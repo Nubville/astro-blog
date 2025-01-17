@@ -1,5 +1,10 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
+import postcssConfig from './postcss.config.mjs';
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  vite: {
+    css: {
+      postcss: postcssConfig
+    }
+  }
+});

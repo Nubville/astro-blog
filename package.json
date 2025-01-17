@@ -10,5 +10,16 @@
   },
   "dependencies": {
     "astro": "^5.1.7"
+  },
+  "devDependencies": {
+    "@csstools/postcss-global-data": "^3.0.0",
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
+    "open-props": "^1.7.10",
+    "postcss": "^8.5.1",
+    "postcss-custom-media": "^11.0.5",
+    "postcss-jit-props": "^1.0.15",
+    "postcss-nesting": "^13.0.1",
+    "postcss-preset-env": "^10.1.3"
   }
 }

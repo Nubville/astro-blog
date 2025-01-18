@@ -1,0 +1,19 @@
+---
+const { heroSrc, heroAlt } = Astro.props;
+---
+
+<section class="hero">
+  <img src={heroSrc} alt={heroAlt} />
+</section>
+
+<style>
+  .hero {
+    aspect-ratio: 16 / 9;
+
+    img {
+      height: auto;
+      obect-fit: cover;
+      width: 100%;
+    }
+  }
+</style>

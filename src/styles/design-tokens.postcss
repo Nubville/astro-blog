@@ -1,0 +1,49 @@
+/* Custom Properties using Open Props naming convention */
+:root {
+  /* Surface Colors */
+  --surface-1: hsl(233,20%,16%);  /* Darkest navy background */
+  --surface-2: hsl(215 27% 22%);  /* Slightly lighter navy */
+  --surface-3: hsl(215 26% 27%);  /* Mid-tone navy */
+  
+  /* Brand Colors */
+  --brand-1: hsl(20 90% 45%);     /* Darkened slightly */
+  --brand-2: hsl(20 85% 40%);     /* Darkened slightly */
+  --brand-3: hsl(20 80% 55%);     /* Darkened slightly */
+  
+  /* Accent Colors */
+  --accent-1: hsl(200 40% 75%);   /* Adjusted for better contrast */
+  --accent-2: hsl(200 35% 55%);   /* Adjusted for better contrast */
+  --accent-3: hsl(200 30% 35%);   /* Adjusted for better contrast */
+
+  /* Text Colors */
+  --text-1: hsl(210 15% 95%);     /* Primary text - almost white */
+  --text-2: hsl(210 15% 85%);     /* Secondary text */
+  --text-3: hsl(210 10% 70%);     /* Tertiary text */
+
+  /* Gradient Presets */
+  --gradient-1: linear-gradient(
+    to bottom right,
+    var(--brand-1),
+    var(--brand-2)
+  );
+  
+  --gradient-2: linear-gradient(
+    to bottom,
+    var(--surface-1),
+    var(--surface-2)
+  );
+
+  /* Shadow with orange glow */
+  --shadow-glow: 0 0 15px hsla(20 90% 50% / 0.2);
+
+  /* You can also map these to existing Open Props values */
+  --shadow-1: var(--shadow-1);
+  --radius-1: var(--radius-2);
+}
+
+/* Dark theme adjustments if needed */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Adjust values for dark mode if necessary */
+  }
+}

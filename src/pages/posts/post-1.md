@@ -10,16 +10,22 @@ image:
 tags: ["astro", "blogging", "learning in public"]
 ---
 
-Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
-
-## What I've accomplished
-
-1. **Installing Astro**: First, I created a new Astro project and set up my online accounts.
-
-2. **Making Pages**: I then learned how to make pages by creating new `.astro` files and placing them in the `src/pages/` folder.
-
-3. **Making Blog Posts**: This is my first blog post! I now have Astro pages and Markdown posts!
-
-## What's next
-
-I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+Some suggested mappings to common UI elements:
+Typography:
+Headers: var(--brand-1) or var(--text-1)
+Body text: var(--text-2)
+Secondary text: var(--text-3)
+Surfaces:
+Main background: var(--surface-1)
+Cards/Elevated elements: var(--surface-2)
+Hover states: var(--surface-3)
+Interactive Elements:
+Primary buttons: var(--brand-1)
+Secondary buttons: var(--accent-2)
+Links: var(--brand-3)
+Hover states: Can use var(--gradient-1)
+Accents:
+Borders: var(--accent-2)
+Icons: var(--brand-1) or var(--accent-1)
+Highlights: var(--brand-3)
+This system provides a good balance of the art deco feeling from the image while maintaining modern web usability standards. The orange and blue contrast will make for striking interactive elements while the navy surfaces keep things professional and readable.

@@ -1,13 +1,18 @@
+@import './design-tokens.postcss';
+@import './fonts.postcss';
+@import './typography.postcss';
+
 html {
   font-family: sans-serif;
 }
 
 body {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 80ch;
-  padding: 1rem;
+  background: var(--surface-1);
+  color: var(--text-1);
+  font-size: 1.6rem;
   line-height: 1.5;
+  margin: 0;
+  padding: 0;
 }
 
 * {
@@ -15,9 +20,13 @@ body {
 }
 
 h1 {
-  color: var(--blue-5);
+  color: var(--brand-1);
   margin: 1rem 0;
   font-size: 2.5rem;
+}
+
+a {
+  color: var(--accent-1);
 }
 
 /* nav styles */

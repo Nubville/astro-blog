@@ -1,4 +1,5 @@
 ---
+import BlogSpotlight from '../components/BlogSpotlight.astro'
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Footer from '../components/Footer.astro';
@@ -15,13 +16,57 @@ const { pageTitle } = Astro.props;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <Header />
-    <Hero heroSrc="/images/fort_wayne_landscape.webp" heroAlt="A Fort Wayne, Indiana inspired AI Illstration"/>
-    <h1 class="hero-title">{pageTitle}</h1>
-    <slot />
-    <Footer />
+    <div class="layout-grid">
+      <Header class="layout-grid__header" />
+      <Hero 
+        class="layout-grid__hero" 
+        heroSrc="/images/fort_wayne_landscape.webp"
+        heroAlt="A Fort Wayne, Indiana inspired AI Illstration"
+      />
+      <BlogSpotlight class="layout-grid__spotlight"/>
+      <main class="layout-grid__main">
+        <h1 class="hero-title">{pageTitle}</h1>
+        <slot />
+      </main>
+      <aside class="layout-grid__aside">
+        <slot name="aside" />
+      </aside>
+      <Footer class="layoutgrid__footer" />
+    </div>
     <script>
       import "../scripts/menu.js";
     </script>
   </body>
 </html>
+
+<style>
+  .layout-grid {
+    display: grid;
+    grid-template-areas:
+      'header  header    header    header '
+      'hero    hero      hero      hero   '
+      'sidebar spotlight spotlight sidebar'
+      'sidebar main      aside     sidebar'
+      'footer  footer    footer    footer ';
+  }
+
+  .layout-grid__header {
+    grid-area: header;
+  }
+
+  .layout-grid__hero {
+    grid-area: hero;
+  }
+
+  .layout-grid__main {
+    grid-area: main;
+  }
+
+  .layout-side__aside {
+    grid-area: aside;
+  }
+
+  .layout-grid__footer {
+    grid-area: footer;
+  }
+</style>

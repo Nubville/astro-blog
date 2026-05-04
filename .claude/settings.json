@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm outdated *)",
+      "PowerShell(cd \"c:\\\\Users\\\\ripro\\\\projects\\\\astro-blog\"; $env:PATH += \";C:\\\\Users\\\\ripro\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe\"; fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression; npm outdated 2>&1)",
+      "PowerShell(cd \"c:\\\\Users\\\\ripro\\\\projects\\\\astro-blog\"; $env:PATH += \";C:\\\\Users\\\\ripro\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe\"; fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression; npm install astro@latest @csstools/postcss-global-data@latest postcss-custom-media@latest postcss-nesting@latest postcss-preset-env@latest autoprefixer@latest cssnano@latest open-props@latest postcss@latest postcss-jit-props@latest 2>&1)",
+      "PowerShell(cd \"c:\\\\Users\\\\ripro\\\\projects\\\\astro-blog\"; $env:PATH += \";C:\\\\Users\\\\ripro\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe\"; fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression; npm install @shoelace-style/shoelace 2>&1)",
+      "WebFetch(domain:webawesome.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:github.com)",
+      "PowerShell(cd \"c:\\\\Users\\\\ripro\\\\projects\\\\astro-blog\"; $env:PATH += \";C:\\\\Users\\\\ripro\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe\"; fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression; npm uninstall \"@shoelace-style/shoelace\" 2>&1)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\ripro\\OneDrive\\Documents\\WindowsPowerShell"
+    ]
+  }
+}

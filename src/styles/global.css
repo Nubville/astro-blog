@@ -1,6 +1,6 @@
-@import './design-tokens.postcss';
-@import './fonts.postcss';
-@import './typography.postcss';
+@import './design-tokens.css';
+@import './fonts.css';
+@import './typography.css';
 
 html {
   font-family: sans-serif;
@@ -40,14 +40,14 @@ a {
   width: 40px;
   height: 5px;
   margin-bottom: 10px;
-  background-color: #ff9776;
+  background-color: var(--brand-3);
 }
 
 .nav-links {
   width: 100%;
   top: 5rem;
   left: 48px;
-  background-color: #ff9776;
+  background-color: var(--brand-3);
   display: none;
   margin: 0;
 }
@@ -62,15 +62,16 @@ a {
   text-transform: uppercase;
 }
 
-.nav-links a:hover, a:focus {
-  background-color: #ff9776;
+.nav-links a:hover,
+a:focus {
+  background-color: var(--brand-2);
 }
 
 .expanded {
   display: unset;
 }
 
-@media screen and (min-width: 636px) {
+@media (min-width: 636px) {
   .nav-links {
     margin-left: 5em;
     display: block;

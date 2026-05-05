@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:PATH += \";C:\\\\Users\\\\ripro\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe\"; fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression; \\(Get-Command node\\).Source)",
+      "PowerShell($env:PATH += \";C:\\\\Users\\\\ripro\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe\"; fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression; fnm list 2>&1; Get-ChildItem \"$env:LOCALAPPDATA\\\\fnm\\\\node-versions\" -ErrorAction SilentlyContinue)"
+    ]
+  }
+}

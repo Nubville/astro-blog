@@ -6,10 +6,36 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky",
+    "check": "astro check",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "lint-staged": {
+    "*.{js,ts,mjs}": ["eslint --fix", "prettier --write"],
+    "*.astro": ["eslint --fix", "prettier --write"],
+    "*.css": ["prettier --write"],
+    "*.md": ["prettier --write"]
   },
   "dependencies": {
     "@awesome.me/webawesome": "^3.6.0",
-    "astro": "^6.2.1"
+    "astro": "^6.2.1",
+    "lit": "^3.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^10.3.0",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-lit": "^2.2.1",
+    "eslint-plugin-lit-a11y": "^5.1.1",
+    "eslint-plugin-wc": "^3.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "typescript-eslint": "^8.59.2"
   }
 }

@@ -1,0 +1,2 @@
+export PATH="/c/Users/ripro/AppData/Roaming/fnm/aliases/default:$PATH"
+node_modules/.bin/lint-staged

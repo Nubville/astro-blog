@@ -1,13 +1,18 @@
 ---
-import BlogSpotlight from '../components/BlogSpotlight.astro'
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
 import Footer from '../components/Footer.astro';
-
+import Header from '../components/Header.astro';
+import Navigation from '../components/Navigation.astro';
 import '../styles/global.css';
-const { pageTitle } = Astro.props;
+
+interface Props {
+  pageTitle: string;
+  showPageTitle?: boolean;
+}
+
+const { pageTitle, showPageTitle = true } = Astro.props;
 ---
-<html lang="en">
+
+<html lang="en" class="wa-theme-awesome wa-dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -16,57 +21,48 @@ const { pageTitle } = Astro.props;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <div class="layout-grid">
-      <Header class="layout-grid__header" />
-      <Hero 
-        class="layout-grid__hero" 
-        heroSrc="/images/fort_wayne_landscape.webp"
-        heroAlt="A Fort Wayne, Indiana inspired AI Illstration"
-      />
-      <BlogSpotlight class="layout-grid__spotlight"/>
-      <main class="layout-grid__main">
-        <h1 class="hero-title">{pageTitle}</h1>
+    <wa-page>
+      <Header slot="header" />
+      <Navigation slot="navigation" />
+
+      <main>
+        {showPageTitle && <h1 class="page-title">{pageTitle}</h1>}
         <slot />
       </main>
-      <aside class="layout-grid__aside">
-        <slot name="aside" />
-      </aside>
-      <Footer class="layoutgrid__footer" />
-    </div>
+
+      {
+        Astro.slots.has('aside') && (
+          <aside slot="aside">
+            <slot name="aside" />
+          </aside>
+        )
+      }
+
+      <Footer slot="footer" />
+    </wa-page>
+
     <script>
-      import "../scripts/menu.js";
+      import '@awesome.me/webawesome/dist/components/page/page.js';
+      import '@awesome.me/webawesome/dist/components/drawer/drawer.js';
+      import '@awesome.me/webawesome/dist/components/button/button.js';
+      import '@awesome.me/webawesome/dist/components/icon/icon.js';
     </script>
   </body>
 </html>
 
 <style>
-  .layout-grid {
-    display: grid;
-    grid-template-areas:
-      'header  header    header    header '
-      'hero    hero      hero      hero   '
-      'sidebar spotlight spotlight sidebar'
-      'sidebar main      aside     sidebar'
-      'footer  footer    footer    footer ';
+  main {
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 3rem 2rem;
+    width: 100%;
   }
 
-  .layout-grid__header {
-    grid-area: header;
-  }
-
-  .layout-grid__hero {
-    grid-area: hero;
-  }
-
-  .layout-grid__main {
-    grid-area: main;
-  }
-
-  .layout-side__aside {
-    grid-area: aside;
-  }
-
-  .layout-grid__footer {
-    grid-area: footer;
+  .page-title {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-light);
+    letter-spacing: 0.04em;
+    margin-bottom: 1.5rem;
+    text-align: center;
   }
 </style>

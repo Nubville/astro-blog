@@ -1,7 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-const pageTitle = "Home Page";
+import Hero from '../components/Hero.astro';
 ---
-<BaseLayout pageTitle={pageTitle}>
-  <h2>My awesome blog subtitle</h2>
+
+<BaseLayout pageTitle="Andrew Garman — Dev Blog" showPageTitle={false}>
+  <Hero />
+  <section class="latest">
+    <h2>Latest Posts</h2>
+    <p>Adventures in code, craft, and the great outdoors.</p>
+  </section>
 </BaseLayout>
+
+<style>
+  .latest {
+    margin-top: 2rem;
+  }
+</style>

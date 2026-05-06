@@ -1,49 +1,51 @@
-/* Custom Properties using Open Props naming convention */
+/* Custom Properties */
 :root {
-  /* Surface Colors */
-  --surface-1: hsl(233,20%,16%);  /* Darkest navy background */
-  --surface-2: hsl(215 27% 22%);  /* Slightly lighter navy */
-  --surface-3: hsl(215 26% 27%);  /* Mid-tone navy */
-  
-  /* Brand Colors */
-  --brand-1: hsl(20 90% 45%);     /* Darkened slightly */
-  --brand-2: hsl(20 85% 40%);     /* Darkened slightly */
-  --brand-3: hsl(20 80% 55%);     /* Darkened slightly */
-  
-  /* Accent Colors */
-  --accent-1: hsl(200 40% 75%);   /* Adjusted for better contrast */
-  --accent-2: hsl(200 35% 55%);   /* Adjusted for better contrast */
-  --accent-3: hsl(200 30% 35%);   /* Adjusted for better contrast */
+  /* Surfaces — deep navy ocean depths */
+  --surface-1: hsl(233 20% 14%);
+  --surface-2: hsl(225 22% 19%);
+  --surface-3: hsl(220 22% 24%);
 
-  /* Text Colors */
-  --text-1: hsl(210 15% 95%);     /* Primary text - almost white */
-  --text-2: hsl(210 15% 85%);     /* Secondary text */
-  --text-3: hsl(210 10% 70%);     /* Tertiary text */
+  /* Brand — sunset orange */
+  --brand-1: hsl(22 88% 48%);
+  --brand-2: hsl(22 84% 40%);
+  --brand-3: hsl(22 82% 58%);
 
-  /* Gradient Presets */
-  --gradient-1: linear-gradient(
-    to bottom right,
-    var(--brand-1),
-    var(--brand-2)
-  );
-  
-  --gradient-2: linear-gradient(
-    to bottom,
-    var(--surface-1),
-    var(--surface-2)
-  );
+  /* Accent — steel-blue ocean surface */
+  --accent-1: hsl(200 45% 72%);
+  --accent-2: hsl(200 40% 52%);
+  --accent-3: hsl(200 35% 34%);
 
-  /* Shadow with orange glow */
-  --shadow-glow: 0 0 15px hsla(20 90% 50% / 0.2);
+  /* Text */
+  --text-1: hsl(210 20% 96%);
+  --text-2: hsl(210 15% 82%);
+  --text-3: hsl(210 12% 65%);
 
-  /* You can also map these to existing Open Props values */
-  --shadow-1: var(--shadow-1);
-  --radius-1: var(--radius-2);
-}
+  /* Gold — Triforce / treasure highlight */
+  --gold-1: hsl(45 95% 58%);
+  --gold-2: hsl(42 90% 46%);
 
-/* Dark theme adjustments if needed */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Adjust values for dark mode if necessary */
-  }
+  /* Sea foam — highlights, success states */
+  --seafoam: hsl(170 50% 62%);
+
+  /* Gradients */
+  --gradient-1: linear-gradient(to bottom right, var(--brand-1), var(--brand-2));
+  --gradient-2: linear-gradient(to bottom, var(--surface-1), var(--surface-2));
+
+  /* ── Cel-Shading System ────────────────────────── */
+  --outline-width: 2px;
+  --outline-color: hsl(225 30% 5%);
+  --outline: var(--outline-width) solid var(--outline-color);
+
+  /* Hard offset shadows — no blur, pure offset = cel-shade */
+  --shadow-cel: 3px 3px 0 var(--outline-color);
+  --shadow-cel-lg: 5px 5px 0 var(--outline-color);
+  --shadow-cel-xl: 8px 8px 0 var(--outline-color);
+
+  /* Glows for special moments */
+  --shadow-glow: 0 0 20px hsla(22 88% 48% / 0.25);
+  --shadow-glow-gold: 0 0 16px hsla(45 95% 58% / 0.4);
+
+  /* Radius — subtle, cartoonish corners */
+  --radius-cel: 4px;
+  --radius-cel-lg: 8px;
 }

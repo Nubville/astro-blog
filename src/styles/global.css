@@ -1,16 +1,19 @@
+@import '@awesome.me/webawesome/dist/styles/webawesome.css';
 @import './design-tokens.css';
 @import './fonts.css';
 @import './typography.css';
 
+/* ── Base ──────────────────────────────────────────── */
+
 html {
-  font-family: sans-serif;
+  font-family: var(--font-body), sans-serif;
 }
 
 body {
   background: var(--surface-1);
   color: var(--text-1);
-  font-size: 1.6rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.6;
   margin: 0;
   padding: 0;
 }
@@ -19,73 +22,63 @@ body {
   box-sizing: border-box;
 }
 
+/* ── Typography ────────────────────────────────────── */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin: 0 0 0.6em;
+}
+
 h1 {
+  font-size: var(--font-size-5);
   color: var(--brand-1);
-  margin: 1rem 0;
-  font-size: 2.5rem;
+}
+h2 {
+  font-size: var(--font-size-4);
+  color: var(--text-1);
+}
+h3 {
+  font-size: var(--font-size-3);
+  color: var(--text-1);
+}
+h4 {
+  font-size: var(--font-size-2);
+  color: var(--text-2);
+}
+
+p {
+  margin: 0 0 1rem;
 }
 
 a {
   color: var(--accent-1);
+  text-underline-offset: 3px;
+
+  &:focus-visible {
+    outline: var(--outline-width) solid var(--gold-1);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 }
 
-/* nav styles */
-.hamburger {
-  padding-right: 20px;
-  cursor: pointer;
-}
+/* ── wa-page Chrome ─────────────────────────────────
+   Minimal overrides — let WA's theme do its job.
+   Add ::part() rules incrementally as needed.
+─────────────────────────────────────────────────── */
 
-.hamburger .line {
+wa-page {
+  --menu-width: 210px;
   display: block;
-  width: 40px;
-  height: 5px;
-  margin-bottom: 10px;
-  background-color: var(--brand-3);
+  min-height: 100dvh;
 }
 
-.nav-links {
-  width: 100%;
-  top: 5rem;
-  left: 48px;
-  background-color: var(--brand-3);
-  display: none;
-  margin: 0;
-}
-
-.nav-links a {
-  display: block;
-  text-align: center;
-  padding: 10px 0;
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.nav-links a:hover,
-a:focus {
-  background-color: var(--brand-2);
-}
-
-.expanded {
-  display: unset;
-}
-
-@media (min-width: 636px) {
-  .nav-links {
-    margin-left: 5em;
-    display: block;
-    position: static;
-    width: auto;
-    background: none;
-  }
-
-  .nav-links a {
-    display: inline-block;
-    padding: 15px 20px;
-  }
-
-  .hamburger {
-    display: none;
-  }
+wa-page::part(main-content) {
+  padding: 0;
 }

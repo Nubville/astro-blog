@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "webawesome": {
+      "source": "/home/dgarman/projects/astro-blog/node_modules/@awesome.me/webawesome/dist/skills/webawesome",
+      "sourceType": "local",
+      "computedHash": "f25524ccde8a2fa8d8513f3d7d104340e17ff71efe019ef995d76f9c8d98fe66"
+    }
+  }
+}

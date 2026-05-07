@@ -1,51 +1,42 @@
-/* Custom Properties */
+/* Semantic aliases — map paper.css raw values to component-level names */
 :root {
-  /* Surfaces — deep navy ocean depths */
-  --surface-1: hsl(233 20% 14%);
-  --surface-2: hsl(225 22% 19%);
-  --surface-3: hsl(220 22% 24%);
+  /* Surfaces */
+  --surface-1: var(--paper);
+  --surface-2: var(--paper-dark);
+  --surface-3: var(--paper-shadow);
 
-  /* Brand — sunset orange */
-  --brand-1: hsl(22 88% 48%);
-  --brand-2: hsl(22 84% 40%);
-  --brand-3: hsl(22 82% 58%);
+  /* Brand — deep red-orange, like a correction marker */
+  --brand-1: #c43a1a;
+  --brand-2: #9e2e14;
+  --brand-3: #d85a3a;
 
-  /* Accent — steel-blue ocean surface */
-  --accent-1: hsl(200 45% 72%);
-  --accent-2: hsl(200 40% 52%);
-  --accent-3: hsl(200 35% 34%);
+  /* Accent — pencil blue */
+  --accent-1: var(--blue-ink);
+  --accent-2: #1e3660;
+  --accent-3: #4a6a9a;
 
-  /* Text */
-  --text-1: hsl(210 20% 96%);
-  --text-2: hsl(210 15% 82%);
-  --text-3: hsl(210 12% 65%);
+  /* Text — charcoal ink scale */
+  --text-1: var(--ink);
+  --text-2: var(--ink-faint);
+  --text-3: var(--pencil);
 
-  /* Gold — Triforce / treasure highlight */
-  --gold-1: hsl(45 95% 58%);
-  --gold-2: hsl(42 90% 46%);
+  /* Gold — amber marker */
+  --gold-1: var(--amber-ink);
+  --gold-2: #5a3c0a;
 
-  /* Sea foam — highlights, success states */
-  --seafoam: hsl(170 50% 62%);
+  /* Seafoam — green marker */
+  --seafoam: var(--green-ink);
 
-  /* Gradients */
-  --gradient-1: linear-gradient(to bottom right, var(--brand-1), var(--brand-2));
-  --gradient-2: linear-gradient(to bottom, var(--surface-1), var(--surface-2));
-
-  /* ── Cel-Shading System ────────────────────────── */
-  --outline-width: 2px;
-  --outline-color: hsl(225 30% 5%);
+  /* Sketch / ink system */
+  --outline-width: 1.5px;
+  --outline-color: var(--ink);
   --outline: var(--outline-width) solid var(--outline-color);
 
-  /* Hard offset shadows — no blur, pure offset = cel-shade */
-  --shadow-cel: 3px 3px 0 var(--outline-color);
-  --shadow-cel-lg: 5px 5px 0 var(--outline-color);
-  --shadow-cel-xl: 8px 8px 0 var(--outline-color);
+  /* Hard offset shadows — no blur, ink drop shadow */
+  --shadow-cel: 2px 2px 0 var(--ink);
+  --shadow-cel-lg: 3px 3px 0 var(--ink);
+  --shadow-cel-xl: 4px 4px 0 var(--ink);
 
-  /* Glows for special moments */
-  --shadow-glow: 0 0 20px hsla(22 88% 48% / 0.25);
-  --shadow-glow-gold: 0 0 16px hsla(45 95% 58% / 0.4);
-
-  /* Radius — subtle, cartoonish corners */
-  --radius-cel: 4px;
-  --radius-cel-lg: 8px;
+  --radius-cel: 2px;
+  --radius-cel-lg: 4px;
 }

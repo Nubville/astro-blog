@@ -3,234 +3,199 @@
 ---
 
 <section class="hero" aria-label="Site introduction">
-  <!-- Ocean backdrop — three wave layers, CSS animated, animation-ready for future canvas swap -->
-  <div class="hero__ocean" aria-hidden="true">
-    <div class="hero__stars"></div>
-    <div class="hero__wave hero__wave--far"></div>
-    <div class="hero__wave hero__wave--mid"></div>
-    <div class="hero__wave hero__wave--near"></div>
-  </div>
+  <sketch-card type="character" class="profile-card">
+    <div class="card-content profile-content">
+      <p class="profile-annotation">// profile card · v0.1</p>
 
-  <!-- Character card — RPG intro style -->
-  <div class="hero__card">
-    <p class="hero__eyebrow">— Adventurer Profile —</p>
+      <div class="profile-body">
+        <div class="portrait">
+          <img
+            src="/images/sketched_me.png"
+            alt="Andrew Garman — pencil sketch portrait"
+            width="240"
+            height="320"
+            loading="eager"
+          />
+        </div>
 
-    <h1 class="hero__name">Andrew Garman</h1>
-    <p class="hero__title">Senior Front-End Developer</p>
+        <div class="profile-info">
+          <h1 class="profile-name">Andrew Garman</h1>
+          <p class="profile-role">Senior Front-End Developer</p>
 
-    <div class="hero__divider" aria-hidden="true"></div>
-
-    <ul class="hero__tags" role="list" aria-label="Interests">
-      <li class="hero__tag hero__tag--code">⌨ Code</li>
-      <li class="hero__tag hero__tag--dnd">⚔ D&amp;D</li>
-      <li class="hero__tag hero__tag--make">🖨 3D Print</li>
-      <li class="hero__tag hero__tag--fish">🎣 Fishing</li>
-      <li class="hero__tag hero__tag--kayak">🚣 Kayak</li>
-    </ul>
-  </div>
+          <ul class="profile-tags" role="list" aria-label="Interests">
+            <li class="tag tag--code">⌨ Code</li>
+            <li class="tag tag--dnd">⚔ D&amp;D</li>
+            <li class="tag tag--make">🖨 3D Print</li>
+            <li class="tag tag--fish">🎣 Fishing</li>
+            <li class="tag tag--kayak">🚣 Kayak</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </sketch-card>
 </section>
 
 <style>
-  /* ── Layout ─────────────────────────────────────── */
-
   .hero {
-    position: relative;
-    overflow: hidden;
-    min-height: 340px;
-    display: grid;
-    place-items: center;
-    padding: 3rem 1.5rem;
-
-    /* Ocean gradient sky */
-    background: linear-gradient(
-      to bottom,
-      hsl(225 40% 22%) 0%,
-      hsl(215 45% 20%) 35%,
-      hsl(205 50% 18%) 65%,
-      hsl(200 55% 16%) 100%
-    );
+    padding: 2.5rem 2.5rem 1.5rem;
   }
 
-  /* ── Stars ──────────────────────────────────────── */
-
-  .hero__stars {
-    position: absolute;
-    inset: 0 0 40% 0;
-    background-image:
-      radial-gradient(1px 1px at 15% 20%, var(--text-1) 0%, transparent 100%),
-      radial-gradient(1px 1px at 32% 12%, var(--text-2) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 55% 8%, var(--gold-1) 0%, transparent 100%),
-      radial-gradient(1px 1px at 72% 18%, var(--text-1) 0%, transparent 100%),
-      radial-gradient(1px 1px at 88% 5%, var(--text-2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 10% 35%, var(--text-3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 45% 28%, var(--text-2) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 80% 25%, var(--accent-1) 0%, transparent 100%),
-      radial-gradient(1px 1px at 25% 42%, var(--text-1) 0%, transparent 100%),
-      radial-gradient(1px 1px at 65% 38%, var(--text-3) 0%, transparent 100%);
-    pointer-events: none;
-  }
-
-  /* ── Ocean waves ────────────────────────────────── */
-
-  .hero__ocean {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-
-  .hero__wave {
-    position: absolute;
-    bottom: 0;
-    left: -20%;
-    width: 140%;
-    border-radius: 45% 55% 0 0 / 30% 30% 0 0;
-    animation: wave-sway linear infinite;
-  }
-
-  .hero__wave--far {
-    height: 42%;
-    background: hsl(210 45% 20%);
-    animation-duration: 9s;
-    animation-delay: -3s;
-    opacity: 0.7;
-  }
-
-  .hero__wave--mid {
-    height: 30%;
-    background: hsl(205 50% 23%);
-    border-top: var(--outline);
-    animation-duration: 7s;
-    animation-delay: -1.5s;
-  }
-
-  .hero__wave--near {
-    height: 18%;
-    background: hsl(198 52% 28%);
-    border-top: var(--outline);
-    animation-duration: 5s;
-    animation-delay: 0s;
-  }
-
-  @keyframes wave-sway {
-    0% {
-      transform: translateX(0%) scaleY(1);
-    }
-    25% {
-      transform: translateX(-4%) scaleY(1.03);
-    }
-    50% {
-      transform: translateX(-7%) scaleY(1);
-    }
-    75% {
-      transform: translateX(-3%) scaleY(0.98);
-    }
-    100% {
-      transform: translateX(0%) scaleY(1);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero__wave {
-      animation: none;
-    }
-  }
-
-  /* ── Character card ─────────────────────────────── */
-
-  .hero__card {
-    position: relative;
-    z-index: 1;
-    background: var(--surface-1);
-    border: var(--outline);
-    border-radius: var(--radius-cel);
-    box-shadow: var(--shadow-cel-xl);
-    padding: 2rem 2.5rem;
-    text-align: center;
-    max-width: 34rem;
+  /* No max-width here — the grid column constrains the card width */
+  .profile-card {
     width: 100%;
   }
 
-  .hero__eyebrow {
-    color: var(--gold-1);
-    font-family: var(--font-heading);
+  .profile-content {
+    padding: 1.5rem 1.75rem 2rem;
+  }
+
+  .profile-annotation {
+    color: var(--pencil);
+    font-family: var(--font-mono);
     font-size: 0.65rem;
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.25em;
-    margin: 0 0 0.75rem;
-    text-transform: uppercase;
-  }
-
-  .hero__name {
-    color: var(--text-1);
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: var(--font-weight-light);
-    letter-spacing: 0.06em;
-    margin: 0 0 0.3rem;
-  }
-
-  .hero__title {
-    color: var(--accent-1);
-    font-family: var(--font-heading);
-    font-size: 0.8rem;
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.05em;
     margin: 0 0 1.25rem;
+  }
+
+  /* Default: stacked — portrait above text */
+  .profile-body {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .portrait {
+    flex-shrink: 0;
+    width: 80px;
+  }
+
+  .portrait img {
+    display: block;
+    height: auto;
+    mix-blend-mode: multiply;
+    width: 100%;
+  }
+
+  .profile-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .profile-name {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0.04em;
+    margin: 0 0 0.2rem;
+  }
+
+  .profile-role {
+    color: var(--brand-1);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    margin: 0 0 1.1rem;
     text-transform: uppercase;
   }
 
-  .hero__divider {
-    border: none;
-    border-top: var(--outline-width) solid var(--surface-3);
-    box-shadow: 0 1px 0 hsl(210 20% 35%);
-    margin: 0 auto 1.25rem;
-    width: 60%;
-  }
-
-  /* ── Tags ───────────────────────────────────────── */
-
-  .hero__tags {
+  .profile-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
+    gap: 0.35rem;
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  .hero__tag {
-    background: var(--surface-3);
-    border: var(--outline);
-    border-radius: var(--radius-cel);
-    box-shadow: 2px 2px 0 var(--outline-color);
-    color: var(--text-2);
-    font-family: var(--font-heading);
-    font-size: 0.65rem;
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.1em;
-    padding: 0.3rem 0.65rem;
+  .tag {
+    border: 1px solid var(--pencil);
+    border-radius: 2px;
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.5rem;
     text-transform: uppercase;
   }
 
-  .hero__tag--code {
-    border-color: var(--accent-2);
-    color: var(--accent-1);
+  .tag--code {
+    border-color: var(--blue-ink);
+    color: var(--blue-ink);
   }
-  .hero__tag--dnd {
-    border-color: var(--brand-2);
-    color: var(--brand-3);
+  .tag--dnd {
+    border-color: var(--brand-1);
+    color: var(--brand-1);
   }
-  .hero__tag--make {
-    border-color: var(--gold-2);
-    color: var(--gold-1);
+  .tag--make {
+    border-color: var(--amber-ink);
+    color: var(--amber-ink);
   }
-  .hero__tag--fish {
-    border-color: var(--seafoam);
-    color: var(--seafoam);
+  .tag--fish,
+  .tag--kayak {
+    border-color: var(--green-ink);
+    color: var(--green-ink);
   }
-  .hero__tag--kayak {
-    border-color: var(--seafoam);
-    color: var(--seafoam);
+
+  /* Step 3: Container queries — card responds to its own width */
+
+  /* Medium (420px+): portrait left, info right */
+  @container sketch-card (min-width: 420px) {
+    .profile-body {
+      flex-direction: row;
+      gap: 1.5rem;
+    }
+
+    .portrait {
+      width: 100px;
+    }
+  }
+
+  /* Wide (640px+): larger portrait, bigger name, unwrap tags */
+  @container sketch-card (min-width: 640px) {
+    .profile-body {
+      gap: 2rem;
+    }
+
+    .portrait {
+      width: 140px;
+    }
+
+    .profile-name {
+      font-size: 2.25rem;
+    }
+
+    .profile-tags {
+      flex-wrap: nowrap;
+    }
+  }
+
+  /* Hero (900px+): portrait tall left column, rich info right */
+  @container sketch-card (min-width: 900px) {
+    .profile-content {
+      align-items: start;
+      display: grid;
+      gap: 3rem;
+      grid-template-columns: 240px 1fr;
+    }
+
+    .profile-annotation {
+      grid-column: 1 / -1;
+      margin-bottom: 0;
+    }
+
+    .profile-body {
+      flex-direction: column;
+      gap: 1.5rem;
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .portrait {
+      grid-column: 1;
+      grid-row: 2;
+      width: 100%;
+    }
   }
 </style>

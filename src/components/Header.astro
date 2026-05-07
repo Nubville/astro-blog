@@ -2,33 +2,44 @@
 
 ---
 
-<header slot="header">
-  <a href="/" class="brand" aria-label="Andrew's Dev Blog — home"> Andrew's Dev Blog </a>
+<header>
+  <a href="/" class="brand" aria-label="Andrew Garman — home">Andrew Garman</a>
+  <span class="brand-sub" aria-hidden="true">// dev + design</span>
 </header>
 
 <style>
   header {
-    align-items: center;
+    align-items: baseline;
+    border-bottom: 1px solid var(--pencil);
     display: flex;
-    padding: 1rem 2rem;
+    gap: 1rem;
+    padding: 1.25rem 2.5rem 1rem;
   }
 
   .brand {
-    color: var(--brand-1);
+    color: var(--ink);
     font-family: var(--font-display);
     font-size: var(--font-size-3);
-    font-weight: var(--font-weight-light);
+    font-weight: var(--font-weight-regular);
     letter-spacing: 0.05em;
     text-decoration: none;
     white-space: nowrap;
 
     &:hover {
-      color: var(--brand-3);
+      color: var(--brand-1);
     }
+
     &:focus-visible {
       border-radius: 2px;
-      outline: 2px solid var(--gold-1);
+      outline: 2px solid var(--brand-1);
       outline-offset: 4px;
     }
+  }
+
+  .brand-sub {
+    color: var(--pencil);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
   }
 </style>

@@ -1,18 +1,100 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+
+type CardType = 'quest' | 'spellbook' | 'lore' | 'character';
+
+interface MarkdownPost {
+  url: string;
+  frontmatter: {
+    title: string;
+    pubDate: string;
+    description?: string;
+    type?: CardType;
+    tags?: string[];
+  };
+}
+
+const allPosts = Object.values(import.meta.glob<MarkdownPost>('./posts/*.md', { eager: true }))
+  .sort(
+    (a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()
+  )
+  .slice(0, 6);
+
+function deriveType(post: MarkdownPost): CardType {
+  if (post.frontmatter.type) return post.frontmatter.type;
+  const tags = post.frontmatter.tags ?? [];
+  if (tags.some((t) => ['dnd', 'd&d', 'gaming', 'character'].includes(t))) return 'character';
+  if (tags.some((t) => ['outdoors', 'fishing', 'kayak', '3dprint'].includes(t))) return 'lore';
+  if (tags.some((t) => ['learning in public', 'learning', 'community', 'blogging'].includes(t)))
+    return 'spellbook';
+  return 'quest';
+}
+
+function formatDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
 ---
 
 <BaseLayout pageTitle="Andrew Garman — Dev Blog" showPageTitle={false}>
-  <Hero />
-  <section class="latest">
-    <h2>Latest Posts</h2>
-    <p>Adventures in code, craft, and the great outdoors.</p>
+  <!-- hero-section and latest are targeted by @container content-col two-panel rule -->
+  <section class="hero-section" aria-label="Profile">
+    <Hero />
+  </section>
+
+  <section class="latest" aria-labelledby="latest-heading">
+    <h2 id="latest-heading" class="section-heading">Latest Posts</h2>
+    <div class="posts-grid">
+      {
+        allPosts.map((post) => {
+          const type = deriveType(post);
+          return (
+            <sketch-card type={type}>
+              <div class="card-content">
+                <span class="card-type-label">[ {type} ]</span>
+                <h3 class="card-post-title">
+                  <a class="card-title" href={post.url}>
+                    {post.frontmatter.title}
+                  </a>
+                </h3>
+                {post.frontmatter.description && (
+                  <p class="card-excerpt">{post.frontmatter.description}</p>
+                )}
+                <time class="card-date" datetime={post.frontmatter.pubDate}>
+                  {formatDate(post.frontmatter.pubDate)}
+                </time>
+              </div>
+            </sketch-card>
+          );
+        })
+      }
+    </div>
   </section>
 </BaseLayout>
 
 <style>
-  .latest {
-    margin-top: 2rem;
+  .hero-section {
+    /* Width is constrained by the grid column at ultrawide via @container content-col */
+    max-inline-size: 480px;
+  }
+
+  /* At ultrawide, the two-panel rule in paper.css removes max-inline-size via grid */
+  @container content-col (min-width: 1400px) {
+    .hero-section {
+      max-inline-size: none;
+    }
+  }
+
+  .section-heading {
+    margin-bottom: 1rem;
+  }
+
+  .card-post-title {
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem;
   }
 </style>

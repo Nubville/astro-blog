@@ -1,0 +1,126 @@
+/* ── Paper System ──────────────────────────────────────
+   All raw color and layout variables live here.
+   Semantic tokens in design-tokens.css reference these.
+───────────────────────────────────────────────────── */
+
+:root {
+  /* Raw paper colors */
+  --paper: #f6f1e7;
+  --paper-dark: #ede6d4;
+  --paper-shadow: #d8d0bc;
+  --ink: #2a1e10;
+  --ink-faint: #9a8060;
+  --pencil: #b4a88a;
+
+  /* Marker / pen ink colors */
+  --red-pen: rgba(200, 60, 60, 0.28);
+  --blue-ink: #2a4a7a;
+  --green-ink: #2a4a2a;
+  --amber-ink: #7a5010;
+
+  /* Margin */
+  --margin-width: 54px;
+  --red-margin: var(--red-pen);
+}
+
+/* ── Graph paper grid ──────────────────────────────── */
+
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(90, 110, 200, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(90, 110, 200, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Red margin rule — fixed, persists on scroll */
+body::before {
+  content: '';
+  position: fixed;
+  left: var(--margin-width);
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--red-margin);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── Site layout ───────────────────────────────────── */
+
+.site-layout {
+  display: grid;
+  grid-template-columns: var(--margin-width) 1fr;
+  min-height: 100vh;
+}
+
+/* Step 1: content-col is now a named container */
+.content-col {
+  container-type: inline-size;
+  container-name: content-col;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: 0;
+}
+
+/* Step 2: main is a fluid container grid — no fixed max-width */
+.content-col main {
+  container-type: inline-size;
+  container-name: main-canvas;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  padding: 2rem 2.5rem;
+}
+
+/* Step 5: Two-panel spread at ultrawide — profile left, posts right */
+@container content-col (min-width: 1400px) {
+  .content-col main {
+    align-items: start;
+    gap: 3rem;
+    grid-template-areas: 'hero posts';
+    grid-template-columns: minmax(380px, 480px) 1fr;
+  }
+
+  .content-col main > .hero-section {
+    grid-area: hero;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .content-col main > .latest {
+    grid-area: posts;
+  }
+}
+
+/* ── Posts grid — responds to main-canvas width ─────── */
+
+.posts-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@container main-canvas (min-width: 700px) {
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container main-canvas (min-width: 1100px) {
+  .posts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@container main-canvas (min-width: 1600px) {
+  .posts-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}

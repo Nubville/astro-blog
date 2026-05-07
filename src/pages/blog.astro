@@ -1,19 +1,81 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BlogPost from '../components/BlogPost.astro';
+
+type CardType = 'quest' | 'spellbook' | 'lore' | 'character';
 
 interface MarkdownPost {
   url: string;
-  frontmatter: { title: string };
+  frontmatter: {
+    title: string;
+    pubDate: string;
+    description?: string;
+    type?: CardType;
+    tags?: string[];
+  };
 }
 
-const allPosts = Object.values(import.meta.glob<MarkdownPost>('./posts/*.md', { eager: true }));
-const pageTitle = 'My Astro Learning Blog';
+const allPosts = Object.values(
+  import.meta.glob<MarkdownPost>('./posts/*.md', { eager: true })
+).sort(
+  (a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()
+);
+
+const pageTitle = 'Quest Log';
+
+function deriveType(post: MarkdownPost): CardType {
+  if (post.frontmatter.type) return post.frontmatter.type;
+  const tags = post.frontmatter.tags ?? [];
+  if (tags.some((t) => ['dnd', 'd&d', 'gaming', 'character'].includes(t))) return 'character';
+  if (tags.some((t) => ['outdoors', 'fishing', 'kayak', '3dprint'].includes(t))) return 'lore';
+  if (tags.some((t) => ['learning in public', 'learning', 'community', 'blogging'].includes(t)))
+    return 'spellbook';
+  return 'quest';
+}
+
+function formatDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p>This is where I will post about my journey learning Astro.</p>
-  <ul>
-    {allPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
-  </ul>
+  <section class="posts-grid" aria-label="Blog posts">
+    {
+      allPosts.map((post) => {
+        const type = deriveType(post);
+        return (
+          <sketch-card type={type}>
+            <div class="card-content">
+              <span class="card-type-label">[ {type} ]</span>
+              <h2 class="card-post-title">
+                <a class="card-title" href={post.url}>
+                  {post.frontmatter.title}
+                </a>
+              </h2>
+              {post.frontmatter.description && (
+                <p class="card-excerpt">{post.frontmatter.description}</p>
+              )}
+              <time class="card-date" datetime={post.frontmatter.pubDate}>
+                {formatDate(post.frontmatter.pubDate)}
+              </time>
+            </div>
+          </sketch-card>
+        );
+      })
+    }
+  </section>
 </BaseLayout>
+
+<style>
+  .posts-grid {
+    padding-bottom: 2rem;
+  }
+
+  .card-post-title {
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem;
+  }
+</style>

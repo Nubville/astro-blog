@@ -11,7 +11,18 @@
       "PowerShell(cd \"c:\\\\Users\\\\ripro\\\\projects\\\\astro-blog\"; $env:PATH += \";C:\\\\Users\\\\ripro\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe\"; fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression; npm uninstall \"@shoelace-style/shoelace\" 2>&1)",
       "PowerShell(Get-ChildItem \"$env:LOCALAPPDATA\\\\fnm_multishells\" | Sort-Object LastWriteTime -Descending | Select-Object -First 1 | ForEach-Object { \\(Get-Item $_.FullName\\).Target })",
       "PowerShell(\\(Get-Item \"C:\\\\Users\\\\ripro\\\\AppData\\\\Roaming\\\\fnm\\\\aliases\\\\default\"\\).Target)",
-      "PowerShell(\\(Get-Item \"C:\\\\Users\\\\ripro\\\\AppData\\\\Roaming\\\\fnm\\\\aliases\\\\lts-latest\"\\).Target)"
+      "PowerShell(\\(Get-Item \"C:\\\\Users\\\\ripro\\\\AppData\\\\Roaming\\\\fnm\\\\aliases\\\\lts-latest\"\\).Target)",
+      "Bash(node -e \"const ts = require\\('typescript'\\); console.log\\(ts.version\\);\")",
+      "Bash(npx tsc *)",
+      "Bash(npx astro *)",
+      "Bash(npx eslint *)",
+      "Bash(nvm list *)",
+      "Read(//home/dgarman/.nvm/versions/node/**)",
+      "Bash(~/.nvm/versions/node/v24.14.1/bin/node --version)",
+      "Bash(~/.nvm/versions/node/v24.14.1/bin/npm run *)",
+      "Bash(curl -s http://localhost:4321/blog)",
+      "Bash(curl -s http://localhost:4321/)",
+      "mcp__playwright__browser_snapshot"
     ],
     "additionalDirectories": [
       "C:\\Users\\ripro\\OneDrive\\Documents\\WindowsPowerShell"

@@ -1,7 +1,9 @@
 :root {
-  --font-display: 'Poiret One', system-ui;
-  --font-heading: 'Raleway', system-ui;
+  --font-display: 'Special Elite', 'Courier New', monospace;
+  --font-heading: 'Special Elite', system-ui;
   --font-body: 'Work Sans', system-ui;
+  --font-annotation: 'Caveat', cursive;
+  --font-mono: 'Courier New', 'Courier Prime', monospace;
 
   --font-size-1: 1rem;
   --font-size-2: 1.25rem;
@@ -12,31 +14,4 @@
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-bold: 600;
-}
-
-.hero-title {
-  background: var(--surface-1);
-  color: var(--accent-1);
-  font-family: var(--font-display);
-  font-size: var(--font-size-5);
-}
-
-h1, h2, h3 {
-  font-family: var(--font-heading);
-  font-weight: var(--font-weight-light);
-  color: var(--brand-1);
-}
-
-body {
-  font-family: var(--font-body);
-  font-weight: var(--font-weight-regular);
-  color: var(--text-2);
-}
-
-.feature-text {
-  font-family: var(--font-heading);
-  font-weight: var(--font-weight-light);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent-1);
 }

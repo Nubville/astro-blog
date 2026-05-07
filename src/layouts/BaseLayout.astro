@@ -12,7 +12,7 @@ interface Props {
 const { pageTitle, showPageTitle = true } = Astro.props;
 ---
 
-<html lang="en" class="wa-theme-awesome wa-dark">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -21,48 +21,32 @@ const { pageTitle, showPageTitle = true } = Astro.props;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <wa-page>
-      <Header slot="header" />
-      <Navigation slot="navigation" />
+    <div class="site-layout">
+      <Navigation />
 
-      <main>
-        {showPageTitle && <h1 class="page-title">{pageTitle}</h1>}
-        <slot />
-      </main>
+      <div class="content-col">
+        <Header />
 
-      {
-        Astro.slots.has('aside') && (
-          <aside slot="aside">
-            <slot name="aside" />
-          </aside>
-        )
-      }
+        <main>
+          {showPageTitle && <h1 class="page-title">{pageTitle}</h1>}
+          <slot />
+        </main>
 
-      <Footer slot="footer" />
-    </wa-page>
+        <Footer />
+      </div>
+    </div>
 
     <script>
-      import '@awesome.me/webawesome/dist/components/page/page.js';
-      import '@awesome.me/webawesome/dist/components/drawer/drawer.js';
-      import '@awesome.me/webawesome/dist/components/button/button.js';
-      import '@awesome.me/webawesome/dist/components/icon/icon.js';
+      import '../scripts/sketch-card.js';
     </script>
   </body>
 </html>
 
 <style>
-  main {
-    margin: 0 auto;
-    max-width: 900px;
-    padding: 3rem 2rem;
-    width: 100%;
-  }
-
   .page-title {
     font-family: var(--font-display);
-    font-weight: var(--font-weight-light);
+    font-weight: var(--font-weight-regular);
     letter-spacing: 0.04em;
     margin-bottom: 1.5rem;
-    text-align: center;
   }
 </style>

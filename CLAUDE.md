@@ -15,102 +15,126 @@ Every feature, component, and design decision must be evaluated through an acces
 - All form inputs need associated `<label>` elements (not just placeholder text)
 - ARIA attributes (`aria-label`, `aria-describedby`, `role`, etc.) only when native HTML semantics are insufficient — prefer native first
 - Motion: respect `prefers-reduced-motion` for any animations or transitions
-- Web Awesome components are built with a11y in mind — prefer them over hand-rolled components for this reason
 - Test with keyboard-only navigation before considering any interactive component complete
 
 ## Project Overview
 
-Personal developer blog. Goal: maximum simplicity, maximum speed, deep accessibility. Web components are the primary UI primitive — this site doubles as a sandbox for Lit/Web Awesome patterns the author uses professionally.
+Personal developer blog. Goal: maximum simplicity, maximum speed, deep accessibility. The aesthetic is a graph-paper field notebook — cream paper canvas, red margin rule, sketchy ink borders. Web components are the primary UI primitive, written as vanilla custom elements.
 
 ## Stack
 
-| Layer | Tool |
-|---|---|
-| Site framework | Astro 6 |
-| UI components | Web Awesome (`@awesome.me/webawesome`) |
-| Component base | Lit (via Web Awesome) |
-| Styling | Plain CSS with custom properties — no preprocessors |
-| Bundler | Vite (via Astro) |
+| Layer          | Tool                                                |
+| -------------- | --------------------------------------------------- |
+| Site framework | Astro 6                                             |
+| UI components  | Vanilla custom elements (`HTMLElement`)             |
+| Styling        | Plain CSS with custom properties — no preprocessors |
+| Bundler        | Vite (via Astro)                                    |
+
+Web Awesome is **not** used for layout or structure. The `wa-` prefix components have been removed. Do not re-add them.
 
 ## CSS Rules
 
 - **No PostCSS, no preprocessors, no build-time CSS transforms** — plain CSS only
 - Use native CSS nesting (`&` syntax) — it is supported in all modern browsers
 - Use `@media` queries directly — no custom media shorthand
-- All color, spacing, and shadow values must use CSS custom properties defined in `src/styles/design-tokens.css`
-- Never hardcode hex, hsl, or rgb color values outside of `design-tokens.css`
+- All color, spacing, and shadow values must use CSS custom properties defined in `src/styles/paper.css` and `src/styles/design-tokens.css`
+- Never hardcode hex, hsl, or rgb color values outside of `paper.css`
 - Style files use `.css` extension — never `.postcss`, `.scss`, `.less`
 - Global styles are imported once in `BaseLayout.astro` via `import '../styles/global.css'`
 - Use scoped `<style>` blocks in `.astro` files for component-level rules
 - Do not import styles in page components — use `BaseLayout.astro` or scoped blocks
 
+## Container Query Contract
+
+**All component responsiveness uses CSS container queries — never viewport media queries for component internals.**
+
+1. **`sketch-card` must remain light DOM** — no shadow root. Container queries on the host element (`@container sketch-card`) only affect children in the light DOM. Adding a shadow root would break all internal `@container` rules.
+
+2. **New components declare `container-type: inline-size`** as a baseline. Register a `container-name` if children need to query it.
+
+3. **No viewport `@media` queries for component internals.** Use `@container` referencing the nearest named ancestor. Viewport queries are only acceptable for truly global layout concerns (e.g., printing).
+
+### Named containers
+
+| Container name | Element        | Purpose                                              |
+| -------------- | -------------- | ---------------------------------------------------- |
+| `content-col`  | `.content-col` | Drives two-panel ultrawide spread at 1400px+         |
+| `main-canvas`  | `main`         | Drives `.posts-grid` column count                    |
+| `sketch-card`  | `sketch-card`  | Drives internal card layout (portrait/text stacking) |
+
 ## Design Tokens
 
-Defined in [src/styles/design-tokens.css](src/styles/design-tokens.css):
+Paper palette defined in `src/styles/paper.css`:
 
 ```
---surface-1   darkest navy background
---surface-2   lighter navy
---surface-3   mid-tone navy
-
---brand-1     orange — primary
---brand-2     orange — darker
---brand-3     orange — lighter
-
---accent-1    steel blue — light
---accent-2    steel blue — mid
---accent-3    steel blue — dark
-
---text-1      primary text, near white
---text-2      secondary text
---text-3      tertiary text
-
---gradient-1  brand orange gradient
---gradient-2  surface gradient
---shadow-glow orange glow shadow
+--paper          cream background (#f6f1e7)
+--paper-dark     slightly darker cream
+--paper-shadow   shadow tone
+--ink            near-black (#2a1e10)
+--ink-faint      warm mid-tone (#9a8060)
+--pencil         light graphite (#b4a88a)
+--blue-ink       dark navy (#2a4a7a)
+--green-ink      dark forest (#2a4a2a)
+--amber-ink      dark amber (#7a5010)
+--red-pen        translucent red (margin rule)
+--margin-width   54px (left margin column)
 ```
 
-Typography tokens in [src/styles/typography.css](src/styles/typography.css):
+Semantic aliases in `src/styles/design-tokens.css`:
+
 ```
---font-display    Poiret One
---font-heading    Raleway
+--brand-1    red-orange marker (#c43a1a)
+--surface-1  var(--paper)
+--text-1     var(--ink)
+--text-2     var(--ink-faint)
+--shadow-cel 2px 2px 0 var(--ink)  (no-blur ink drop shadow)
+```
+
+Typography tokens in `src/styles/typography.css`:
+
+```
+--font-display    Special Elite (typewriter)
+--font-heading    Special Elite
 --font-body       Work Sans
---font-size-1     1rem
---font-size-2     1.25rem
---font-size-3     1.5rem
---font-size-4     2rem
---font-size-5     2.5rem
+--font-annotation Caveat (handwriting)
+--font-mono       Courier New
+--font-size-1 through --font-size-5
 --font-weight-light / --font-weight-regular / --font-weight-bold
 ```
 
-## Web Awesome
+## sketch-card Component
 
-- npm package: `@awesome.me/webawesome`
-- All elements use the `wa-` prefix: `<wa-button>`, `<wa-badge>`, `<wa-card>`, etc.
-- Cherry-pick component imports: `@awesome.me/webawesome/dist/components/<name>/<name>.js`
-- Stylesheet: `@awesome.me/webawesome/dist/styles/webawesome.css`
-- Apply themes via class on `<html>`: e.g. `class="wa-theme-awesome"`
-- Built on Lit — custom components should also extend `LitElement` from `lit`
-- Prefer Web Awesome components over hand-rolling UI primitives — they ship with a11y built in
+Defined in `src/scripts/sketch-card.js` — a vanilla `HTMLElement` subclass.
+
+- Registered as `<sketch-card type="quest|spellbook|lore|character">`
+- Inserts an SVG sketchy border into its own light DOM
+- Four border styles, each with unique hand-drawn SVG paths
+- SVG uses `preserveAspectRatio="none"` + `vector-effect="non-scaling-stroke"` so the border stretches to card size without distorting stroke widths
+- **Do not convert to Lit or add a shadow root** — breaks container queries
 
 ## Component Rules
 
 - **Astro components** (`.astro`): layout, page composition, static shells only
-- **Lit web components**: any interactive UI — written as native custom elements extending `LitElement`
-- Never introduce React, Vue, Svelte, or any JS framework
+- **Vanilla custom elements** (`HTMLElement`): any interactive UI or reusable web components
+- Never introduce React, Vue, Svelte, Lit, or any JS framework
 - Use `client:load` on Astro islands only when a component genuinely needs client-side hydration
 - Prefer static rendering everywhere possible — keep the JS bundle minimal
-- Custom element names follow the Web Awesome convention: `wa-` prefix for library components, author-defined prefix for custom ones
 
 ## File Naming
 
-- Astro components: PascalCase (`BlogPost.astro`, `BlogSpotlight.astro`)
-- CSS files: kebab-case (`design-tokens.css`, `global.css`)
-- Scripts / web components: kebab-case matching element name (`blog-card.ts`)
+- Astro components: PascalCase (`BlogPost.astro`, `Header.astro`)
+- CSS files: kebab-case (`design-tokens.css`, `paper.css`)
+- Scripts / web components: kebab-case matching element name (`sketch-card.js`)
 
-## Known Issues
+## Node Version
 
-- `BlogSpotlight.astro` is imported in `BaseLayout.astro` but does not exist — will error until created
+Astro 6 requires Node >=22.12.0. Use nvm v24.14.1:
+
+```
+PATH="/home/dgarman/.nvm/versions/node/v24.14.1/bin:$PATH" npm run dev
+```
+
+System node (v20) will fail to start the dev server.
 
 ## Project Structure
 
@@ -121,10 +145,12 @@ src/
   pages/            # Routes — Astro pages + Markdown posts
     posts/          # Blog post markdown files
     tags/           # Tag index and dynamic tag pages
-  scripts/          # Client-side JS
+  scripts/          # Client-side JS / custom elements
+    sketch-card.js  # <sketch-card> vanilla web component
   styles/
+    paper.css        # Raw palette + site grid layout + container queries
     design-tokens.css
     fonts.css
-    global.css
+    global.css       # Imports all CSS; defines sketch-card container + card utilities
     typography.css
 ```

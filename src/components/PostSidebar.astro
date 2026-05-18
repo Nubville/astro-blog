@@ -1,0 +1,96 @@
+---
+import Hero from './Hero.astro';
+
+interface SidebarPost {
+  title: string;
+  pubDate: string | Date;
+  url: string;
+}
+
+interface Props {
+  nameHeading?: 'h1' | 'h2';
+  posts: SidebarPost[];
+  postsLabel?: string;
+}
+
+const { nameHeading = 'h1', posts, postsLabel = '// more posts' } = Astro.props;
+---
+
+<Hero nameHeading={nameHeading} />
+
+{
+  posts.length > 0 && (
+    <nav class="sidebar-posts" aria-label="More posts">
+      <p class="sidebar-posts-label">{postsLabel}</p>
+      <ul role="list" class="sidebar-posts-list">
+        {posts.map((post) => (
+          <li class="sidebar-post-item">
+            <a href={post.url} class="sidebar-post-link">
+              {post.title}
+            </a>
+            <span class="sidebar-post-date">
+              {new Date(post.pubDate).toISOString().slice(0, 10)}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .sidebar-posts {
+    padding: 0 var(--ag-space-2xl) var(--ag-space-l);
+  }
+
+  .sidebar-posts-label {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--ag-space-xs);
+  }
+
+  .sidebar-posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebar-post-item {
+    border: 1px solid var(--pencil);
+    border-radius: var(--radius-cel);
+    padding: var(--ag-space-xs) var(--ag-space-s);
+  }
+
+  .sidebar-post-link {
+    color: var(--ink);
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-m);
+    line-height: 1.3;
+    margin-bottom: var(--ag-space-2xs);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--brand-1);
+    }
+
+    &:focus-visible {
+      border-radius: 2px;
+      outline: 2px solid var(--brand-1);
+      outline-offset: 3px;
+    }
+  }
+
+  .sidebar-post-date {
+    color: var(--ink-faint);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.08em;
+  }
+</style>

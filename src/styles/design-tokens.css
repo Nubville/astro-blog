@@ -1,42 +1,45 @@
-/* Semantic aliases — map paper.css raw values to component-level names */
+/* ── Semantic aliases ──────────────────────────────────
+   All values reference --ag-* tokens from wa-tokens.css.
+   Components use these names; the wa-theme layer drives
+   what they resolve to — swap [data-theme] to retheme.
+───────────────────────────────────────────────────── */
 :root {
+  /* Brand */
+  --brand-1: var(--ag-color-brand-fill-loud);
+  --brand-2: var(--ag-color-brand-border-loud);
+  --brand-3: var(--ag-color-brand-70);
+
+  /* Accent */
+  --accent-1: var(--ag-color-text-link);
+  --accent-2: var(--ag-color-accent-40);
+  --accent-3: var(--ag-color-accent-70);
+
   /* Surfaces */
-  --surface-1: var(--paper);
-  --surface-2: var(--paper-dark);
-  --surface-3: var(--paper-shadow);
+  --surface-1: var(--ag-color-surface-default);
+  --surface-2: var(--ag-color-surface-lowered);
+  --surface-3: var(--ag-color-neutral-80);
 
-  /* Brand — deep red-orange, like a correction marker */
-  --brand-1: #c43a1a;
-  --brand-2: #9e2e14;
-  --brand-3: #d85a3a;
+  /* Text */
+  --text-1: var(--ag-color-text-normal);
+  --text-2: var(--ag-color-text-quiet);
+  --text-3: var(--ag-color-surface-border);
 
-  /* Accent — pencil blue */
-  --accent-1: var(--blue-ink);
-  --accent-2: #1e3660;
-  --accent-3: #4a6a9a;
+  /* Gold / seafoam */
+  --gold-1: var(--ag-color-warning-on-normal);
+  --gold-2: var(--ag-color-warning-40);
+  --seafoam: var(--ag-color-success-on-normal);
 
-  /* Text — charcoal ink scale */
-  --text-1: var(--ink);
-  --text-2: var(--ink-faint);
-  --text-3: var(--pencil);
+  /* Borders & outlines */
+  --outline-width: var(--ag-border-width-l);
+  --outline-color: var(--ag-color-text-normal);
+  --outline: var(--ag-border-width-l) var(--ag-border-style) var(--ag-color-text-normal);
 
-  /* Gold — amber marker */
-  --gold-1: var(--amber-ink);
-  --gold-2: #5a3c0a;
+  /* Cel-shadows */
+  --shadow-cel: var(--ag-shadow-s);
+  --shadow-cel-lg: var(--ag-shadow-m);
+  --shadow-cel-xl: var(--ag-shadow-l);
 
-  /* Seafoam — green marker */
-  --seafoam: var(--green-ink);
-
-  /* Sketch / ink system */
-  --outline-width: 1.5px;
-  --outline-color: var(--ink);
-  --outline: var(--outline-width) solid var(--outline-color);
-
-  /* Hard offset shadows — no blur, ink drop shadow */
-  --shadow-cel: 2px 2px 0 var(--ink);
-  --shadow-cel-lg: 3px 3px 0 var(--ink);
-  --shadow-cel-xl: 4px 4px 0 var(--ink);
-
-  --radius-cel: 2px;
-  --radius-cel-lg: 4px;
+  /* Radii */
+  --radius-cel: var(--ag-border-radius-s);
+  --radius-cel-lg: var(--ag-border-radius-m);
 }

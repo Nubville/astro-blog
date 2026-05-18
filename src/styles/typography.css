@@ -1,17 +1,21 @@
+/* ── Typography ────────────────────────────────────────
+   All values reference --ag-font-* tokens from wa-tokens.css.
+───────────────────────────────────────────────────── */
 :root {
-  --font-display: 'Special Elite', 'Courier New', monospace;
-  --font-heading: 'Special Elite', system-ui;
-  --font-body: 'Work Sans', system-ui;
-  --font-annotation: 'Caveat', cursive;
-  --font-mono: 'Courier New', 'Courier Prime', monospace;
+  --font-display: var(--ag-font-family-heading);
+  --font-heading: var(--ag-font-family-heading);
+  --font-body: var(--ag-font-family-body);
+  --font-annotation: var(--ag-font-family-longform);
+  --font-mono: var(--ag-font-family-code);
 
-  --font-size-1: 1rem;
-  --font-size-2: 1.25rem;
-  --font-size-3: 1.5rem;
-  --font-size-4: 2rem;
-  --font-size-5: 2.5rem;
+  /* Size scale — resolved from the Major Second ratio in wa-tokens.css */
+  --font-size-1: var(--ag-font-size-m);
+  --font-size-2: var(--ag-font-size-l);
+  --font-size-3: var(--ag-font-size-xl);
+  --font-size-4: var(--ag-font-size-2xl);
+  --font-size-5: var(--ag-font-size-3xl);
 
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-bold: 600;
+  --font-weight-light: var(--ag-font-weight-light);
+  --font-weight-regular: var(--ag-font-weight-normal);
+  --font-weight-bold: var(--ag-font-weight-bold);
 }

@@ -1,0 +1,347 @@
+/* ── Layer order — must be declared before any @layer use ────
+   Mirrors WA's architecture: palette → semantic theme → overrides
+──────────────────────────────────────────────────────────── */
+@layer ag-color-palette, ag-theme, ag-theme-overrides;
+
+/* ── Raw color palette ───────────────────────────────────────
+   Numeric scale: lower number = darker, higher = lighter.
+   All values are warm-toned to match the paper notebook aesthetic.
+──────────────────────────────────────────────────────────── */
+@layer ag-color-palette {
+  :root {
+    /* Neutral — cream paper to near-black ink */
+    --ag-color-neutral-99: #fdfaf5;
+    --ag-color-neutral-95: #f6f1e7;
+    --ag-color-neutral-90: #ede6d4;
+    --ag-color-neutral-80: #d8d0bc;
+    --ag-color-neutral-70: #b4a88a;
+    --ag-color-neutral-60: #9a8070;
+    --ag-color-neutral-50: #7e6450;
+    --ag-color-neutral-40: #5e4a38;
+    --ag-color-neutral-30: #42301e;
+    --ag-color-neutral-20: #2a1e10;
+    --ag-color-neutral-10: #1a1008;
+    --ag-color-neutral-05: #0d0804;
+
+    /* Brand — red-orange correction marker */
+    --ag-color-brand-95: #fdf0ec;
+    --ag-color-brand-90: #fad4c4;
+    --ag-color-brand-80: #f0a080;
+    --ag-color-brand-70: #e07050;
+    --ag-color-brand-60: #d05030;
+    --ag-color-brand-50: #c43a1a;
+    --ag-color-brand-40: #9e2e14;
+    --ag-color-brand-30: #7a2010;
+    --ag-color-brand-20: #5c1808;
+    --ag-color-brand-10: #3e1004;
+    --ag-color-brand-05: #200800;
+
+    /* Accent — blue ink */
+    --ag-color-accent-90: #d0dcf0;
+    --ag-color-accent-70: #4a6a9a;
+    --ag-color-accent-50: #2a4a7a;
+    --ag-color-accent-40: #1e3660;
+    --ag-color-accent-20: #0e1c30;
+    --ag-color-accent-10: #060e18;
+
+    /* Success — green ink */
+    --ag-color-success-95: #eef4ee;
+    --ag-color-success-90: #d0e4d0;
+    --ag-color-success-70: #4a7a4a;
+    --ag-color-success-50: #336633;
+    --ag-color-success-40: #2a4a2a;
+    --ag-color-success-20: #142814;
+    --ag-color-success-10: #0a1a0a;
+
+    /* Warning — amber ink */
+    --ag-color-warning-95: #fdf4e8;
+    --ag-color-warning-90: #f8e4c0;
+    --ag-color-warning-70: #c08030;
+    --ag-color-warning-50: #8a5a18;
+    --ag-color-warning-40: #7a5010;
+    --ag-color-warning-20: #402a06;
+    --ag-color-warning-10: #281a02;
+
+    /* Danger — same as brand for this palette */
+    --ag-color-danger-95: var(--ag-color-brand-95);
+    --ag-color-danger-90: var(--ag-color-brand-90);
+    --ag-color-danger-70: var(--ag-color-brand-70);
+    --ag-color-danger-50: var(--ag-color-brand-50);
+    --ag-color-danger-40: var(--ag-color-brand-40);
+    --ag-color-danger-20: var(--ag-color-brand-20);
+  }
+}
+
+/* ── Semantic theme tokens ────────────────────────────────────
+   Paper theme (light) is the default. Dark theme activates via
+   [data-theme="dark"] on <html> — ready for a theme switcher.
+──────────────────────────────────────────────────────────── */
+@layer ag-theme {
+  :root,
+  [data-theme='paper'] {
+    /* Surfaces */
+    --ag-color-surface-raised: #ffffff;
+    --ag-color-surface-default: var(--ag-color-neutral-95);
+    --ag-color-surface-lowered: var(--ag-color-neutral-90);
+    --ag-color-surface-border: var(--ag-color-neutral-70);
+
+    /* Text */
+    --ag-color-text-normal: var(--ag-color-neutral-20);
+    --ag-color-text-quiet: var(--ag-color-neutral-50);
+    --ag-color-text-link: var(--ag-color-accent-50);
+
+    /* Focus */
+    --ag-color-focus: var(--ag-color-brand-50);
+
+    /* Brand semantic */
+    --ag-color-brand-fill-quiet: var(--ag-color-brand-95);
+    --ag-color-brand-fill-normal: var(--ag-color-brand-90);
+    --ag-color-brand-fill-loud: var(--ag-color-brand-50);
+    --ag-color-brand-border-quiet: var(--ag-color-brand-80);
+    --ag-color-brand-border-normal: var(--ag-color-brand-60);
+    --ag-color-brand-border-loud: var(--ag-color-brand-40);
+    --ag-color-brand-on-quiet: var(--ag-color-brand-40);
+    --ag-color-brand-on-normal: var(--ag-color-brand-30);
+    --ag-color-brand-on-loud: white;
+
+    /* Success semantic */
+    --ag-color-success-fill-quiet: var(--ag-color-success-95);
+    --ag-color-success-fill-normal: var(--ag-color-success-90);
+    --ag-color-success-fill-loud: var(--ag-color-success-50);
+    --ag-color-success-border-normal: var(--ag-color-success-70);
+    --ag-color-success-on-normal: var(--ag-color-success-40);
+    --ag-color-success-on-loud: white;
+
+    /* Warning semantic */
+    --ag-color-warning-fill-quiet: var(--ag-color-warning-95);
+    --ag-color-warning-fill-normal: var(--ag-color-warning-90);
+    --ag-color-warning-fill-loud: var(--ag-color-warning-50);
+    --ag-color-warning-border-normal: var(--ag-color-warning-70);
+    --ag-color-warning-on-normal: var(--ag-color-warning-40);
+    --ag-color-warning-on-loud: white;
+
+    /* Neutral semantic */
+    --ag-color-neutral-fill-quiet: var(--ag-color-neutral-95);
+    --ag-color-neutral-fill-normal: var(--ag-color-neutral-90);
+    --ag-color-neutral-fill-loud: var(--ag-color-neutral-20);
+    --ag-color-neutral-border-quiet: var(--ag-color-neutral-80);
+    --ag-color-neutral-border-normal: var(--ag-color-neutral-70);
+    --ag-color-neutral-border-loud: var(--ag-color-neutral-50);
+    --ag-color-neutral-on-quiet: var(--ag-color-neutral-50);
+    --ag-color-neutral-on-normal: var(--ag-color-neutral-30);
+    --ag-color-neutral-on-loud: white;
+
+    /* Typography */
+    --ag-font-family-body: 'Work Sans', system-ui, sans-serif;
+    --ag-font-family-heading: 'Special Elite', serif;
+    --ag-font-family-code: 'Courier New', 'Courier Prime', monospace;
+    --ag-font-family-longform: 'Caveat', cursive;
+
+    /* Font size — Major Second (×1.125) scale anchored at 1rem */
+    --ag-font-size-scale: 1;
+    --ag-font-size-3xs: round(calc(var(--ag-font-size-2xs) / 1.125), 1px);
+    --ag-font-size-2xs: round(calc(var(--ag-font-size-xs) / 1.125), 1px);
+    --ag-font-size-xs: round(calc(var(--ag-font-size-s) / 1.125), 1px);
+    --ag-font-size-s: round(calc(var(--ag-font-size-m) / 1.125), 1px);
+    --ag-font-size-m: calc(1rem * var(--ag-font-size-scale));
+    --ag-font-size-l: round(calc(var(--ag-font-size-m) * 1.125 * 1.125), 1px);
+    --ag-font-size-xl: round(calc(var(--ag-font-size-l) * 1.125 * 1.125), 1px);
+    --ag-font-size-2xl: round(calc(var(--ag-font-size-xl) * 1.125 * 1.125), 1px);
+    --ag-font-size-3xl: round(calc(var(--ag-font-size-2xl) * 1.125 * 1.125), 1px);
+    --ag-font-size-4xl: round(calc(var(--ag-font-size-3xl) * 1.125 * 1.125), 1px);
+    --ag-font-size-5xl: round(calc(var(--ag-font-size-4xl) * 1.125 * 1.125), 1px);
+
+    /* Font weight */
+    --ag-font-weight-light: 300;
+    --ag-font-weight-normal: 400;
+    --ag-font-weight-semibold: 500;
+    --ag-font-weight-bold: 600;
+
+    /* Line height */
+    --ag-line-height-condensed: 1.2;
+    --ag-line-height-normal: 1.6;
+    --ag-line-height-expanded: 2;
+
+    /* Spacing — T-shirt scale with a scale multiplier for density control */
+    --ag-space-scale: 1;
+    --ag-space-3xs: calc(var(--ag-space-scale) * 0.125rem);
+    --ag-space-2xs: calc(var(--ag-space-scale) * 0.25rem);
+    --ag-space-xs: calc(var(--ag-space-scale) * 0.5rem);
+    --ag-space-s: calc(var(--ag-space-scale) * 0.75rem);
+    --ag-space-m: calc(var(--ag-space-scale) * 1rem);
+    --ag-space-l: calc(var(--ag-space-scale) * 1.5rem);
+    --ag-space-xl: calc(var(--ag-space-scale) * 2rem);
+    --ag-space-2xl: calc(var(--ag-space-scale) * 2.5rem);
+    --ag-space-3xl: calc(var(--ag-space-scale) * 3rem);
+    --ag-space-4xl: calc(var(--ag-space-scale) * 4rem);
+
+    /* Borders */
+    --ag-border-style: solid;
+    --ag-border-width-scale: 1;
+    --ag-border-width-s: calc(var(--ag-border-width-scale) * 0.0625rem);
+    --ag-border-width-m: calc(var(--ag-border-width-scale) * 0.09375rem);
+    --ag-border-width-l: calc(var(--ag-border-width-scale) * 0.125rem);
+
+    /* Border radius — tight squares match the cel/sketch aesthetic */
+    --ag-border-radius-scale: 1;
+    --ag-border-radius-s: calc(var(--ag-border-radius-scale) * 0.125rem);
+    --ag-border-radius-m: calc(var(--ag-border-radius-scale) * 0.25rem);
+    --ag-border-radius-l: calc(var(--ag-border-radius-scale) * 0.5rem);
+    --ag-border-radius-pill: 9999px;
+
+    /* Focus ring */
+    --ag-focus-ring-style: solid;
+    --ag-focus-ring-width: 0.125rem;
+    --ag-focus-ring: var(--ag-focus-ring-style) var(--ag-focus-ring-width) var(--ag-color-focus);
+    --ag-focus-ring-offset: 0.1875rem;
+
+    /* Shadows — hard cel-shadow: offset but no blur, ink-colored.
+       blur-scale=0 collapses all blur values to 0. */
+    --ag-color-shadow: var(--ag-color-text-normal);
+    --ag-shadow-blur-scale: 0;
+    --ag-shadow-spread-scale: 0;
+    --ag-shadow-offset-x-scale: 1;
+    --ag-shadow-offset-y-scale: 1;
+    --ag-shadow-offset-x-s: calc(var(--ag-shadow-offset-x-scale) * 0.125rem);
+    --ag-shadow-offset-x-m: calc(var(--ag-shadow-offset-x-scale) * 0.1875rem);
+    --ag-shadow-offset-x-l: calc(var(--ag-shadow-offset-x-scale) * 0.25rem);
+    --ag-shadow-offset-y-s: calc(var(--ag-shadow-offset-y-scale) * 0.125rem);
+    --ag-shadow-offset-y-m: calc(var(--ag-shadow-offset-y-scale) * 0.1875rem);
+    --ag-shadow-offset-y-l: calc(var(--ag-shadow-offset-y-scale) * 0.25rem);
+    --ag-shadow-s: var(--ag-shadow-offset-x-s) var(--ag-shadow-offset-y-s) 0 0
+      var(--ag-color-shadow);
+    --ag-shadow-m: var(--ag-shadow-offset-x-m) var(--ag-shadow-offset-y-m) 0 0
+      var(--ag-color-shadow);
+    --ag-shadow-l: var(--ag-shadow-offset-x-l) var(--ag-shadow-offset-y-l) 0 0
+      var(--ag-color-shadow);
+
+    /* Transitions */
+    --ag-transition-easing: ease;
+    --ag-transition-slow: 300ms;
+    --ag-transition-normal: 150ms;
+    --ag-transition-fast: 75ms;
+  }
+
+  /* ── Dark theme ───────────────────────────────────────── */
+  [data-theme='dark'] {
+    --ag-color-surface-raised: var(--ag-color-neutral-20);
+    --ag-color-surface-default: var(--ag-color-neutral-10);
+    --ag-color-surface-lowered: var(--ag-color-neutral-05);
+    --ag-color-surface-border: var(--ag-color-neutral-30);
+
+    --ag-color-text-normal: var(--ag-color-neutral-95);
+    --ag-color-text-quiet: var(--ag-color-neutral-70);
+    --ag-color-text-link: var(--ag-color-accent-70);
+
+    --ag-color-focus: var(--ag-color-brand-60);
+    --ag-color-shadow: color-mix(in oklab, var(--ag-color-neutral-05) 80%, transparent);
+
+    --ag-color-brand-fill-quiet: var(--ag-color-brand-10);
+    --ag-color-brand-fill-normal: var(--ag-color-brand-20);
+    --ag-color-brand-fill-loud: var(--ag-color-brand-50);
+    --ag-color-brand-border-quiet: var(--ag-color-brand-20);
+    --ag-color-brand-border-normal: var(--ag-color-brand-40);
+    --ag-color-brand-border-loud: var(--ag-color-brand-60);
+    --ag-color-brand-on-quiet: var(--ag-color-brand-70);
+    --ag-color-brand-on-normal: var(--ag-color-brand-80);
+    --ag-color-brand-on-loud: white;
+
+    --ag-color-neutral-fill-quiet: var(--ag-color-neutral-10);
+    --ag-color-neutral-fill-normal: var(--ag-color-neutral-20);
+    --ag-color-neutral-fill-loud: var(--ag-color-neutral-90);
+    --ag-color-neutral-border-quiet: var(--ag-color-neutral-20);
+    --ag-color-neutral-border-normal: var(--ag-color-neutral-30);
+    --ag-color-neutral-border-loud: var(--ag-color-neutral-40);
+    --ag-color-neutral-on-quiet: var(--ag-color-neutral-70);
+    --ag-color-neutral-on-normal: var(--ag-color-neutral-80);
+    --ag-color-neutral-on-loud: var(--ag-color-neutral-05);
+
+    --ag-color-success-fill-quiet: var(--ag-color-success-10);
+    --ag-color-success-fill-normal: var(--ag-color-success-20);
+    --ag-color-success-fill-loud: var(--ag-color-success-50);
+    --ag-color-success-border-normal: var(--ag-color-success-50);
+    --ag-color-success-on-normal: var(--ag-color-success-70);
+    --ag-color-success-on-loud: white;
+  }
+}
+
+/* ── Blog alias layer ─────────────────────────────────────────
+   Maps --ag-* semantic tokens back onto the existing --paper,
+   --ink, --brand-1 names so no component code needs to change.
+   Theme switching updates these automatically via cascade.
+──────────────────────────────────────────────────────────── */
+@layer ag-theme-overrides {
+  :root {
+    /* Paper palette aliases */
+    --paper: var(--ag-color-surface-default);
+    --paper-dark: var(--ag-color-surface-lowered);
+    --paper-shadow: var(--ag-color-neutral-80);
+    --ink: var(--ag-color-text-normal);
+    --ink-faint: var(--ag-color-text-quiet);
+    --pencil: var(--ag-color-surface-border);
+    --blue-ink: var(--ag-color-text-link);
+    --green-ink: var(--ag-color-success-on-normal);
+    --amber-ink: var(--ag-color-warning-on-normal);
+    --red-pen: rgba(200, 60, 60, 0.28);
+    --margin-width: 54px;
+    --red-margin: var(--red-pen);
+
+    /* Brand */
+    --brand-1: var(--ag-color-brand-fill-loud);
+    --brand-2: var(--ag-color-brand-border-loud);
+    --brand-3: var(--ag-color-brand-70);
+
+    /* Surfaces */
+    --surface-1: var(--ag-color-surface-default);
+    --surface-2: var(--ag-color-surface-lowered);
+    --surface-3: var(--ag-color-neutral-80);
+
+    /* Text */
+    --text-1: var(--ag-color-text-normal);
+    --text-2: var(--ag-color-text-quiet);
+    --text-3: var(--ag-color-surface-border);
+
+    /* Accent */
+    --accent-1: var(--ag-color-text-link);
+    --accent-2: var(--ag-color-accent-40);
+    --accent-3: var(--ag-color-accent-70);
+
+    /* Gold / seafoam */
+    --gold-1: var(--ag-color-warning-on-normal);
+    --gold-2: var(--ag-color-warning-40);
+    --seafoam: var(--ag-color-success-on-normal);
+
+    /* Typography aliases */
+    --font-display: var(--ag-font-family-heading);
+    --font-heading: var(--ag-font-family-heading);
+    --font-body: var(--ag-font-family-body);
+    --font-annotation: var(--ag-font-family-longform);
+    --font-mono: var(--ag-font-family-code);
+
+    /* Font sizes */
+    --font-size-1: var(--ag-font-size-m);
+    --font-size-2: var(--ag-font-size-l);
+    --font-size-3: var(--ag-font-size-xl);
+    --font-size-4: var(--ag-font-size-2xl);
+    --font-size-5: var(--ag-font-size-3xl);
+
+    /* Font weights */
+    --font-weight-light: var(--ag-font-weight-light);
+    --font-weight-regular: var(--ag-font-weight-normal);
+    --font-weight-bold: var(--ag-font-weight-bold);
+
+    /* Borders */
+    --outline-width: var(--ag-border-width-l);
+    --outline-color: var(--ag-color-text-normal);
+    --outline: var(--ag-border-width-l) var(--ag-border-style) var(--ag-color-text-normal);
+
+    /* Cel-shadows */
+    --shadow-cel: var(--ag-shadow-s);
+    --shadow-cel-lg: var(--ag-shadow-m);
+    --shadow-cel-xl: var(--ag-shadow-l);
+
+    /* Radii */
+    --radius-cel: var(--ag-border-radius-s);
+    --radius-cel-lg: var(--ag-border-radius-m);
+  }
+}

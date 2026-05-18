@@ -1,0 +1,327 @@
+---
+const char = {
+  class: 'Senior Front-End Developer',
+  level: 15,
+  background: 'Animator · Designer · Maker',
+  race: 'Human (Caffeinated)',
+  alignment: 'Chaotic Good',
+  abilities: [
+    { abbr: 'STR', score: 10 },
+    { abbr: 'DEX', score: 14 },
+    { abbr: 'CON', score: 13 },
+    { abbr: 'INT', score: 16 },
+    { abbr: 'WIS', score: 12 },
+    { abbr: 'CHA', score: 15 },
+  ],
+  skills: [
+    { name: 'Web Components · Design Systems', type: 'code' },
+    { name: 'TypeScript · React · Astro', type: 'code' },
+    { name: 'Flash Animator (Retired) → Dev', type: 'code' },
+    { name: '3D Printing — FDM + Resin', type: 'make' },
+    { name: 'ESP32 · Arduino', type: 'make' },
+    { name: 'D&D 5e — Dungeon Master', type: 'dnd' },
+    { name: 'Fishing · Kayaking', type: 'wild' },
+  ],
+  trait:
+    'Started in Flash animation. Ended up in design systems. Will absolutely over-engineer a D&D prop at 2am.',
+  equipment: ['Bambu P2S', 'Elegoo Saturn 2', 'Breadboard & solder', 'Worn dice bag'],
+};
+
+function mod(score: number): string {
+  const m = Math.floor((score - 10) / 2);
+  return m >= 0 ? `+${m}` : `${m}`;
+}
+---
+
+<section class="char-sheet" aria-label="Character sheet">
+  <!-- ── Header fields ─────────────────────────────── -->
+  <div class="sheet-header">
+    <div class="field-row">
+      <div class="field field--grow">
+        <span class="field-value">{char.class}</span>
+        <span class="field-label">Class</span>
+      </div>
+      <div class="field field--shrink">
+        <span class="field-value">{char.level}</span>
+        <span class="field-label">Level</span>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field field--grow">
+        <span class="field-value">{char.race}</span>
+        <span class="field-label">Race</span>
+      </div>
+      <div class="field field--grow">
+        <span class="field-value">{char.alignment}</span>
+        <span class="field-label">Alignment</span>
+      </div>
+    </div>
+    <div class="field field--full">
+      <span class="field-value">{char.background}</span>
+      <span class="field-label">Background</span>
+    </div>
+  </div>
+
+  <!-- ── Ability scores ────────────────────────────── -->
+  <div class="sheet-section">
+    <ul class="abilities" role="list" aria-label="Ability scores">
+      {
+        char.abilities.map((a) => (
+          <li class="ability">
+            <span class="ability-name">{a.abbr}</span>
+            <div class="ability-score" aria-label={`${a.abbr} score`}>
+              {a.score}
+            </div>
+            <div class="ability-mod" aria-label="modifier">
+              {mod(a.score)}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="section-label">Ability Scores</p>
+  </div>
+
+  <!-- ── Skills / Proficiencies ────────────────────── -->
+  <div class="sheet-section">
+    <ul class="skills" role="list" aria-label="Proficiencies">
+      {
+        char.skills.map((s) => (
+          <li class={`skill skill--${s.type}`}>
+            <span class="skill-pip" aria-hidden="true">
+              ◆
+            </span>
+            <span class="skill-name">{s.name}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="section-label">Proficiencies &amp; Skills</p>
+  </div>
+
+  <!-- ── Personality trait ─────────────────────────── -->
+  <div class="sheet-section">
+    <p class="trait-text">{char.trait}</p>
+    <p class="section-label">Personality Traits</p>
+  </div>
+
+  <!-- ── Equipment ─────────────────────────────────── -->
+  <div class="sheet-section sheet-section--last">
+    <ul class="equipment" role="list">
+      {char.equipment.map((item) => <li class="equipment-item">{item}</li>)}
+    </ul>
+    <p class="section-label">Equipment</p>
+  </div>
+</section>
+
+<style>
+  /* ── Outer shell ──────────────────────────────────── */
+  .char-sheet {
+    border: 1.5px solid var(--ink);
+    margin: 0 var(--ag-space-2xl) var(--ag-space-l);
+  }
+
+  /* ── Header ───────────────────────────────────────── */
+  .sheet-header {
+    background: var(--paper-dark);
+    border-bottom: 1.5px solid var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .field-row {
+    border-bottom: 1px solid var(--pencil);
+    display: flex;
+  }
+
+  .field-row:last-child {
+    border-bottom: none;
+  }
+
+  .field {
+    border-right: 1px solid var(--pencil);
+    display: flex;
+    flex-direction: column-reverse; /* label below value, like the real sheet */
+    gap: 0;
+    padding: var(--ag-space-2xs) var(--ag-space-xs);
+  }
+
+  .field:last-child {
+    border-right: none;
+  }
+
+  .field--grow {
+    flex: 1;
+  }
+  .field--shrink {
+    flex-shrink: 1;
+    width: 3rem;
+  }
+  .field--full {
+    border-top: 1px solid var(--pencil);
+    width: 100%;
+  }
+
+  .field-value {
+    color: var(--ink);
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-s);
+    line-height: 1.2;
+    min-height: 1.2em;
+  }
+
+  .field-label {
+    color: var(--ink-faint);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-3xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── Sections ─────────────────────────────────────── */
+  .sheet-section {
+    border-bottom: 1.5px solid var(--ink);
+    padding: var(--ag-space-s) var(--ag-space-s) var(--ag-space-2xs);
+  }
+
+  .sheet-section--last {
+    border-bottom: none;
+  }
+
+  /* section label sits at the bottom, centered — like the PDF */
+  .section-label {
+    border-top: 1px solid var(--pencil);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-3xs);
+    letter-spacing: 0.14em;
+    margin: var(--ag-space-xs) 0 0;
+    padding-top: var(--ag-space-2xs);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* ── Ability scores ───────────────────────────────── */
+  .abilities {
+    display: grid;
+    gap: var(--ag-space-xs);
+    grid-template-columns: repeat(6, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ability {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .ability-name {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-3xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .ability-score {
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-l);
+    line-height: 1.8;
+    text-align: center;
+    width: 100%;
+  }
+
+  .ability-mod {
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-3xs);
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    width: 1.5rem;
+  }
+
+  /* ── Skills ───────────────────────────────────────── */
+  .skills {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .skill {
+    align-items: baseline;
+    display: flex;
+    font-size: var(--ag-font-size-xs);
+    gap: var(--ag-space-2xs);
+  }
+
+  .skill-pip {
+    flex-shrink: 0;
+    font-size: 6px;
+    line-height: var(--ag-font-size-xs);
+  }
+
+  .skill-name {
+    color: var(--ink);
+    font-family: var(--font-body);
+  }
+
+  .skill--code .skill-pip {
+    color: var(--blue-ink);
+  }
+  .skill--make .skill-pip {
+    color: var(--amber-ink);
+  }
+  .skill--dnd .skill-pip {
+    color: var(--brand-1);
+  }
+  .skill--wild .skill-pip {
+    color: var(--green-ink);
+  }
+
+  /* ── Personality trait ────────────────────────────── */
+  .trait-text {
+    color: var(--ink);
+    font-family: var(--font-annotation);
+    font-size: var(--ag-font-size-m);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── Equipment ────────────────────────────────────── */
+  .equipment {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .equipment-item {
+    border-bottom: 1px dotted var(--pencil);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    padding: 1px 0;
+  }
+
+  .equipment-item:last-child {
+    border-bottom: none;
+  }
+</style>

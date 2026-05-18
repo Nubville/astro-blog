@@ -1,35 +1,137 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import PostSidebar from '../components/PostSidebar.astro';
+
 const { frontmatter } = Astro.props;
+
+type PostModule = {
+  frontmatter: { title: string; pubDate: string | Date; type?: string };
+  url: string;
+};
+
+const postModules = import.meta.glob<PostModule>('../pages/posts/*.md', { eager: true });
+const recentPosts = Object.values(postModules)
+  .filter(
+    (p) => p.frontmatter.title !== frontmatter.title && p.frontmatter.type === frontmatter.type
+  )
+  .sort(
+    (a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()
+  )
+  .slice(0, 4)
+  .map((p) => ({ title: p.frontmatter.title, pubDate: p.frontmatter.pubDate, url: p.url }));
 ---
-<BaseLayout pageTitle={frontmatter.title}>
-  <p>{frontmatter.pubDate.toString().slice(0,10)}</p>
-  <p><em>{frontmatter.description}</em></p>
-  <p>Written by: {frontmatter.author}</p>
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-  <div class="tags">
-    {frontmatter.tags.map((tag: string) => (
-      <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
-    ))}
-  </div>
-  <slot />
+
+<script>
+  import '../scripts/code-copy.js';
+</script>
+<BaseLayout pageTitle={frontmatter.title} showPageTitle={false}>
+  <aside class="hero-section post-sidebar" aria-label="Author and more posts">
+    <PostSidebar
+      nameHeading="h2"
+      posts={recentPosts}
+      postsLabel={`// more ${frontmatter.type ?? 'posts'}`}
+    />
+  </aside>
+
+  <article class="post-article">
+    <header class="post-header">
+      <p class="post-date">{frontmatter.pubDate.toString().slice(0, 10)}</p>
+      <p class="post-description"><em>{frontmatter.description}</em></p>
+      <p class="post-author">Written by: {frontmatter.author}</p>
+      {
+        frontmatter.image && (
+          <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+        )
+      }
+      <div class="tags">
+        {
+          frontmatter.tags.map((tag: string) => (
+            <p class="tag">
+              <a href={`/tags/${tag}`}>{tag}</a>
+            </p>
+          ))
+        }
+      </div>
+    </header>
+    <div class="post-body">
+      <slot />
+    </div>
+  </article>
 </BaseLayout>
 <style>
-  a {
-    color: var(--accent-1);
+  .post-sidebar {
+    display: none;
+  }
+
+  @container content-col (min-width: 1400px) {
+    .post-sidebar {
+      display: block;
+    }
+  }
+
+  .post-article {
+    grid-area: posts;
+    max-width: 72ch;
+    width: 100%;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .post-date {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-description {
+    color: var(--ink-faint);
+    margin-bottom: 0.25rem;
+  }
+
+  .post-author {
+    color: var(--ink-faint);
+    font-size: var(--ag-font-size-s);
+    margin-bottom: 1rem;
+  }
+
+  .post-header img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
   }
 
   .tags {
     display: flex;
     flex-wrap: wrap;
+    gap: 0.25rem;
   }
 
   .tag {
-    margin: 0.25em;
-    border: dotted 1px var(--text-3);
-    border-radius: .5em;
-    padding: .5em 1em;
-    font-size: 1.15em;
-    background-color: var(--surface-2);
+    margin: 0;
+    border: dotted 1px var(--pencil);
+    border-radius: 0.5em;
+    padding: 0.25em 0.75em;
+    font-size: var(--ag-font-size-xs);
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+  }
+
+  .tag a {
+    color: var(--ink-faint);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--brand-1);
+    }
+  }
+
+  .post-body {
+    line-height: 1.7;
   }
 </style>

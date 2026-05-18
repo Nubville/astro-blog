@@ -1,19 +1,51 @@
 ---
+const navItems = [
+  { href: '/', label: 'Home', icon: '⚓' },
+  { href: '/blog/', label: 'Quest Log', icon: '📜' },
+  { href: '/tags/', label: 'Topics', icon: '🗺' },
+  { href: '/about/', label: 'About', icon: '⚔' },
+];
 
+const { pathname } = Astro.url;
+
+function isActive(href: string) {
+  return href === '/' ? pathname === '/' : pathname.startsWith(href);
+}
 ---
 
 <header>
   <a href="/" class="brand" aria-label="Andrew Garman — home">Andrew Garman</a>
   <span class="brand-sub" aria-hidden="true">// dev + design</span>
+
+  <nav class="header-nav" aria-label="Main navigation">
+    <ul class="nav-list" role="list">
+      {
+        navItems.map(({ href, label, icon }) => (
+          <li class="nav-item">
+            <a
+              href={href}
+              class={`nav-link${isActive(href) ? ' nav-link--active' : ''}`}
+              aria-current={isActive(href) ? 'page' : undefined}
+            >
+              <span class="nav-icon" aria-hidden="true">
+                {icon}
+              </span>
+              <span class="nav-label">{label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
 </header>
 
 <style>
   header {
-    align-items: baseline;
+    align-items: center;
     border-bottom: 1px solid var(--pencil);
     display: flex;
-    gap: 1rem;
-    padding: 1.25rem 2.5rem 1rem;
+    gap: var(--ag-space-m);
+    padding: var(--ag-space-s) var(--ag-space-2xl);
   }
 
   .brand {
@@ -37,9 +69,67 @@
   }
 
   .brand-sub {
-    color: var(--pencil);
+    color: var(--ink-faint);
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: var(--ag-font-size-xs);
     letter-spacing: 0.04em;
+  }
+
+  /* ── Right-side nav ──────────────────────────────── */
+  .header-nav {
+    margin-left: auto;
+  }
+
+  .nav-list {
+    display: flex;
+    flex-direction: row;
+    gap: var(--ag-space-2xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    list-style: none;
+  }
+
+  .nav-link {
+    align-items: center;
+    border: 1px solid var(--pencil);
+    border-radius: 2px;
+    color: var(--ink-faint);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    gap: var(--ag-space-2xs);
+    letter-spacing: 0.06em;
+    padding: var(--ag-space-2xs) var(--ag-space-s);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      border-color var(--ag-transition-fast),
+      color var(--ag-transition-fast),
+      background var(--ag-transition-fast);
+
+    &:hover {
+      background: var(--paper-dark);
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 2px;
+    }
+  }
+
+  .nav-link--active {
+    border-color: var(--brand-1);
+    color: var(--brand-1);
+  }
+
+  .nav-icon {
+    font-size: 0.85em;
+    line-height: 1;
   }
 </style>

@@ -1,18 +1,48 @@
 ---
-import Social from './Social.astro';
+
 ---
 
 <footer>
-  <Social platform="twitter" username="astrodotbuild" />
-  <Social platform="github" username="withastro" />
-  <Social platform="youtube" username="astrodotbuild" />
+  <a
+    href="https://www.linkedin.com/in/drew-garman"
+    class="footer-link"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    LinkedIn
+  </a>
+  <a href="mailto:garman.andrew@gmail.com" class="footer-link"> Email </a>
+  <a href="/about" class="footer-link">About</a>
 </footer>
 
 <style>
   footer {
+    border-top: 1px solid var(--pencil);
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    padding: 1.5rem;
+    gap: var(--ag-space-s);
+    padding: var(--ag-space-l);
+  }
+
+  .footer-link {
+    background: var(--surface-2);
+    border-radius: var(--radius-cel);
+    color: var(--text-1);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.06em;
+    padding: var(--ag-space-xs) var(--ag-space-m);
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:hover {
+      background: var(--brand-1);
+      color: var(--paper);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 2px;
+    }
   }
 </style>

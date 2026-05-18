@@ -1,13 +1,585 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-const pageTitle = 'About Me';
-
-const skills = ['HTML', 'CSS', 'JavaScript', 'Web Components', 'Lit', 'Astro'];
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-  <p>My skills are:</p>
-  <ul>
-    {skills.map((skill) => <li class="skill">{skill}</li>)}
-  </ul>
+<BaseLayout pageTitle="About" showPageTitle={false}>
+  <div class="about-page">
+    <!-- ── Profile header ──────────────────────────────── -->
+    <header class="about-header">
+      <div class="about-header-text">
+        <p class="about-eyebrow">// about.md</p>
+        <h1 class="about-name">Andrew Garman</h1>
+        <p class="about-role">Senior Front-End Developer</p>
+        <p class="about-summary">
+          I specialize in accessible design systems and modern web components — architecting
+          scalable solutions for complex digital properties across healthcare, education, and
+          beyond. Over 10+ years I've traveled from Flash animation and graphic design to front-end
+          architecture, landing somewhere at the intersection of design, engineering, and "let me
+          just 3D print that."
+        </p>
+        <div class="about-actions">
+          <a
+            href="https://www.linkedin.com/in/drew-garman"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn Profile
+          </a>
+          <a href="mailto:garman.andrew@gmail.com" class="btn-secondary">
+            garman.andrew@gmail.com
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Skills ──────────────────────────────────────── -->
+    <section class="about-section" aria-labelledby="skills-heading">
+      <h2 id="skills-heading" class="section-heading">Technical Skills</h2>
+      <dl class="skills-grid">
+        <div class="skill-group">
+          <dt class="skill-category">Frameworks</dt>
+          <dd class="skill-tags">
+            {
+              ['React', 'Vue', 'Svelte', 'Lit', 'Web Components', 'Astro'].map((s) => (
+                <span class="skill-tag skill-tag--code">{s}</span>
+              ))
+            }
+          </dd>
+        </div>
+        <div class="skill-group">
+          <dt class="skill-category">Build Tools</dt>
+          <dd class="skill-tags">
+            {
+              ['Vite', 'Webpack', 'Gulp', 'Parcel'].map((s) => (
+                <span class="skill-tag skill-tag--code">{s}</span>
+              ))
+            }
+          </dd>
+        </div>
+        <div class="skill-group">
+          <dt class="skill-category">CMS</dt>
+          <dd class="skill-tags">
+            {
+              ['WordPress', 'Drupal', 'Sitecore'].map((s) => (
+                <span class="skill-tag skill-tag--code">{s}</span>
+              ))
+            }
+          </dd>
+        </div>
+        <div class="skill-group">
+          <dt class="skill-category">Design</dt>
+          <dd class="skill-tags">
+            {
+              ['Figma', 'Sketch', 'Invision', 'Storybook'].map((s) => (
+                <span class="skill-tag skill-tag--design">{s}</span>
+              ))
+            }
+          </dd>
+        </div>
+        <div class="skill-group">
+          <dt class="skill-category">Standards</dt>
+          <dd class="skill-tags">
+            {
+              ['WCAG AA', 'Atomic Design', 'Component-Driven Dev'].map((s) => (
+                <span class="skill-tag skill-tag--standard">{s}</span>
+              ))
+            }
+          </dd>
+        </div>
+        <div class="skill-group">
+          <dt class="skill-category">AI Tooling</dt>
+          <dd class="skill-tags">
+            {
+              ['Cursor', 'Claude', 'Claude Code', 'ChatGPT'].map((s) => (
+                <span class="skill-tag skill-tag--ai">{s}</span>
+              ))
+            }
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ── Experience ──────────────────────────────────── -->
+    <section class="about-section" aria-labelledby="experience-heading">
+      <h2 id="experience-heading" class="section-heading">Experience</h2>
+      <ol class="timeline" role="list">
+        <li class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-dates">Oct 2022 – Present</span>
+          </div>
+          <div class="timeline-body">
+            <h3 class="timeline-role">Senior Developer</h3>
+            <p class="timeline-company">Phase2 — Fort Wayne, IN (Remote)</p>
+            <p class="timeline-summary">
+              Technical lead for complex front-end implementations, providing architectural guidance
+              and mentorship while building accessible, component-driven design systems for
+              healthcare and education clients.
+            </p>
+            <ul class="timeline-bullets">
+              <li>
+                Architect and develop design systems using web components and Lit, configuring Vite
+                build systems across multiple client projects
+              </li>
+              <li>
+                Lead technical solutioning and troubleshooting, establishing implementation patterns
+                and development standards
+              </li>
+              <li>
+                Mentor junior developers through regular 1-on-1s focused on career development and
+                technical growth
+              </li>
+              <li>
+                Translate client requirements into technical specifications and user stories,
+                bridging stakeholder needs with development execution
+              </li>
+              <li>Build accessible Drupal themes and integrations ensuring WCAG AA compliance</li>
+              <li>
+                Leverage AI tools to optimize development workflows and establish team coding
+                standards
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-dates">Aug 2021 – Oct 2022</span>
+          </div>
+          <div class="timeline-body">
+            <h3 class="timeline-role">Front End Tech Lead</h3>
+            <p class="timeline-company">GeekHive — Warwick, NY (Remote)</p>
+            <ul class="timeline-bullets">
+              <li>
+                Led teams building accessible, component-driven front ends across React, Vue, and
+                Svelte
+              </li>
+              <li>
+                Architected a multi-site design system for Drupal 9 with Storybook integration
+              </li>
+              <li>
+                Built features on an existing React Native codebase using TypeScript, Redux, and
+                Redux Toolkit
+              </li>
+              <li>
+                Created epics, stories, and tasks from client requirements; configured build systems
+                and living style guides
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-dates">Feb 2020 – Aug 2021</span>
+          </div>
+          <div class="timeline-body">
+            <h3 class="timeline-role">Senior Developer</h3>
+            <p class="timeline-company">GeekHive — Warwick, NY (Remote)</p>
+            <ul class="timeline-bullets">
+              <li>
+                Translated designs from Figma, Sketch, and Invision into interactive prototypes and
+                design systems
+              </li>
+              <li>Built complex scroll-triggered animations using ScrollMagic and GSAP</li>
+              <li>Converted a Drupal 7 multisite to Drupal 8 with a shared base theme</li>
+              <li>Created custom Sitecore SXA theme components</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-dates">Apr 2016 – Feb 2020</span>
+          </div>
+          <div class="timeline-body">
+            <h3 class="timeline-role">Developer</h3>
+            <p class="timeline-company">GeekHive — Warwick, NY (Remote)</p>
+            <ul class="timeline-bullets">
+              <li>Built responsive, modern CMS themes across Drupal, WordPress, and Sitecore</li>
+              <li>
+                Developed build systems for Sass/SCSS, JavaScript, and image optimization using
+                Gulp, Webpack, and Parcel
+              </li>
+              <li>Created iOS-targeted websites and sales presentations for conference use</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-dates">Sep 2015 – Mar 2016</span>
+          </div>
+          <div class="timeline-body">
+            <h3 class="timeline-role">Front End Web Developer</h3>
+            <p class="timeline-company">LYFT Digital, LLC — Fort Wayne, IN</p>
+            <ul class="timeline-bullets">
+              <li>Developed responsive custom WordPress websites and e-commerce themes</li>
+              <li>Created style guides and working mockups from provided designs</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-dates">Jun 2014 – Sep 2015</span>
+          </div>
+          <div class="timeline-body">
+            <h3 class="timeline-role">Front End Web Developer / Graphic Designer</h3>
+            <p class="timeline-company">Enspire Software, Inc. — Fort Wayne, IN</p>
+            <ul class="timeline-bullets">
+              <li>
+                Implemented views and styles across Ruby on Rails, ASP.NET, and Angular 1.x projects
+              </li>
+              <li>Built and maintained responsive CMS sites in Drupal and WordPress</li>
+              <li>Participated in agile, sprint-based development cycles</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-dates">Jan 2013 – May 2014</span>
+          </div>
+          <div class="timeline-body">
+            <h3 class="timeline-role">Marketing Graphic Designer</h3>
+            <p class="timeline-company">Symplexity (Formerly ENS Group) — Fort Wayne, IN</p>
+            <ul class="timeline-bullets">
+              <li>
+                Created HTML emails, digital marketing campaigns, and print/digital sales materials
+              </li>
+              <li>
+                Maintained company Drupal and WordPress sites and managed social media scheduling
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-dates">Oct 2010 – Dec 2012</span>
+          </div>
+          <div class="timeline-body">
+            <h3 class="timeline-role">Flash Animator / Web Design</h3>
+            <p class="timeline-company">System Simulations — Poway, CA</p>
+            <ul class="timeline-bullets">
+              <li>
+                Produced e-learning modules for Infiniti USA, Infiniti Global, Suzuki North America,
+                and Nissan North America
+              </li>
+              <li>
+                Translated scripts with voice-over into interactive training tools meeting worldwide
+                automotive brand standards
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ── Education ───────────────────────────────────── -->
+    <section class="about-section" aria-labelledby="education-heading">
+      <h2 id="education-heading" class="section-heading">Education</h2>
+      <div class="education-item">
+        <h3 class="education-degree">Bachelor of Fine Arts, Computer Art and Design</h3>
+        <p class="education-school">Purdue University Fort Wayne — Fort Wayne, IN</p>
+        <p class="education-dates">2000–2008</p>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
+
+<style>
+  .about-page {
+    max-width: 72ch;
+    width: 100%;
+  }
+
+  /* ── Header ───────────────────────────────────────── */
+  .about-header {
+    border-bottom: 1.5px solid var(--ink);
+    margin-bottom: var(--ag-space-2xl);
+    padding: var(--ag-space-xl) 0 var(--ag-space-2xl);
+  }
+
+  .about-eyebrow {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.1em;
+    margin: 0 0 var(--ag-space-xs);
+  }
+
+  .about-name {
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-4xl);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    margin: 0 0 var(--ag-space-2xs);
+  }
+
+  .about-role {
+    color: var(--brand-1);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.12em;
+    margin: 0 0 var(--ag-space-l);
+    text-transform: uppercase;
+  }
+
+  .about-summary {
+    color: var(--ink);
+    font-size: var(--ag-font-size-m);
+    line-height: 1.7;
+    margin: 0 0 var(--ag-space-xl);
+    max-width: 62ch;
+  }
+
+  .about-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ag-space-s);
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    border: 1.5px solid var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.08em;
+    padding: var(--ag-space-xs) var(--ag-space-l);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      background var(--ag-transition-fast),
+      color var(--ag-transition-fast);
+
+    &:hover {
+      background: var(--brand-1);
+      border-color: var(--brand-1);
+      color: var(--paper);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 3px;
+    }
+  }
+
+  .btn-secondary {
+    border: 1.5px solid var(--pencil);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.06em;
+    padding: var(--ag-space-xs) var(--ag-space-l);
+    text-decoration: none;
+
+    &:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 3px;
+    }
+  }
+
+  /* ── Shared section styles ────────────────────────── */
+  .about-section {
+    margin-bottom: var(--ag-space-3xl);
+  }
+
+  .section-heading {
+    border-bottom: 1px solid var(--pencil);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0.14em;
+    margin: 0 0 var(--ag-space-l);
+    padding-bottom: var(--ag-space-2xs);
+    text-transform: uppercase;
+  }
+
+  /* ── Skills ───────────────────────────────────────── */
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-m);
+  }
+
+  .skill-group {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ag-space-xs);
+  }
+
+  .skill-category {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.06em;
+    min-width: 9rem;
+    text-transform: uppercase;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ag-space-2xs);
+    margin: 0;
+    padding: 0;
+  }
+
+  .skill-tag {
+    border: 1px solid var(--pencil);
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.04em;
+    padding: 2px var(--ag-space-xs);
+  }
+
+  .skill-tag--code {
+    border-color: var(--blue-ink);
+    color: var(--blue-ink);
+  }
+  .skill-tag--design {
+    border-color: var(--amber-ink);
+    color: var(--amber-ink);
+  }
+  .skill-tag--standard {
+    border-color: var(--green-ink);
+    color: var(--green-ink);
+  }
+  .skill-tag--ai {
+    border-color: var(--brand-1);
+    color: var(--brand-1);
+  }
+
+  /* ── Timeline ─────────────────────────────────────── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .timeline-item {
+    border-left: 2px solid var(--pencil);
+    display: grid;
+    gap: var(--ag-space-xs) var(--ag-space-xl);
+    grid-template-columns: 9rem 1fr;
+    padding: 0 0 var(--ag-space-2xl) var(--ag-space-l);
+    position: relative;
+
+    /* dot on the timeline rail */
+    &::before {
+      background: var(--ink);
+      border-radius: 50%;
+      content: '';
+      height: 8px;
+      left: -5px;
+      position: absolute;
+      top: 6px;
+      width: 8px;
+    }
+
+    &:last-child {
+      border-left-color: transparent;
+    }
+  }
+
+  .timeline-meta {
+    padding-top: 2px;
+  }
+
+  .timeline-dates {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .timeline-role {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-m);
+    font-weight: var(--font-weight-regular);
+    margin: 0 0 2px;
+  }
+
+  .timeline-company {
+    color: var(--brand-1);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.04em;
+    margin: 0 0 var(--ag-space-xs);
+  }
+
+  .timeline-summary {
+    color: var(--ink-faint);
+    font-size: var(--ag-font-size-s);
+    line-height: 1.6;
+    margin: 0 0 var(--ag-space-xs);
+  }
+
+  .timeline-bullets {
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    font-size: var(--ag-font-size-s);
+    gap: var(--ag-space-2xs);
+    line-height: 1.5;
+    margin: 0;
+    padding-left: var(--ag-space-l);
+  }
+
+  /* ── Responsive: collapse timeline to single col ──── */
+  @media (max-width: 600px) {
+    .timeline-item {
+      grid-template-columns: 1fr;
+    }
+
+    .skill-category {
+      min-width: 100%;
+    }
+  }
+
+  /* ── Education ────────────────────────────────────── */
+  .education-item {
+    border-left: 2px solid var(--pencil);
+    padding-left: var(--ag-space-l);
+  }
+
+  .education-degree {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-m);
+    font-weight: var(--font-weight-regular);
+    margin: 0 0 2px;
+  }
+
+  .education-school {
+    color: var(--brand-1);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+
+  .education-dates {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    margin: 2px 0 0;
+  }
+</style>

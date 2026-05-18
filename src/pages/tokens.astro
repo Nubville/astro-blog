@@ -1,0 +1,778 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const colorGroups = [
+  {
+    label: 'Neutral — cream paper to near-black ink',
+    tokens: [
+      { name: '--ag-color-neutral-99', desc: 'Brightest paper' },
+      { name: '--ag-color-neutral-95', desc: 'Paper (default surface)' },
+      { name: '--ag-color-neutral-90', desc: 'Paper dark (lowered surface)' },
+      { name: '--ag-color-neutral-80', desc: 'Pencil light' },
+      { name: '--ag-color-neutral-70', desc: 'Pencil (border)' },
+      { name: '--ag-color-neutral-60', desc: 'Mid warm tone' },
+      { name: '--ag-color-neutral-50', desc: 'Ink faint (WCAG AA on paper)' },
+      { name: '--ag-color-neutral-40', desc: 'Darker warm' },
+      { name: '--ag-color-neutral-30', desc: 'Near-black warm' },
+      { name: '--ag-color-neutral-20', desc: 'Ink (primary text)' },
+      { name: '--ag-color-neutral-10', desc: 'Deep ink' },
+      { name: '--ag-color-neutral-05', desc: 'Near black' },
+    ],
+  },
+  {
+    label: 'Brand — red-orange correction marker',
+    tokens: [
+      { name: '--ag-color-brand-95', desc: 'Lightest tint' },
+      { name: '--ag-color-brand-90', desc: 'Light tint' },
+      { name: '--ag-color-brand-80', desc: 'Soft' },
+      { name: '--ag-color-brand-70', desc: 'Medium' },
+      { name: '--ag-color-brand-60', desc: 'Strong' },
+      { name: '--ag-color-brand-50', desc: 'Base brand (fill-loud)' },
+      { name: '--ag-color-brand-40', desc: 'Dark' },
+      { name: '--ag-color-brand-30', desc: 'Darker' },
+      { name: '--ag-color-brand-20', desc: 'Deepest' },
+    ],
+  },
+  {
+    label: 'Accent — blue ink',
+    tokens: [
+      { name: '--ag-color-accent-90', desc: 'Light blue' },
+      { name: '--ag-color-accent-70', desc: 'Mid blue' },
+      { name: '--ag-color-accent-50', desc: 'Blue ink (links)' },
+      { name: '--ag-color-accent-40', desc: 'Dark blue' },
+      { name: '--ag-color-accent-20', desc: 'Deep blue' },
+    ],
+  },
+  {
+    label: 'Success — green ink',
+    tokens: [
+      { name: '--ag-color-success-95', desc: 'Light green tint' },
+      { name: '--ag-color-success-90', desc: 'Green tint' },
+      { name: '--ag-color-success-70', desc: 'Mid green' },
+      { name: '--ag-color-success-50', desc: 'Green base' },
+      { name: '--ag-color-success-40', desc: 'Dark green' },
+    ],
+  },
+  {
+    label: 'Warning — amber ink',
+    tokens: [
+      { name: '--ag-color-warning-95', desc: 'Light amber tint' },
+      { name: '--ag-color-warning-90', desc: 'Amber tint' },
+      { name: '--ag-color-warning-70', desc: 'Amber mid' },
+      { name: '--ag-color-warning-50', desc: 'Amber base' },
+      { name: '--ag-color-warning-40', desc: 'Amber dark' },
+    ],
+  },
+];
+
+const semanticTokens = [
+  { name: '--ag-color-surface-raised', desc: 'Card / raised surface' },
+  { name: '--ag-color-surface-default', desc: 'Page background' },
+  { name: '--ag-color-surface-lowered', desc: 'Recessed / darker inset' },
+  { name: '--ag-color-surface-border', desc: 'Default border color' },
+  { name: '--ag-color-text-normal', desc: 'Body text' },
+  { name: '--ag-color-text-quiet', desc: 'Secondary / muted text' },
+  { name: '--ag-color-text-link', desc: 'Hyperlinks' },
+  { name: '--ag-color-focus', desc: 'Focus ring color' },
+  { name: '--ag-color-brand-fill-quiet', desc: 'Brand fill — subtle' },
+  { name: '--ag-color-brand-fill-normal', desc: 'Brand fill — default' },
+  { name: '--ag-color-brand-fill-loud', desc: 'Brand fill — primary CTA' },
+  { name: '--ag-color-brand-border-normal', desc: 'Brand border' },
+  { name: '--ag-color-success-fill-loud', desc: 'Success state fill' },
+  { name: '--ag-color-success-on-normal', desc: 'Success text on tint' },
+  { name: '--ag-color-warning-fill-loud', desc: 'Warning state fill' },
+  { name: '--ag-color-warning-on-normal', desc: 'Warning text on tint' },
+];
+
+const fontSizes = [
+  {
+    token: '--ag-font-size-3xs',
+    label: '3xs',
+    approx: '~10px',
+    note: 'Below hard floor — do not use',
+  },
+  {
+    token: '--ag-font-size-2xs',
+    label: '2xs',
+    approx: '~11px',
+    note: 'Below hard floor — do not use',
+  },
+  {
+    token: '--ag-font-size-xs',
+    label: 'xs',
+    approx: '~13px',
+    note: 'Hard floor — labels, annotations only',
+  },
+  {
+    token: '--ag-font-size-s',
+    label: 's',
+    approx: '~14px',
+    note: 'Below 16px — captions, meta only',
+  },
+  { token: '--ag-font-size-m', label: 'm', approx: '16px', note: 'Base — minimum for body copy' },
+  { token: '--ag-font-size-l', label: 'l', approx: '~20px', note: 'Subheadings, emphasized body' },
+  { token: '--ag-font-size-xl', label: 'xl', approx: '~25px', note: 'h3 / section headings' },
+  { token: '--ag-font-size-2xl', label: '2xl', approx: '~32px', note: 'h2 / page section titles' },
+  { token: '--ag-font-size-3xl', label: '3xl', approx: '~40px', note: 'h1 / hero headings' },
+  { token: '--ag-font-size-4xl', label: '4xl', approx: '~51px', note: 'Display — very large' },
+  { token: '--ag-font-size-5xl', label: '5xl', approx: '~64px', note: 'Display — maximum' },
+];
+
+const spaceTokens = [
+  { token: '--ag-space-3xs', label: '3xs', approx: '2px' },
+  { token: '--ag-space-2xs', label: '2xs', approx: '4px' },
+  { token: '--ag-space-xs', label: 'xs', approx: '8px' },
+  { token: '--ag-space-s', label: 's', approx: '12px' },
+  { token: '--ag-space-m', label: 'm', approx: '16px' },
+  { token: '--ag-space-l', label: 'l', approx: '24px' },
+  { token: '--ag-space-xl', label: 'xl', approx: '32px' },
+  { token: '--ag-space-2xl', label: '2xl', approx: '40px' },
+  { token: '--ag-space-3xl', label: '3xl', approx: '48px' },
+  { token: '--ag-space-4xl', label: '4xl', approx: '64px' },
+];
+
+const shadows = [
+  { token: '--ag-shadow-s', label: 's', desc: '2px offset, no blur — tight cel' },
+  { token: '--ag-shadow-m', label: 'm', desc: '3px offset, no blur — default cel' },
+  { token: '--ag-shadow-l', label: 'l', desc: '4px offset, no blur — lifted cel' },
+];
+
+const radii = [
+  { token: '--ag-border-radius-s', label: 's', approx: '2px' },
+  { token: '--ag-border-radius-m', label: 'm', approx: '4px' },
+  { token: '--ag-border-radius-l', label: 'l', approx: '8px' },
+  { token: '--ag-border-radius-pill', label: 'pill', approx: '9999px' },
+];
+
+const legacyAliases = [
+  { alias: '--paper', points: '--ag-color-surface-default' },
+  { alias: '--paper-dark', points: '--ag-color-surface-lowered' },
+  { alias: '--ink', points: '--ag-color-text-normal' },
+  { alias: '--ink-faint', points: '--ag-color-text-quiet' },
+  { alias: '--pencil', points: '--ag-color-surface-border' },
+  { alias: '--blue-ink', points: '--ag-color-text-link' },
+  { alias: '--green-ink', points: '--ag-color-success-on-normal' },
+  { alias: '--amber-ink', points: '--ag-color-warning-on-normal' },
+  { alias: '--brand-1', points: '--ag-color-brand-fill-loud' },
+  { alias: '--shadow-cel', points: '--ag-shadow-s' },
+  { alias: '--radius-cel', points: '--ag-border-radius-s' },
+  { alias: '--font-display', points: '--ag-font-family-heading' },
+  { alias: '--font-mono', points: '--ag-font-family-code' },
+  { alias: '--font-size-1', points: '--ag-font-size-m (16px)' },
+  { alias: '--font-size-2', points: '--ag-font-size-l (~20px)' },
+  { alias: '--font-size-3', points: '--ag-font-size-xl (~25px)' },
+  { alias: '--font-size-4', points: '--ag-font-size-2xl (~32px)' },
+  { alias: '--font-size-5', points: '--ag-font-size-3xl (~40px)' },
+];
+---
+
+<BaseLayout pageTitle="Design Tokens" showPageTitle={false}>
+  <!-- Hero column: title + intro. More theme content will go here later. -->
+  <section class="hero-section tokens-hero" aria-label="Token reference intro">
+    <p class="tokens-annotation">// design-tokens · ag-prefix · v1.0</p>
+    <h1 class="tokens-title">Design Tokens</h1>
+    <p class="tokens-intro">
+      Living reference for all <code>--ag-*</code> CSS custom properties. Defined in
+      <code>src/styles/ag-tokens.css</code> using a three-layer cascade:
+      <code>ag-color-palette → ag-theme → ag-theme-overrides</code>. Theme switching is driven by <code
+        >[data-theme="dark"]</code
+      > on <code>&lt;html&gt;</code>.
+    </p>
+  </section>
+
+  <!-- Posts column: all token sections -->
+  <div class="tokens-content">
+    <!-- ── Color Palette ─────────────────────────────── -->
+    <section class="tokens-section" aria-labelledby="palette-heading">
+      <h2 id="palette-heading" class="section-title">Color Palette</h2>
+      <p class="section-desc">
+        Raw numeric scale — lower number = darker. All values are warm-toned for the paper notebook
+        aesthetic. Defined in <code>@layer ag-color-palette</code>.
+      </p>
+
+      {
+        colorGroups.map((group) => (
+          <div class="color-group">
+            <h3 class="color-group-label">{group.label}</h3>
+            <ul class="color-swatches" role="list">
+              {group.tokens.map(({ name, desc }) => (
+                <li class="swatch-item">
+                  <span
+                    class="swatch"
+                    style={`background: var(${name}); border: 1px solid var(--pencil);`}
+                    aria-hidden="true"
+                  />
+                  <span class="swatch-name">
+                    <code>{name}</code>
+                  </span>
+                  <span class="swatch-desc">{desc}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </section>
+
+    <!-- ── Semantic Theme Tokens ─────────────────────── -->
+    <section class="tokens-section" aria-labelledby="semantic-heading">
+      <h2 id="semantic-heading" class="section-title">Semantic Theme Tokens</h2>
+      <p class="section-desc">
+        Defined in <code>@layer ag-theme</code>. These flip automatically when <code
+          >[data-theme="dark"]</code
+        > is applied. Use these in components, never raw palette values.
+      </p>
+
+      <ul class="semantic-list" role="list">
+        {
+          semanticTokens.map(({ name, desc }) => (
+            <li class="semantic-item">
+              <span
+                class="swatch swatch--inline"
+                style={`background: var(${name}); border: 1px solid var(--pencil);`}
+                aria-hidden="true"
+              />
+              <code class="semantic-name">{name}</code>
+              <span class="semantic-desc">{desc}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- ── Typography ────────────────────────────────── -->
+    <section class="tokens-section" aria-labelledby="type-heading">
+      <h2 id="type-heading" class="section-title">Typography</h2>
+
+      <h3 class="subsection-title">Font Families</h3>
+      <ul class="font-list" role="list">
+        <li class="font-item">
+          <span class="font-sample" style="font-family: var(--ag-font-family-heading);"
+            >Special Elite — display &amp; headings</span
+          >
+          <code class="font-token">--ag-font-family-heading</code>
+          <span class="font-alias"
+            >alias: <code>--font-display</code>, <code>--font-heading</code></span
+          >
+        </li>
+        <li class="font-item">
+          <span class="font-sample" style="font-family: var(--ag-font-family-body);"
+            >Work Sans — body &amp; UI text</span
+          >
+          <code class="font-token">--ag-font-family-body</code>
+          <span class="font-alias">alias: <code>--font-body</code></span>
+        </li>
+        <li class="font-item">
+          <span class="font-sample" style="font-family: var(--ag-font-family-code);"
+            >Courier New — code &amp; mono labels</span
+          >
+          <code class="font-token">--ag-font-family-code</code>
+          <span class="font-alias">alias: <code>--font-mono</code></span>
+        </li>
+        <li class="font-item">
+          <span class="font-sample" style="font-family: var(--ag-font-family-longform);"
+            >Caveat — handwritten annotations</span
+          >
+          <code class="font-token">--ag-font-family-longform</code>
+          <span class="font-alias">alias: <code>--font-annotation</code></span>
+        </li>
+      </ul>
+
+      <h3 class="subsection-title">Font Size Scale</h3>
+      <p class="section-desc">
+        Major Second (×1.125) scale anchored at 1rem (16px). Rule: nothing below <strong
+          >12px</strong
+        > hard floor; body copy minimum <strong>16px</strong>.
+      </p>
+      <ul class="type-scale" role="list">
+        {
+          fontSizes.map(({ token, label, approx, note }) => (
+            <li class={`type-item ${label === '3xs' || label === '2xs' ? 'type-item--floor' : ''}`}>
+              <span
+                class="type-sample"
+                style={`font-size: var(${token}); font-family: var(--ag-font-family-heading);`}
+              >
+                Aa — {label}
+              </span>
+              <span class="type-meta">
+                <code>{token}</code>
+                <span class="type-approx">{approx}</span>
+                <span class="type-note">{note}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- ── Spacing ────────────────────────────────────── -->
+    <section class="tokens-section" aria-labelledby="space-heading">
+      <h2 id="space-heading" class="section-title">Spacing Scale</h2>
+      <p class="section-desc">
+        T-shirt scale multiplied by <code>--ag-space-scale</code> (default 1) for density control. Use
+        these for all margin, padding, and gap values.
+      </p>
+      <ul class="space-scale" role="list">
+        {
+          spaceTokens.map(({ token, label, approx }) => (
+            <li class="space-item">
+              <span
+                class="space-bar"
+                style={`width: var(${token}); min-width: 2px;`}
+                aria-hidden="true"
+              />
+              <code class="space-name">{token}</code>
+              <span class="space-label">{label}</span>
+              <span class="space-approx">{approx}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- ── Shadows ────────────────────────────────────── -->
+    <section class="tokens-section" aria-labelledby="shadow-heading">
+      <h2 id="shadow-heading" class="section-title">Shadows</h2>
+      <p class="section-desc">
+        Hard cel-shadows: offset with <em>no blur</em>, ink-colored. <code
+          >--ag-shadow-blur-scale: 0</code
+        > collapses all blur to zero. Alias: <code>--shadow-cel</code> → <code>--ag-shadow-s</code>.
+      </p>
+      <ul class="shadow-list" role="list">
+        {
+          shadows.map(({ token, label, desc }) => (
+            <li class="shadow-item">
+              <span class="shadow-sample" style={`box-shadow: var(${token});`} aria-hidden="true" />
+              <code class="shadow-name">{token}</code>
+              <span class="shadow-label">{label}</span>
+              <span class="shadow-desc">{desc}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- ── Border Radius ──────────────────────────────── -->
+    <section class="tokens-section" aria-labelledby="radius-heading">
+      <h2 id="radius-heading" class="section-title">Border Radius</h2>
+      <p class="section-desc">
+        Tight squares match the cel/sketch aesthetic. Alias: <code>--radius-cel</code> → <code
+          >--ag-border-radius-s</code
+        >.
+      </p>
+      <ul class="radius-list" role="list">
+        {
+          radii.map(({ token, label, approx }) => (
+            <li class="radius-item">
+              <span
+                class="radius-sample"
+                style={`border-radius: var(${token});`}
+                aria-hidden="true"
+              />
+              <code class="radius-name">{token}</code>
+              <span class="radius-label">
+                {label} — {approx}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- ── Legacy Aliases ─────────────────────────────── -->
+    <section class="tokens-section" aria-labelledby="aliases-heading">
+      <h2 id="aliases-heading" class="section-title">Legacy Aliases</h2>
+      <p class="section-desc">
+        Defined in <code>@layer ag-theme-overrides</code>. These map the old <code>--paper</code>, <code
+          >--ink</code
+        >, <code>--brand-1</code>, etc. names onto <code>--ag-*</code> semantic tokens. Theme switching
+        propagates through automatically. Prefer <code>--ag-*</code> tokens in new code.
+      </p>
+      <table class="alias-table">
+        <thead>
+          <tr>
+            <th scope="col">Alias</th>
+            <th scope="col">Points to</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            legacyAliases.map(({ alias, points }) => (
+              <tr>
+                <td>
+                  <code>{alias}</code>
+                </td>
+                <td>
+                  <code>{points}</code>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ── Hero panel ── */
+
+  .tokens-hero {
+    padding: var(--ag-space-l) 0 var(--ag-space-2xl);
+  }
+
+  .tokens-annotation {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--ag-space-xs);
+  }
+
+  .tokens-title {
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-2xl);
+    font-weight: var(--font-weight-regular);
+    margin: 0 0 var(--ag-space-m);
+  }
+
+  .tokens-intro {
+    color: var(--ink-faint);
+    font-size: var(--ag-font-size-m);
+    line-height: 1.6;
+  }
+
+  /* ── Content column ── */
+
+  .tokens-content {
+    padding-bottom: var(--ag-space-4xl);
+  }
+
+  /* ── Sections ── */
+
+  .tokens-section {
+    border-top: 1px solid var(--pencil);
+    margin-bottom: var(--ag-space-3xl);
+    padding-top: var(--ag-space-xl);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-2xl);
+    font-weight: var(--font-weight-regular);
+    margin: 0 0 var(--ag-space-xs);
+  }
+
+  .section-desc {
+    color: var(--ink-faint);
+    font-size: var(--ag-font-size-s);
+    margin: 0 0 var(--ag-space-l);
+    max-width: 64ch;
+  }
+
+  .subsection-title {
+    font-size: var(--ag-font-size-l);
+    margin: var(--ag-space-xl) 0 var(--ag-space-s);
+  }
+
+  /* ── Color swatches ── */
+
+  .color-group {
+    margin-bottom: var(--ag-space-xl);
+  }
+
+  .color-group-label {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--ag-space-s);
+    text-transform: uppercase;
+  }
+
+  .color-swatches {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-2xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .swatch-item {
+    align-items: center;
+    display: grid;
+    gap: var(--ag-space-s);
+    grid-template-columns: 2rem 22ch 1fr;
+  }
+
+  .swatch {
+    border-radius: var(--radius-cel);
+    display: block;
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .swatch--inline {
+    flex-shrink: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
+  .swatch-name code,
+  .swatch-desc {
+    font-size: var(--ag-font-size-s);
+  }
+
+  .swatch-desc {
+    color: var(--ink-faint);
+  }
+
+  /* ── Semantic tokens ── */
+
+  .semantic-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .semantic-item {
+    align-items: center;
+    display: grid;
+    gap: var(--ag-space-s);
+    grid-template-columns: 1.25rem 26ch 1fr;
+  }
+
+  .semantic-name,
+  .semantic-desc {
+    font-size: var(--ag-font-size-s);
+  }
+
+  .semantic-desc {
+    color: var(--ink-faint);
+  }
+
+  /* ── Font families ── */
+
+  .font-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-m);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .font-item {
+    border: 1px solid var(--pencil);
+    border-radius: var(--radius-cel);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-3xs);
+    padding: var(--ag-space-s) var(--ag-space-m);
+  }
+
+  .font-sample {
+    font-size: var(--ag-font-size-l);
+  }
+
+  .font-token,
+  .font-alias {
+    color: var(--ink-faint);
+    font-size: var(--ag-font-size-xs);
+  }
+
+  /* ── Type scale ── */
+
+  .type-scale {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-s);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .type-item {
+    align-items: baseline;
+    border: 1px solid var(--pencil);
+    border-radius: var(--radius-cel);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ag-space-s) var(--ag-space-m);
+    padding: var(--ag-space-xs) var(--ag-space-m);
+  }
+
+  .type-item--floor {
+    border-style: dashed;
+    opacity: 0.6;
+  }
+
+  .type-sample {
+    color: var(--ink);
+    line-height: 1.2;
+    min-width: 12ch;
+  }
+
+  .type-meta {
+    align-items: baseline;
+    color: var(--ink-faint);
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--ag-font-size-xs);
+    gap: var(--ag-space-s);
+  }
+
+  .type-approx {
+    font-family: var(--font-mono);
+  }
+
+  .type-note {
+    font-style: italic;
+  }
+
+  /* ── Spacing scale ── */
+
+  .space-scale {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .space-item {
+    align-items: center;
+    display: grid;
+    gap: var(--ag-space-s);
+    grid-template-columns: 5rem 22ch 3ch 4ch;
+  }
+
+  .space-bar {
+    background: var(--brand-1);
+    border-radius: 1px;
+    display: block;
+    height: 0.75rem;
+  }
+
+  .space-name,
+  .space-label,
+  .space-approx {
+    font-size: var(--ag-font-size-xs);
+  }
+
+  .space-label {
+    color: var(--ink-faint);
+  }
+
+  .space-approx {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+  }
+
+  /* ── Shadows ── */
+
+  .shadow-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-l);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .shadow-item {
+    align-items: center;
+    display: grid;
+    gap: var(--ag-space-m);
+    grid-template-columns: 3rem 20ch 2ch 1fr;
+  }
+
+  .shadow-sample {
+    background: var(--paper-dark);
+    border: 1px solid var(--pencil);
+    border-radius: var(--radius-cel);
+    display: block;
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  .shadow-name,
+  .shadow-label,
+  .shadow-desc {
+    font-size: var(--ag-font-size-s);
+  }
+
+  .shadow-desc {
+    color: var(--ink-faint);
+  }
+
+  /* ── Border radius ── */
+
+  .radius-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ag-space-l);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .radius-item {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-xs);
+  }
+
+  .radius-sample {
+    background: var(--paper-dark);
+    border: 1px solid var(--pencil);
+    display: block;
+    height: 3rem;
+    width: 3rem;
+  }
+
+  .radius-name,
+  .radius-label {
+    font-size: var(--ag-font-size-xs);
+    text-align: center;
+  }
+
+  .radius-name {
+    color: var(--ink-faint);
+  }
+
+  /* ── Alias table ── */
+
+  .alias-table {
+    border-collapse: collapse;
+    font-size: var(--ag-font-size-s);
+    width: 100%;
+  }
+
+  .alias-table th,
+  .alias-table td {
+    border: 1px solid var(--pencil);
+    padding: var(--ag-space-2xs) var(--ag-space-s);
+    text-align: left;
+  }
+
+  .alias-table th {
+    background: var(--paper-dark);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .alias-table tr:nth-child(even) td {
+    background: var(--paper-dark);
+  }
+</style>

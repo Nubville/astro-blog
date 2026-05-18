@@ -1,27 +1,7 @@
 /* ── Paper System ──────────────────────────────────────
-   All raw color and layout variables live here.
-   Semantic tokens in design-tokens.css reference these.
+   Layout and graph paper only. All color and typography
+   tokens now live in wa-tokens.css.
 ───────────────────────────────────────────────────── */
-
-:root {
-  /* Raw paper colors */
-  --paper: #f6f1e7;
-  --paper-dark: #ede6d4;
-  --paper-shadow: #d8d0bc;
-  --ink: #2a1e10;
-  --ink-faint: #9a8060;
-  --pencil: #b4a88a;
-
-  /* Marker / pen ink colors */
-  --red-pen: rgba(200, 60, 60, 0.28);
-  --blue-ink: #2a4a7a;
-  --green-ink: #2a4a2a;
-  --amber-ink: #7a5010;
-
-  /* Margin */
-  --margin-width: 54px;
-  --red-margin: var(--red-pen);
-}
 
 /* ── Graph paper grid ──────────────────────────────── */
 
@@ -82,14 +62,16 @@ body::before {
     grid-template-columns: minmax(380px, 480px) 1fr;
   }
 
+  /* Default: all direct children land in the posts column */
+  .content-col main > * {
+    grid-area: posts;
+  }
+
+  /* Hero section overrides — higher specificity wins */
   .content-col main > .hero-section {
     grid-area: hero;
     position: sticky;
     top: 2rem;
-  }
-
-  .content-col main > .latest {
-    grid-area: posts;
   }
 }
 

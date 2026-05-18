@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import CharacterSheet from '../components/CharacterSheet.astro';
+import CharacterTraits from '../components/CharacterTraits.astro';
 
 type CardType = 'quest' | 'spellbook' | 'lore' | 'character';
 
@@ -50,34 +51,38 @@ function formatDate(dateStr: string): string {
     <CharacterSheet />
   </section>
 
-  <section class="latest" aria-labelledby="latest-heading">
-    <h2 id="latest-heading" class="section-heading">Latest Posts</h2>
-    <div class="posts-grid">
-      {
-        allPosts.map((post) => {
-          const type = deriveType(post);
-          return (
-            <sketch-card type={type}>
-              <div class="card-content">
-                <span class="card-type-label">[ {type} ]</span>
-                <h3 class="card-post-title">
-                  <a class="card-title" href={post.url}>
-                    {post.frontmatter.title}
-                  </a>
-                </h3>
-                {post.frontmatter.description && (
-                  <p class="card-excerpt">{post.frontmatter.description}</p>
-                )}
-                <time class="card-date" datetime={post.frontmatter.pubDate}>
-                  {formatDate(post.frontmatter.pubDate)}
-                </time>
-              </div>
-            </sketch-card>
-          );
-        })
-      }
-    </div>
-  </section>
+  <div class="homepage-split">
+    <section class="latest" aria-labelledby="latest-heading">
+      <h2 id="latest-heading" class="section-heading">Latest Posts</h2>
+      <div class="posts-grid">
+        {
+          allPosts.map((post) => {
+            const type = deriveType(post);
+            return (
+              <sketch-card type={type}>
+                <div class="card-content">
+                  <span class="card-type-label">[ {type} ]</span>
+                  <h3 class="card-post-title">
+                    <a class="card-title" href={post.url}>
+                      {post.frontmatter.title}
+                    </a>
+                  </h3>
+                  {post.frontmatter.description && (
+                    <p class="card-excerpt">{post.frontmatter.description}</p>
+                  )}
+                  <time class="card-date" datetime={post.frontmatter.pubDate}>
+                    {formatDate(post.frontmatter.pubDate)}
+                  </time>
+                </div>
+              </sketch-card>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    <CharacterTraits />
+  </div>
 </BaseLayout>
 
 <style>
@@ -90,6 +95,19 @@ function formatDate(dateStr: string): string {
   @container content-col (min-width: 1400px) {
     .hero-section {
       max-inline-size: none;
+    }
+  }
+
+  .homepage-split {
+    align-items: start;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  @container main-canvas (min-width: 700px) {
+    .homepage-split {
+      grid-template-columns: 2fr 1fr;
     }
   }
 

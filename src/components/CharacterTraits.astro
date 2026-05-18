@@ -1,0 +1,120 @@
+---
+const char = {
+  personalityTraits: [
+    'Will refactor the CSS to be "clean" before shipping the actual feature.',
+    'Narrates debugging sessions out loud. The dog helps.',
+  ],
+  ideals: [
+    'Accessibility is non-negotiable. Full stop. (Lawful Good)',
+    'The maker who ships beats the perfectionist who never does. (Neutral Practical)',
+  ],
+  bonds: [
+    "The campaign must continue. Trenzor hasn't found the compass yet.",
+    'This blog is the notebook I kept meaning to start.',
+  ],
+  flaws: [
+    "Has 47 browser tabs open. Swears they're all important.",
+    'Buys new filament before finishing the current spool.',
+  ],
+  features: `Started in Flash — built web games, cartoon shorts, and banner ads that nobody asked for. When the browser ate Flash for breakfast, pivoted hard into front-end dev. Now I build design systems and web components by day, and by night I'm DMing a D&D campaign while 3D printing a haunted compass for a player who has absolutely no idea it's coming.
+
+Equal parts coder and maker. Most comfortable when there's solder in one hand and a spec doc in the other.`,
+};
+---
+
+<aside class="char-traits" aria-label="Character traits and features">
+  <!-- ── Four trait boxes ────────────────────────────── -->
+  <div class="traits-column">
+    <div class="trait-box">
+      <ul class="trait-list" role="list">
+        {char.personalityTraits.map((t) => <li class="trait-item">{t}</li>)}
+      </ul>
+      <p class="section-label">Personality Traits</p>
+    </div>
+    <div class="trait-box">
+      <ul class="trait-list" role="list">
+        {char.ideals.map((t) => <li class="trait-item">{t}</li>)}
+      </ul>
+      <p class="section-label">Ideals</p>
+    </div>
+    <div class="trait-box">
+      <ul class="trait-list" role="list">
+        {char.bonds.map((t) => <li class="trait-item">{t}</li>)}
+      </ul>
+      <p class="section-label">Bonds</p>
+    </div>
+    <div class="trait-box trait-box--last-row">
+      <ul class="trait-list" role="list">
+        {char.flaws.map((t) => <li class="trait-item">{t}</li>)}
+      </ul>
+      <p class="section-label">Flaws</p>
+    </div>
+  </div>
+
+  <!-- ── Features & Traits ──────────────────────────── -->
+  <div class="features-box">
+    {char.features.split('\n\n').map((para) => <p class="features-text">{para}</p>)}
+    <p class="section-label">Features &amp; Traits</p>
+  </div>
+</aside>
+
+<style>
+  .trait-box {
+    border: solid var(--ag-border-width-m) var(--ink);
+    padding: var(--ag-space-s) var(--ag-space-s) var(--ag-space-2xs);
+  }
+
+  .traits-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-s);
+    margin-bottom: var(--ag-space-s);
+  }
+
+  .trait-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .trait-item {
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--ag-font-size-s);
+    line-height: 1.4;
+  }
+
+  /* ── Features box ─────────────────────────────────── */
+  .features-box {
+    border: solid var(--ag-border-width-m) var(--ink);
+    padding: var(--ag-space-s) var(--ag-space-s) var(--ag-space-2xs);
+  }
+
+  .features-text {
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--ag-font-size-m);
+    line-height: 1.6;
+    margin: 0 0 0.75em;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  /* ── Section label ────────────────────────────────── */
+  .section-label {
+    border-top: 1px solid var(--pencil);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-3xs);
+    letter-spacing: 0.14em;
+    margin: var(--ag-space-xs) 0 0;
+    padding-top: var(--ag-space-2xs);
+    text-align: center;
+    text-transform: uppercase;
+  }
+</style>

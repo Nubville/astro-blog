@@ -22,7 +22,13 @@
       "Bash(~/.nvm/versions/node/v24.14.1/bin/npm run *)",
       "Bash(curl -s http://localhost:4321/blog)",
       "Bash(curl -s http://localhost:4321/)",
-      "mcp__playwright__browser_snapshot"
+      "mcp__playwright__browser_snapshot",
+      "Bash(PATH=/home/dgarman/.nvm/versions/node/v24.14.1/bin:__TRACKED_VAR__ npm run dev -- --port 4323)",
+      "Bash(echo \"PID=$!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4323/tokens/)",
+      "Bash(PATH=/home/dgarman/.nvm/versions/node/v24.14.1/bin:__TRACKED_VAR__ npx @playwright/mcp install-browser chrome-for-testing)",
+      "Bash(PATH=/home/dgarman/.nvm/versions/node/v24.14.1/bin:__TRACKED_VAR__ npm run build)",
+      "mcp__playwright__browser_resize"
     ],
     "additionalDirectories": [
       "C:\\Users\\ripro\\OneDrive\\Documents\\WindowsPowerShell"

@@ -1,3 +1,10 @@
 import { defineConfig } from 'astro/config';
 
-export default defineConfig({});
+export default defineConfig({
+  markdown: {
+    shikiConfig: {
+      theme: 'github-dark',
+      wrap: false,
+    },
+  },
+});

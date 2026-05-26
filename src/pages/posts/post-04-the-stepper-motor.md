@@ -50,7 +50,7 @@ type ? for commands
 That banner alone felt like a victory. The chip boots, runs my code, and talks back. Moving on.
 
 <figure>
-  <img src="/images/compressed/post4/photo4.webp" alt="Adafruit HUZZAH32 ESP32 seated on a white breadboard with a USB cable connected, freshly flashed and running firmware" width="1400" />
+  <img src="/images/compressed/post4/photo3.webp" alt="Adafruit HUZZAH32 ESP32 seated on a white breadboard with a USB cable connected, freshly flashed and running firmware" width="1400" />
   <figcaption>Fresh firmware on real hardware. The serial monitor was talking back.</figcaption>
 </figure>
 
@@ -72,9 +72,11 @@ The firmware received the command. The code ran. The motor did not move.
 
 This is the specific frustration of hardware debugging: the software is doing its job perfectly. The problem is somewhere in the physical world, which doesn't have stack traces.
 
-### Lesson 1: The ULN2003 has a power LED
+### Lesson 1: Look at the board, not just the serial monitor
 
-The ULN2003 driver board has a small red LED that lights when the board has power. Mine was dark. I'd been so focused on wiring the signal pins (IN1–IN4) that I hadn't confirmed the board was actually on.
+I had no idea where to start. The serial output confirmed the firmware was running and had received the command — that was it. No error, no indication anything was wrong on the software side. I was staring at code that looked correct, a board that looked wired correctly, and a motor that was just sitting there.
+
+I didn't know what I was looking for until I actually looked at the ULN2003 board itself. It has four indicator LEDs, one per coil winding, that light up when the firmware is actively driving that phase. All four were completely dark — not flickering, not dim, just off. The firmware was commanding motion and nothing on the driver board was responding at all. That told me the problem wasn't in the code.
 
 ### Lesson 2: The breadboard power rails don't have power unless you give them power
 
@@ -87,7 +89,7 @@ I had moved the power wires for the ULN2003 to the breadboard's `+` and `-` rail
 I dug out an old Sperry DM-6400. With the black probe on the `-` rail and the red probe on the `+` rail, it read exactly 0.00V. Confirmed.
 
 <figure>
-  <img src="/images/compressed/post4/photo3.webp" alt="Sperry DM-6400 multimeter reading 0.00V, held over the breadboard" width="1400" />
+  <img src="/images/compressed/post4/photo4.webp" alt="Sperry DM-6400 multimeter reading 0.00V, held over the breadboard" width="1400" />
   <figcaption>0.00V. The breadboard power rails were floating at nothing.</figcaption>
 </figure>
 

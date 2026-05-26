@@ -38,7 +38,66 @@ function isActive(href: string) {
       }
     </ul>
   </nav>
+
+  <button
+    class="nav-toggle"
+    aria-label="Open navigation menu"
+    aria-expanded="false"
+    aria-controls="mobile-nav-dialog"
+  >
+    <span class="bar" aria-hidden="true"></span>
+    <span class="bar" aria-hidden="true"></span>
+    <span class="bar" aria-hidden="true"></span>
+  </button>
 </header>
+
+<dialog id="mobile-nav-dialog" aria-label="Navigation menu">
+  <div class="dialog-inner">
+    <button class="dialog-close" aria-label="Close navigation menu" autofocus>✕</button>
+    <nav aria-label="Mobile navigation">
+      <ul class="dialog-nav-list" role="list">
+        {
+          navItems.map(({ href, label, icon }) => (
+            <li>
+              <a
+                href={href}
+                class={`dialog-nav-link${isActive(href) ? ' dialog-nav-link--active' : ''}`}
+                aria-current={isActive(href) ? 'page' : undefined}
+              >
+                <span aria-hidden="true">{icon}</span>
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</dialog>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle') as HTMLButtonElement;
+  const dialog = document.querySelector('#mobile-nav-dialog') as HTMLDialogElement;
+  const closeBtn = dialog.querySelector('.dialog-close') as HTMLButtonElement;
+
+  toggle.addEventListener('click', () => {
+    dialog.showModal();
+    toggle.setAttribute('aria-expanded', 'true');
+  });
+
+  closeBtn.addEventListener('click', () => dialog.close());
+
+  // Backdrop click closes
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+
+  // Restore focus to toggle and reset aria-expanded on any close (Escape or button)
+  dialog.addEventListener('close', () => {
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.focus();
+  });
+</script>
 
 <style>
   header {
@@ -76,7 +135,7 @@ function isActive(href: string) {
     letter-spacing: 0.04em;
   }
 
-  /* ── Right-side nav ──────────────────────────────── */
+  /* ── Desktop nav ─────────────────────────────────── */
   .header-nav {
     margin-left: auto;
   }
@@ -132,5 +191,153 @@ function isActive(href: string) {
   .nav-icon {
     font-size: 0.85em;
     line-height: 1;
+  }
+
+  /* ── Hamburger button ────────────────────────────── */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: none;
+    border: 1px solid var(--pencil);
+    border-radius: 2px;
+    cursor: pointer;
+    padding: var(--ag-space-xs);
+
+    &:hover {
+      background: var(--paper-dark);
+      border-color: var(--ink);
+
+      & .bar {
+        background: var(--ink);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 2px;
+    }
+  }
+
+  .bar {
+    display: block;
+    width: 1.1rem;
+    height: 1.5px;
+    background: var(--ink-faint);
+    border-radius: 1px;
+    transition: background var(--ag-transition-fast);
+  }
+
+  /* ── Mobile breakpoint ───────────────────────────── */
+  @media (max-width: 999px) {
+    .brand-sub {
+      display: none;
+    }
+
+    .header-nav {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+  }
+
+  /* ── Dialog ──────────────────────────────────────── */
+  #mobile-nav-dialog {
+    background: var(--paper);
+    border: 1px solid var(--pencil);
+    border-radius: 2px;
+    box-shadow: 4px 4px 0 var(--ink);
+    margin: auto;
+    max-width: min(340px, 90vw);
+    padding: 0;
+    width: 100%;
+
+    &::backdrop {
+      background: rgba(42, 30, 16, 0.45);
+    }
+  }
+
+  .dialog-inner {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-m);
+    padding: var(--ag-space-l) var(--ag-space-xl);
+  }
+
+  .dialog-close {
+    align-self: flex-end;
+    background: none;
+    border: 1px solid var(--pencil);
+    border-radius: 2px;
+    color: var(--ink-faint);
+    cursor: pointer;
+    font-size: var(--ag-font-size-s);
+    line-height: 1;
+    padding: var(--ag-space-2xs) var(--ag-space-xs);
+
+    &:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 2px;
+    }
+  }
+
+  .dialog-nav-list {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .dialog-nav-link {
+    align-items: center;
+    border: 1px solid var(--pencil);
+    border-radius: 2px;
+    color: var(--ink-faint);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-s);
+    gap: var(--ag-space-xs);
+    justify-content: center;
+    letter-spacing: 0.06em;
+    padding: var(--ag-space-s) var(--ag-space-l);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      border-color var(--ag-transition-fast),
+      color var(--ag-transition-fast),
+      background var(--ag-transition-fast);
+
+    &:hover {
+      background: var(--paper-dark);
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 2px;
+    }
+  }
+
+  .dialog-nav-link--active {
+    border-color: var(--brand-1);
+    color: var(--brand-1);
   }
 </style>

@@ -1,7 +1,7 @@
 ---
+import Binding from '../components/Binding.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import Navigation from '../components/Navigation.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -22,33 +22,37 @@ const { pageTitle, showPageTitle = true } = Astro.props;
   </head>
   <body>
     <div class="site-layout">
-      <Navigation />
+      <Binding />
 
       <div class="content-col">
         <Header />
 
-        <main>
-          {
-            showPageTitle ? (
-              <div class="page-content">
-                <h1 class="page-title">{pageTitle}</h1>
+        <div class="content-container">
+          <div class="content-outer-column"></div>
+          <main>
+            {
+              showPageTitle ? (
+                <div class="page-content">
+                  <h1 class="page-title">{pageTitle}</h1>
+                  <slot />
+                </div>
+              ) : (
                 <slot />
-              </div>
-            ) : (
-              <slot />
-            )
-          }
-        </main>
+              )
+            }
+          </main>
+          <div class="content-outer-column"></div>
+        </div>
 
         <Footer />
       </div>
     </div>
-
-    <script>
-      import '../scripts/sketch-card.js';
-    </script>
   </body>
 </html>
+
+<script>
+  import '../scripts/sketch-card.js';
+</script>
 
 <style>
   .page-title {

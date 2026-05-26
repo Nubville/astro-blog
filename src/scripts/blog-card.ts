@@ -39,6 +39,7 @@ export class BlogCard extends LitElement {
   static styles = css`
     :host {
       --type-color: var(--brand-1, hsl(22 88% 48%));
+      border: solid var(--ag-border-width-m) var(--pencil);
       display: block;
       position: relative;
     }

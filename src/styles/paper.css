@@ -43,14 +43,20 @@ body::before {
   min-width: 0;
 }
 
-/* Step 2: main is a fluid container grid — no fixed max-width */
+/* Step 2: main is a fluid container — grid kicks in at 768px+ */
 .content-col main {
   container-type: inline-size;
   container-name: main-canvas;
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: 1fr;
-  padding: 2rem 2.5rem;
+  padding: 1rem 1.25rem;
+}
+
+@container content-col (min-width: 768px) {
+  .content-col main {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    padding: 2rem 2.5rem;
+  }
 }
 
 /* Step 5: Two-panel spread at ultrawide — profile left, posts right */

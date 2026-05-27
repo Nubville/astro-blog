@@ -50,7 +50,7 @@ body::before {
   padding: 1rem 1.25rem;
 }
 
-@container content-col (min-width: 768px) {
+@container content-col (min-width: 1200px) {
   .content-col main {
     display: grid;
     gap: 2rem;
@@ -59,13 +59,13 @@ body::before {
   }
 }
 
-/* Step 5: Two-panel spread at ultrawide — profile left, posts right */
+/* Step 5: Three-column spread at desktop — hero left, posts center, traits right */
 @container content-col (min-width: 1400px) {
   .content-col main {
     align-items: start;
     gap: 3rem;
-    grid-template-areas: 'hero posts';
-    grid-template-columns: minmax(380px, 480px) 1fr;
+    grid-template-areas: 'hero posts traits';
+    grid-template-columns: 20% 1fr 20%;
   }
 
   /* Default: all direct children land in the posts column */
@@ -73,11 +73,16 @@ body::before {
     grid-area: posts;
   }
 
-  /* Hero section overrides — higher specificity wins */
   .content-col main > .hero-section {
     grid-area: hero;
     position: sticky;
-    top: 2rem;
+    top: 5rem;
+  }
+
+  .content-col main > .traits-col {
+    grid-area: traits;
+    position: sticky;
+    top: 5rem;
   }
 }
 

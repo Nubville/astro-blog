@@ -102,10 +102,14 @@ function isActive(href: string) {
 <style>
   header {
     align-items: center;
+    background-color: var(--paper);
     border-bottom: 1px solid var(--pencil);
     display: flex;
     gap: var(--ag-space-m);
     padding: var(--ag-space-s) var(--ag-space-2xl);
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
 
   .brand {

@@ -45,69 +45,77 @@ function formatDate(dateStr: string): string {
 ---
 
 <BaseLayout pageTitle="Andrew Garman — Dev Blog" showPageTitle={false}>
-  <!-- hero-section and latest are targeted by @container content-col two-panel rule -->
   <section class="hero-section" aria-label="Profile">
     <Hero />
     <CharacterSheet />
   </section>
 
-  <div class="homepage-split">
-    <section class="latest" aria-labelledby="latest-heading">
-      <h2 id="latest-heading" class="section-heading">Latest Posts</h2>
-      <div class="posts-grid">
-        {
-          allPosts.map((post) => {
-            const type = deriveType(post);
-            return (
-              <sketch-card type={type}>
-                <div class="card-content">
-                  <span class="card-type-label">[ {type} ]</span>
-                  <h3 class="card-post-title">
-                    <a class="card-title" href={post.url}>
-                      {post.frontmatter.title}
-                    </a>
-                  </h3>
-                  {post.frontmatter.description && (
-                    <p class="card-excerpt">{post.frontmatter.description}</p>
-                  )}
-                  <time class="card-date" datetime={post.frontmatter.pubDate}>
-                    {formatDate(post.frontmatter.pubDate)}
-                  </time>
-                </div>
-              </sketch-card>
-            );
-          })
-        }
-      </div>
-    </section>
+  <section class="latest" aria-labelledby="latest-heading">
+    <h2 id="latest-heading" class="section-heading">Latest Posts</h2>
+    <div class="posts-grid">
+      {
+        allPosts.map((post) => {
+          const type = deriveType(post);
+          return (
+            <sketch-card type={type}>
+              <div class="card-content">
+                <span class="card-type-label">[ {type} ]</span>
+                <h3 class="card-post-title">
+                  <a class="card-title" href={post.url}>
+                    {post.frontmatter.title}
+                  </a>
+                </h3>
+                {post.frontmatter.description && (
+                  <p class="card-excerpt">{post.frontmatter.description}</p>
+                )}
+                <time class="card-date" datetime={post.frontmatter.pubDate}>
+                  {formatDate(post.frontmatter.pubDate)}
+                </time>
+              </div>
+            </sketch-card>
+          );
+        })
+      }
+    </div>
+  </section>
 
+  <div class="traits-col">
     <CharacterTraits />
   </div>
 </BaseLayout>
 
 <style>
   .hero-section {
-    /* Width is constrained by the grid column at ultrawide via @container content-col */
     max-inline-size: 480px;
   }
 
-  /* At ultrawide, the two-panel rule in paper.css removes max-inline-size via grid */
-  @container content-col (min-width: 1400px) {
+  @container content-col (min-width: 960px) {
     .hero-section {
       max-inline-size: none;
     }
   }
 
-  .homepage-split {
-    align-items: start;
-    display: grid;
-    gap: 2rem;
+  /* .latest is its own container so posts-grid responds to its actual width,
+     not main-canvas (which fires at the full main width in the 3-col layout) */
+  .latest {
+    container-type: inline-size;
+    container-name: latest-col;
+  }
+
+  /* Reset global main-canvas posts-grid rules — Astro scoped specificity wins */
+  .posts-grid {
     grid-template-columns: 1fr;
   }
 
-  @container main-canvas (min-width: 700px) {
-    .homepage-split {
-      grid-template-columns: 2fr 1fr;
+  @container latest-col (min-width: 560px) {
+    .posts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @container latest-col (min-width: 900px) {
+    .posts-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 

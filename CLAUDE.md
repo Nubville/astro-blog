@@ -145,7 +145,7 @@ src/
   pages/            # Routes — Astro pages + Markdown posts
     posts/          # Blog post markdown files
     tags/           # Tag index and dynamic tag pages
-  scripts/          # Client-side JS / custom elements
+  custom-elements/  # Vanilla custom elements (browser-side JS only)
     sketch-card.js  # <sketch-card> vanilla web component
   styles/
     paper.css        # Raw palette + site grid layout + container queries

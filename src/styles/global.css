@@ -168,6 +168,44 @@ sketch-card {
   display: block;
   position: relative;
   width: 100%;
+  background: var(--paper);
+  border: var(--card-border-width, 1.8px) solid var(--ink);
+  border-radius: var(--card-corner-radius, 6px);
+}
+
+sketch-card[type='quest'] {
+  --card-corner-radius: 10px;
+  --card-corner-shape: bevel;
+  outline: 0.6px solid color-mix(in srgb, var(--ink) 25%, transparent);
+  outline-offset: -6px;
+}
+
+sketch-card[type='spellbook'] {
+  --card-corner-radius: 18px;
+  --card-corner-shape: bevel;
+  outline: 0.6px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  outline-offset: -5px;
+}
+
+sketch-card[type='lore'] {
+  --card-corner-radius: 10px;
+  --card-corner-shape: scoop;
+  outline: 0.6px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  outline-offset: -6px;
+}
+
+sketch-card[type='character'] {
+  --card-border-width: 2px;
+  --card-corner-radius: 4px;
+  --card-corner-shape: bevel;
+  outline: 0.6px solid color-mix(in srgb, var(--ink) 30%, transparent);
+  outline-offset: -7px;
+}
+
+@supports (corner-shape: bevel) {
+  sketch-card {
+    corner-shape: var(--card-corner-shape, round);
+  }
 }
 
 .card-content {

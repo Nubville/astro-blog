@@ -154,4 +154,32 @@ const recentPosts = Object.values(postModules)
     font-size: var(--ag-font-size-s);
     color: var(--ink-faint);
   }
+
+  .post-body :global(table) {
+    border-collapse: collapse;
+    font-size: var(--ag-font-size-s);
+    margin-bottom: var(--ag-space-xl);
+    width: 100%;
+  }
+
+  .post-body :global(th),
+  .post-body :global(td) {
+    border: 1px solid var(--pencil);
+    padding: var(--ag-space-2xs) var(--ag-space-s);
+    text-align: left;
+  }
+
+  .post-body :global(th) {
+    background: var(--paper-dark);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .post-body :global(tr:nth-child(even) td) {
+    background: var(--paper-dark);
+  }
 </style>

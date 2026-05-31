@@ -2,7 +2,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Root Meridian Part 3: The Needle Flies, the Speaker Speaks'
 pubDate: 2026-05-30
-description: 'Fixing the stepper motor speed bottleneck, wiring up a DFPlayer Mini with five CC-licensed sounds, and hearing the compass come alive for the first time — all three systems running together on real hardware.'
+description: 'Fixing the stepper motor speed bottleneck, wiring up a DFPlayer Mini with five CC-licensed sounds, and hearing the compass come alive for the first time — motor and audio running together on real hardware.'
 author: 'Andrew Garman'
 image:
   url: '/images/compressed/post5/photo1.webp'
@@ -129,7 +129,7 @@ Everything wired, firmware flashed, serial monitor open. I typed the full sequen
 spin
 ```
 
-The needle whipped around. The ratchet fired. The LEDs flickered erratically.
+The needle whipped around. The ratchet fired.
 
 ```
 lockon north

@@ -171,11 +171,11 @@ The `compass` command — the plain seek to a direction — intentionally has no
 
 ## Where Things Stand
 
-All three hardware subsystems are validated and working together on a real bench:
+Two of the three hardware subsystems are validated on a real bench:
 
-- **Motor** — seek, erratic, lock-on motion modes working at correct speeds
-- **LEDs** — gem quadrant animations, chase comet, all states responding to commands
-- **Audio** — all five tracks triggering at the right moments
+- **Motor** ✓ — seek, erratic, lock-on motion modes working at correct speeds
+- **Audio** ✓ — all five tracks triggering at the right moments
+- **LEDs** ⚠ — gem quadrant animations and all states verified in Wokwi, but the NeoPixel ring still needs to be physically soldered and wired. That's the next hardware session.
 
 The DM workflow runs entirely from a serial terminal right now. Next step is making it run from Discord instead — a Node.js bot that accepts `!spin` or `!gem harlen spent` from the DM in a private channel and fires the corresponding HTTP command at the ESP32.
 

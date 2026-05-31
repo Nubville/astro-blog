@@ -136,6 +136,13 @@ The serial monitor printed:
 
 The ESP32 is on the network and taking requests. On to the bot.
 
+Before the Discord bot existed, all testing ran through a local stub server — a small Express app that mirrors the ESP32's HTTP interface and lets you fire commands from a browser. This was the whole control panel at v0.1:
+
+<figure>
+  <img src="/images/compressed/post6/stub-server.webp" alt="Root Meridian stub server UI showing compass direction buttons for each player, gem available/spent toggles, spin, and reset controls on a dark background" width="851" height="836" />
+  <figcaption>The stub server at localhost:3000 — the development control panel before Chronicler existed</figcaption>
+</figure>
+
 ## Building Chronicler
 
 <figure style="max-width: 320px; margin: 0 auto 1.5rem;">

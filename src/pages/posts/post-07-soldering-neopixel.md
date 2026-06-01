@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Root Meridian Part 5: First Solder, First Light'
-pubDate: 2026-05-31
+pubDate: 2026-06-01
 description: 'Learning to solder for the first time with a Pinecil V2, wiring the NeoPixel ring, and the moment all four gem quadrants lit up together — topaz, emerald, ruby, diamond — on a real bench for the first time.'
 author: 'Andrew Garman'
 image:

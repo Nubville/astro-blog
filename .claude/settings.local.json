@@ -16,7 +16,11 @@
       "Bash(git add *)",
       "Bash(git rm *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(PATH=\"/home/dgarman/.nvm/versions/node/v24.14.1/bin:$PATH\" node *)",
+      "Bash(dpkg -l)",
+      "Bash(python3 -c \"import pillow_heif\")",
+      "Bash(apt list *)"
     ]
   },
   "enabledMcpjsonServers": [

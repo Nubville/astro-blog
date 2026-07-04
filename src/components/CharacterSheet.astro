@@ -219,6 +219,8 @@ function mod(score: number): string {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    padding-bottom: var(--ag-space-xs);
+    position: relative;
   }
 
   .ability-name {
@@ -232,10 +234,12 @@ function mod(score: number): string {
   .ability-score {
     background: var(--paper);
     border: 1.5px solid var(--ink);
+    border-radius: 4px;
     color: var(--ink);
     font-family: var(--font-display);
-    font-size: var(--ag-font-size-l);
-    line-height: 1.8;
+    font-size: var(--ag-font-size-xl);
+    line-height: 1.4;
+    padding-block: var(--ag-space-2xs);
     text-align: center;
     width: 100%;
   }
@@ -244,12 +248,16 @@ function mod(score: number): string {
     background: var(--paper);
     border: 1.5px solid var(--ink);
     border-radius: 50%;
+    bottom: -0.75rem;
     color: var(--ink);
     font-family: var(--font-mono);
     font-size: var(--ag-font-size-3xs);
     height: 1.5rem;
+    left: 50%;
     line-height: 1.5rem;
+    position: absolute;
     text-align: center;
+    transform: translateX(-50%);
     width: 1.5rem;
   }
 

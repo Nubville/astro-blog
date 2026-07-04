@@ -1,0 +1,55 @@
+---
+type CardType = 'quest' | 'spellbook' | 'lore' | 'character';
+
+interface Props {
+  type: CardType;
+  url: string;
+  title: string;
+  description?: string;
+  pubDate: string;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { type, url, title, description, pubDate, headingLevel = 'h2' } = Astro.props;
+const HeadingTag = headingLevel;
+
+const BADGE: Record<CardType, string> = {
+  quest: '⚔',
+  spellbook: '✦',
+  lore: '🗺',
+  character: '⬡',
+};
+
+function formatDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+---
+
+<sketch-card type={type}>
+  <div class="card-content">
+    <span class="card-type-label">
+      <span class="card-type-icon" aria-hidden="true">{BADGE[type]}</span>
+      [ {type} ]
+    </span>
+    <HeadingTag class="card-post-title">
+      <a class="card-title" href={url}>
+        {title}
+      </a>
+    </HeadingTag>
+    {description && <p class="card-excerpt">{description}</p>}
+    <time class="card-date" datetime={pubDate}>
+      {formatDate(pubDate)}
+    </time>
+  </div>
+</sketch-card>
+
+<style>
+  .card-post-title {
+    font-size: var(--ag-font-size-m);
+    margin: 0 0 0.5rem;
+  }
+</style>

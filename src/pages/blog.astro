@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
 
 type CardType = 'quest' | 'spellbook' | 'lore' | 'character';
 
@@ -31,40 +32,20 @@ function deriveType(post: MarkdownPost): CardType {
     return 'spellbook';
   return 'quest';
 }
-
-function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-}
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <section class="posts-grid" aria-label="Blog posts">
     {
-      allPosts.map((post) => {
-        const type = deriveType(post);
-        return (
-          <sketch-card type={type}>
-            <div class="card-content">
-              <span class="card-type-label">[ {type} ]</span>
-              <h2 class="card-post-title">
-                <a class="card-title" href={post.url}>
-                  {post.frontmatter.title}
-                </a>
-              </h2>
-              {post.frontmatter.description && (
-                <p class="card-excerpt">{post.frontmatter.description}</p>
-              )}
-              <time class="card-date" datetime={post.frontmatter.pubDate}>
-                {formatDate(post.frontmatter.pubDate)}
-              </time>
-            </div>
-          </sketch-card>
-        );
-      })
+      allPosts.map((post) => (
+        <PostCard
+          type={deriveType(post)}
+          url={post.url}
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          pubDate={post.frontmatter.pubDate}
+        />
+      ))
     }
   </section>
 </BaseLayout>
@@ -72,10 +53,5 @@ function formatDate(dateStr: string): string {
 <style>
   .posts-grid {
     padding-bottom: 2rem;
-  }
-
-  .card-post-title {
-    font-size: var(--ag-font-size-m);
-    margin: 0 0 0.5rem;
   }
 </style>

@@ -87,7 +87,8 @@
 
     /* Text */
     --ag-color-text-normal: var(--ag-color-neutral-20);
-    --ag-color-text-quiet: var(--ag-color-neutral-50);
+    /* Darkened from neutral-50 (#7e6450) for AA contrast on --paper-dark surfaces */
+    --ag-color-text-quiet: #6f5842;
     --ag-color-text-link: var(--ag-color-accent-50);
 
     /* Focus */

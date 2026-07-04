@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Root Meridian Part 6: The Cardboard Box Before Fusion 360'
-pubDate: 2026-07-04
+pubDate: 2026-07-02
 description: "Measuring the confirmed electronics stack with calipers, sketching the housing footprint, and building a cardboard mockup — because it turns out a month of dreading Fusion 360 is easier to survive with scissors and painter's tape first."
 author: 'Andrew Garman'
 image:

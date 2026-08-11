@@ -24,7 +24,18 @@ const recentPosts = Object.values(postModules)
 <script>
   import '../custom-elements/code-copy.js';
 </script>
-<BaseLayout pageTitle={frontmatter.title} showPageTitle={false}>
+{
+  /* Note: frontmatter.type is the card category (spellbook/quest/lore), not the
+    Open Graph type — a post is always an "article" for social scrapers. */
+}
+<BaseLayout
+  pageTitle={frontmatter.title}
+  showPageTitle={false}
+  description={frontmatter.description}
+  image={frontmatter.image?.url}
+  type="article"
+  pubDate={frontmatter.pubDate}
+>
   <aside class="hero-section post-sidebar" aria-label="Author and more posts">
     <PostSidebar
       nameHeading="h2"

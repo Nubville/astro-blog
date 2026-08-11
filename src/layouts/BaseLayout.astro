@@ -4,12 +4,40 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import '../styles/global.css';
 
+import { DEFAULT_SOCIAL_IMAGE, SITE_AUTHOR, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
 interface Props {
   pageTitle: string;
   showPageTitle?: boolean;
+  /** Search-result snippet and social-card body. Falls back to the site description. */
+  description?: string;
+  /** Social card image. Post layouts pass their frontmatter image. */
+  image?: string;
+  /** Posts are articles; everything else is a website. */
+  type?: 'website' | 'article';
+  /** Publication date, for article metadata. */
+  pubDate?: string | Date;
 }
 
-const { pageTitle, showPageTitle = true } = Astro.props;
+const {
+  pageTitle,
+  showPageTitle = true,
+  description = SITE_DESCRIPTION,
+  image = DEFAULT_SOCIAL_IMAGE,
+  type = 'website',
+  pubDate,
+} = Astro.props;
+
+// Titles read "Post name — Andrew Garman — Dev Blog", except the homepage,
+// which already is the site title.
+const title = pageTitle === SITE_TITLE ? pageTitle : `${pageTitle} — ${SITE_TITLE}`;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Social scrapers reject relative paths, so every image is resolved to absolute.
+const socialImage = new URL(image, Astro.site).href;
+
+const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
 ---
 
 <html lang="en">
@@ -18,7 +46,35 @@ const { pageTitle, showPageTitle = true } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <meta name="theme-color" content="#1a1a1a" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE_AUTHOR} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={SITE_TITLE}
+      href={new URL('rss.xml', Astro.site)}
+    />
+
+    <!-- Open Graph — what LinkedIn, Discord, Slack and Bluesky read. -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:site_name" content={SITE_TITLE} />
+    {publishedISO && <meta property="article:published_time" content={publishedISO} />}
+    {type === 'article' && <meta property="article:author" content={SITE_AUTHOR} />}
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
   </head>
   <body>
     <div class="site-layout">

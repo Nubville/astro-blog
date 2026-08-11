@@ -1,6 +1,5 @@
 # Andrew Garman
 
-**Phone:** 260.402.0378  
 **Email:** garman.andrew@gmail.com  
 **LinkedIn:** [linkedin.com/in/drew-garman](https://www.linkedin.com/in/drew-garman)
 

@@ -165,7 +165,8 @@ pre:focus-within .code-copy-btn {
 sketch-card {
   container-name: sketch-card;
   container-type: inline-size;
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
   background: var(--paper);
@@ -209,6 +210,9 @@ sketch-card[type='character'] {
 }
 
 .card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 1.5rem 1.75rem;
   position: relative;
   z-index: 1;
@@ -249,5 +253,7 @@ sketch-card[type='character'] {
   font-family: var(--font-mono);
   font-size: var(--ag-font-size-xs);
   letter-spacing: 0.1em;
+  margin-top: auto;
+  padding-top: 0.75rem;
   text-transform: uppercase;
 }

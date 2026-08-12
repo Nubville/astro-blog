@@ -1,6 +1,4 @@
 ---
-import Hero from './Hero.astro';
-
 interface SidebarPost {
   title: string;
   pubDate: string | Date;
@@ -8,15 +6,12 @@ interface SidebarPost {
 }
 
 interface Props {
-  nameHeading?: 'h1' | 'h2';
   posts: SidebarPost[];
   postsLabel?: string;
 }
 
-const { nameHeading = 'h1', posts, postsLabel = '// more posts' } = Astro.props;
+const { posts, postsLabel = '// more posts' } = Astro.props;
 ---
-
-<Hero nameHeading={nameHeading} />
 
 {
   posts.length > 0 && (
@@ -39,6 +34,10 @@ const { nameHeading = 'h1', posts, postsLabel = '// more posts' } = Astro.props;
 }
 
 <style>
+  .sidebar-posts {
+    margin-top: var(--ag-space-l);
+  }
+
   .sidebar-posts-label {
     color: var(--ink-faint);
     font-family: var(--font-mono);

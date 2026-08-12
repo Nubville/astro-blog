@@ -11,6 +11,7 @@ export const SITE_DESCRIPTION =
 
 /** Falls back onto any page that does not supply its own social image. */
 export const DEFAULT_SOCIAL_IMAGE = '/images/drew_avatar.jpg';
+export const DEFAULT_SOCIAL_IMAGE_ALT = 'Andrew Garman';
 
 export const LINKS = {
   linkedin: 'https://www.linkedin.com/in/drew-garman',

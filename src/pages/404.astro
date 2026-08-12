@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  pageTitle="Page Not Found"
+  showPageTitle={false}
+  description="That page doesn't exist — it may have moved or the link is out of date."
+>
+  <div class="not-found">
+    <p class="not-found-eyebrow">// 404.md</p>
+    <h1 class="not-found-title">Off the Map</h1>
+    <p class="not-found-body">
+      There's nothing charted at this address. The page may have moved, been renamed, or never
+      existed in the first place.
+    </p>
+    <div class="not-found-actions">
+      <a href="/" class="btn-primary">Back to Home</a>
+      <a href="/blog/" class="btn-secondary">Browse the Quest Log</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    max-width: 60ch;
+    padding: var(--ag-space-3xl) 0;
+  }
+
+  .not-found-eyebrow {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.1em;
+    margin: 0 0 var(--ag-space-xs);
+  }
+
+  .not-found-title {
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-4xl);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    margin: 0 0 var(--ag-space-l);
+  }
+
+  .not-found-body {
+    color: var(--ink);
+    font-size: var(--ag-font-size-m);
+    line-height: 1.7;
+    margin: 0 0 var(--ag-space-xl);
+  }
+
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ag-space-s);
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    border: 1.5px solid var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.08em;
+    padding: var(--ag-space-xs) var(--ag-space-l);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      background var(--ag-transition-fast),
+      color var(--ag-transition-fast);
+
+    &:hover {
+      background: var(--brand-1);
+      border-color: var(--brand-1);
+      color: var(--paper);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 3px;
+    }
+  }
+
+  .btn-secondary {
+    border: 1.5px solid var(--pencil);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.06em;
+    padding: var(--ag-space-xs) var(--ag-space-l);
+    text-decoration: none;
+
+    &:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 3px;
+    }
+  }
+</style>

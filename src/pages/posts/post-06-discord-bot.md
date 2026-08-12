@@ -7,6 +7,8 @@ author: 'Andrew Garman'
 image:
   url: '/images/compressed/post6/chroniclers_companion.webp'
   alt: 'Chronicler bot avatar — a hooded robot reading a tome surrounded by D20s and a map, rendered in dark fantasy style'
+  width: 1254
+  height: 1254
 tags: ['dnd', 'esp32', 'maker', 'discord', 'nodejs', 'wifi', 'props']
 type: spellbook
 ---
@@ -139,14 +141,14 @@ The ESP32 is on the network and taking requests. On to the bot.
 Before the Discord bot existed, all testing ran through a local stub server — a small Express app that mirrors the ESP32's HTTP interface and lets you fire commands from a browser. This was the whole control panel at v0.1:
 
 <figure>
-  <img src="/images/compressed/post6/stub-server.webp" alt="Root Meridian stub server UI showing compass direction buttons for each player, gem available/spent toggles, spin, and reset controls on a dark background" width="851" height="836" />
+  <img src="/images/compressed/post6/stub-server.webp" alt="Root Meridian stub server UI showing compass direction buttons for each player, gem available/spent toggles, spin, and reset controls on a dark background" width="851" height="836" loading="lazy" />
   <figcaption>The stub server at localhost:3000 — the development control panel before Chronicler existed</figcaption>
 </figure>
 
 ## Building Chronicler
 
 <figure style="max-width: 320px; margin: 0 auto 1.5rem;">
-  <img src="/images/compressed/post6/chroniclers_companion.webp" alt="Chronicler bot avatar — a hooded robot reading a tome surrounded by D20s and a map, rendered in dark fantasy style" width="1254" height="1254" />
+  <img src="/images/compressed/post6/chroniclers_companion.webp" alt="Chronicler bot avatar — a hooded robot reading a tome surrounded by D20s and a map, rendered in dark fantasy style" width="1254" height="1254" loading="lazy" />
   <figcaption>Chronicler's avatar — generated with ChatGPT as a placeholder until I make something real</figcaption>
 </figure>
 

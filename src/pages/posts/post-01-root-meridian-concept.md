@@ -7,6 +7,8 @@ author: 'Andrew Garman'
 image:
   url: '/images/loot-studios-compass-render.png'
   alt: 'A detailed 3D render of an ornate nautical compass with brass fittings and a glowing face'
+  width: 1080
+  height: 1080
 tags: ['dnd', 'esp32', 'maker', 'arduino', 'props', 'neopixel']
 type: spellbook
 ---

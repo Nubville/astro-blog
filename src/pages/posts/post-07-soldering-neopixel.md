@@ -7,6 +7,8 @@ author: 'Andrew Garman'
 image:
   url: '/images/compressed/post7/photo4.webp'
   alt: 'NeoPixel ring glowing with four gem color quadrants — topaz yellow, emerald green, ruby red, diamond blue-white'
+  width: 979
+  height: 1305
 tags: ['dnd', 'esp32', 'maker', 'soldering', 'neopixel', 'hardware', 'props']
 type: spellbook
 ---
@@ -29,7 +31,7 @@ The tools I had going in:
 - **Weller brass sponge tip cleaner**
 - **Helping hands** — four-arm PCB holder with weighted base
 
-<img src="/images/compressed/post7/photo1.webp" alt="Full soldering workstation: four-arm helping hands, Pinecil V2 iron on the mat, Weller tip cleaner, and the ESP32 breadboard assembly in the background" width="1740" height="1305" />
+<img src="/images/compressed/post7/photo1.webp" alt="Full soldering workstation: four-arm helping hands, Pinecil V2 iron on the mat, Weller tip cleaner, and the ESP32 breadboard assembly in the background" width="1740" height="1305" loading="lazy" />
 
 The Kester 44 is genuinely good solder. 63/37 is a eutectic alloy — it goes from solid to fully liquid at exactly 183°C with no mushy in-between phase, which makes it much more forgiving to learn on than lead-free. A lot of hobbyists use it for years.
 
@@ -65,7 +67,7 @@ I used Dupont jumper wires from the Elegoo kit — 26 AWG stranded, which is exa
 
 The iron tip needs to be tinned before use — melt a small amount of solder onto the tip, wipe it on the brass wool, repeat until it comes out shiny silver. A shiny tip transfers heat. A dark, oxidized tip doesn't.
 
-<img src="/images/compressed/post7/photo2.webp" alt="Weller brass sponge tip cleaner on the workmat, used for wiping and tinning the soldering iron tip" width="979" height="1305" />
+<img src="/images/compressed/post7/photo2.webp" alt="Weller brass sponge tip cleaner on the workmat, used for wiping and tinning the soldering iron tip" width="979" height="1305" loading="lazy" />
 
 The rule I kept reminding myself: **heat the joint, not the solder.** Touch the iron to the pad and the wire together, wait a beat for them to get hot, then touch the solder to the joint — not to the iron. The solder should flow toward the heat. If you melt solder onto the tip and drag it to the pad, you get a cold joint: structurally weak, electrically unreliable, dull gray instead of shiny.
 
@@ -94,11 +96,11 @@ Three wires soldered. Plugged the ESP32 back in. Serial monitor came up:
 
 And the ring lit up.
 
-<img src="/images/compressed/post7/photo3.webp" alt="NeoPixel ring fully lit with all 24 pixels glowing in rainbow colors, connected to the ESP32 breadboard by three jumper wires" width="979" height="1305" />
+<img src="/images/compressed/post7/photo3.webp" alt="NeoPixel ring fully lit with all 24 pixels glowing in rainbow colors, connected to the ESP32 breadboard by three jumper wires" width="979" height="1305" loading="lazy" />
 
 All four quadrants, all four gem colors, pulsing in their slow breathing animations. Topaz warm yellow in the north. Emerald green in the east. Ruby red in the south. Diamond blue-white in the west.
 
-<img src="/images/compressed/post7/photo4.webp" alt="NeoPixel ring displaying four distinct gem color quadrants — topaz yellow, emerald green, ruby red, diamond blue-white — connected to the ESP32 breadboard" width="979" height="1305" />
+<img src="/images/compressed/post7/photo4.webp" alt="NeoPixel ring displaying four distinct gem color quadrants — topaz yellow, emerald green, ruby red, diamond blue-white — connected to the ESP32 breadboard" width="979" height="1305" loading="lazy" />
 
 I said nothing for a second. It looked exactly like I'd been imagining for months.
 
@@ -122,7 +124,7 @@ Every subsystem is running. The prop responds to Discord commands, moves a physi
 
 For anyone else learning to solder: a good joint is **shiny and volcano-shaped**, tapering smoothly from the pad up to the wire. It reflects light cleanly. A cold joint — made by not heating the pad enough, or moving before it solidified — looks dull, gray, and sometimes grainy. Cold joints can pass continuity tests and still fail intermittently under vibration or temperature change.
 
-<img src="/images/compressed/post7/photo5.webp" alt="Close-up of the NeoPixel ring PCB held in hand, showing the solder joints on the pads and the ring glowing with gem colors" width="979" height="1305" />
+<img src="/images/compressed/post7/photo5.webp" alt="Close-up of the NeoPixel ring PCB held in hand, showing the solder joints on the pads and the ring glowing with gem colors" width="979" height="1305" loading="lazy" />
 
 If a joint looks dull, add a little fresh solder and reheat. The new flux will clean it up.
 

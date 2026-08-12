@@ -1,0 +1,135 @@
+{
+  "role": "Senior Front-End Developer",
+  "summary": "I specialize in accessible design systems and modern web components — architecting scalable solutions for complex digital properties across healthcare, education, and beyond. Over 10+ years I've traveled from Flash animation and graphic design to front-end architecture, landing somewhere at the intersection of design, engineering, and \"let me just 3D print that.\"",
+  "skillGroups": [
+    {
+      "category": "Frameworks",
+      "style": "code",
+      "tags": ["React", "Vue", "Svelte", "Lit", "Web Components", "Astro"]
+    },
+    {
+      "category": "Build Tools",
+      "style": "code",
+      "tags": ["Vite", "Webpack", "Gulp", "Parcel"]
+    },
+    {
+      "category": "CMS",
+      "style": "code",
+      "tags": ["WordPress", "Drupal", "Sitecore"]
+    },
+    {
+      "category": "Design",
+      "style": "design",
+      "tags": ["Figma", "Sketch", "Invision", "Storybook"]
+    },
+    {
+      "category": "Standards",
+      "style": "standard",
+      "tags": ["WCAG AA", "Atomic Design", "Component-Driven Dev"]
+    },
+    {
+      "category": "AI Tooling",
+      "style": "ai",
+      "tags": ["Cursor", "Claude", "Claude Code", "ChatGPT"]
+    }
+  ],
+  "experience": [
+    {
+      "dates": "Oct 2022 – Present",
+      "role": "Senior Developer",
+      "company": "Phase2 — Fort Wayne, IN (Remote)",
+      "summary": "Technical lead for complex front-end implementations, providing architectural guidance and mentorship while building accessible, component-driven design systems for healthcare and education clients.",
+      "bullets": [
+        "Architect and develop design systems using web components and Lit, configuring Vite build systems across multiple client projects",
+        "Lead technical solutioning and troubleshooting, establishing implementation patterns and development standards",
+        "Mentor junior developers through regular 1-on-1s focused on career development and technical growth",
+        "Translate client requirements into technical specifications and user stories, bridging stakeholder needs with development execution",
+        "Build accessible Drupal themes and integrations ensuring WCAG AA compliance",
+        "Leverage AI tools to optimize development workflows and establish team coding standards"
+      ]
+    },
+    {
+      "dates": "Aug 2021 – Oct 2022",
+      "role": "Front End Tech Lead",
+      "company": "GeekHive — Warwick, NY (Remote)",
+      "summary": "",
+      "bullets": [
+        "Led teams building accessible, component-driven front ends across React, Vue, and Svelte",
+        "Architected a multi-site design system for Drupal 9 with Storybook integration",
+        "Built features on an existing React Native codebase using TypeScript, Redux, and Redux Toolkit",
+        "Created epics, stories, and tasks from client requirements; configured build systems and living style guides"
+      ]
+    },
+    {
+      "dates": "Feb 2020 – Aug 2021",
+      "role": "Senior Developer",
+      "company": "GeekHive — Warwick, NY (Remote)",
+      "summary": "",
+      "bullets": [
+        "Translated designs from Figma, Sketch, and Invision into interactive prototypes and design systems",
+        "Built complex scroll-triggered animations using ScrollMagic and GSAP",
+        "Converted a Drupal 7 multisite to Drupal 8 with a shared base theme",
+        "Created custom Sitecore SXA theme components"
+      ]
+    },
+    {
+      "dates": "Apr 2016 – Feb 2020",
+      "role": "Developer",
+      "company": "GeekHive — Warwick, NY (Remote)",
+      "summary": "",
+      "bullets": [
+        "Built responsive, modern CMS themes across Drupal, WordPress, and Sitecore",
+        "Developed build systems for Sass/SCSS, JavaScript, and image optimization using Gulp, Webpack, and Parcel",
+        "Created iOS-targeted websites and sales presentations for conference use"
+      ]
+    },
+    {
+      "dates": "Sep 2015 – Mar 2016",
+      "role": "Front End Web Developer",
+      "company": "LYFT Digital, LLC — Fort Wayne, IN",
+      "summary": "",
+      "bullets": [
+        "Developed responsive custom WordPress websites and e-commerce themes",
+        "Created style guides and working mockups from provided designs"
+      ]
+    },
+    {
+      "dates": "Jun 2014 – Sep 2015",
+      "role": "Front End Web Developer / Graphic Designer",
+      "company": "Enspire Software, Inc. — Fort Wayne, IN",
+      "summary": "",
+      "bullets": [
+        "Implemented views and styles across Ruby on Rails, ASP.NET, and Angular 1.x projects",
+        "Built and maintained responsive CMS sites in Drupal and WordPress",
+        "Participated in agile, sprint-based development cycles"
+      ]
+    },
+    {
+      "dates": "Jan 2013 – May 2014",
+      "role": "Marketing Graphic Designer",
+      "company": "Symplexity (Formerly ENS Group) — Fort Wayne, IN",
+      "summary": "",
+      "bullets": [
+        "Created HTML emails, digital marketing campaigns, and print/digital sales materials",
+        "Maintained company Drupal and WordPress sites and managed social media scheduling"
+      ]
+    },
+    {
+      "dates": "Oct 2010 – Dec 2012",
+      "role": "Flash Animator / Web Design",
+      "company": "System Simulations — Poway, CA",
+      "summary": "",
+      "bullets": [
+        "Produced e-learning modules for Infiniti USA, Infiniti Global, Suzuki North America, and Nissan North America",
+        "Translated scripts with voice-over into interactive training tools meeting worldwide automotive brand standards"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Fine Arts, Computer Art and Design",
+      "school": "Purdue University Fort Wayne — Fort Wayne, IN",
+      "dates": "2000–2008"
+    }
+  ]
+}

@@ -87,3 +87,56 @@ collections:
             fields:
               - { name: linkedin, label: 'LinkedIn URL', widget: string }
               - { name: github, label: 'GitHub URL', widget: string }
+
+      - name: resume
+        label: 'Resume (About Page)'
+        file: 'src/data/resume.json'
+        fields:
+          - { name: role, label: 'Job Title / Role', widget: string }
+          - name: summary
+            label: 'Summary'
+            widget: text
+            hint: 'The intro paragraph under your name on the About page.'
+          - name: skillGroups
+            label: 'Skill Groups'
+            widget: list
+            summary: '{{category}}'
+            fields:
+              - { name: category, label: 'Category Label', widget: string }
+              - name: style
+                label: 'Tag Color'
+                widget: select
+                options: ['code', 'design', 'standard', 'ai']
+                hint: 'Purely visual — pick whichever color group fits, or reuse one.'
+              - name: tags
+                label: 'Skills'
+                widget: list
+                field: { name: tag, label: Skill, widget: string }
+          - name: experience
+            label: 'Experience'
+            widget: list
+            summary: '{{role}} — {{company}}'
+            fields:
+              - name: dates
+                label: 'Dates'
+                widget: string
+                hint: 'e.g. "Oct 2022 – Present"'
+              - { name: role, label: 'Job Title', widget: string }
+              - { name: company, label: 'Company — Location', widget: string }
+              - name: summary
+                label: 'Summary (optional)'
+                widget: text
+                required: false
+                hint: 'A short lead-in paragraph shown above the bullets. Leave blank to skip it.'
+              - name: bullets
+                label: 'Bullets'
+                widget: list
+                field: { name: bullet, label: Bullet, widget: string }
+          - name: education
+            label: 'Education'
+            widget: list
+            summary: '{{degree}}'
+            fields:
+              - { name: degree, label: 'Degree', widget: string }
+              - { name: school, label: 'School — Location', widget: string }
+              - { name: dates, label: 'Dates', widget: string }

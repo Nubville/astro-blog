@@ -1,23 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { LINKS } from '../consts';
+import { LINKS, SITE_AUTHOR } from '../consts';
+import resume from '../data/resume.json';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE_AUTHOR,
+  jobTitle: resume.role,
+  url: new URL('/about', Astro.site).href,
+  sameAs: [LINKS.linkedin, LINKS.github].filter(Boolean),
+};
 ---
 
 <BaseLayout pageTitle="About" showPageTitle={false}>
+  <script
+    is:inline
+    type="application/ld+json"
+    slot="head"
+    set:html={JSON.stringify(personSchema)}
+  />
   <div class="about-page">
     <!-- ── Profile header ──────────────────────────────── -->
     <header class="about-header">
       <div class="about-header-text">
         <p class="about-eyebrow">// about.md</p>
-        <h1 class="about-name">Andrew Garman</h1>
-        <p class="about-role">Senior Front-End Developer</p>
-        <p class="about-summary">
-          I specialize in accessible design systems and modern web components — architecting
-          scalable solutions for complex digital properties across healthcare, education, and
-          beyond. Over 10+ years I've traveled from Flash animation and graphic design to front-end
-          architecture, landing somewhere at the intersection of design, engineering, and "let me
-          just 3D print that."
-        </p>
+        <h1 class="about-name">{SITE_AUTHOR}</h1>
+        <p class="about-role">{resume.role}</p>
+        <p class="about-summary">{resume.summary}</p>
         <div class="about-actions">
           <a href={LINKS.linkedin} class="btn-primary" target="_blank" rel="noopener noreferrer">
             LinkedIn Profile
@@ -33,66 +43,18 @@ import { LINKS } from '../consts';
     <section class="about-section" aria-labelledby="skills-heading">
       <h2 id="skills-heading" class="section-heading">Technical Skills</h2>
       <dl class="skills-grid">
-        <div class="skill-group">
-          <dt class="skill-category">Frameworks</dt>
-          <dd class="skill-tags">
-            {
-              ['React', 'Vue', 'Svelte', 'Lit', 'Web Components', 'Astro'].map((s) => (
-                <span class="skill-tag skill-tag--code">{s}</span>
-              ))
-            }
-          </dd>
-        </div>
-        <div class="skill-group">
-          <dt class="skill-category">Build Tools</dt>
-          <dd class="skill-tags">
-            {
-              ['Vite', 'Webpack', 'Gulp', 'Parcel'].map((s) => (
-                <span class="skill-tag skill-tag--code">{s}</span>
-              ))
-            }
-          </dd>
-        </div>
-        <div class="skill-group">
-          <dt class="skill-category">CMS</dt>
-          <dd class="skill-tags">
-            {
-              ['WordPress', 'Drupal', 'Sitecore'].map((s) => (
-                <span class="skill-tag skill-tag--code">{s}</span>
-              ))
-            }
-          </dd>
-        </div>
-        <div class="skill-group">
-          <dt class="skill-category">Design</dt>
-          <dd class="skill-tags">
-            {
-              ['Figma', 'Sketch', 'Invision', 'Storybook'].map((s) => (
-                <span class="skill-tag skill-tag--design">{s}</span>
-              ))
-            }
-          </dd>
-        </div>
-        <div class="skill-group">
-          <dt class="skill-category">Standards</dt>
-          <dd class="skill-tags">
-            {
-              ['WCAG AA', 'Atomic Design', 'Component-Driven Dev'].map((s) => (
-                <span class="skill-tag skill-tag--standard">{s}</span>
-              ))
-            }
-          </dd>
-        </div>
-        <div class="skill-group">
-          <dt class="skill-category">AI Tooling</dt>
-          <dd class="skill-tags">
-            {
-              ['Cursor', 'Claude', 'Claude Code', 'ChatGPT'].map((s) => (
-                <span class="skill-tag skill-tag--ai">{s}</span>
-              ))
-            }
-          </dd>
-        </div>
+        {
+          resume.skillGroups.map((group) => (
+            <div class="skill-group">
+              <dt class="skill-category">{group.category}</dt>
+              <dd class="skill-tags">
+                {group.tags.map((tag) => (
+                  <span class={`skill-tag skill-tag--${group.style}`}>{tag}</span>
+                ))}
+              </dd>
+            </div>
+          ))
+        }
       </dl>
     </section>
 
@@ -100,187 +62,40 @@ import { LINKS } from '../consts';
     <section class="about-section" aria-labelledby="experience-heading">
       <h2 id="experience-heading" class="section-heading">Experience</h2>
       <ol class="timeline" role="list">
-        <li class="timeline-item">
-          <div class="timeline-meta">
-            <span class="timeline-dates">Oct 2022 – Present</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Senior Developer</h3>
-            <p class="timeline-company">Phase2 — Fort Wayne, IN (Remote)</p>
-            <p class="timeline-summary">
-              Technical lead for complex front-end implementations, providing architectural guidance
-              and mentorship while building accessible, component-driven design systems for
-              healthcare and education clients.
-            </p>
-            <ul class="timeline-bullets">
-              <li>
-                Architect and develop design systems using web components and Lit, configuring Vite
-                build systems across multiple client projects
-              </li>
-              <li>
-                Lead technical solutioning and troubleshooting, establishing implementation patterns
-                and development standards
-              </li>
-              <li>
-                Mentor junior developers through regular 1-on-1s focused on career development and
-                technical growth
-              </li>
-              <li>
-                Translate client requirements into technical specifications and user stories,
-                bridging stakeholder needs with development execution
-              </li>
-              <li>Build accessible Drupal themes and integrations ensuring WCAG AA compliance</li>
-              <li>
-                Leverage AI tools to optimize development workflows and establish team coding
-                standards
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-meta">
-            <span class="timeline-dates">Aug 2021 – Oct 2022</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Front End Tech Lead</h3>
-            <p class="timeline-company">GeekHive — Warwick, NY (Remote)</p>
-            <ul class="timeline-bullets">
-              <li>
-                Led teams building accessible, component-driven front ends across React, Vue, and
-                Svelte
-              </li>
-              <li>
-                Architected a multi-site design system for Drupal 9 with Storybook integration
-              </li>
-              <li>
-                Built features on an existing React Native codebase using TypeScript, Redux, and
-                Redux Toolkit
-              </li>
-              <li>
-                Created epics, stories, and tasks from client requirements; configured build systems
-                and living style guides
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-meta">
-            <span class="timeline-dates">Feb 2020 – Aug 2021</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Senior Developer</h3>
-            <p class="timeline-company">GeekHive — Warwick, NY (Remote)</p>
-            <ul class="timeline-bullets">
-              <li>
-                Translated designs from Figma, Sketch, and Invision into interactive prototypes and
-                design systems
-              </li>
-              <li>Built complex scroll-triggered animations using ScrollMagic and GSAP</li>
-              <li>Converted a Drupal 7 multisite to Drupal 8 with a shared base theme</li>
-              <li>Created custom Sitecore SXA theme components</li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-meta">
-            <span class="timeline-dates">Apr 2016 – Feb 2020</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Developer</h3>
-            <p class="timeline-company">GeekHive — Warwick, NY (Remote)</p>
-            <ul class="timeline-bullets">
-              <li>Built responsive, modern CMS themes across Drupal, WordPress, and Sitecore</li>
-              <li>
-                Developed build systems for Sass/SCSS, JavaScript, and image optimization using
-                Gulp, Webpack, and Parcel
-              </li>
-              <li>Created iOS-targeted websites and sales presentations for conference use</li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-meta">
-            <span class="timeline-dates">Sep 2015 – Mar 2016</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Front End Web Developer</h3>
-            <p class="timeline-company">LYFT Digital, LLC — Fort Wayne, IN</p>
-            <ul class="timeline-bullets">
-              <li>Developed responsive custom WordPress websites and e-commerce themes</li>
-              <li>Created style guides and working mockups from provided designs</li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-meta">
-            <span class="timeline-dates">Jun 2014 – Sep 2015</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Front End Web Developer / Graphic Designer</h3>
-            <p class="timeline-company">Enspire Software, Inc. — Fort Wayne, IN</p>
-            <ul class="timeline-bullets">
-              <li>
-                Implemented views and styles across Ruby on Rails, ASP.NET, and Angular 1.x projects
-              </li>
-              <li>Built and maintained responsive CMS sites in Drupal and WordPress</li>
-              <li>Participated in agile, sprint-based development cycles</li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-meta">
-            <span class="timeline-dates">Jan 2013 – May 2014</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Marketing Graphic Designer</h3>
-            <p class="timeline-company">Symplexity (Formerly ENS Group) — Fort Wayne, IN</p>
-            <ul class="timeline-bullets">
-              <li>
-                Created HTML emails, digital marketing campaigns, and print/digital sales materials
-              </li>
-              <li>
-                Maintained company Drupal and WordPress sites and managed social media scheduling
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-meta">
-            <span class="timeline-dates">Oct 2010 – Dec 2012</span>
-          </div>
-          <div class="timeline-body">
-            <h3 class="timeline-role">Flash Animator / Web Design</h3>
-            <p class="timeline-company">System Simulations — Poway, CA</p>
-            <ul class="timeline-bullets">
-              <li>
-                Produced e-learning modules for Infiniti USA, Infiniti Global, Suzuki North America,
-                and Nissan North America
-              </li>
-              <li>
-                Translated scripts with voice-over into interactive training tools meeting worldwide
-                automotive brand standards
-              </li>
-            </ul>
-          </div>
-        </li>
+        {
+          resume.experience.map((job) => (
+            <li class="timeline-item">
+              <div class="timeline-meta">
+                <span class="timeline-dates">{job.dates}</span>
+              </div>
+              <div class="timeline-body">
+                <h3 class="timeline-role">{job.role}</h3>
+                <p class="timeline-company">{job.company}</p>
+                {job.summary && <p class="timeline-summary">{job.summary}</p>}
+                <ul class="timeline-bullets">
+                  {job.bullets.map((bullet) => (
+                    <li>{bullet}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
       </ol>
     </section>
 
     <!-- ── Education ───────────────────────────────────── -->
     <section class="about-section" aria-labelledby="education-heading">
       <h2 id="education-heading" class="section-heading">Education</h2>
-      <div class="education-item">
-        <h3 class="education-degree">Bachelor of Fine Arts, Computer Art and Design</h3>
-        <p class="education-school">Purdue University Fort Wayne — Fort Wayne, IN</p>
-        <p class="education-dates">2000–2008</p>
-      </div>
+      {
+        resume.education.map((entry) => (
+          <div class="education-item">
+            <h3 class="education-degree">{entry.degree}</h3>
+            <p class="education-school">{entry.school}</p>
+            <p class="education-dates">{entry.dates}</p>
+          </div>
+        ))
+      }
     </section>
   </div>
 </BaseLayout>
@@ -554,6 +369,10 @@ import { LINKS } from '../consts';
   .education-item {
     border-left: 2px solid var(--pencil);
     padding-left: var(--ag-space-l);
+
+    & + & {
+      margin-top: var(--ag-space-l);
+    }
   }
 
   .education-degree {

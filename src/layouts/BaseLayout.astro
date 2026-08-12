@@ -1,5 +1,6 @@
 ---
 import Binding from '../components/Binding.astro';
+import CharacterSheet from '../components/CharacterSheet.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
@@ -126,8 +127,9 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
         <Header />
         <div class="content-container">
           <main>
-            <aside class="hero-section" aria-label="Author profile and tag index">
+            <aside class="hero-section" aria-label="Author profile and site navigation">
               <Hero nameHeading={heroNameHeading} />
+              <CharacterSheet />
               <slot name="sidebar-extra" />
               <TagNav />
             </aside>

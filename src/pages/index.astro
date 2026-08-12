@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CharacterSheet from '../components/CharacterSheet.astro';
 import CharacterTraits from '../components/CharacterTraits.astro';
 import PostCard from '../components/PostCard.astro';
 
@@ -37,27 +36,23 @@ function deriveType(post: MarkdownPost): CardType {
 ---
 
 <BaseLayout pageTitle="Andrew Garman — Dev Blog" showPageTitle={false} heroNameHeading="h1">
-  <div class="posts-col">
-    <CharacterSheet />
-
-    <section class="latest" aria-labelledby="latest-heading">
-      <h2 id="latest-heading" class="section-heading">Latest Posts</h2>
-      <div class="posts-grid">
-        {
-          allPosts.map((post) => (
-            <PostCard
-              type={deriveType(post)}
-              url={post.url}
-              title={post.frontmatter.title}
-              description={post.frontmatter.description}
-              pubDate={post.frontmatter.pubDate}
-              headingLevel="h3"
-            />
-          ))
-        }
-      </div>
-    </section>
-  </div>
+  <section class="latest" aria-labelledby="latest-heading">
+    <h2 id="latest-heading" class="section-heading">Latest Posts</h2>
+    <div class="posts-grid">
+      {
+        allPosts.map((post) => (
+          <PostCard
+            type={deriveType(post)}
+            url={post.url}
+            title={post.frontmatter.title}
+            description={post.frontmatter.description}
+            pubDate={post.frontmatter.pubDate}
+            headingLevel="h3"
+          />
+        ))
+      }
+    </div>
+  </section>
 
   <div class="traits-col">
     <CharacterTraits />

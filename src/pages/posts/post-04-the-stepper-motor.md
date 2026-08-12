@@ -7,6 +7,8 @@ author: 'Andrew Garman'
 image:
   url: '/images/compressed/post4/photo1.webp'
   alt: 'ESP32 on a breadboard connected to a ULN2003 stepper driver with wires everywhere'
+  width: 1400
+  height: 1050
 tags: ['dnd', 'esp32', 'maker', 'arduino', 'stepper-motor', 'debugging', 'hardware']
 type: spellbook
 ---
@@ -24,7 +26,7 @@ Last post, I had a NeoPixel ring breathing green in a simulator. The real hardwa
 That plan lasted about one session.
 
 <figure>
-  <img src="/images/compressed/post4/photo1.webp" alt="NeoPixel ring and Adafruit HUZZAH32 ESP32 laid out side by side on a Lord of the Rings desk mat, unconnected" />
+  <img src="/images/compressed/post4/photo1.webp" alt="NeoPixel ring and Adafruit HUZZAH32 ESP32 laid out side by side on a Lord of the Rings desk mat, unconnected" width="1400" height="1050" loading="lazy" />
   <figcaption>Hardware day-one: NeoPixel ring and ESP32 coexisting peacefully before I made them work for a living.</figcaption>
 </figure>
 
@@ -50,7 +52,7 @@ type ? for commands
 That banner alone felt like a victory. The chip boots, runs my code, and talks back. Moving on.
 
 <figure>
-  <img src="/images/compressed/post4/photo3.webp" alt="Adafruit HUZZAH32 ESP32 seated on a white breadboard with a USB cable connected, freshly flashed and running firmware" />
+  <img src="/images/compressed/post4/photo3.webp" alt="Adafruit HUZZAH32 ESP32 seated on a white breadboard with a USB cable connected, freshly flashed and running firmware" width="1400" height="1050" loading="lazy" />
   <figcaption>Fresh firmware on real hardware. The serial monitor was talking back.</figcaption>
 </figure>
 
@@ -66,7 +68,7 @@ The firmware has a `spin` command that throws the compass into erratic mode — 
 The firmware received the command. The code ran. The motor did not move.
 
 <figure>
-  <img src="/images/compressed/post4/photo2.webp" alt="ESP32 breadboard connected to ULN2003 stepper driver board via colorful jumper wires — the wiring setup before the power rail fix" />
+  <img src="/images/compressed/post4/photo2.webp" alt="ESP32 breadboard connected to ULN2003 stepper driver board via colorful jumper wires — the wiring setup before the power rail fix" width="1400" height="1050" loading="lazy" />
   <figcaption>Everything looked correct. The ULN2003 power LED was dark.</figcaption>
 </figure>
 
@@ -89,7 +91,7 @@ I had moved the power wires for the ULN2003 to the breadboard's `+` and `-` rail
 I dug out an old Sperry DM-6400. With the black probe on the `-` rail and the red probe on the `+` rail, it read exactly 0.00V. Confirmed.
 
 <figure>
-  <img src="/images/compressed/post4/photo4.webp" alt="Sperry DM-6400 multimeter reading 0.00V, held over the breadboard" />
+  <img src="/images/compressed/post4/photo4.webp" alt="Sperry DM-6400 multimeter reading 0.00V, held over the breadboard" width="1400" height="1867" loading="lazy" />
   <figcaption>0.00V. The breadboard power rails were floating at nothing.</figcaption>
 </figure>
 
@@ -114,7 +116,7 @@ The multimeter immediately read 4.97V. The red LED on the ULN2003 lit up.
 While debugging the signal wiring, I discovered I'd been referencing breadboard row numbers instead of the pin labels printed on the ESP32 board itself. Breadboard row 33 has absolutely nothing to do with GPIO33. The GPIO numbers are labeled in tiny silkscreen text on the board edge — those are the ones that matter.
 
 <figure>
-  <img src="/images/compressed/post4/photo5.webp" alt="Close-up of the Adafruit HUZZAH32 on a breadboard showing tiny GPIO pin silkscreen labels along the board edge" />
+  <img src="/images/compressed/post4/photo5.webp" alt="Close-up of the Adafruit HUZZAH32 on a breadboard showing tiny GPIO pin silkscreen labels along the board edge" width="1400" height="1050" loading="lazy" />
   <figcaption>The silkscreen labels are small. Read them anyway.</figcaption>
 </figure>
 
@@ -129,7 +131,7 @@ Slowly. Too slowly, I thought — I had no idea yet whether this was all the 28B
 It worked exactly as designed.
 
 <figure>
-  <img src="/images/compressed/post4/photo6.webp" alt="28BYJ-48 stepper motor held up next to the ULN2003 driver board with signal LEDs lit red, connected via jumper wires to the ESP32 breadboard" />
+  <img src="/images/compressed/post4/photo6.webp" alt="28BYJ-48 stepper motor held up next to the ULN2003 driver board with signal LEDs lit red, connected via jumper wires to the ESP32 breadboard" width="1400" height="1050" loading="lazy" />
   <figcaption>The ULN2003 signal LEDs lit. The motor turned.</figcaption>
 </figure>
 

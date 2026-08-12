@@ -53,10 +53,18 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <!-- Mirrors --ink from paper.css; meta[theme-color] can't reference a CSS custom property. -->
     <meta name="theme-color" content="#2a1e10" />
+
+    <!-- Google Fonts are @imported from fonts.css; preconnect starts that
+         connection before CSS parsing discovers it. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -87,6 +95,17 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <meta name="twitter:image:alt" content={imageAlt} />
+
+    <!-- Page-specific structured data (Person on /about, BlogPosting on posts). -->
+    <slot name="head" />
+
+    <!-- Plausible — privacy-friendly, no cookie banner needed. Confirm this
+         domain matches whatever gets registered in the Plausible dashboard. -->
+    <script
+      is:inline
+      defer
+      data-domain="www.andrewgarman.com"
+      src="https://plausible.io/js/script.js"></script>
   </head>
   <body>
     <div class="site-layout">

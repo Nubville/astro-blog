@@ -7,6 +7,8 @@ author: 'Andrew Garman'
 image:
   url: '/images/compressed/post8/housing-footprint-sketch.webp'
   alt: 'Pencil sketch of the 120mm octagonal housing footprint with 20mm chamfered corners and the stepper motor mounting holes marked'
+  width: 1239
+  height: 1615
 tags: ['dnd', 'esp32', 'maker', 'hardware', 'props', 'cad', 'fusion-360', '3d-print']
 type: spellbook
 ---

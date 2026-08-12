@@ -1,8 +1,24 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import PostSidebar from '../components/PostSidebar.astro';
+import { DEFAULT_SOCIAL_IMAGE, SITE_AUTHOR } from '../consts';
 
 const { frontmatter } = Astro.props;
+
+const postImage = frontmatter.image?.url ?? DEFAULT_SOCIAL_IMAGE;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+
+const blogPostingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: frontmatter.title,
+  description: frontmatter.description,
+  image: new URL(postImage, Astro.site).href,
+  datePublished: new Date(frontmatter.pubDate).toISOString(),
+  author: { '@type': 'Person', name: frontmatter.author ?? SITE_AUTHOR },
+  publisher: { '@type': 'Person', name: SITE_AUTHOR },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+};
 
 type PostModule = {
   frontmatter: { title: string; pubDate: string | Date; type?: string };
@@ -37,6 +53,13 @@ const recentPosts = Object.values(postModules)
   type="article"
   pubDate={frontmatter.pubDate}
 >
+  <script
+    is:inline
+    type="application/ld+json"
+    slot="head"
+    set:html={JSON.stringify(blogPostingSchema)}
+  />
+
   <aside class="hero-section post-sidebar" aria-label="Author and more posts">
     <PostSidebar
       nameHeading="h2"
@@ -52,7 +75,12 @@ const recentPosts = Object.values(postModules)
       <p class="post-author">Written by: {frontmatter.author}</p>
       {
         frontmatter.image && (
-          <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+          <img
+            src={frontmatter.image.url}
+            width={frontmatter.image.width}
+            height={frontmatter.image.height}
+            alt={frontmatter.image.alt}
+          />
         )
       }
       <div class="tags">
@@ -114,6 +142,7 @@ const recentPosts = Object.values(postModules)
 
   .post-header img {
     display: block;
+    width: 300px;
     max-width: 100%;
     height: auto;
     margin-bottom: 1rem;

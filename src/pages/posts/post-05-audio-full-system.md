@@ -7,6 +7,8 @@ author: 'Andrew Garman'
 image:
   url: '/images/compressed/post5/photo1.webp'
   alt: 'ESP32, DFPlayer Mini, stepper motor, and speaker wired up on a breadboard'
+  width: 979
+  height: 1305
 tags: ['dnd', 'esp32', 'maker', 'arduino', 'props', 'dfplayer', 'audio', 'stepper-motor']
 type: spellbook
 ---
@@ -17,7 +19,7 @@ Last post ended with a known open item: a `delay(16)` in the main loop was putti
 
 This session I fixed it, added audio, and heard the whole thing work for the first time. It sounds exactly like I imagined.
 
-<img src="/images/compressed/post5/photo1.webp" alt="Full bench setup: ESP32 on a breadboard with DFPlayer Mini, stepper motor, and speaker all wired together" width="979" height="1305" />
+<img src="/images/compressed/post5/photo1.webp" alt="Full bench setup: ESP32 on a breadboard with DFPlayer Mini, stepper motor, and speaker all wired together" width="979" height="1305" loading="lazy" />
 
 ## Finally Fixing the delay(16)
 
@@ -70,7 +72,7 @@ SPK_1        ────────  Speaker +
 SPK_2        ────────  Speaker −
 ```
 
-<img src="/images/compressed/post5/photo2.webp" alt="Close-up of the ESP32 HUZZAH32 on a breadboard with the DFPlayer Mini module and SD card visible behind it" width="979" height="1305" />
+<img src="/images/compressed/post5/photo2.webp" alt="Close-up of the ESP32 HUZZAH32 on a breadboard with the DFPlayer Mini module and SD card visible behind it" width="979" height="1305" loading="lazy" />
 
 The 1kΩ resistor on the RX line protects the DFPlayer's input from the ESP32's 3.3V signal. It's not optional — the module can be damaged without it. Everything else is direct.
 
@@ -151,9 +153,9 @@ All four quadrants returned to their pulsing gem colors. The magic healing spell
 
 I said "it works" out loud to nobody.
 
-<img src="/images/compressed/post5/photo3.webp" alt="Full system laid out on the bench: stepper motor, breadboard with ESP32, and speaker connected end to end" width="979" height="1305" />
+<img src="/images/compressed/post5/photo3.webp" alt="Full system laid out on the bench: stepper motor, breadboard with ESP32, and speaker connected end to end" width="979" height="1305" loading="lazy" />
 
-<img src="/images/compressed/post5/photo4.webp" alt="The full compass prototype mounted vertically, showing all three systems wired together and running" width="979" height="1305" />
+<img src="/images/compressed/post5/photo4.webp" alt="The full compass prototype mounted vertically, showing all three systems wired together and running" width="979" height="1305" loading="lazy" />
 
 ## The Full Audio Trigger Map
 

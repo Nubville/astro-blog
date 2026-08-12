@@ -1,0 +1,89 @@
+# Sveltia CMS config. See netlify/functions/auth.js + callback.js for the
+# GitHub OAuth handshake this backend relies on, and CLAUDE.md for the
+# frontmatter shape these fields mirror.
+
+backend:
+  name: github
+  repo: Nubville/astro-blog
+  branch: main
+  base_url: https://www.andrewgarman.com
+  auth_endpoint: auth
+
+# Default uploads only — the compressed images already under
+# public/images/compressed/postN/ were hand-optimized outside the CMS and
+# aren't managed here.
+media_folder: 'public/images/uploads'
+public_folder: '/images/uploads'
+
+collections:
+  - name: posts
+    label: 'Quest Log (Posts)'
+    label_singular: 'Post'
+    folder: 'src/pages/posts'
+    create: true
+    slug: '{{slug}}'
+    extension: md
+    format: frontmatter
+    fields:
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: '../../layouts/MarkdownPostLayout.astro'
+      - { name: title, label: Title, widget: string }
+      - name: pubDate
+        label: 'Publish Date'
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+      - name: description
+        label: Description
+        widget: text
+        hint: 'Used as the search snippet and the social-card body text.'
+      - { name: author, label: Author, widget: string, default: 'Andrew Garman' }
+      - name: image
+        label: 'Header / Social Image'
+        widget: object
+        fields:
+          - { name: url, label: Image, widget: image }
+          - name: alt
+            label: 'Alt Text'
+            widget: string
+            hint: 'Required. Read by screen readers and used for og:image:alt / twitter:image:alt.'
+      - name: tags
+        label: Tags
+        widget: list
+        hint: 'Lowercase, hyphenated (e.g. "stepper-motor"). Each becomes a /tags/<tag> page.'
+      - name: type
+        label: 'Card Category'
+        widget: select
+        options: ['quest', 'spellbook', 'lore']
+        hint: 'Controls the sketch-card border style, not the Open Graph type — posts are always og:type=article.'
+      - { name: body, label: Body, widget: markdown }
+
+  - name: settings
+    label: 'Site Settings'
+    files:
+      - name: site
+        label: 'Site Identity'
+        file: 'src/data/site.json'
+        fields:
+          - { name: title, label: 'Site Title', widget: string }
+          - { name: author, label: 'Author Name', widget: string }
+          - name: description
+            label: 'Site Description'
+            widget: text
+            hint: 'Used as the default meta description and RSS feed description.'
+          - name: defaultSocialImage
+            label: 'Default Social Image'
+            widget: image
+            hint: 'Fallback og:image/twitter:image for pages without their own (homepage, about, tags).'
+          - name: defaultSocialImageAlt
+            label: 'Default Social Image Alt Text'
+            widget: string
+          - name: links
+            label: 'Links'
+            widget: object
+            fields:
+              - { name: linkedin, label: 'LinkedIn URL', widget: string }
+              - { name: github, label: 'GitHub URL', widget: string }

@@ -4,3 +4,18 @@
 
 [build.environment]
   NODE_VERSION = "24"
+
+[functions]
+  directory = "netlify/functions"
+
+# GitHub OAuth handshake for Sveltia CMS (/admin). See
+# netlify/functions/auth.js + callback.js.
+[[redirects]]
+  from = "/auth"
+  to = "/.netlify/functions/auth"
+  status = 200
+
+[[redirects]]
+  from = "/callback"
+  to = "/.netlify/functions/callback"
+  status = 200

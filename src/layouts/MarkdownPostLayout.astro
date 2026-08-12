@@ -60,13 +60,11 @@ const recentPosts = Object.values(postModules)
     set:html={JSON.stringify(blogPostingSchema)}
   />
 
-  <aside class="hero-section post-sidebar" aria-label="Author and more posts">
-    <PostSidebar
-      nameHeading="h2"
-      posts={recentPosts}
-      postsLabel={`// more ${frontmatter.type ?? 'posts'}`}
-    />
-  </aside>
+  <PostSidebar
+    slot="sidebar-extra"
+    posts={recentPosts}
+    postsLabel={`// more ${frontmatter.type ?? 'posts'}`}
+  />
 
   <article class="post-article">
     <header class="post-header">
@@ -99,16 +97,6 @@ const recentPosts = Object.values(postModules)
   </article>
 </BaseLayout>
 <style>
-  .post-sidebar {
-    display: none;
-  }
-
-  @container content-col (min-width: 1400px) {
-    .post-sidebar {
-      display: block;
-    }
-  }
-
   .post-article {
     grid-area: posts;
     max-width: 72ch;

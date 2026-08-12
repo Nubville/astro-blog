@@ -1,7 +1,10 @@
 ---
 import Binding from '../components/Binding.astro';
+import CharacterSheet from '../components/CharacterSheet.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import TagNav from '../components/TagNav.astro';
 import '../styles/global.css';
 
 import {
@@ -25,6 +28,14 @@ interface Props {
   type?: 'website' | 'article';
   /** Publication date, for article metadata. */
   pubDate?: string | Date;
+  /**
+   * Heading level for the author card's name in the persistent sidebar.
+   * Only ever 'h1' on pages with no other h1 on the page (the homepage,
+   * where showPageTitle is false and nothing else supplies one) — every
+   * other page already gets its own h1 (page-title or the post's own
+   * markdown heading), so the sidebar name stays an 'h2' there.
+   */
+  heroNameHeading?: 'h1' | 'h2';
 }
 
 const {
@@ -35,6 +46,7 @@ const {
   imageAlt = DEFAULT_SOCIAL_IMAGE_ALT,
   type = 'website',
   pubDate,
+  heroNameHeading = 'h2',
 } = Astro.props;
 
 // Titles read "Post name — Andrew Garman — Dev Blog", except the homepage,
@@ -115,6 +127,13 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
         <Header />
         <div class="content-container">
           <main>
+            <aside class="hero-section" aria-label="Author profile and site navigation">
+              <Hero nameHeading={heroNameHeading} />
+              <CharacterSheet />
+              <slot name="sidebar-extra" />
+              <TagNav />
+            </aside>
+
             {
               showPageTitle ? (
                 <div class="page-content">

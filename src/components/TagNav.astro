@@ -1,0 +1,106 @@
+---
+// Compact, site-wide tag browser. Lives in the persistent sidebar
+// (see BaseLayout.astro) so any tag is reachable from any page. The
+// full browsable index with the same data lives at /tags.
+interface MarkdownPost {
+  frontmatter: { tags?: string[] };
+}
+
+const allPosts = Object.values(
+  import.meta.glob<MarkdownPost>('../pages/posts/*.md', { eager: true })
+);
+const allTags = allPosts.flatMap((post) => post.frontmatter.tags ?? []);
+const tags = [...new Set(allTags)]
+  .map((tag) => ({ tag, count: allTags.filter((t) => t === tag).length }))
+  .sort((a, b) => a.tag.localeCompare(b.tag));
+---
+
+{
+  tags.length > 0 && (
+    <nav class="tag-nav" aria-label="Browse tags">
+      <p class="tag-nav-label">// browse tags</p>
+      <ul role="list" class="tag-nav-list">
+        {tags.map(({ tag, count }) => (
+          <li>
+            <a href={`/tags/${tag}`} class="tag-nav-link">
+              {tag} <span class="tag-nav-count">×{count}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a href="/tags" class="tag-nav-all">
+        View all tags →
+      </a>
+    </nav>
+  )
+}
+
+<style>
+  .tag-nav {
+    margin-top: var(--ag-space-l);
+  }
+
+  .tag-nav-label {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--ag-space-xs);
+  }
+
+  .tag-nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ag-space-2xs);
+    list-style: none;
+    margin: 0 0 var(--ag-space-s);
+    padding: 0;
+  }
+
+  .tag-nav-link {
+    border: 1px dotted var(--pencil);
+    border-radius: 0.5em;
+    color: var(--ink-faint);
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.04em;
+    padding: 0.25em 0.75em;
+    text-decoration: none;
+
+    &:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    &:focus-visible {
+      border-radius: 2px;
+      outline: 2px solid var(--brand-1);
+      outline-offset: 2px;
+    }
+  }
+
+  .tag-nav-count {
+    color: var(--ink-faint);
+    font-size: var(--ag-font-size-3xs);
+  }
+
+  .tag-nav-all {
+    color: var(--brand-1);
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      border-radius: 2px;
+      outline: 2px solid var(--brand-1);
+      outline-offset: 2px;
+    }
+  }
+</style>

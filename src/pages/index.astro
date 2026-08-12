@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import CharacterSheet from '../components/CharacterSheet.astro';
 import CharacterTraits from '../components/CharacterTraits.astro';
 import PostCard from '../components/PostCard.astro';
 
@@ -37,12 +35,7 @@ function deriveType(post: MarkdownPost): CardType {
 }
 ---
 
-<BaseLayout pageTitle="Andrew Garman — Dev Blog" showPageTitle={false}>
-  <section class="hero-section" aria-label="Profile">
-    <Hero />
-    <CharacterSheet />
-  </section>
-
+<BaseLayout pageTitle="Andrew Garman — Dev Blog" showPageTitle={false} heroNameHeading="h1">
   <section class="latest" aria-labelledby="latest-heading">
     <h2 id="latest-heading" class="section-heading">Latest Posts</h2>
     <div class="posts-grid">
@@ -67,16 +60,6 @@ function deriveType(post: MarkdownPost): CardType {
 </BaseLayout>
 
 <style>
-  .hero-section {
-    max-inline-size: 480px;
-  }
-
-  @container content-col (min-width: 960px) {
-    .hero-section {
-      max-inline-size: none;
-    }
-  }
-
   /* .latest is its own container so posts-grid responds to its actual width,
      not main-canvas (which fires at the full main width in the 3-col layout) */
   .latest {

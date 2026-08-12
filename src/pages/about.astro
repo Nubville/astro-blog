@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { LINKS } from '../consts';
 ---
 
 <BaseLayout pageTitle="About" showPageTitle={false}>
@@ -18,12 +19,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           just 3D print that."
         </p>
         <div class="about-actions">
-          <a
-            href="https://www.linkedin.com/in/drew-garman"
-            class="btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={LINKS.linkedin} class="btn-primary" target="_blank" rel="noopener noreferrer">
             LinkedIn Profile
           </a>
           <a href="mailto:garman.andrew@gmail.com" class="btn-secondary">

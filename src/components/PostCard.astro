@@ -79,9 +79,9 @@ function formatDate(dateStr: string): string {
     rotate: -4deg;
   }
   .stamp--spellbook {
-    background: var(--ag-color-accent-90);
-    border-color: var(--ag-color-accent-70);
-    color: var(--ag-color-accent-40);
+    background: var(--ag-color-accent-fill-quiet);
+    border-color: var(--ag-color-accent-border-normal);
+    color: var(--ag-color-accent-on-quiet);
     rotate: 3deg;
   }
   .stamp--lore {
@@ -108,5 +108,18 @@ function formatDate(dateStr: string): string {
   .card-post-title {
     font-size: var(--ag-font-size-m);
     margin: 0 0 0.5rem;
+  }
+
+  /* Stretches the title link to cover the whole card, so the card
+     itself is the click target — the hover-lift on sketch-card
+     (:has(a:hover)) depends on this. */
+  .card-title {
+    position: static;
+
+    &::after {
+      content: '';
+      inset: 0;
+      position: absolute;
+    }
   }
 </style>

@@ -13,6 +13,16 @@ body {
   background-size: 24px 24px;
 }
 
+/* Lamplight only: the blue-tinted grid was tuned for a light page —
+   on a dark navy surface a cool-toned grid nearly disappears into the
+   background, so it gets a warm gold tint instead (also kept fainter
+   than paper's, so it reads as texture and not noise). */
+[data-theme='lamplight'] body {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--gold-1) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--gold-1) 9%, transparent) 1px, transparent 1px);
+}
+
 /* Red margin rule — fixed, persists on scroll */
 body::before {
   content: '';

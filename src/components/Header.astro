@@ -7,6 +7,14 @@ const navItems = [
   { href: '/tokens/', label: 'Design Tokens', icon: '🎨' },
 ];
 
+// Add an entry here (and a matching [data-theme='…'] block in
+// ag-tokens.css) to register a new theme — the switcher picks it up
+// automatically, no other wiring needed.
+const THEMES = [
+  { value: 'paper', label: 'Paper' },
+  { value: 'lamplight', label: 'Lamplight' },
+];
+
 const { pathname } = Astro.url;
 
 function isActive(href: string) {
@@ -38,6 +46,16 @@ function isActive(href: string) {
       }
     </ul>
   </nav>
+
+  <theme-switcher class="theme-switcher">
+    <label for="theme-select" class="theme-switcher-label">
+      <span class="nav-icon" aria-hidden="true">🖌</span>
+      <span class="nav-label">Theme</span>
+    </label>
+    <select id="theme-select" class="theme-select">
+      {THEMES.map(({ value, label }) => <option value={value}>{label}</option>)}
+    </select>
+  </theme-switcher>
 
   <button
     class="nav-toggle"
@@ -195,6 +213,45 @@ function isActive(href: string) {
   .nav-icon {
     font-size: 0.85em;
     line-height: 1;
+  }
+
+  /* ── Theme switcher ──────────────────────────────── */
+  .theme-switcher {
+    align-items: center;
+    display: flex;
+    gap: var(--ag-space-2xs);
+  }
+
+  .theme-switcher-label {
+    align-items: center;
+    color: var(--ink-faint);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    gap: var(--ag-space-2xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .theme-select {
+    background: var(--paper);
+    border: 1px solid var(--pencil);
+    border-radius: 2px;
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.06em;
+    padding: var(--ag-space-2xs) var(--ag-space-xs);
+
+    &:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 2px;
+    }
   }
 
   /* ── Hamburger button ────────────────────────────── */

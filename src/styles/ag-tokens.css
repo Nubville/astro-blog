@@ -91,6 +91,12 @@
     --ag-color-text-quiet: #6f5842;
     --ag-color-text-link: var(--ag-color-accent-50);
 
+    /* Accent semantic (mirrors the quiet/on-quiet shape brand/
+       success/warning get, for anything badge-shaped) */
+    --ag-color-accent-fill-quiet: var(--ag-color-accent-90);
+    --ag-color-accent-border-normal: var(--ag-color-accent-70);
+    --ag-color-accent-on-quiet: var(--ag-color-accent-40);
+
     /* Focus */
     --ag-color-focus: var(--ag-color-brand-50);
 
@@ -223,30 +229,103 @@
     --ag-transition-fast: 75ms;
   }
 
-  /* ── Dark theme ───────────────────────────────────────── */
-  [data-theme='dark'] {
+  /* ── Lamplight theme ──────────────────────────────────────
+     A DM's field journal on the map table at night. Not paper
+     theme inverted — it overrides the raw hues too (brand/accent/
+     success/warning), because CSS layer order beats selector
+     specificity: these declarations live in the ag-theme layer,
+     one layer above ag-color-palette, so they win even though
+     :root's raw values technically also match. That lets any
+     future theme repaint the actual hue family, not just swap
+     which rung of paper's palette gets used where.
+  ──────────────────────────────────────────────────────────── */
+  [data-theme='lamplight'] {
+    /* Raw hue overrides — indigo-ink neutrals; vermillion wax-seal
+       brand; arcane-teal accent; loot-green success; treasure-gold
+       warning. Flat and saturated, not paper's softer ink tones. */
+    --ag-color-neutral-40: #4a5470;
+    --ag-color-neutral-30: #3a4256;
+    --ag-color-neutral-20: #262b3a;
+    --ag-color-neutral-10: #171a24;
+    --ag-color-neutral-05: #0d0e14;
+
+    --ag-color-brand-80: #f49a78;
+    --ag-color-brand-70: #ec6b42;
+    --ag-color-brand-60: #e14a22;
+    --ag-color-brand-50: #d63a12;
+    --ag-color-brand-40: #ad2d0d;
+    --ag-color-brand-20: #5c1707;
+    --ag-color-brand-10: #3a0e04;
+
+    --ag-color-accent-70: #4fb8a8;
+    --ag-color-accent-40: #146357;
+    --ag-color-accent-20: #0a342d;
+
+    --ag-color-success-70: #5fbe5c;
+    --ag-color-success-50: #2e9e37;
+    --ag-color-success-20: #0f3d14;
+    --ag-color-success-10: #081f0a;
+
+    --ag-color-warning-70: #e0a62e;
+    --ag-color-warning-50: #b8790e;
+    --ag-color-warning-20: #4a2e06;
+    --ag-color-warning-10: #271803;
+
+    /* Surfaces */
     --ag-color-surface-raised: var(--ag-color-neutral-20);
     --ag-color-surface-default: var(--ag-color-neutral-10);
     --ag-color-surface-lowered: var(--ag-color-neutral-05);
     --ag-color-surface-border: var(--ag-color-neutral-30);
 
+    /* Text */
     --ag-color-text-normal: var(--ag-color-neutral-95);
     --ag-color-text-quiet: var(--ag-color-neutral-70);
     --ag-color-text-link: var(--ag-color-accent-70);
 
+    /* Focus + shadow. The shadow MUST be a color that's actually
+       visible against a dark surface — reusing a near-black shadow
+       here (like paper's ink-colored one) would be invisible against
+       an already-dark page, which is exactly what made the first
+       pass at this theme unreadable. */
     --ag-color-focus: var(--ag-color-brand-60);
-    --ag-color-shadow: color-mix(in oklab, var(--ag-color-neutral-05) 80%, transparent);
+    --ag-color-shadow: color-mix(in oklab, var(--ag-color-neutral-05) 85%, transparent);
 
+    /* Brand semantic */
     --ag-color-brand-fill-quiet: var(--ag-color-brand-10);
     --ag-color-brand-fill-normal: var(--ag-color-brand-20);
     --ag-color-brand-fill-loud: var(--ag-color-brand-50);
     --ag-color-brand-border-quiet: var(--ag-color-brand-20);
     --ag-color-brand-border-normal: var(--ag-color-brand-40);
-    --ag-color-brand-border-loud: var(--ag-color-brand-60);
+    --ag-color-brand-border-loud: var(--ag-color-brand-70);
     --ag-color-brand-on-quiet: var(--ag-color-brand-70);
     --ag-color-brand-on-normal: var(--ag-color-brand-80);
     --ag-color-brand-on-loud: white;
 
+    /* Accent semantic — paper theme only needs the raw rungs
+       directly; this theme's stamp badge needs the quiet/on-quiet
+       shape the other three families get, so it's added here. */
+    --ag-color-accent-fill-quiet: var(--ag-color-accent-20);
+    --ag-color-accent-border-normal: var(--ag-color-accent-70);
+    --ag-color-accent-on-quiet: var(--ag-color-accent-70);
+
+    /* Success semantic */
+    --ag-color-success-fill-quiet: var(--ag-color-success-10);
+    --ag-color-success-fill-normal: var(--ag-color-success-20);
+    --ag-color-success-fill-loud: var(--ag-color-success-50);
+    --ag-color-success-border-normal: var(--ag-color-success-50);
+    --ag-color-success-on-normal: var(--ag-color-success-70);
+    --ag-color-success-on-loud: white;
+
+    /* Warning semantic — the previous dark-theme stub never
+       defined this family at all. */
+    --ag-color-warning-fill-quiet: var(--ag-color-warning-10);
+    --ag-color-warning-fill-normal: var(--ag-color-warning-20);
+    --ag-color-warning-fill-loud: var(--ag-color-warning-50);
+    --ag-color-warning-border-normal: var(--ag-color-warning-50);
+    --ag-color-warning-on-normal: var(--ag-color-warning-70);
+    --ag-color-warning-on-loud: black;
+
+    /* Neutral semantic */
     --ag-color-neutral-fill-quiet: var(--ag-color-neutral-10);
     --ag-color-neutral-fill-normal: var(--ag-color-neutral-20);
     --ag-color-neutral-fill-loud: var(--ag-color-neutral-90);
@@ -257,12 +336,11 @@
     --ag-color-neutral-on-normal: var(--ag-color-neutral-80);
     --ag-color-neutral-on-loud: var(--ag-color-neutral-05);
 
-    --ag-color-success-fill-quiet: var(--ag-color-success-10);
-    --ag-color-success-fill-normal: var(--ag-color-success-20);
-    --ag-color-success-fill-loud: var(--ag-color-success-50);
-    --ag-color-success-border-normal: var(--ag-color-success-50);
-    --ag-color-success-on-normal: var(--ag-color-success-70);
-    --ag-color-success-on-loud: white;
+    /* Typography — a bolder display face and a real code font;
+       body (Work Sans) and handwriting (Caveat) stay the same. */
+    --ag-font-family-heading: 'Bricolage Grotesque', system-ui, sans-serif;
+    --ag-font-family-code: 'JetBrains Mono', 'Courier New', monospace;
+    --ag-font-weight-bold: 700;
   }
 }
 

@@ -172,6 +172,37 @@ sketch-card {
   background: var(--paper);
   border: var(--card-border-width, 1.8px) solid var(--ink);
   border-radius: var(--card-corner-radius, 6px);
+  transition:
+    box-shadow var(--ag-transition-normal),
+    translate var(--ag-transition-normal);
+
+  /* Cards with a stretched link (.card-title a::after, see PostCard)
+     lift on hover/focus like a card being picked up off the table. */
+  &:has(a:hover),
+  &:has(a:focus-visible) {
+    box-shadow: var(--shadow-cel-lg);
+    translate: 0 -0.125rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:has(a:hover),
+    &:has(a:focus-visible) {
+      translate: none;
+    }
+  }
+}
+
+/* Lamplight only: give cards a surface distinct from the page instead
+   of reusing --paper (which equals the page background there), and a
+   shadow color that's actually visible against a dark surface — a
+   near-black shadow on an already-dark page is invisible. Paper theme
+   keeps its original flat "index card drawn on the same page" look. */
+[data-theme='lamplight'] sketch-card {
+  background: var(--surface-raised);
+  border-width: 2.25px;
+  box-shadow: var(--shadow-cel-lg);
 }
 
 sketch-card[type='quest'] {

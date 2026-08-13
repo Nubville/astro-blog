@@ -83,6 +83,13 @@ const { nameHeading: NameTag = 'h1' } = Astro.props;
     width: 100%;
   }
 
+  /* multiply only reads correctly against a light backdrop — on
+     lamplight's dark surface it crushes this full-color illustration
+     toward black, so it renders unblended there instead. */
+  [data-theme='lamplight'] .portrait img {
+    mix-blend-mode: normal;
+  }
+
   .profile-info {
     flex: 1;
     min-width: 0;

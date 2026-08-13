@@ -121,6 +121,13 @@ function mod(score: number): string {
     margin: 0 0 var(--ag-space-2xl);
   }
 
+  /* Dark themes only — see the matching comment in global.css on
+     sketch-card for why. */
+  [data-theme='lamplight'] .char-sheet,
+  [data-theme='horde'] .char-sheet {
+    background: var(--surface-raised);
+  }
+
   /* ── Header ───────────────────────────────────────── */
   .sheet-header {
     background: var(--paper-dark);

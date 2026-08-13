@@ -135,6 +135,14 @@ const { nameHeading: NameTag = 'h1' } = Astro.props;
     text-transform: uppercase;
   }
 
+  /* Dark themes only: same reasoning as sketch-card in global.css —
+     a border alone doesn't separate a chip from a busy dark page the
+     way it does on light paper. */
+  [data-theme='lamplight'] .tag,
+  [data-theme='horde'] .tag {
+    background: var(--surface-raised);
+  }
+
   .tag--code {
     border-color: var(--blue-ink);
     color: var(--blue-ink);

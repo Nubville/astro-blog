@@ -44,6 +44,13 @@ const pageTitle = 'Tag Index';
     letter-spacing: 0.05em;
   }
 
+  /* Dark themes only — see the matching comment in global.css on
+     sketch-card for why. */
+  [data-theme='lamplight'] .tag,
+  [data-theme='horde'] .tag {
+    background: var(--surface-raised);
+  }
+
   .tag a {
     color: var(--ink-faint);
     text-decoration: none;

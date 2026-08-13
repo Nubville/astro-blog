@@ -142,7 +142,7 @@
     --ag-font-family-body: 'Work Sans', system-ui, sans-serif;
     --ag-font-family-heading: 'Special Elite', serif;
     --ag-font-family-code: 'Courier New', 'Courier Prime', monospace;
-    --ag-font-family-longform: 'Caveat', cursive;
+    --ag-font-family-longform: 'Patrick Hand', cursive;
 
     /* Font size — Major Second (×1.125) scale anchored at 1rem */
     --ag-font-size-scale: 1;
@@ -337,7 +337,7 @@
     --ag-color-neutral-on-loud: var(--ag-color-neutral-05);
 
     /* Typography — a bolder display face and a real code font;
-       body (Work Sans) and handwriting (Caveat) stay the same. */
+       body (Work Sans) and handwriting (Patrick Hand) stay the same. */
     --ag-font-family-heading: 'Bricolage Grotesque', system-ui, sans-serif;
     --ag-font-family-code: 'JetBrains Mono', 'Courier New', monospace;
     --ag-font-weight-bold: 700;

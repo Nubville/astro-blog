@@ -61,6 +61,13 @@ const { posts, postsLabel = '// more posts' } = Astro.props;
     padding: var(--ag-space-xs) var(--ag-space-s);
   }
 
+  /* Dark themes only — see the matching comment in global.css on
+     sketch-card for why. */
+  [data-theme='lamplight'] .sidebar-post-item,
+  [data-theme='horde'] .sidebar-post-item {
+    background: var(--surface-raised);
+  }
+
   .sidebar-post-link {
     color: var(--ink);
     display: block;

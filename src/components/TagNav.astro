@@ -80,6 +80,13 @@ const tags = [...new Set(allTags)]
     }
   }
 
+  /* Dark themes only — see the matching comment in global.css on
+     sketch-card for why. */
+  [data-theme='lamplight'] .tag-nav-link,
+  [data-theme='horde'] .tag-nav-link {
+    background: var(--surface-raised);
+  }
+
   .tag-nav-count {
     color: var(--ink-faint);
     font-size: var(--ag-font-size-3xs);

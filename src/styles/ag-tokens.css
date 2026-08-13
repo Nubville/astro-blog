@@ -342,6 +342,103 @@
     --ag-font-family-code: 'JetBrains Mono', 'Courier New', monospace;
     --ag-font-weight-bold: 700;
   }
+
+  /* ── Horde theme ──────────────────────────────────────────
+     Scorched charcoal, blood red, bone, weathered bronze — a war
+     camp at night, not a remix of paper's or lamplight's hues.
+  ──────────────────────────────────────────────────────────── */
+  [data-theme='horde'] {
+    --ag-color-neutral-40: #6b5644;
+    --ag-color-neutral-30: #3d2f26;
+    --ag-color-neutral-20: #241c17;
+    --ag-color-neutral-10: #181310;
+    --ag-color-neutral-05: #0e0b09;
+
+    --ag-color-brand-80: #e97b6a;
+    --ag-color-brand-70: #e75f4b;
+    --ag-color-brand-60: #d43d29;
+    --ag-color-brand-50: #c4291f;
+    --ag-color-brand-40: #8f1f15;
+    --ag-color-brand-20: #5c130d;
+    --ag-color-brand-10: #3a0e04;
+
+    --ag-color-accent-70: #8fae5c;
+    --ag-color-accent-40: #4e6432;
+    --ag-color-accent-20: #26331a;
+
+    --ag-color-success-70: #8fae5c;
+    --ag-color-success-50: #5c7a34;
+    --ag-color-success-20: #26331a;
+    --ag-color-success-10: #171f10;
+
+    --ag-color-warning-70: #d19a3f;
+    --ag-color-warning-50: #a06f1e;
+    --ag-color-warning-20: #3d2a0c;
+    --ag-color-warning-10: #251a08;
+
+    /* Surfaces */
+    --ag-color-surface-raised: var(--ag-color-neutral-20);
+    --ag-color-surface-default: var(--ag-color-neutral-10);
+    --ag-color-surface-lowered: var(--ag-color-neutral-05);
+    --ag-color-surface-border: var(--ag-color-neutral-30);
+
+    /* Text — bone, not paper's cream or lamplight's cool white */
+    --ag-color-text-normal: #e8dcc8;
+    --ag-color-text-quiet: #a89a82;
+    --ag-color-text-link: var(--ag-color-accent-70);
+
+    --ag-color-focus: var(--ag-color-brand-60);
+    --ag-color-shadow: color-mix(in oklab, var(--ag-color-neutral-05) 85%, transparent);
+
+    /* Brand semantic */
+    --ag-color-brand-fill-quiet: var(--ag-color-brand-10);
+    --ag-color-brand-fill-normal: var(--ag-color-brand-20);
+    --ag-color-brand-fill-loud: var(--ag-color-brand-50);
+    --ag-color-brand-border-quiet: var(--ag-color-brand-20);
+    --ag-color-brand-border-normal: var(--ag-color-brand-40);
+    --ag-color-brand-border-loud: var(--ag-color-brand-70);
+    --ag-color-brand-on-quiet: var(--ag-color-brand-70);
+    --ag-color-brand-on-normal: var(--ag-color-brand-80);
+    --ag-color-brand-on-loud: white;
+
+    /* Accent semantic */
+    --ag-color-accent-fill-quiet: var(--ag-color-accent-20);
+    --ag-color-accent-border-normal: var(--ag-color-accent-70);
+    --ag-color-accent-on-quiet: var(--ag-color-accent-70);
+
+    /* Success semantic */
+    --ag-color-success-fill-quiet: var(--ag-color-success-10);
+    --ag-color-success-fill-normal: var(--ag-color-success-20);
+    --ag-color-success-fill-loud: var(--ag-color-success-50);
+    --ag-color-success-border-normal: var(--ag-color-success-50);
+    --ag-color-success-on-normal: var(--ag-color-success-70);
+    --ag-color-success-on-loud: white;
+
+    /* Warning semantic */
+    --ag-color-warning-fill-quiet: var(--ag-color-warning-10);
+    --ag-color-warning-fill-normal: var(--ag-color-warning-20);
+    --ag-color-warning-fill-loud: var(--ag-color-warning-50);
+    --ag-color-warning-border-normal: var(--ag-color-warning-50);
+    --ag-color-warning-on-normal: var(--ag-color-warning-70);
+    --ag-color-warning-on-loud: white;
+
+    /* Neutral semantic */
+    --ag-color-neutral-fill-quiet: var(--ag-color-neutral-10);
+    --ag-color-neutral-fill-normal: var(--ag-color-neutral-20);
+    --ag-color-neutral-fill-loud: var(--ag-color-neutral-90);
+    --ag-color-neutral-border-quiet: var(--ag-color-neutral-20);
+    --ag-color-neutral-border-normal: var(--ag-color-neutral-30);
+    --ag-color-neutral-border-loud: var(--ag-color-neutral-40);
+    --ag-color-neutral-on-quiet: var(--ag-color-neutral-70);
+    --ag-color-neutral-on-normal: var(--ag-color-neutral-80);
+    --ag-color-neutral-on-loud: var(--ag-color-neutral-05);
+
+    /* Typography — same bolder display/code pairing as lamplight;
+       a war-camp journal is still a journal. */
+    --ag-font-family-heading: 'Bricolage Grotesque', system-ui, sans-serif;
+    --ag-font-family-code: 'JetBrains Mono', 'Courier New', monospace;
+    --ag-font-weight-bold: 700;
+  }
 }
 
 /* ── Blog alias layer ─────────────────────────────────────────

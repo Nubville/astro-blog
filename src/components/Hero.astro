@@ -83,10 +83,12 @@ const { nameHeading: NameTag = 'h1' } = Astro.props;
     width: 100%;
   }
 
-  /* multiply only reads correctly against a light backdrop — on
-     lamplight's dark surface it crushes this full-color illustration
-     toward black, so it renders unblended there instead. */
-  [data-theme='lamplight'] .portrait img {
+  /* multiply only reads correctly against a light backdrop — on a
+     dark surface it crushes this full-color illustration toward
+     black, so it renders unblended there instead. Add new dark
+     themes to this selector list too. */
+  [data-theme='lamplight'] .portrait img,
+  [data-theme='horde'] .portrait img {
     mix-blend-mode: normal;
   }
 

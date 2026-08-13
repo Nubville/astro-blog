@@ -194,12 +194,14 @@ sketch-card {
   }
 }
 
-/* Lamplight only: give cards a surface distinct from the page instead
-   of reusing --paper (which equals the page background there), and a
-   shadow color that's actually visible against a dark surface — a
-   near-black shadow on an already-dark page is invisible. Paper theme
-   keeps its original flat "index card drawn on the same page" look. */
-[data-theme='lamplight'] sketch-card {
+/* Dark themes only: give cards a surface distinct from the page
+   instead of reusing --paper (which equals the page background
+   there), and a shadow color that's actually visible against a dark
+   surface — a near-black shadow on an already-dark page is invisible.
+   Paper theme keeps its original flat "index card drawn on the same
+   page" look. Add new dark themes to this selector list too. */
+[data-theme='lamplight'] sketch-card,
+[data-theme='horde'] sketch-card {
   background: var(--surface-raised);
   border-width: 2.25px;
   box-shadow: var(--shadow-cel-lg);

@@ -13,11 +13,14 @@ body {
   background-size: 24px 24px;
 }
 
-/* Lamplight only: the blue-tinted grid was tuned for a light page —
-   on a dark navy surface a cool-toned grid nearly disappears into the
-   background, so it gets a warm gold tint instead (also kept fainter
-   than paper's, so it reads as texture and not noise). */
-[data-theme='lamplight'] body {
+/* Dark themes only: the blue-tinted grid was tuned for a light page —
+   on a dark surface a cool-toned grid nearly disappears into the
+   background, so it gets a warm gold/bronze tint instead via --gold-1
+   (also kept fainter than paper's, so it reads as texture and not
+   noise). --gold-1 resolves per-theme, so this line works for any
+   dark theme without hardcoding a color here. */
+[data-theme='lamplight'] body,
+[data-theme='horde'] body {
   background-image:
     linear-gradient(color-mix(in oklab, var(--gold-1) 14%, transparent) 1px, transparent 1px),
     linear-gradient(90deg, color-mix(in oklab, var(--gold-1) 9%, transparent) 1px, transparent 1px);

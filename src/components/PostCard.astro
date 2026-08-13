@@ -31,10 +31,10 @@ function formatDate(dateStr: string): string {
 
 <sketch-card type={type}>
   <div class="card-content">
-    <span class="card-type-label">
-      <span class="card-type-icon" aria-hidden="true">{BADGE[type]}</span>
-      [ {type} ]
-    </span>
+    <div class="card-type-label">
+      <span class={`stamp stamp--${type}`} aria-hidden="true">{BADGE[type]}</span>
+      <span class="stamp-text">{type}</span>
+    </div>
     <HeadingTag class="card-post-title">
       <a class="card-title" href={url}>
         {title}
@@ -48,6 +48,63 @@ function formatDate(dateStr: string): string {
 </sketch-card>
 
 <style>
+  /* ── Wax-seal stamp: a pressed ink stamp marking each post's
+     category, tilted like it was pressed by hand. Color + icon +
+     text together, so category is never carried by color alone. ── */
+  .card-type-label {
+    align-items: center;
+    display: flex;
+    gap: var(--ag-space-xs);
+    margin-bottom: var(--ag-space-m);
+  }
+
+  .stamp {
+    align-items: center;
+    border-radius: var(--ag-border-radius-pill);
+    border-style: solid;
+    border-width: var(--ag-border-width-l);
+    box-shadow: var(--shadow-cel);
+    display: flex;
+    flex-shrink: 0;
+    font-size: var(--ag-font-size-l);
+    height: 2.25rem;
+    justify-content: center;
+    width: 2.25rem;
+  }
+
+  .stamp--quest {
+    background: var(--ag-color-brand-fill-quiet);
+    border-color: var(--ag-color-brand-border-loud);
+    color: var(--ag-color-brand-on-quiet);
+    rotate: -4deg;
+  }
+  .stamp--spellbook {
+    background: var(--ag-color-accent-90);
+    border-color: var(--ag-color-accent-70);
+    color: var(--ag-color-accent-40);
+    rotate: 3deg;
+  }
+  .stamp--lore {
+    background: var(--ag-color-warning-fill-quiet);
+    border-color: var(--ag-color-warning-border-normal);
+    color: var(--ag-color-warning-on-normal);
+    rotate: -2deg;
+  }
+  .stamp--character {
+    background: var(--ag-color-success-fill-quiet);
+    border-color: var(--ag-color-success-border-normal);
+    color: var(--ag-color-success-on-normal);
+    rotate: 4deg;
+  }
+
+  .stamp-text {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
   .card-post-title {
     font-size: var(--ag-font-size-m);
     margin: 0 0 0.5rem;

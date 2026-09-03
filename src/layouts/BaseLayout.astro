@@ -37,12 +37,14 @@ interface Props {
    */
   heroNameHeading?: 'h1' | 'h2';
   /**
-   * Hides the profile card + character sheet below the 1400px three-column
-   * breakpoint, so a mobile visitor lands on the actual content instead of
-   * scrolling past the author card first. Post pages pass this — the
-   * sidebar there is about the site, not that particular page, and post
-   * readers land here from a link wanting the post. Above 1400px nothing
-   * changes: same sticky sidebar every other page has.
+   * Below the 1400px three-column breakpoint, hides everything in the
+   * sidebar except the profile card itself — character sheet, related
+   * posts, browse-tags — so a mobile visitor sees Hero then the article
+   * directly under it, instead of scrolling past several screens of
+   * content about the site first. Post pages pass this. Above 1400px
+   * nothing changes: same sticky sidebar every other page has (on post
+   * pages specifically, that sidebar is really just hero + article
+   * already, since posts don't populate a .traits-col).
    */
   compactHeroOnMobile?: boolean;
 }
@@ -143,10 +145,10 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
         <div class="content-container">
           <main>
             <aside class="hero-section" aria-label="Author profile and site navigation">
+              <Hero nameHeading={heroNameHeading} />
               <div
                 class:list={['hero-block', { 'hero-block--compact-mobile': compactHeroOnMobile }]}
               >
-                <Hero nameHeading={heroNameHeading} />
                 <CharacterSheet />
                 <slot name="sidebar-extra" />
                 <TagNav />

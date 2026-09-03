@@ -86,9 +86,10 @@ body::before {
   }
 }
 
-/* Below the three-column breakpoint, post pages skip straight to the
-   article instead of scrolling past the profile card + character sheet
-   first — see compactHeroOnMobile on BaseLayout. Undone below, inside the
+/* Below the three-column breakpoint, post pages skip straight to Hero
+   then the article — this hides the character sheet, related posts, and
+   browse-tags, not Hero itself (Hero sits outside this wrapper in
+   BaseLayout) — see compactHeroOnMobile there. Undone below, inside the
    1400px container query — must come before it in source order: equal
    specificity means the later rule wins regardless of which one sits in
    a conditional, so a plain rule placed after this block would silently
@@ -124,8 +125,9 @@ body::before {
   }
 
   /* Undoes the hiding above — display: contents rather than block so
-     Hero and CharacterSheet still land directly in .hero-section's own
-     flow, exactly as if this wrapper didn't exist. */
+     the character sheet, related posts, and browse-tags still land
+     directly in .hero-section's own flow, exactly as if this wrapper
+     didn't exist. */
   .hero-block--compact-mobile {
     display: contents;
   }

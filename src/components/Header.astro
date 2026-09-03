@@ -91,6 +91,21 @@ function isActive(href: string) {
         }
       </ul>
     </nav>
+
+    <!-- Separate <theme-switcher> instance for mobile — same pattern as
+         the nav links above: a second static rendering rather than moving
+         the header's copy, since that one stays in the DOM (just hidden)
+         for desktop. Needs its own ids so both selects remain valid,
+         uniquely-labeled elements at once. -->
+    <theme-switcher class="theme-switcher dialog-theme-switcher">
+      <label for="theme-select-mobile" class="theme-switcher-label">
+        <span class="nav-icon" aria-hidden="true">🖌</span>
+        <span class="nav-label">Theme</span>
+      </label>
+      <select id="theme-select-mobile" class="theme-select">
+        {THEMES.map(({ value, label }) => <option value={value}>{label}</option>)}
+      </select>
+    </theme-switcher>
   </div>
 </dialog>
 
@@ -211,6 +226,16 @@ function isActive(href: string) {
     color: var(--brand-1);
   }
 
+  /* Dark themes only: --brand-1 (a fill color, not a text-on-surface
+     one) fails WCAG AA's 4.5:1 for body text against these themes'
+     dark surfaces. --brand-3 is the same brand hue at the lighter
+     on-surface rung each dark theme defines. */
+  :global([data-theme='lamplight']) .nav-link--active,
+  :global([data-theme='horde']) .nav-link--active {
+    border-color: var(--brand-3);
+    color: var(--brand-3);
+  }
+
   .nav-icon {
     font-size: 0.85em;
     line-height: 1;
@@ -297,11 +322,27 @@ function isActive(href: string) {
 
   /* ── Mobile breakpoint ───────────────────────────── */
   @media (max-width: 999px) {
+    header {
+      /* --ag-space-2xl is tuned for desktop's wider column; at mobile
+         it left brand + gap + hamburger button wider than the
+         viewport's available width (after the fixed left margin). */
+      padding-left: var(--ag-space-m);
+      padding-right: var(--ag-space-m);
+    }
+
     .brand-sub {
       display: none;
     }
 
     .header-nav {
+      display: none;
+    }
+
+    /* This is the header's copy — the dialog has its own, shown via
+       .dialog-theme-switcher below. Without this, the label+select
+       stayed visible in the cramped mobile header alongside the
+       hamburger button and overflowed the viewport. */
+    header > .theme-switcher {
       display: none;
     }
 
@@ -367,6 +408,14 @@ function isActive(href: string) {
     width: 100%;
   }
 
+  .dialog-theme-switcher {
+    border-top: 1px dotted var(--pencil);
+    justify-content: center;
+    margin-top: var(--ag-space-xs);
+    padding-top: var(--ag-space-m);
+    width: 100%;
+  }
+
   .dialog-nav-link {
     align-items: center;
     border: 1px solid var(--pencil);
@@ -401,5 +450,12 @@ function isActive(href: string) {
   .dialog-nav-link--active {
     border-color: var(--brand-1);
     color: var(--brand-1);
+  }
+
+  /* Same --brand-1 contrast issue as .nav-link--active above, same fix. */
+  :global([data-theme='lamplight']) .dialog-nav-link--active,
+  :global([data-theme='horde']) .dialog-nav-link--active {
+    border-color: var(--brand-3);
+    color: var(--brand-3);
   }
 </style>

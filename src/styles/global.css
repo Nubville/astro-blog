@@ -43,6 +43,17 @@ h1 {
   font-size: var(--font-size-5);
   color: var(--brand-1);
 }
+
+/* Dark themes only: --brand-1 (a fill color, not a text-on-surface one)
+   fails WCAG AA's 4.5:1 for body text against these themes' dark
+   surfaces. --brand-3 is the same brand hue at the lighter on-surface
+   rung each dark theme defines. This file is a plain global stylesheet
+   (not an Astro-scoped component), so no :global() wrapper is needed
+   here — see the matching per-component overrides where it is. */
+[data-theme='lamplight'] h1,
+[data-theme='horde'] h1 {
+  color: var(--brand-3);
+}
 h2 {
   font-size: var(--font-size-4);
   color: var(--ink);

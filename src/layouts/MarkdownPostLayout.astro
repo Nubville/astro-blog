@@ -154,8 +154,8 @@ const recentPosts = Object.values(postModules)
 
   /* Dark themes only — see the matching comment in global.css on
      sketch-card for why. */
-  [data-theme='lamplight'] .tag,
-  [data-theme='horde'] .tag {
+  :global([data-theme='lamplight']) .tag,
+  :global([data-theme='horde']) .tag {
     background: var(--surface-raised);
   }
 

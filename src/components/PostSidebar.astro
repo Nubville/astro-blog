@@ -63,8 +63,8 @@ const { posts, postsLabel = '// more posts' } = Astro.props;
 
   /* Dark themes only — see the matching comment in global.css on
      sketch-card for why. */
-  [data-theme='lamplight'] .sidebar-post-item,
-  [data-theme='horde'] .sidebar-post-item {
+  :global([data-theme='lamplight']) .sidebar-post-item,
+  :global([data-theme='horde']) .sidebar-post-item {
     background: var(--surface-raised);
   }
 

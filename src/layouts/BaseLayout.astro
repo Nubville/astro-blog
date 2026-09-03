@@ -69,18 +69,22 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
          deferred (module scripts, the theme-switcher custom element
          itself) runs after the stylesheet is already painted, which
          would flash the default theme first. If nothing is stored,
-         [data-theme] stays unset and CSS alone falls back to paper. -->
+         default to 'horde' (temporary — see DEFAULT_THEME below) so
+         every [data-theme='horde'] rule site-wide (not just the
+         token file's cascade) applies consistently. -->
     <script is:inline>
       (function () {
+        // TODO: revert to 'paper' once Horde's had its run as the default.
+        const DEFAULT_THEME = 'horde';
         try {
           const stored = localStorage.getItem('ag-theme');
-          if (stored) document.documentElement.dataset.theme = stored;
+          document.documentElement.dataset.theme = stored || DEFAULT_THEME;
         } catch {
-          // Storage unavailable — fall through to the default theme.
+          document.documentElement.dataset.theme = DEFAULT_THEME;
         }
       })();
     </script>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="512x512" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />

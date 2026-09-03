@@ -1,0 +1,72 @@
+---
+/**
+ * Stack — the vertical rhythm primitive.
+ *
+ * Owns the space *between* its children so components don't have to. A
+ * component should style its own insides and nothing else; the layout that
+ * places it decides how much room sits around it. Before this existed,
+ * spacing between page regions was whatever trailing margin the previous
+ * component happened to declare — which measured 0px between sections on
+ * the homepage and 40px on a post page, at the same breakpoint, purely by
+ * accident of which component landed last.
+ *
+ * Uses flex + gap rather than the margin-based owl selector (`> * + *`) on
+ * purpose: gap can't collapse, can't leak past the container, and leaves
+ * nothing behind on the children themselves. A child that's
+ * `display: none` contributes no gap either, which the sidebar relies on.
+ *
+ * `space` takes a step from the --ag-space-* scale and is applied via a
+ * data attribute rather than an inline style, so this needs no
+ * style-src 'unsafe-inline' allowance.
+ */
+interface Props {
+  space?: '3xs' | '2xs' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl' | '4xl';
+  /** Rendered element. Keep it semantic — this is a layout wrapper, not a reason to reach for a div. */
+  as?: string;
+  class?: string;
+}
+
+const { space = 'l', as: Tag = 'div', class: className, ...rest } = Astro.props;
+---
+
+<Tag class:list={['stack', className]} data-space={space} {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stack[data-space='3xs'] {
+    gap: var(--ag-space-3xs);
+  }
+  .stack[data-space='2xs'] {
+    gap: var(--ag-space-2xs);
+  }
+  .stack[data-space='xs'] {
+    gap: var(--ag-space-xs);
+  }
+  .stack[data-space='s'] {
+    gap: var(--ag-space-s);
+  }
+  .stack[data-space='m'] {
+    gap: var(--ag-space-m);
+  }
+  .stack[data-space='l'] {
+    gap: var(--ag-space-l);
+  }
+  .stack[data-space='xl'] {
+    gap: var(--ag-space-xl);
+  }
+  .stack[data-space='2xl'] {
+    gap: var(--ag-space-2xl);
+  }
+  .stack[data-space='3xl'] {
+    gap: var(--ag-space-3xl);
+  }
+  .stack[data-space='4xl'] {
+    gap: var(--ag-space-4xl);
+  }
+</style>

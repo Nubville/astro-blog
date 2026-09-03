@@ -116,9 +116,10 @@ function mod(score: number): string {
 
 <style>
   /* ── Outer shell ──────────────────────────────────── */
+  /* No outer margin — the Stack that places this owns the space around
+     it. See src/components/Stack.astro. */
   .char-sheet {
     border: 1.5px solid var(--ink);
-    margin: 0 0 var(--ag-space-2xl);
   }
 
   /* Dark themes only — see the matching comment in global.css on

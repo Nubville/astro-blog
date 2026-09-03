@@ -65,25 +65,18 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
   <head>
     <meta charset="utf-8" />
     <!-- Applies a saved theme choice before first paint. Must be a
-         synchronous inline script this early in <head> — anything
-         deferred (module scripts, the theme-switcher custom element
-         itself) runs after the stylesheet is already painted, which
-         would flash the default theme first. If nothing is stored,
-         default to 'horde' (temporary — see DEFAULT_THEME below) so
-         every [data-theme='horde'] rule site-wide (not just the
-         token file's cascade) applies consistently. -->
-    <script is:inline>
-      (function () {
-        // TODO: revert to 'paper' once Horde's had its run as the default.
-        const DEFAULT_THEME = 'horde';
-        try {
-          const stored = localStorage.getItem('ag-theme');
-          document.documentElement.dataset.theme = stored || DEFAULT_THEME;
-        } catch {
-          document.documentElement.dataset.theme = DEFAULT_THEME;
-        }
-      })();
-    </script>
+         synchronous script this early in <head> — anything deferred
+         (module scripts, the theme-switcher custom element itself)
+         runs after the stylesheet is already painted, which would
+         flash the default theme first. Lives at public/theme-init.js
+         rather than inline: the site's CSP is script-src 'self' (no
+         'unsafe-inline'), which silently blocks an inline <script>
+         in production — astro dev doesn't enforce netlify.toml's
+         headers, so that broke live without failing anywhere local.
+         A plain (non-module, non-deferred) same-origin <script src>
+         still blocks parsing and runs in place, same as inline would,
+         and needs no CSP exception. -->
+    <script is:inline src="/theme-init.js"></script>
     <link rel="icon" type="image/png" href="/favicon.png" sizes="512x512" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

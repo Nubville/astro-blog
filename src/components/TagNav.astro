@@ -43,7 +43,7 @@ const tags = [...new Set(allTags)]
   .tag-nav-label {
     color: var(--ink-faint);
     font-family: var(--font-mono);
-    font-size: var(--ag-font-size-xs);
+    font-size: var(--ag-font-size-s);
     letter-spacing: 0.08em;
     margin: 0 0 var(--ag-space-xs);
   }
@@ -63,7 +63,7 @@ const tags = [...new Set(allTags)]
     color: var(--ink-faint);
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: var(--ag-font-size-xs);
+    font-size: var(--ag-font-size-s);
     letter-spacing: 0.04em;
     padding: 0.25em 0.75em;
     text-decoration: none;
@@ -80,6 +80,13 @@ const tags = [...new Set(allTags)]
     }
   }
 
+  /* Dark themes only — see the matching comment in global.css on
+     sketch-card for why. */
+  :global([data-theme='lamplight']) .tag-nav-link,
+  :global([data-theme='horde']) .tag-nav-link {
+    background: var(--surface-raised);
+  }
+
   .tag-nav-count {
     color: var(--ink-faint);
     font-size: var(--ag-font-size-3xs);
@@ -89,7 +96,7 @@ const tags = [...new Set(allTags)]
     color: var(--brand-1);
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: var(--ag-font-size-xs);
+    font-size: var(--ag-font-size-s);
     letter-spacing: 0.04em;
     text-decoration: none;
 
@@ -102,5 +109,14 @@ const tags = [...new Set(allTags)]
       outline: 2px solid var(--brand-1);
       outline-offset: 2px;
     }
+  }
+
+  /* Dark themes only: --brand-1 (a fill color, not a text-on-surface
+     one) fails WCAG AA's 4.5:1 for body text against these themes'
+     dark surfaces. --brand-3 is the same brand hue at the lighter
+     on-surface rung each dark theme defines. */
+  :global([data-theme='lamplight']) .tag-nav-all,
+  :global([data-theme='horde']) .tag-nav-all {
+    color: var(--brand-3);
   }
 </style>

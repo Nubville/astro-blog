@@ -167,250 +167,259 @@ const legacyAliases = [
 ---
 
 <BaseLayout pageTitle="Design Tokens" showPageTitle={false}>
-  <!-- Hero column: title + intro. More theme content will go here later. -->
-  <section class="tokens-hero" aria-label="Token reference intro">
-    <p class="tokens-annotation">// design-tokens · ag-prefix · v1.0</p>
-    <h1 class="tokens-title">Design Tokens</h1>
-    <p class="tokens-intro">
-      Living reference for all <code>--ag-*</code> CSS custom properties. Defined in
-      <code>src/styles/ag-tokens.css</code> using a three-layer cascade:
-      <code>ag-color-palette → ag-theme → ag-theme-overrides</code>. Theme switching is driven by <code
-        >[data-theme="dark"]</code
-      > on <code>&lt;html&gt;</code>.
-    </p>
-  </section>
-
-  <!-- Posts column: all token sections -->
-  <div class="tokens-content">
-    <!-- ── Color Palette ─────────────────────────────── -->
-    <section class="tokens-section" aria-labelledby="palette-heading">
-      <h2 id="palette-heading" class="section-title">Color Palette</h2>
-      <p class="section-desc">
-        Raw numeric scale — lower number = darker. All values are warm-toned for the paper notebook
-        aesthetic. Defined in <code>@layer ag-color-palette</code>.
-      </p>
-
-      {
-        colorGroups.map((group) => (
-          <div class="color-group">
-            <h3 class="color-group-label">{group.label}</h3>
-            <ul class="color-swatches" role="list">
-              {group.tokens.map(({ name, desc }) => (
-                <li class="swatch-item">
-                  <span
-                    class="swatch"
-                    style={`background: var(${name}); border: 1px solid var(--pencil);`}
-                    aria-hidden="true"
-                  />
-                  <span class="swatch-name">
-                    <code>{name}</code>
-                  </span>
-                  <span class="swatch-desc">{desc}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
-    </section>
-
-    <!-- ── Semantic Theme Tokens ─────────────────────── -->
-    <section class="tokens-section" aria-labelledby="semantic-heading">
-      <h2 id="semantic-heading" class="section-title">Semantic Theme Tokens</h2>
-      <p class="section-desc">
-        Defined in <code>@layer ag-theme</code>. These flip automatically when <code
+  <div class="posts-col">
+    <!-- Intro: title + intro. More theme content will go here later. -->
+    <section class="tokens-hero" aria-label="Token reference intro">
+      <p class="tokens-annotation">// design-tokens · ag-prefix · v1.0</p>
+      <h1 class="tokens-title">Design Tokens</h1>
+      <p class="tokens-intro">
+        Living reference for all <code>--ag-*</code> CSS custom properties. Defined in
+        <code>src/styles/ag-tokens.css</code> using a three-layer cascade:
+        <code>ag-color-palette → ag-theme → ag-theme-overrides</code>. Theme switching is driven by <code
           >[data-theme="dark"]</code
-        > is applied. Use these in components, never raw palette values.
+        > on <code>&lt;html&gt;</code>.
       </p>
-
-      <ul class="semantic-list" role="list">
-        {
-          semanticTokens.map(({ name, desc }) => (
-            <li class="semantic-item">
-              <span
-                class="swatch swatch--inline"
-                style={`background: var(${name}); border: 1px solid var(--pencil);`}
-                aria-hidden="true"
-              />
-              <code class="semantic-name">{name}</code>
-              <span class="semantic-desc">{desc}</span>
-            </li>
-          ))
-        }
-      </ul>
     </section>
 
-    <!-- ── Typography ────────────────────────────────── -->
-    <section class="tokens-section" aria-labelledby="type-heading">
-      <h2 id="type-heading" class="section-title">Typography</h2>
+    <!-- All token sections -->
+    <div class="tokens-content">
+      <!-- ── Color Palette ─────────────────────────────── -->
+      <section class="tokens-section" aria-labelledby="palette-heading">
+        <h2 id="palette-heading" class="section-title">Color Palette</h2>
+        <p class="section-desc">
+          Raw numeric scale — lower number = darker. All values are warm-toned for the paper
+          notebook aesthetic. Defined in <code>@layer ag-color-palette</code>.
+        </p>
 
-      <h3 class="subsection-title">Font Families</h3>
-      <ul class="font-list" role="list">
-        <li class="font-item">
-          <span class="font-sample" style="font-family: var(--ag-font-family-heading);"
-            >Special Elite — display &amp; headings</span
-          >
-          <code class="font-token">--ag-font-family-heading</code>
-          <span class="font-alias"
-            >alias: <code>--font-display</code>, <code>--font-heading</code></span
-          >
-        </li>
-        <li class="font-item">
-          <span class="font-sample" style="font-family: var(--ag-font-family-body);"
-            >Work Sans — body &amp; UI text</span
-          >
-          <code class="font-token">--ag-font-family-body</code>
-          <span class="font-alias">alias: <code>--font-body</code></span>
-        </li>
-        <li class="font-item">
-          <span class="font-sample" style="font-family: var(--ag-font-family-code);"
-            >Courier New — code &amp; mono labels</span
-          >
-          <code class="font-token">--ag-font-family-code</code>
-          <span class="font-alias">alias: <code>--font-mono</code></span>
-        </li>
-        <li class="font-item">
-          <span class="font-sample" style="font-family: var(--ag-font-family-longform);"
-            >Caveat — handwritten annotations</span
-          >
-          <code class="font-token">--ag-font-family-longform</code>
-          <span class="font-alias">alias: <code>--font-annotation</code></span>
-        </li>
-      </ul>
-
-      <h3 class="subsection-title">Font Size Scale</h3>
-      <p class="section-desc">
-        Major Second (×1.125) scale anchored at 1rem (16px). Rule: nothing below <strong
-          >12px</strong
-        > hard floor; body copy minimum <strong>16px</strong>.
-      </p>
-      <ul class="type-scale" role="list">
         {
-          fontSizes.map(({ token, label, approx, note }) => (
-            <li class={`type-item ${label === '3xs' || label === '2xs' ? 'type-item--floor' : ''}`}>
-              <span
-                class="type-sample"
-                style={`font-size: var(${token}); font-family: var(--ag-font-family-heading);`}
-              >
-                Aa — {label}
-              </span>
-              <span class="type-meta">
-                <code>{token}</code>
-                <span class="type-approx">{approx}</span>
-                <span class="type-note">{note}</span>
-              </span>
-            </li>
+          colorGroups.map((group) => (
+            <div class="color-group">
+              <h3 class="color-group-label">{group.label}</h3>
+              <ul class="color-swatches" role="list">
+                {group.tokens.map(({ name, desc }) => (
+                  <li class="swatch-item">
+                    <span
+                      class="swatch"
+                      style={`background: var(${name}); border: 1px solid var(--pencil);`}
+                      aria-hidden="true"
+                    />
+                    <span class="swatch-name">
+                      <code>{name}</code>
+                    </span>
+                    <span class="swatch-desc">{desc}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))
         }
-      </ul>
-    </section>
+      </section>
 
-    <!-- ── Spacing ────────────────────────────────────── -->
-    <section class="tokens-section" aria-labelledby="space-heading">
-      <h2 id="space-heading" class="section-title">Spacing Scale</h2>
-      <p class="section-desc">
-        T-shirt scale multiplied by <code>--ag-space-scale</code> (default 1) for density control. Use
-        these for all margin, padding, and gap values.
-      </p>
-      <ul class="space-scale" role="list">
-        {
-          spaceTokens.map(({ token, label, approx }) => (
-            <li class="space-item">
-              <span
-                class="space-bar"
-                style={`width: var(${token}); min-width: 2px;`}
-                aria-hidden="true"
-              />
-              <code class="space-name">{token}</code>
-              <span class="space-label">{label}</span>
-              <span class="space-approx">{approx}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
+      <!-- ── Semantic Theme Tokens ─────────────────────── -->
+      <section class="tokens-section" aria-labelledby="semantic-heading">
+        <h2 id="semantic-heading" class="section-title">Semantic Theme Tokens</h2>
+        <p class="section-desc">
+          Defined in <code>@layer ag-theme</code>. These flip automatically when <code
+            >[data-theme="dark"]</code
+          > is applied. Use these in components, never raw palette values.
+        </p>
 
-    <!-- ── Shadows ────────────────────────────────────── -->
-    <section class="tokens-section" aria-labelledby="shadow-heading">
-      <h2 id="shadow-heading" class="section-title">Shadows</h2>
-      <p class="section-desc">
-        Hard cel-shadows: offset with <em>no blur</em>, ink-colored. <code
-          >--ag-shadow-blur-scale: 0</code
-        > collapses all blur to zero. Alias: <code>--shadow-cel</code> → <code>--ag-shadow-s</code>.
-      </p>
-      <ul class="shadow-list" role="list">
-        {
-          shadows.map(({ token, label, desc }) => (
-            <li class="shadow-item">
-              <span class="shadow-sample" style={`box-shadow: var(${token});`} aria-hidden="true" />
-              <code class="shadow-name">{token}</code>
-              <span class="shadow-label">{label}</span>
-              <span class="shadow-desc">{desc}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <!-- ── Border Radius ──────────────────────────────── -->
-    <section class="tokens-section" aria-labelledby="radius-heading">
-      <h2 id="radius-heading" class="section-title">Border Radius</h2>
-      <p class="section-desc">
-        Tight squares match the cel/sketch aesthetic. Alias: <code>--radius-cel</code> → <code
-          >--ag-border-radius-s</code
-        >.
-      </p>
-      <ul class="radius-list" role="list">
-        {
-          radii.map(({ token, label, approx }) => (
-            <li class="radius-item">
-              <span
-                class="radius-sample"
-                style={`border-radius: var(${token});`}
-                aria-hidden="true"
-              />
-              <code class="radius-name">{token}</code>
-              <span class="radius-label">
-                {label} — {approx}
-              </span>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <!-- ── Legacy Aliases ─────────────────────────────── -->
-    <section class="tokens-section" aria-labelledby="aliases-heading">
-      <h2 id="aliases-heading" class="section-title">Legacy Aliases</h2>
-      <p class="section-desc">
-        Defined in <code>@layer ag-theme-overrides</code>. These map the old <code>--paper</code>, <code
-          >--ink</code
-        >, <code>--brand-1</code>, etc. names onto <code>--ag-*</code> semantic tokens. Theme switching
-        propagates through automatically. Prefer <code>--ag-*</code> tokens in new code.
-      </p>
-      <table class="alias-table">
-        <thead>
-          <tr>
-            <th scope="col">Alias</th>
-            <th scope="col">Points to</th>
-          </tr>
-        </thead>
-        <tbody>
+        <ul class="semantic-list" role="list">
           {
-            legacyAliases.map(({ alias, points }) => (
-              <tr>
-                <td>
-                  <code>{alias}</code>
-                </td>
-                <td>
-                  <code>{points}</code>
-                </td>
-              </tr>
+            semanticTokens.map(({ name, desc }) => (
+              <li class="semantic-item">
+                <span
+                  class="swatch swatch--inline"
+                  style={`background: var(${name}); border: 1px solid var(--pencil);`}
+                  aria-hidden="true"
+                />
+                <code class="semantic-name">{name}</code>
+                <span class="semantic-desc">{desc}</span>
+              </li>
             ))
           }
-        </tbody>
-      </table>
-    </section>
+        </ul>
+      </section>
+
+      <!-- ── Typography ────────────────────────────────── -->
+      <section class="tokens-section" aria-labelledby="type-heading">
+        <h2 id="type-heading" class="section-title">Typography</h2>
+
+        <h3 class="subsection-title">Font Families</h3>
+        <ul class="font-list" role="list">
+          <li class="font-item">
+            <span class="font-sample" style="font-family: var(--ag-font-family-heading);"
+              >Special Elite — display &amp; headings</span
+            >
+            <code class="font-token">--ag-font-family-heading</code>
+            <span class="font-alias"
+              >alias: <code>--font-display</code>, <code>--font-heading</code></span
+            >
+          </li>
+          <li class="font-item">
+            <span class="font-sample" style="font-family: var(--ag-font-family-body);"
+              >Work Sans — body &amp; UI text</span
+            >
+            <code class="font-token">--ag-font-family-body</code>
+            <span class="font-alias">alias: <code>--font-body</code></span>
+          </li>
+          <li class="font-item">
+            <span class="font-sample" style="font-family: var(--ag-font-family-code);"
+              >Courier New — code &amp; mono labels</span
+            >
+            <code class="font-token">--ag-font-family-code</code>
+            <span class="font-alias">alias: <code>--font-mono</code></span>
+          </li>
+          <li class="font-item">
+            <span class="font-sample" style="font-family: var(--ag-font-family-longform);"
+              >Patrick Hand — handwritten annotations</span
+            >
+            <code class="font-token">--ag-font-family-longform</code>
+            <span class="font-alias">alias: <code>--font-annotation</code></span>
+          </li>
+        </ul>
+
+        <h3 class="subsection-title">Font Size Scale</h3>
+        <p class="section-desc">
+          Major Second (×1.125) scale anchored at 1rem (16px). Rule: nothing below <strong
+            >12px</strong
+          > hard floor; body copy minimum <strong>16px</strong>.
+        </p>
+        <ul class="type-scale" role="list">
+          {
+            fontSizes.map(({ token, label, approx, note }) => (
+              <li
+                class={`type-item ${label === '3xs' || label === '2xs' ? 'type-item--floor' : ''}`}
+              >
+                <span
+                  class="type-sample"
+                  style={`font-size: var(${token}); font-family: var(--ag-font-family-heading);`}
+                >
+                  Aa — {label}
+                </span>
+                <span class="type-meta">
+                  <code>{token}</code>
+                  <span class="type-approx">{approx}</span>
+                  <span class="type-note">{note}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- ── Spacing ────────────────────────────────────── -->
+      <section class="tokens-section" aria-labelledby="space-heading">
+        <h2 id="space-heading" class="section-title">Spacing Scale</h2>
+        <p class="section-desc">
+          T-shirt scale multiplied by <code>--ag-space-scale</code> (default 1) for density control. Use
+          these for all margin, padding, and gap values.
+        </p>
+        <ul class="space-scale" role="list">
+          {
+            spaceTokens.map(({ token, label, approx }) => (
+              <li class="space-item">
+                <span
+                  class="space-bar"
+                  style={`width: var(${token}); min-width: 2px;`}
+                  aria-hidden="true"
+                />
+                <code class="space-name">{token}</code>
+                <span class="space-label">{label}</span>
+                <span class="space-approx">{approx}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- ── Shadows ────────────────────────────────────── -->
+      <section class="tokens-section" aria-labelledby="shadow-heading">
+        <h2 id="shadow-heading" class="section-title">Shadows</h2>
+        <p class="section-desc">
+          Hard cel-shadows: offset with <em>no blur</em>, ink-colored. <code
+            >--ag-shadow-blur-scale: 0</code
+          > collapses all blur to zero. Alias: <code>--shadow-cel</code> → <code>--ag-shadow-s</code
+          >.
+        </p>
+        <ul class="shadow-list" role="list">
+          {
+            shadows.map(({ token, label, desc }) => (
+              <li class="shadow-item">
+                <span
+                  class="shadow-sample"
+                  style={`box-shadow: var(${token});`}
+                  aria-hidden="true"
+                />
+                <code class="shadow-name">{token}</code>
+                <span class="shadow-label">{label}</span>
+                <span class="shadow-desc">{desc}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- ── Border Radius ──────────────────────────────── -->
+      <section class="tokens-section" aria-labelledby="radius-heading">
+        <h2 id="radius-heading" class="section-title">Border Radius</h2>
+        <p class="section-desc">
+          Tight squares match the cel/sketch aesthetic. Alias: <code>--radius-cel</code> → <code
+            >--ag-border-radius-s</code
+          >.
+        </p>
+        <ul class="radius-list" role="list">
+          {
+            radii.map(({ token, label, approx }) => (
+              <li class="radius-item">
+                <span
+                  class="radius-sample"
+                  style={`border-radius: var(${token});`}
+                  aria-hidden="true"
+                />
+                <code class="radius-name">{token}</code>
+                <span class="radius-label">
+                  {label} — {approx}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- ── Legacy Aliases ─────────────────────────────── -->
+      <section class="tokens-section" aria-labelledby="aliases-heading">
+        <h2 id="aliases-heading" class="section-title">Legacy Aliases</h2>
+        <p class="section-desc">
+          Defined in <code>@layer ag-theme-overrides</code>. These map the old <code>--paper</code>, <code
+            >--ink</code
+          >, <code>--brand-1</code>, etc. names onto <code>--ag-*</code> semantic tokens. Theme switching
+          propagates through automatically. Prefer <code>--ag-*</code> tokens in new code.
+        </p>
+        <table class="alias-table">
+          <thead>
+            <tr>
+              <th scope="col">Alias</th>
+              <th scope="col">Points to</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              legacyAliases.map(({ alias, points }) => (
+                <tr>
+                  <td>
+                    <code>{alias}</code>
+                  </td>
+                  <td>
+                    <code>{points}</code>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </section>
+    </div>
   </div>
 </BaseLayout>
 

@@ -11,8 +11,10 @@ const pages = [
 for (const { name, path } of pages) {
   test(`${name} page has no accessibility violations`, async ({ page }) => {
     await page.goto(path);
-    // Wait for Web Awesome custom elements to upgrade before scanning
-    await page.waitForFunction(() => customElements.get('wa-page') !== undefined);
+    // Wait for the site's custom elements to upgrade before scanning —
+    // <theme-switcher> lives in Header.astro, rendered on every page via
+    // BaseLayout, so it's a reliable signal the page has hydrated.
+    await page.waitForFunction(() => customElements.get('theme-switcher') !== undefined);
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'])

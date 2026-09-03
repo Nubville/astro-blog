@@ -64,7 +64,27 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Applies a saved theme choice before first paint. Must be a
+         synchronous inline script this early in <head> — anything
+         deferred (module scripts, the theme-switcher custom element
+         itself) runs after the stylesheet is already painted, which
+         would flash the default theme first. If nothing is stored,
+         default to 'horde' (temporary — see DEFAULT_THEME below) so
+         every [data-theme='horde'] rule site-wide (not just the
+         token file's cascade) applies consistently. -->
+    <script is:inline>
+      (function () {
+        // TODO: revert to 'paper' once Horde's had its run as the default.
+        const DEFAULT_THEME = 'horde';
+        try {
+          const stored = localStorage.getItem('ag-theme');
+          document.documentElement.dataset.theme = stored || DEFAULT_THEME;
+        } catch {
+          document.documentElement.dataset.theme = DEFAULT_THEME;
+        }
+      })();
+    </script>
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="512x512" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
@@ -154,6 +174,7 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
 
 <script>
   import '../custom-elements/sketch-card.js';
+  import '../custom-elements/theme-switcher.js';
 </script>
 
 <style>

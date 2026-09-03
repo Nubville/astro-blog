@@ -64,6 +64,15 @@ Equal parts coder and maker. Most comfortable when there's solder in one hand an
     padding: var(--ag-space-s) var(--ag-space-s) var(--ag-space-2xs);
   }
 
+  /* Dark themes only — see the matching comment in global.css on
+     sketch-card for why. */
+  :global([data-theme='lamplight']) .trait-box,
+  :global([data-theme='horde']) .trait-box,
+  :global([data-theme='lamplight']) .features-box,
+  :global([data-theme='horde']) .features-box {
+    background: var(--surface-raised);
+  }
+
   .traits-column {
     display: flex;
     flex-direction: column;

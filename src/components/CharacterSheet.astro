@@ -121,6 +121,13 @@ function mod(score: number): string {
     margin: 0 0 var(--ag-space-2xl);
   }
 
+  /* Dark themes only — see the matching comment in global.css on
+     sketch-card for why. */
+  :global([data-theme='lamplight']) .char-sheet,
+  :global([data-theme='horde']) .char-sheet {
+    background: var(--surface-raised);
+  }
+
   /* ── Header ───────────────────────────────────────── */
   .sheet-header {
     background: var(--paper-dark);
@@ -274,14 +281,14 @@ function mod(score: number): string {
   .skill {
     align-items: baseline;
     display: flex;
-    font-size: var(--ag-font-size-xs);
+    font-size: var(--ag-font-size-s);
     gap: var(--ag-space-2xs);
   }
 
   .skill-pip {
     flex-shrink: 0;
     font-size: 6px;
-    line-height: var(--ag-font-size-xs);
+    line-height: var(--ag-font-size-s);
   }
 
   .skill-name {

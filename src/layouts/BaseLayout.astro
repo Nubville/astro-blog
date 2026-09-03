@@ -123,14 +123,6 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
 
     <!-- Page-specific structured data (Person on /about, BlogPosting on posts). -->
     <slot name="head" />
-
-    <!-- Plausible — privacy-friendly, no cookie banner needed. Confirm this
-         domain matches whatever gets registered in the Plausible dashboard. -->
-    <script
-      is:inline
-      defer
-      data-domain="www.andrewgarman.com"
-      src="https://plausible.io/js/script.js"></script>
   </head>
   <body>
     <div class="site-layout">

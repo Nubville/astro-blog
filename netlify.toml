@@ -3,8 +3,16 @@
   publish = "dist"
 
 [build.environment]
+  # Build image Node. .nvmrc also pins 24 — Netlify reads that too, so keep
+  # the two in sync. package.json engines stays at Astro's real floor
+  # (>=22.12.0) rather than 24; this is where "run it on 24" belongs.
   NODE_VERSION = "24"
 
+# Functions run on a SEPARATE runtime from the build image. It normally
+# inherits the build's Node version, but if it ever needs pinning, note that
+# AWS_LAMBDA_JS_RUNTIME cannot be set here — Netlify only reads it from the
+# UI/CLI/API, so setting it in this file silently does nothing.
+# https://docs.netlify.com/build/functions/optional-configuration/
 [functions]
   directory = "netlify/functions"
 

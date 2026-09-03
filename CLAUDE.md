@@ -25,7 +25,7 @@ Personal developer blog. Goal: maximum simplicity, maximum speed, deep accessibi
 
 | Layer          | Tool                                                |
 | -------------- | --------------------------------------------------- |
-| Site framework | Astro 6                                             |
+| Site framework | Astro 7                                             |
 | UI components  | Vanilla custom elements (`HTMLElement`)             |
 | Styling        | Plain CSS with custom properties — no preprocessors |
 | Bundler        | Vite (via Astro)                                    |
@@ -128,13 +128,20 @@ Defined in `src/scripts/sketch-card.js` — a vanilla `HTMLElement` subclass.
 
 ## Node Version
 
-Astro 6 requires Node >=22.12.0. Use nvm v24.14.1:
+Astro 7 requires Node >=22.12.0 — that's the floor in `package.json` engines,
+matching Astro's own. The project runs on 24 everywhere: `.nvmrc` and
+`netlify.toml`'s `NODE_VERSION` both pin `24`. Use nvm v24.14.1 locally:
 
 ```
 PATH="/home/dgarman/.nvm/versions/node/v24.14.1/bin:$PATH" npm run dev
 ```
 
 System node (v20) will fail to start the dev server.
+
+Netlify Functions run on a **separate** runtime from the build image, and it
+cannot be set from `netlify.toml` — `AWS_LAMBDA_JS_RUNTIME` is UI/CLI/API only.
+It otherwise inherits the build's Node version, so it only needs touching if
+someone has explicitly pinned an old runtime in the site's dashboard env vars.
 
 ## Project Structure
 

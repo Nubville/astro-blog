@@ -30,7 +30,7 @@
 # looser policy there is a reasonable trade-off. If CMS login breaks after
 # this deploys, check the browser console for the blocked directive/domain.
 #
-# script-src is 'self'-only (plus plausible.io): astro.config.mjs sets
+# script-src is 'self'-only: astro.config.mjs sets
 # vite.build.assetsInlineLimit: 0 specifically so every hoisted <script>
 # (nav toggle, code-copy, sketch-card) always emits as an external
 # /_astro/*.js file instead of inline JS — verified in the actual
@@ -45,7 +45,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://plausible.io; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
 
 [[headers]]
   for = "/admin/*"

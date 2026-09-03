@@ -86,6 +86,17 @@ body::before {
   }
 }
 
+/* Below the three-column breakpoint, post pages skip straight to the
+   article instead of scrolling past the profile card + character sheet
+   first — see compactHeroOnMobile on BaseLayout. Undone below, inside the
+   1400px container query — must come before it in source order: equal
+   specificity means the later rule wins regardless of which one sits in
+   a conditional, so a plain rule placed after this block would silently
+   beat the container query's override even when it matches. */
+.hero-block--compact-mobile {
+  display: none;
+}
+
 /* Step 5: Three-column spread at desktop — hero left, posts center, traits right */
 @container content-col (min-width: 1400px) {
   .content-col main {
@@ -110,6 +121,13 @@ body::before {
     grid-area: traits;
     position: sticky;
     top: 5rem;
+  }
+
+  /* Undoes the hiding above — display: contents rather than block so
+     Hero and CharacterSheet still land directly in .hero-section's own
+     flow, exactly as if this wrapper didn't exist. */
+  .hero-block--compact-mobile {
+    display: contents;
   }
 }
 

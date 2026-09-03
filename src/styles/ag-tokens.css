@@ -283,12 +283,16 @@
     --ag-color-text-link: var(--ag-color-accent-70);
 
     /* Focus + shadow. The shadow MUST be a color that's actually
-       visible against a dark surface — reusing a near-black shadow
-       here (like paper's ink-colored one) would be invisible against
-       an already-dark page, which is exactly what made the first
-       pass at this theme unreadable. */
+       visible against a dark surface — a near-black shadow (like
+       paper's ink-colored one, or this theme's own near-black
+       neutral-05) contrasts at ~1:1 against an already near-black
+       page: verified via real pixel sampling of the composited
+       color, not assumed. Going even darker doesn't help — pure
+       black manages only ~1.2:1 here — so this needs to go lighter,
+       not darker: treasure-gold reads at 7-8:1 against both the page
+       and the card surface. */
     --ag-color-focus: var(--ag-color-brand-60);
-    --ag-color-shadow: color-mix(in oklab, var(--ag-color-neutral-05) 85%, transparent);
+    --ag-color-shadow: var(--ag-color-warning-on-normal);
 
     /* Brand semantic */
     --ag-color-brand-fill-quiet: var(--ag-color-brand-10);
@@ -388,7 +392,11 @@
     --ag-color-text-link: var(--ag-color-accent-70);
 
     --ag-color-focus: var(--ag-color-brand-60);
-    --ag-color-shadow: color-mix(in oklab, var(--ag-color-neutral-05) 85%, transparent);
+    /* Same fix as lamplight above, same reason: a near-black shadow
+       reads at ~1:1 against this theme's own near-black page — going
+       darker doesn't help, treasure-gold (weathered bronze, matches
+       this theme's own palette) reads at 7:1+ instead. */
+    --ag-color-shadow: var(--ag-color-warning-on-normal);
 
     /* Brand semantic */
     --ag-color-brand-fill-quiet: var(--ag-color-brand-10);

@@ -33,6 +33,19 @@ function loadThemeFonts(theme) {
     link.id = id;
     link.rel = 'stylesheet';
     link.href = 'https://fonts.googleapis.com/css2?' + family + '&display=swap';
+    // Loaded as media="print" so the browser fetches it without treating it
+    // as render-blocking (print doesn't apply to screen rendering), then
+    // flipped to "all" once it's actually loaded. Lighthouse flagged this
+    // link as part of a render-blocking chain off theme-init.js — fair,
+    // since a plain rel="stylesheet" link blocks paint by default even
+    // when injected by a script that's already running post-parse. There's
+    // no downside to deferring it: the font itself already uses
+    // display=swap, so the page was never waiting to avoid invisible text,
+    // just needlessly waiting to paint at all.
+    link.media = 'print';
+    link.onload = function () {
+      link.media = 'all';
+    };
     document.head.appendChild(link);
   });
 }

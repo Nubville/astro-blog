@@ -1,1 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Bricolage+Grotesque:wght@400..800&family=Patrick+Hand&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+/* Only the two families every theme uses unconditionally (body text and
+   handwritten annotations). Each theme's own heading/code font is
+   lazy-loaded per the active theme instead — see theme-init.js — so a
+   visitor who never switches themes never downloads Bricolage Grotesque,
+   JetBrains Mono, or Cabin Sketch at all. */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Work+Sans:wght@400;500;600&display=swap');

@@ -26,6 +26,20 @@ body {
     linear-gradient(90deg, color-mix(in oklab, var(--gold-1) 9%, transparent) 1px, transparent 1px);
 }
 
+/* Wayfinder is light like paper, but keeps its own lagoon-teal grid
+   (via --accent-1, which resolves to this theme's teal) rather than
+   paper's blue-tinted one — a small texture-level nod to the sea
+   motif everywhere the page's structural grid shows through. */
+[data-theme='wayfinder'] body {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--accent-1) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--accent-1) 8%, transparent) 1px,
+      transparent 1px
+    );
+}
+
 /* Red margin rule — fixed, persists on scroll */
 body::before {
   content: '';

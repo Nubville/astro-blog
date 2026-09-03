@@ -14,6 +14,7 @@ const THEMES = [
   { value: 'paper', label: 'Paper' },
   { value: 'lamplight', label: 'Lamplight' },
   { value: 'horde', label: 'Horde' },
+  { value: 'wayfinder', label: 'Wayfinder' },
 ];
 
 const { pathname } = Astro.url;
@@ -236,6 +237,14 @@ function isActive(href: string) {
     color: var(--brand-3);
   }
 
+  /* Wayfinder only: same shape break as sketch-card — rounder, bolder
+     outlines instead of the sharp ink-sketch corners every other theme
+     keeps. */
+  :global([data-theme='wayfinder']) .nav-link {
+    border-radius: 999px;
+    border-width: 1.5px;
+  }
+
   .nav-icon {
     font-size: 0.85em;
     line-height: 1;
@@ -278,6 +287,11 @@ function isActive(href: string) {
       outline: 2px solid var(--brand-1);
       outline-offset: 2px;
     }
+  }
+
+  :global([data-theme='wayfinder']) .theme-select {
+    border-radius: 12px;
+    border-width: 1.5px;
   }
 
   /* ── Hamburger button ────────────────────────────── */

@@ -22,6 +22,12 @@ customElements.define(
         const theme = select.value;
         document.documentElement.dataset.theme = theme;
 
+        // Lazy-loads this theme's own heading/code font if nothing has
+        // already fetched it — see theme-init.js, which defines this
+        // and calls it once on initial load for whatever theme was
+        // already active.
+        window.__loadThemeFonts?.(theme);
+
         try {
           localStorage.setItem(STORAGE_KEY, theme);
         } catch {

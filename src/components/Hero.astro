@@ -54,9 +54,8 @@ const { nameHeading: NameTag = 'h1' } = Astro.props;
 </section>
 
 <style>
-  .hero {
-    margin-bottom: var(--ag-space-2xl);
-  }
+  /* No outer margin here on purpose — the Stack that places this owns the
+     space around it. See src/components/Stack.astro. */
 
   /* No max-width here — the grid column constrains the card width */
   .profile-card {

@@ -34,9 +34,8 @@ const { posts, postsLabel = '// more posts' } = Astro.props;
 }
 
 <style>
-  .sidebar-posts {
-    margin-top: var(--ag-space-l);
-  }
+  /* No outer margin — the Stack that places this owns the space around
+     it. See src/components/Stack.astro. */
 
   .sidebar-posts-label {
     color: var(--ink-faint);

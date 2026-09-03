@@ -36,9 +36,8 @@ const tags = [...new Set(allTags)]
 }
 
 <style>
-  .tag-nav {
-    margin-top: var(--ag-space-l);
-  }
+  /* No outer margin — the Stack that places this owns the space around
+     it. See src/components/Stack.astro. */
 
   .tag-nav-label {
     color: var(--ink-faint);

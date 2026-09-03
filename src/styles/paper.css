@@ -70,10 +70,20 @@ body::before {
   min-width: 0;
 }
 
-/* Step 2: main is a fluid container — grid kicks in at 768px+ */
+/* Step 2: main is a fluid container. It's a grid at every width — the
+   breakpoints below only retune gap/columns/padding rather than switching
+   layout modes. It owns the space between the page's top-level regions
+   (sidebar, content, traits) for the same reason Stack does inside them:
+   before this, main was display:block below 1200px with no gap at all, so
+   region spacing was whatever trailing margin the previous component
+   happened to own — measured 0px on the homepage and 40px on a post page
+   at the same width. */
 .content-col main {
   container-type: inline-size;
   container-name: main-canvas;
+  display: grid;
+  gap: var(--ag-space-2xl);
+  grid-template-columns: 1fr;
   padding: 1rem 1.25rem;
 }
 
@@ -84,6 +94,15 @@ body::before {
     grid-template-columns: 1fr;
     padding: 2rem 2.5rem;
   }
+}
+
+/* This wrapper exists only to hide/show a group as a unit — it should
+   never be a box of its own, or its children would sit outside the
+   sidebar Stack's rhythm and butt against each other at 0px. Dissolving
+   it makes CharacterSheet / PostSidebar / TagNav direct children of the
+   Stack, so they pick up its gap like everything else. */
+.hero-block {
+  display: contents;
 }
 
 /* Below the three-column breakpoint, post pages skip straight to Hero

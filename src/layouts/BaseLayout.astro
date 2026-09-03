@@ -4,6 +4,7 @@ import CharacterSheet from '../components/CharacterSheet.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import Stack from '../components/Stack.astro';
 import TagNav from '../components/TagNav.astro';
 import '../styles/global.css';
 
@@ -144,7 +145,12 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
         <Header />
         <div class="content-container">
           <main>
-            <aside class="hero-section" aria-label="Author profile and site navigation">
+            <Stack
+              as="aside"
+              space="2xl"
+              class="hero-section"
+              aria-label="Author profile and site navigation"
+            >
               <Hero nameHeading={heroNameHeading} />
               <div
                 class:list={['hero-block', { 'hero-block--compact-mobile': compactHeroOnMobile }]}
@@ -153,7 +159,7 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
                 <slot name="sidebar-extra" />
                 <TagNav />
               </div>
-            </aside>
+            </Stack>
 
             {
               showPageTitle ? (

@@ -218,6 +218,16 @@ sketch-card {
   box-shadow: var(--shadow-cel-lg);
 }
 
+/* Wayfinder only: the site's one deliberate shape break — every other
+   theme keeps paper's sharp ink-sketch corners, this one goes soft and
+   chunky (driftwood, not cut paper). --card-border-width/-corner-radius
+   are the same custom properties every sketch-card type already reads
+   from, just pushed further than any type= variant does on its own. */
+[data-theme='wayfinder'] sketch-card {
+  --card-border-width: 3px;
+  --card-corner-radius: 22px;
+}
+
 sketch-card[type='quest'] {
   --card-corner-radius: 10px;
   --card-corner-shape: bevel;

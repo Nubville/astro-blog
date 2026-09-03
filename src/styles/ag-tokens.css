@@ -439,6 +439,138 @@
     --ag-font-family-code: 'JetBrains Mono', 'Courier New', monospace;
     --ag-font-weight-bold: 700;
   }
+
+  /* ── Wayfinder theme ───────────────────────────────────────
+     Open water at midday — not a fourth ink-and-parchment mood
+     but a genuine structural break from the other three: sea-glass
+     and coral instead of warm paper, a hand-sketched sail-canvas
+     display face instead of typewriter/grotesk, and — the real
+     departure — soft pill shapes and bold toon outlines instead of
+     the site's sharp ink-sketch squares (border-radius/border-width
+     scales below, untouched by every other theme). Still a light
+     theme like paper (balances the set: 2 light, 2 dark), so it
+     reuses paper's semantic shape rather than lamplight/horde's.
+  ──────────────────────────────────────────────────────────── */
+  [data-theme='wayfinder'] {
+    /* Raw hue overrides — sea-glass neutrals; coral-sunset brand;
+       lagoon-teal accent; palm-green success; treasure-gold warning.
+       Every text-bearing rung below is hand-verified at 4.5:1+
+       against both surface-default and surface-lowered. */
+    --ag-color-neutral-95: #eef7f5;
+    --ag-color-neutral-90: #dcefeb;
+    --ag-color-neutral-80: #bdded7;
+    --ag-color-neutral-70: #93c0b7;
+    --ag-color-neutral-50: #4d7873;
+    --ag-color-neutral-40: #3c5f5b;
+    --ag-color-neutral-30: #294744;
+    --ag-color-neutral-20: #14302e;
+    --ag-color-neutral-10: #0c1c1a;
+    --ag-color-neutral-05: #061110;
+
+    --ag-color-brand-95: #fdf0f2;
+    --ag-color-brand-90: #fad3d9;
+    --ag-color-brand-80: #f2a3b3;
+    --ag-color-brand-70: #e37a90;
+    --ag-color-brand-60: #cc5670;
+    --ag-color-brand-50: #b02b4c;
+    --ag-color-brand-40: #8a2039;
+    --ag-color-brand-30: #66172a;
+    --ag-color-brand-20: #47101d;
+    --ag-color-brand-10: #290910;
+
+    --ag-color-accent-90: #cfe4f5;
+    --ag-color-accent-70: #2e86c9;
+    --ag-color-accent-50: #1a6ea8;
+    --ag-color-accent-40: #12507c;
+    --ag-color-accent-20: #0a2c44;
+    --ag-color-accent-10: #051826;
+
+    --ag-color-success-95: #eef6ec;
+    --ag-color-success-90: #d3ecc9;
+    --ag-color-success-70: #5fa855;
+    --ag-color-success-50: #2f6b28;
+    --ag-color-success-40: #244f1f;
+
+    --ag-color-warning-95: #fdf5e4;
+    --ag-color-warning-90: #f8e6ba;
+    --ag-color-warning-70: #c99a3a;
+    --ag-color-warning-50: #a67a1e;
+    --ag-color-warning-40: #6b4a12;
+
+    /* Surfaces */
+    --ag-color-surface-raised: #ffffff;
+    --ag-color-surface-default: var(--ag-color-neutral-95);
+    --ag-color-surface-lowered: var(--ag-color-neutral-90);
+    --ag-color-surface-border: var(--ag-color-neutral-70);
+
+    /* Text */
+    --ag-color-text-normal: var(--ag-color-neutral-20);
+    /* Hand-tuned darker than neutral-50 — same reasoning as paper's
+       own text-quiet override: needs AA on the lowered surface too. */
+    --ag-color-text-quiet: #3f625d;
+    --ag-color-text-link: var(--ag-color-accent-50);
+
+    --ag-color-focus: var(--ag-color-brand-50);
+    --ag-color-shadow: var(--ag-color-text-normal);
+
+    /* Accent semantic */
+    --ag-color-accent-fill-quiet: var(--ag-color-accent-90);
+    --ag-color-accent-border-normal: var(--ag-color-accent-70);
+    --ag-color-accent-on-quiet: var(--ag-color-accent-40);
+
+    /* Brand semantic */
+    --ag-color-brand-fill-quiet: var(--ag-color-brand-95);
+    --ag-color-brand-fill-normal: var(--ag-color-brand-90);
+    --ag-color-brand-fill-loud: var(--ag-color-brand-50);
+    --ag-color-brand-border-quiet: var(--ag-color-brand-80);
+    --ag-color-brand-border-normal: var(--ag-color-brand-60);
+    --ag-color-brand-border-loud: var(--ag-color-brand-40);
+    --ag-color-brand-on-quiet: var(--ag-color-brand-40);
+    --ag-color-brand-on-normal: var(--ag-color-brand-30);
+    --ag-color-brand-on-loud: white;
+
+    /* Success semantic */
+    --ag-color-success-fill-quiet: var(--ag-color-success-95);
+    --ag-color-success-fill-normal: var(--ag-color-success-90);
+    --ag-color-success-fill-loud: var(--ag-color-success-50);
+    --ag-color-success-border-normal: var(--ag-color-success-70);
+    --ag-color-success-on-normal: var(--ag-color-success-40);
+    --ag-color-success-on-loud: white;
+
+    /* Warning semantic */
+    --ag-color-warning-fill-quiet: var(--ag-color-warning-95);
+    --ag-color-warning-fill-normal: var(--ag-color-warning-90);
+    --ag-color-warning-fill-loud: var(--ag-color-warning-50);
+    --ag-color-warning-border-normal: var(--ag-color-warning-70);
+    --ag-color-warning-on-normal: var(--ag-color-warning-40);
+    --ag-color-warning-on-loud: white;
+
+    /* Neutral semantic */
+    --ag-color-neutral-fill-quiet: var(--ag-color-neutral-95);
+    --ag-color-neutral-fill-normal: var(--ag-color-neutral-90);
+    --ag-color-neutral-fill-loud: var(--ag-color-neutral-20);
+    --ag-color-neutral-border-quiet: var(--ag-color-neutral-80);
+    --ag-color-neutral-border-normal: var(--ag-color-neutral-70);
+    --ag-color-neutral-border-loud: var(--ag-color-neutral-50);
+    --ag-color-neutral-on-quiet: var(--ag-color-neutral-50);
+    --ag-color-neutral-on-normal: var(--ag-color-neutral-30);
+    --ag-color-neutral-on-loud: white;
+
+    /* Typography — Cabin Sketch reads as hand-drawn on a sail chart,
+       echoing the site's own hand-inked sketch-card borders instead
+       of repeating typewriter (paper) or grotesk (lamplight/horde). */
+    --ag-font-family-heading: 'Cabin Sketch', cursive;
+    --ag-font-family-code: 'JetBrains Mono', 'Courier New', monospace;
+    --ag-font-weight-bold: 700;
+
+    /* Shape — the actual "dramatic shift": every other theme keeps
+       paper's sharp ink-sketch squares and only retints. Wayfinder
+       goes soft and chunky instead — sanded driftwood, not cut paper. */
+    --ag-border-radius-scale: 3;
+    --ag-border-width-scale: 2;
+    --ag-shadow-offset-x-scale: 1.4;
+    --ag-shadow-offset-y-scale: 1.4;
+  }
 }
 
 /* ── Blog alias layer ─────────────────────────────────────────

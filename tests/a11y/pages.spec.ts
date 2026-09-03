@@ -6,6 +6,12 @@ const pages = [
   { name: 'blog', path: '/blog' },
   { name: 'about', path: '/about' },
   { name: 'tags', path: '/tags' },
+  // A real post, specifically one with code blocks — individual posts were
+  // never covered here before, which is how a real sitewide bug (Shiki's
+  // github-dark theme colored comments at 3.04:1, under every post's code
+  // samples, in every site theme) went unnoticed until this post's own
+  // code blocks first got scanned.
+  { name: 'post with code blocks', path: '/posts/post-10-design-tokens-deep-dive' },
 ];
 
 // Keep in sync with THEMES in Header.astro. Scanning every theme, not just

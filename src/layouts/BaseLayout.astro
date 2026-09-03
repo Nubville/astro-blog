@@ -36,6 +36,15 @@ interface Props {
    * markdown heading), so the sidebar name stays an 'h2' there.
    */
   heroNameHeading?: 'h1' | 'h2';
+  /**
+   * Hides the profile card + character sheet below the 1400px three-column
+   * breakpoint, so a mobile visitor lands on the actual content instead of
+   * scrolling past the author card first. Post pages pass this — the
+   * sidebar there is about the site, not that particular page, and post
+   * readers land here from a link wanting the post. Above 1400px nothing
+   * changes: same sticky sidebar every other page has.
+   */
+  compactHeroOnMobile?: boolean;
 }
 
 const {
@@ -47,6 +56,7 @@ const {
   type = 'website',
   pubDate,
   heroNameHeading = 'h2',
+  compactHeroOnMobile = false,
 } = Astro.props;
 
 // Titles read "Post name — Andrew Garman — Dev Blog", except the homepage,
@@ -133,10 +143,14 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
         <div class="content-container">
           <main>
             <aside class="hero-section" aria-label="Author profile and site navigation">
-              <Hero nameHeading={heroNameHeading} />
-              <CharacterSheet />
-              <slot name="sidebar-extra" />
-              <TagNav />
+              <div
+                class:list={['hero-block', { 'hero-block--compact-mobile': compactHeroOnMobile }]}
+              >
+                <Hero nameHeading={heroNameHeading} />
+                <CharacterSheet />
+                <slot name="sidebar-extra" />
+                <TagNav />
+              </div>
             </aside>
 
             {

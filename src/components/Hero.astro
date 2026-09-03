@@ -12,13 +12,28 @@ const { nameHeading: NameTag = 'h1' } = Astro.props;
 
       <div class="profile-body">
         <div class="portrait">
-          <img
-            src="/images/drew_avatar.jpg"
-            alt="Andrew Garman — a generated illustration of the author as a css wizard with a mix of coding and dungeon master dice"
-            width="240"
-            height="320"
-            loading="eager"
-          />
+          <picture>
+            <!-- Rendered width isn't monotonic with viewport — this card's
+                 layout is container-query-driven (sketch-card breakpoints
+                 at 420px/900px), not viewport-driven, and sizes can only
+                 express the latter. These three tiers are measured, not
+                 guessed: ~200px below 420px viewport width, ~750px in the
+                 420-1399px single-column range, back down to ~300px once
+                 the 1400px three-column spread kicks in. -->
+            <source
+              type="image/webp"
+              srcset="/images/drew_avatar-300.webp 300w, /images/drew_avatar-600.webp 600w, /images/drew_avatar-900.webp 900w, /images/drew_avatar-1350.webp 1350w"
+              sizes="(max-width: 419px) 200px, (min-width: 1400px) 300px, 750px"
+            />
+            <img
+              src="/images/drew_avatar-fallback.jpg"
+              alt="Andrew Garman — a generated illustration of the author as a css wizard with a mix of coding and dungeon master dice"
+              width="900"
+              height="600"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </picture>
         </div>
 
         <div class="profile-info">

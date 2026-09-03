@@ -2,7 +2,7 @@
   "title": "Andrew Garman — Dev Blog",
   "author": "Andrew Garman",
   "description": "Senior front-end developer writing about accessible design systems and web components — plus D&D props, ESP32 hardware, and learning in public.",
-  "defaultSocialImage": "/images/drew_avatar.jpg",
+  "defaultSocialImage": "/images/drew_avatar-fallback.jpg",
   "defaultSocialImageAlt": "Andrew Garman",
   "links": {
     "linkedin": "https://www.linkedin.com/in/drew-garman",

@@ -3,6 +3,28 @@ interface Props {
   nameHeading?: 'h1' | 'h2';
 }
 const { nameHeading: NameTag = 'h1' } = Astro.props;
+
+interface MarkdownPost {
+  frontmatter: { tags?: string[] };
+}
+
+// A chip links to its tag archive only when that tag actually has posts —
+// a visitor read these as clickable, so they should be, but linking a tag
+// with nothing behind it would 404. Fishing has no posts yet and renders
+// as plain text until it does, at which point it becomes a link on its own
+// with no code change.
+const allPosts = Object.values(
+  import.meta.glob<MarkdownPost>('../pages/posts/*.md', { eager: true })
+);
+const tagsWithPosts = new Set(allPosts.flatMap((post) => post.frontmatter.tags ?? []));
+
+const interests = [
+  { icon: '⌨', label: 'Code', tag: 'frontend', modifier: 'code' },
+  { icon: '⚔', label: 'D&D', tag: 'dnd', modifier: 'dnd' },
+  { icon: '🖨', label: '3D Print', tag: '3d-print', modifier: 'make' },
+  { icon: '🎣', label: 'Fishing', tag: 'fishing', modifier: 'fish' },
+  { icon: '🤖', label: 'IoT', tag: 'esp32', modifier: 'kayak' },
+].map((i) => ({ ...i, linked: tagsWithPosts.has(i.tag) }));
 ---
 
 <section class="hero" aria-label="Site introduction">
@@ -41,11 +63,21 @@ const { nameHeading: NameTag = 'h1' } = Astro.props;
           <p class="profile-role">Senior Front-End Developer</p>
 
           <ul class="profile-tags" role="list" aria-label="Interests">
-            <li class="tag tag--code">⌨ Code</li>
-            <li class="tag tag--dnd">⚔ D&amp;D</li>
-            <li class="tag tag--make">🖨 3D Print</li>
-            <li class="tag tag--fish">🎣 Fishing</li>
-            <li class="tag tag--kayak">🤖 IoT</li>
+            {
+              interests.map(({ icon, label, tag, modifier, linked }) => (
+                <li>
+                  {linked ? (
+                    <a class={`tag tag--${modifier}`} href={`/tags/${tag}`}>
+                      <span aria-hidden="true">{icon}</span> {label}
+                    </a>
+                  ) : (
+                    <span class={`tag tag--${modifier}`}>
+                      <span aria-hidden="true">{icon}</span> {label}
+                    </span>
+                  )}
+                </li>
+              ))
+            }
           </ul>
         </div>
       </div>
@@ -151,11 +183,30 @@ const { nameHeading: NameTag = 'h1' } = Astro.props;
     border: 1px solid var(--pencil);
     border-radius: 2px;
     color: var(--ink-faint);
+    /* These are <a>/<span> now rather than <li>, so they need to generate a
+       block box for the padding and border to lay out. */
+    display: inline-block;
     font-family: var(--font-mono);
     font-size: var(--ag-font-size-xs);
     letter-spacing: 0.06em;
     padding: var(--ag-space-2xs) var(--ag-space-xs);
+    text-decoration: none;
     text-transform: uppercase;
+  }
+
+  /* Only chips with a tag behind them are links; the rest are plain spans.
+     Hover underlines rather than swapping the background: each chip carries
+     its own identity color, and a new background would create four new
+     color pairings to re-verify for contrast across all four themes for no
+     real gain. The focus ring matches the one every other link on the site
+     uses. */
+  a.tag:hover {
+    text-decoration: underline;
+  }
+
+  a.tag:focus-visible {
+    outline: 2px solid var(--brand-1);
+    outline-offset: 2px;
   }
 
   /* Dark themes only: same reasoning as sketch-card in global.css —

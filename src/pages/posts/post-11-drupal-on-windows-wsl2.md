@@ -83,7 +83,7 @@ lando drush uli
 
 That last command hands back a one-time login link. Pasting it into a plain Windows Chrome window loaded the full Drupal 11 admin dashboard over **trusted HTTPS** — `https://drupal-test.lndo.site`, no certificate warning. That padlock was its own small proof point: Lando's local certificate authority had installed itself into _Windows'_ own trust store, not just Linux's, so a browser running entirely outside WSL2 trusted a cert generated entirely inside it.
 
-<img src="/images/compressed/post11/drush-uli-password-reset.webp" alt="The Drupal account edit form reached through the one-time login link, showing the status message 'You have used a one-time login link. You can set your new password now.' above the email, username and password fields" width="1600" height="876" loading="lazy" />
+<img src="/images/compressed/post11/drush-uli-password-reset.webp" alt="The Drupal account edit form reached through the one-time login link, showing the status message 'You have used a one-time login link. You can set your new password now.' above the email, username and password fields" width="1600" height="845" loading="lazy" />
 
 ## The honest take
 

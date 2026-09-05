@@ -7,8 +7,8 @@ author: 'Andrew Garman'
 image:
   url: '/images/compressed/post8/full-stack-fit-test.webp'
   alt: 'NeoPixel ring mounted directly on the stepper motor shaft, sitting inside the cardboard mockup housing with the full electronics stack wired in around it'
-  width: 4284
-  height: 5712
+  width: 1600
+  height: 2133
 tags: ['dnd', 'esp32', 'maker', 'hardware', 'props', 'cad', 'fusion-360', '3d-print']
 type: spellbook
 ---
@@ -27,11 +27,11 @@ So this session isn't the CAD session. This is the session where I finally stopp
 
 Every part of the stack got measured with actual digital calipers, not eyeballed off a datasheet PDF.
 
-<img src="/images/compressed/post8/speaker-caliper-measurement.webp" alt="Digital calipers measuring the speaker enclosure at 69.6mm, resting on a notebook page with a hand-drawn speaker sketch" width="5712" height="4284" loading="lazy" />
+<img src="/images/compressed/post8/speaker-caliper-measurement.webp" alt="Digital calipers measuring the speaker enclosure at 69.6mm, resting on a notebook page with a hand-drawn speaker sketch" width="1600" height="1200" loading="lazy" />
 
 The speaker turned out to be the awkward one — it's not a simple rectangle, it's a trapezoidal bracket that widens from a 31.5mm base to a 69.5mm face, 63mm deep, with mounting ears that add another 16.3mm on each side. Every other part was comparatively easy: the ESP32 HUZZAH32 is 51mm × 43.5mm × 23mm with the header pins on; the stepper driver board is a clean 34mm × 30mm × 10mm; the NeoPixel ring is 66mm outer diameter, 52.3mm inner, 3.2mm thick; the stepper motor itself is 42mm across with a 35mm mounting bolt circle and 31mm of body height.
 
-<img src="/images/compressed/post8/component-spec-sheet.webp" alt="Full notebook page of hand-drawn component measurements: speaker, SD card, ESP32, stepper driver board, stepper motor, and NeoPixel ring, each with caliper readings in millimeters" width="4284" height="5712" loading="lazy" />
+<img src="/images/compressed/post8/component-spec-sheet.webp" alt="Full notebook page of hand-drawn component measurements: speaker, SD card, ESP32, stepper driver board, stepper motor, and NeoPixel ring, each with caliper readings in millimeters" width="1600" height="2133" loading="lazy" />
 
 Writing all of it down in one place, to scale, was the first time the whole stack existed as numbers instead of a pile of parts on my desk.
 
@@ -49,7 +49,7 @@ The chamfers aren't decorative. A plain 120mm square is bigger than it needs to 
 
 Before committing to any of those numbers, I rebuilt the entire stack on the breadboard one more time — ESP32, NeoPixel ring, stepper driver and motor, DFPlayer, speaker — everything live and wired, sitting next to the foam case it all ships in.
 
-<img src="/images/compressed/post8/full-electronics-stack.webp" alt="Complete electronics stack wired on a breadboard: ESP32, NeoPixel ring, stepper driver and motor, DFPlayer, and speaker, sitting next to a foam tool case" width="5712" height="4284" loading="lazy" />
+<img src="/images/compressed/post8/full-electronics-stack.webp" alt="Complete electronics stack wired on a breadboard: ESP32, NeoPixel ring, stepper driver and motor, DFPlayer, and speaker, sitting next to a foam tool case" width="1600" height="1200" loading="lazy" />
 
 This wasn't strictly necessary — I already had all these measurements from the soldering session. But designing a housing around parts I'm only remembering, instead of parts I'm looking at, felt like exactly the kind of mistake that costs a wasted print. Five minutes of re-wiring against zero regret later.
 
@@ -59,27 +59,27 @@ Here's the part I actually want to talk about, because it's the thing that broke
 
 First, a test fit for the speaker cutout — marked directly on a cardboard strip at the same 27mm / 80mm / 35mm intervals from the sketch, then pressed the actual speaker into it to check the tolerance by feel.
 
-<img src="/images/compressed/post8/speaker-cutout-test-fit.webp" alt="The speaker component test-fitted against cutout marks drawn in red marker on a cardboard strip" width="4032" height="3024" loading="lazy" />
+<img src="/images/compressed/post8/speaker-cutout-test-fit.webp" alt="The speaker component test-fitted against cutout marks drawn in red marker on a cardboard strip" width="1600" height="1200" loading="lazy" />
 
 Then the whole octagon, taped together at the chamfered corners and set directly on top of the pencil sketch to check that the physical object actually matched the drawing.
 
-<img src="/images/compressed/post8/cardboard-mockup-vs-sketch.webp" alt="Assembled cardboard mockup of the octagonal housing sitting directly on top of the pencil footprint sketch, dimensions matching" width="4284" height="5712" loading="lazy" />
+<img src="/images/compressed/post8/cardboard-mockup-vs-sketch.webp" alt="Assembled cardboard mockup of the octagonal housing sitting directly on top of the pencil footprint sketch, dimensions matching" width="1600" height="2133" loading="lazy" />
 
 It did. Genuinely satisfying, in a way that's out of proportion to how simple the test was — tape a box together, put it on the drawing, see if the corners line up. But it's the first physical evidence in this whole project that the numbers on paper describe something that can actually exist in three dimensions.
 
 A cross-brace strip inside gives the stepper motor something to mount to, sized and positioned straight off the sketch:
 
-<img src="/images/compressed/post8/cardboard-mockup-top-view.webp" alt="Top-down view of the taped cardboard mockup showing an internal cross-brace strip for mounting the stepper motor" width="5712" height="4284" loading="lazy" />
+<img src="/images/compressed/post8/cardboard-mockup-top-view.webp" alt="Top-down view of the taped cardboard mockup showing an internal cross-brace strip for mounting the stepper motor" width="1600" height="1200" loading="lazy" />
 
 ## Everything, At Once
 
 With the brace in place, the stepper motor got mounted for real, and the rest of the stack staged around it to see how much room was actually left over.
 
-<img src="/images/compressed/post8/stepper-motor-mounted-in-mockup.webp" alt="Stepper motor mounted on the cardboard cross-brace inside the mockup housing, with the breadboard electronics staged alongside" width="5712" height="4284" loading="lazy" />
+<img src="/images/compressed/post8/stepper-motor-mounted-in-mockup.webp" alt="Stepper motor mounted on the cardboard cross-brace inside the mockup housing, with the breadboard electronics staged alongside" width="1600" height="1200" loading="lazy" />
 
 Then the last piece: the NeoPixel ring, slid directly onto the stepper motor's shaft, sitting inside the mockup with every wire still connected back to the breadboard.
 
-<img src="/images/compressed/post8/full-stack-fit-test.webp" alt="NeoPixel ring mounted on the stepper motor shaft, sitting inside the cardboard mockup housing with the full electronics stack wired in around it" width="4284" height="5712" loading="lazy" />
+<img src="/images/compressed/post8/full-stack-fit-test.webp" alt="NeoPixel ring mounted on the stepper motor shaft, sitting inside the cardboard mockup housing with the full electronics stack wired in around it" width="1600" height="2133" loading="lazy" />
 
 That's the whole compass. Not glued, not printed, not final — a cardboard box with a motor bolted to a strip of corrugated fiberboard — but every physical relationship in the final part is right there, at true scale, for the first time.
 

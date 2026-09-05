@@ -31,7 +31,7 @@ The tools I had going in:
 - **Weller brass sponge tip cleaner**
 - **Helping hands** — four-arm PCB holder with weighted base
 
-<img src="/images/compressed/post7/photo1.webp" alt="Full soldering workstation: four-arm helping hands, Pinecil V2 iron on the mat, Weller tip cleaner, and the ESP32 breadboard assembly in the background" width="1740" height="1305" loading="lazy" />
+<img src="/images/compressed/post7/photo1.webp" alt="Full soldering workstation: four-arm helping hands, Pinecil V2 iron on the mat, Weller tip cleaner, and the ESP32 breadboard assembly in the background" width="1600" height="1200" loading="lazy" />
 
 The Kester 44 is genuinely good solder. 63/37 is a eutectic alloy — it goes from solid to fully liquid at exactly 183°C with no mushy in-between phase, which makes it much more forgiving to learn on than lead-free. A lot of hobbyists use it for years.
 

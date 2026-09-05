@@ -98,8 +98,14 @@ const recentPosts = Object.values(postModules)
   </article>
 </BaseLayout>
 <style>
+  /* No grid-area here on purpose. paper.css already assigns every direct
+     child of main to the "posts" area inside the 1400px container query,
+     which is the only place grid-template-areas exists. Declaring it
+     unconditionally used to be inert because main was display:block below
+     1200px, but main is a grid at every width now — so an area name with
+     no matching template made the browser invent implicit tracks and
+     collapse the sidebar to 4px on mobile. */
   .post-article {
-    grid-area: posts;
     max-width: 72ch;
     width: 100%;
     min-width: 0;

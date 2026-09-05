@@ -13,8 +13,10 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test:a11y": "playwright test",
-    "test:a11y:ui": "playwright test --ui"
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:a11y": "playwright test tests/a11y",
+    "test:layout": "playwright test tests/layout"
   },
   "lint-staged": {
     "*.{js,ts,mjs}": [

@@ -131,16 +131,21 @@ body::before {
     grid-area: posts;
   }
 
+  /* Neither side column sticks. Both used to, but a sticky grid item can
+     only travel inside its own grid area, and with all three columns on
+     one row that area is only as tall as the tallest column — which is the
+     hero sidebar. That left hero with ~64px of travel (so it never
+     visibly stuck at all) while traits had ~1140px, i.e. the two sides
+     behaved differently for reasons nobody could see. There's enough
+     content in both columns that pinning them wasn't buying much anyway,
+     so they scroll with the page and match each other. align-items: start
+     stays — that keeps the columns top-aligned rather than stretched. */
   .content-col main > .hero-section {
     grid-area: hero;
-    position: sticky;
-    top: 5rem;
   }
 
   .content-col main > .traits-col {
     grid-area: traits;
-    position: sticky;
-    top: 5rem;
   }
 
   /* Undoes the hiding above — display: contents rather than block so

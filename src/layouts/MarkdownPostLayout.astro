@@ -30,9 +30,12 @@ const recentPosts = Object.values(postModules)
   .filter(
     (p) => p.frontmatter.title !== frontmatter.title && p.frontmatter.type === frontmatter.type
   )
-  .sort(
-    (a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()
-  )
+  .sort((a, b) => {
+    const byDate =
+      new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime();
+    // Same tiebreak as index.astro/blog.astro — see the comment there.
+    return byDate !== 0 ? byDate : b.url.localeCompare(a.url);
+  })
   .slice(0, 4)
   .map((p) => ({ title: p.frontmatter.title, pubDate: p.frontmatter.pubDate, url: p.url }));
 ---

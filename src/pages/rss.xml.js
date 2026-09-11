@@ -13,7 +13,11 @@ export async function GET(context) {
       description: post.frontmatter.description,
       link: post.url,
     }))
-    .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+    .sort((a, b) => {
+      const byDate = new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime();
+      // Same tiebreak as index.astro/blog.astro — see the comment there.
+      return byDate !== 0 ? byDate : b.link.localeCompare(a.link);
+    });
 
   return rss({
     title: SITE_TITLE,

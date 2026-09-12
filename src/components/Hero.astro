@@ -40,12 +40,13 @@ const interests = [
                  at 420px/900px), not viewport-driven, and sizes can only
                  express the latter. These three tiers are measured, not
                  guessed: ~200px below 420px viewport width, ~750px in the
-                 420-1399px single-column range, back down to ~300px once
-                 the 1400px three-column spread kicks in. -->
+                 420-991px single-column range, back down to ~300px once
+                 the 992px two-column layout (and its narrower hero-section
+                 grid track) kicks in. -->
             <source
               type="image/webp"
               srcset="/images/drew_avatar-300.webp 300w, /images/drew_avatar-600.webp 600w, /images/drew_avatar-900.webp 900w, /images/drew_avatar-1350.webp 1350w"
-              sizes="(max-width: 419px) 200px, (min-width: 1400px) 300px, 750px"
+              sizes="(max-width: 419px) 200px, (min-width: 992px) 300px, 750px"
             />
             <img
               src="/images/drew_avatar-fallback.jpg"

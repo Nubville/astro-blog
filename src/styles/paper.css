@@ -87,15 +87,6 @@ body::before {
   padding: 1rem 1.25rem;
 }
 
-@container content-col (min-width: 1200px) {
-  .content-col main {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr;
-    padding: 2rem 2.5rem;
-  }
-}
-
 /* This wrapper exists only to hide/show a group as a unit — it should
    never be a box of its own, or its children would sit outside the
    sidebar Stack's rhythm and butt against each other at 0px. Dissolving
@@ -105,11 +96,11 @@ body::before {
   display: contents;
 }
 
-/* Below the three-column breakpoint, post pages skip straight to Hero
+/* Below the two-column breakpoint, post pages skip straight to Hero
    then the article — this hides the character sheet, related posts, and
    browse-tags, not Hero itself (Hero sits outside this wrapper in
    BaseLayout) — see compactHeroOnMobile there. Undone below, inside the
-   1400px container query — must come before it in source order: equal
+   992px container query — must come before it in source order: equal
    specificity means the later rule wins regardless of which one sits in
    a conditional, so a plain rule placed after this block would silently
    beat the container query's override even when it matches. */
@@ -117,13 +108,36 @@ body::before {
   display: none;
 }
 
-/* Step 5: Three-column spread at desktop — hero left, posts center, traits right */
-@container content-col (min-width: 1400px) {
+/* Step 3: Two columns kick in at 992px viewport width — hero left, content
+   right. Below this everything stacks single-column; a real sidebar column
+   needs more room than that to avoid squeezing the content column too
+   narrow to be worth it. Most pages only have one thing on the right
+   (posts), but the homepage also has .traits-col — the :has() below
+   promotes that to its own row in the same right-hand column rather than
+   a third column, since a hero-spans-two-rows shape only makes sense when
+   there's a second thing to put in that second row. Pages without
+   .traits-col get the single-row template, so there's no empty named area
+   for the grid to size a phantom row for.
+
+   The query itself is 938px, not 992px: content-col is the 1fr sibling of
+   .site-layout's var(--margin-width) column (54px), so its own inline-size
+   is always 54px narrower than the viewport — 938px here is what makes the
+   visible break actually land at 992px viewport width, matching the
+   992px viewport breakpoint MarkdownPostLayout already uses for
+   .post-article's margin. */
+@container content-col (min-width: 938px) {
   .content-col main {
     align-items: start;
-    gap: 3rem;
-    grid-template-areas: 'hero posts traits';
-    grid-template-columns: 20% 1fr 20%;
+    gap: 2rem;
+    grid-template-areas: 'hero posts';
+    grid-template-columns: 25% 1fr;
+    padding: 2rem 2.5rem;
+  }
+
+  .content-col main:has(> .traits-col) {
+    grid-template-areas:
+      'hero posts'
+      'hero traits';
   }
 
   /* Default: all direct children land in the posts column */
@@ -132,14 +146,14 @@ body::before {
   }
 
   /* Neither side column sticks. Both used to, but a sticky grid item can
-     only travel inside its own grid area, and with all three columns on
-     one row that area is only as tall as the tallest column — which is the
-     hero sidebar. That left hero with ~64px of travel (so it never
-     visibly stuck at all) while traits had ~1140px, i.e. the two sides
-     behaved differently for reasons nobody could see. There's enough
-     content in both columns that pinning them wasn't buying much anyway,
-     so they scroll with the page and match each other. align-items: start
-     stays — that keeps the columns top-aligned rather than stretched. */
+     only travel inside its own grid area, and with hero spanning the full
+     column height that area is only as tall as hero's own content — which
+     left hero with ~64px of travel (so it never visibly stuck at all)
+     while traits had ~1140px, i.e. the two sides behaved differently for
+     reasons nobody could see. There's enough content in both columns that
+     pinning them wasn't buying much anyway, so they scroll with the page
+     and match each other. align-items: start stays — that keeps the
+     columns top-aligned rather than stretched. */
   .content-col main > .hero-section {
     grid-area: hero;
   }
@@ -154,6 +168,25 @@ body::before {
      didn't exist. */
   .hero-block--compact-mobile {
     display: contents;
+  }
+}
+
+/* Step 5: Three-column spread at desktop — hero left, posts center, traits
+   right. align-items and the grid-area assignments from the 992px query
+   above still apply and aren't redeclared — but grid-template-areas has to
+   be, and to both selectors: :has(> .traits-col) (0,2,1) outranks the
+   plain .content-col main (0,1,1) it would otherwise just override by
+   source order, so the homepage would stay on the two-row area forever
+   without an equally-specific override here too. Three columns fit hero,
+   posts, and traits side by side either way, so both selectors converge
+   on the same single-row template — a page with no .traits-col just
+   leaves that column empty, same as it always has above 1400px. */
+@container content-col (min-width: 1400px) {
+  .content-col main,
+  .content-col main:has(> .traits-col) {
+    gap: 3rem;
+    grid-template-areas: 'hero posts traits';
+    grid-template-columns: 20% 1fr 20%;
   }
 }
 

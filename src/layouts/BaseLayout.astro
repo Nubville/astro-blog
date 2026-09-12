@@ -38,16 +38,24 @@ interface Props {
    */
   heroNameHeading?: 'h1' | 'h2';
   /**
-   * Below the 1400px three-column breakpoint, hides everything in the
+   * Below the 992px two-column breakpoint, hides everything in the
    * sidebar except the profile card itself — character sheet, related
    * posts, browse-tags — so a mobile visitor sees Hero then the article
    * directly under it, instead of scrolling past several screens of
-   * content about the site first. Post pages pass this. Above 1400px
-   * nothing changes: same sticky sidebar every other page has (on post
-   * pages specifically, that sidebar is really just hero + article
-   * already, since posts don't populate a .traits-col).
+   * content about the site first. Post pages pass this. Above 992px
+   * nothing changes: same sidebar every other page has (on post pages
+   * specifically, that sidebar is really just hero + article already,
+   * since posts don't populate a .traits-col).
    */
   compactHeroOnMobile?: boolean;
+  /**
+   * Renders the browse-tags nav in the sidebar. Only post pages set this —
+   * Home/Blog/About/Tags already have their own way to reach tags (the
+   * hero chips, the blog list, or the /tags index itself), so showing the
+   * full tag browser there was redundant; on a post it's the one place
+   * without another path to "what else is tagged like this."
+   */
+  showTagNav?: boolean;
 }
 
 const {
@@ -60,6 +68,7 @@ const {
   pubDate,
   heroNameHeading = 'h2',
   compactHeroOnMobile = false,
+  showTagNav = false,
 } = Astro.props;
 
 // Titles read "Post name — Andrew Garman — Dev Blog", except the homepage,
@@ -157,7 +166,7 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
               >
                 <CharacterSheet />
                 <slot name="sidebar-extra" />
-                <TagNav />
+                {showTagNav && <TagNav />}
               </div>
             </Stack>
 

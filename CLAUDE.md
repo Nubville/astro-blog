@@ -56,11 +56,11 @@ Web Awesome is **not** used for layout or structure. The `wa-` prefix components
 
 ### Named containers
 
-| Container name | Element        | Purpose                                              |
-| -------------- | -------------- | ---------------------------------------------------- |
-| `content-col`  | `.content-col` | Drives two-panel ultrawide spread at 1400px+         |
-| `main-canvas`  | `main`         | Drives `.posts-grid` column count                    |
-| `sketch-card`  | `sketch-card`  | Drives internal card layout (portrait/text stacking) |
+| Container name | Element        | Purpose                                                   |
+| -------------- | -------------- | --------------------------------------------------------- |
+| `content-col`  | `.content-col` | Drives two-panel spread at 992px+, three-panel at 1400px+ |
+| `main-canvas`  | `main`         | Drives `.posts-grid` column count                         |
+| `sketch-card`  | `sketch-card`  | Drives internal card layout (portrait/text stacking)      |
 
 ## Design Tokens
 

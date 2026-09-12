@@ -6,7 +6,7 @@ import { expect, test } from '@playwright/test';
  * A regression this exists to catch: MarkdownPostLayout declared
  * `grid-area: posts` unconditionally, which was inert while main was
  * display:block below 1200px. Once main became a grid at every width, that
- * area name — with no matching grid-template-areas outside the 1400px
+ * area name — with no matching grid-template-areas below the 992px
  * container query — made the browser invent implicit tracks, collapsing the
  * sidebar to 4px on phones. It shipped because the change was verified by
  * measuring *gaps between* children, never their widths.

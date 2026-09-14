@@ -87,6 +87,7 @@ collections:
             fields:
               - { name: linkedin, label: 'LinkedIn URL', widget: string }
               - { name: github, label: 'GitHub URL', widget: string }
+              - { name: bluesky, label: 'Bluesky URL', widget: string }
 
       - name: resume
         label: 'Resume (About Page)'

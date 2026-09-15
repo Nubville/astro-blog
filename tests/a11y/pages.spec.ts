@@ -12,6 +12,11 @@ const pages = [
   // samples, in every site theme) went unnoticed until this post's own
   // code blocks first got scanned.
   { name: 'post with code blocks', path: '/posts/post-10-design-tokens-deep-dive' },
+  // Same reasoning as above: CharacterStatBlock is new markup (dl/dt/dd
+  // detail lines, a second ability-score grid alongside the sidebar's own)
+  // that no other post exercises, so it needs its own scan rather than
+  // relying on the general pages above to happen to cover it.
+  { name: 'post with a character stat block', path: '/posts/post-14-fizzwick-sparkmender' },
 ];
 
 // Keep in sync with THEMES in Header.astro. Scanning every theme, not just

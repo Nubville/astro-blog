@@ -1,0 +1,449 @@
+---
+// Generic, reusable character stat block for dropping a D&D (or any TTRPG)
+// character sheet into a post — same dark-bordered, monospace-labeled card
+// language as CharacterSheet.astro (the personal "dev stats" card in the
+// site's own sidebar), but driven entirely by props instead of one hardcoded
+// character. Meant to be imported into an .mdx post, not .md — plain
+// Markdown pages can't import/use Astro components in their body.
+interface AbilityScore {
+  abbr: string;
+  score: number;
+}
+
+interface DetailLine {
+  label: string;
+  /** Multiple values render as separate lines under the same label — e.g.
+      two personality Traits, or a Skills line that's naturally a list. */
+  value: string | string[];
+}
+
+interface Props {
+  name: string;
+  /** "Born ___" / "formerly ___" — shown as a small note under the name. */
+  formerName?: string;
+  classLabel: string;
+  /** e.g. "formerly Barbarian (Path of the Berserker)" */
+  formerClass?: string;
+  level: number;
+  race: string;
+  alignment: string;
+  background: string;
+  /** Small at-a-glance row — AC, Proficiency Bonus, Spell Save DC, etc. */
+  quickFacts?: DetailLine[];
+  abilities: AbilityScore[];
+  proficiencies: DetailLine[];
+  /** Omit entirely for a non-caster. */
+  spells?: DetailLine[];
+  /** Traits / Ideal / Bond / Flaw — each is its own labeled line rather
+      than one paragraph, since a real character sheet has four. */
+  personality: DetailLine[];
+  equipment: string[];
+}
+
+const {
+  name,
+  formerName,
+  classLabel,
+  formerClass,
+  level,
+  race,
+  alignment,
+  background,
+  quickFacts,
+  abilities,
+  proficiencies,
+  spells,
+  personality,
+  equipment,
+} = Astro.props;
+
+function mod(score: number): string {
+  const m = Math.floor((score - 10) / 2);
+  return m >= 0 ? `+${m}` : `${m}`;
+}
+
+function lines(value: string | string[]): string[] {
+  return Array.isArray(value) ? value : [value];
+}
+---
+
+<section class="char-stat-block" aria-label={`Character sheet — ${name}`}>
+  <div class="sheet-name">
+    <p class="name-value">{name}</p>
+    {formerName && <p class="name-former">born {formerName}</p>}
+  </div>
+
+  <div class="sheet-header">
+    <div class="field-row">
+      <div class="field field--grow">
+        <span class="field-value">{classLabel}</span>
+        <span class="field-label">Class</span>
+      </div>
+      <div class="field field--shrink">
+        <span class="field-value">{level}</span>
+        <span class="field-label">Level</span>
+      </div>
+    </div>
+    {formerClass && <p class="field-note">formerly {formerClass}</p>}
+    <div class="field-row">
+      <div class="field field--grow">
+        <span class="field-value">{race}</span>
+        <span class="field-label">Race</span>
+      </div>
+      <div class="field field--grow">
+        <span class="field-value">{alignment}</span>
+        <span class="field-label">Alignment</span>
+      </div>
+    </div>
+    <div class="field field--full">
+      <span class="field-value">{background}</span>
+      <span class="field-label">Background</span>
+    </div>
+    {
+      quickFacts && quickFacts.length > 0 && (
+        <div class="field-row field-row--wrap">
+          {quickFacts.map((f) => (
+            <div class="field field--grow">
+              <span class="field-value">{lines(f.value).join(', ')}</span>
+              <span class="field-label">{f.label}</span>
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+
+  <div class="sheet-section">
+    <ul class="abilities" role="list" aria-label="Ability scores">
+      {
+        abilities.map((a) => (
+          <li class="ability">
+            <span class="ability-name">{a.abbr}</span>
+            <div class="ability-score" aria-label={`${a.abbr} score`}>
+              {a.score}
+            </div>
+            <div class="ability-mod" aria-label="modifier">
+              {mod(a.score)}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="section-label">Ability Scores</p>
+  </div>
+
+  <div class="sheet-section">
+    <dl class="detail-lines">
+      {
+        proficiencies.map((p) => (
+          <div class="detail-line">
+            <dt>{p.label}</dt>
+            <dd>{lines(p.value).join(' · ')}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="section-label">Proficiencies &amp; Skills</p>
+  </div>
+
+  {
+    spells && spells.length > 0 && (
+      <div class="sheet-section">
+        <dl class="detail-lines">
+          {spells.map((s) => (
+            <div class="detail-line">
+              <dt>{s.label}</dt>
+              <dd>{lines(s.value).join(' · ')}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="section-label">Spells &amp; Divine Features</p>
+      </div>
+    )
+  }
+
+  <div class="sheet-section">
+    <dl class="detail-lines">
+      {
+        personality.map((p) => (
+          <div class="detail-line">
+            <dt>{p.label}</dt>
+            {lines(p.value).map((line) => (
+              <dd class="trait-text">{line}</dd>
+            ))}
+          </div>
+        ))
+      }
+    </dl>
+    <p class="section-label">Personality</p>
+  </div>
+
+  <div class="sheet-section sheet-section--last">
+    <ul class="equipment" role="list">
+      {equipment.map((item) => <li class="equipment-item">{item}</li>)}
+    </ul>
+    <p class="section-label">Equipment</p>
+  </div>
+</section>
+
+<style>
+  /* ── Outer shell ──────────────────────────────────── */
+  .char-stat-block {
+    border: 1.5px solid var(--ink);
+    margin: 2rem 0;
+  }
+
+  /* Dark themes only — see the matching comment in global.css on
+     sketch-card for why. */
+  :global([data-theme='lamplight']) .char-stat-block,
+  :global([data-theme='horde']) .char-stat-block {
+    background: var(--surface-raised);
+  }
+
+  /* ── Name ─────────────────────────────────────────── */
+  .sheet-name {
+    background: var(--paper-dark);
+    border-bottom: 1.5px solid var(--ink);
+    padding: var(--ag-space-s) var(--ag-space-s) var(--ag-space-xs);
+  }
+
+  .name-value {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-xl);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .name-former {
+    color: var(--ink-faint);
+    font-family: var(--font-annotation);
+    font-size: var(--ag-font-size-m);
+    margin: var(--ag-space-3xs) 0 0;
+  }
+
+  /* ── Header fields ────────────────────────────────── */
+  .sheet-header {
+    background: var(--paper-dark);
+    border-bottom: 1.5px solid var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .field-row {
+    border-bottom: 1px solid var(--pencil);
+    display: flex;
+  }
+
+  .field-row--wrap {
+    flex-wrap: wrap;
+  }
+
+  .field-row:last-child {
+    border-bottom: none;
+  }
+
+  .field {
+    border-right: 1px solid var(--pencil);
+    display: flex;
+    flex-direction: column-reverse; /* label below value, like the real sheet */
+    gap: 0;
+    padding: var(--ag-space-2xs) var(--ag-space-xs);
+  }
+
+  .field:last-child {
+    border-right: none;
+  }
+
+  .field--grow {
+    flex: 1;
+    min-width: 8rem;
+  }
+  .field--shrink {
+    flex-shrink: 1;
+    width: 3rem;
+  }
+  .field--full {
+    border-top: 1px solid var(--pencil);
+    width: 100%;
+  }
+
+  .field-value {
+    color: var(--ink);
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-s);
+    line-height: 1.2;
+    min-height: 1.2em;
+  }
+
+  .field-label {
+    color: var(--ink-faint);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-3xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* e.g. "formerly Barbarian (Path of the Berserker)" — sits between the
+     class/level row and the race/alignment row, so it reads as an aside on
+     the class field without needing its own bordered cell. */
+  .field-note {
+    border-top: 1px solid var(--pencil);
+    color: var(--ink-faint);
+    font-family: var(--font-annotation);
+    font-size: var(--ag-font-size-s);
+    margin: 0;
+    padding: var(--ag-space-3xs) var(--ag-space-xs);
+  }
+
+  /* ── Sections ─────────────────────────────────────── */
+  .sheet-section {
+    border-bottom: 1.5px solid var(--ink);
+    padding: var(--ag-space-s) var(--ag-space-s) var(--ag-space-2xs);
+  }
+
+  .sheet-section--last {
+    border-bottom: none;
+  }
+
+  /* section label sits at the bottom, centered — like the PDF */
+  .section-label {
+    border-top: 1px solid var(--pencil);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-3xs);
+    letter-spacing: 0.14em;
+    margin: var(--ag-space-xs) 0 0;
+    padding-top: var(--ag-space-2xs);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* ── Ability scores ───────────────────────────────── */
+  .abilities {
+    display: grid;
+    gap: var(--ag-space-xs);
+    grid-template-columns: repeat(6, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ability {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: var(--ag-space-xs);
+    position: relative;
+  }
+
+  .ability-name {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-3xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .ability-score {
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: var(--ag-font-size-xl);
+    line-height: 1.4;
+    padding-block: var(--ag-space-2xs);
+    text-align: center;
+    width: 100%;
+  }
+
+  .ability-mod {
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    bottom: -0.75rem;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-3xs);
+    height: 1.5rem;
+    left: 50%;
+    line-height: 1.5rem;
+    position: absolute;
+    text-align: center;
+    transform: translateX(-50%);
+    width: 1.5rem;
+  }
+
+  /* ── Detail lines (proficiencies / spells / personality) ──────────── */
+  .detail-lines {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ag-space-s);
+    margin: 0;
+  }
+
+  .detail-line {
+    border-bottom: 1px dotted var(--pencil);
+    padding-bottom: var(--ag-space-xs);
+  }
+
+  .detail-line:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .detail-line dt {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-3xs);
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--ag-space-3xs);
+    text-transform: uppercase;
+  }
+
+  .detail-line dd {
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--ag-font-size-s);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .detail-line dd + dd {
+    margin-top: var(--ag-space-2xs);
+  }
+
+  /* Personality lines (Traits/Ideal/Bond/Flaw) read as handwritten
+     annotations, same as the single trait line on the personal dev card. */
+  .detail-line dd.trait-text {
+    font-family: var(--font-annotation);
+    font-size: var(--ag-font-size-m);
+  }
+
+  /* ── Equipment ────────────────────────────────────── */
+  .equipment {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .equipment-item {
+    border-bottom: 1px dotted var(--pencil);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    padding: 1px 0;
+  }
+
+  .equipment-item:last-child {
+    border-bottom: none;
+  }
+</style>

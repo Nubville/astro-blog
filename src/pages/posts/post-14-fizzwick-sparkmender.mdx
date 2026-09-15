@@ -1,0 +1,154 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Fizzwick Sparkmender: Cleric of the Morninglord'
+pubDate: 2026-09-15
+description: 'The origin story of my newest D&D character — a gnome tinkerer turned barbarian turned failed tomb-robber, who died chasing a cursed book and came back changed. Plus a reusable CharacterStatBlock component for dropping any TTRPG sheet into a post.'
+author: 'Andrew Garman'
+image:
+  url: '/images/compressed/post14/fizzwick-cleric-portrait.webp'
+  alt: 'Fizzwick Sparkmender, a rock gnome cleric of Lathander, standing in a sunlit dungeon corridor in ornate armor with a sunburst chestplate, goggles pushed up into his wind-blown hair, looking up toward a shaft of golden light'
+  width: 884
+  height: 714
+tags: ['dnd', 'character', 'backstory', 'cleric']
+type: character
+---
+
+import CharacterStatBlock from '../../components/CharacterStatBlock.astro';
+
+# Fizzwick Sparkmender: Cleric of the Morninglord
+
+I've got a new character, and for once "new character" doesn't mean "rolled up at session zero." Fizzwick has a whole life before this campaign — most of it spent as a barbarian, exactly none of it spent expecting to end up a cleric — and I wanted to actually write that life down instead of summarizing it in a Discord message. So: this is equal parts prequel and reference sheet. If you just want the crunch, the block below has it. If you want to know why a gnome with a warhammer he refuses to swing anymore is currently serving the god of dawn, keep scrolling.
+
+<CharacterStatBlock
+  name="Fizzwick Sparkmender"
+  formerName="Fizzwick Ironwhirl"
+  classLabel="Cleric (Light Domain)"
+  formerClass="Barbarian (Path of the Berserker)"
+  level={4}
+  race="Rock Gnome"
+  alignment="Chaotic Good"
+  background="Artisan"
+  quickFacts={[
+    { label: 'Deity', value: 'Lathander, the Morninglord' },
+    { label: 'Armor Class', value: '17' },
+    { label: 'Proficiency Bonus', value: '+2' },
+    { label: 'Spell Save DC', value: '13' },
+    { label: 'Primary Weapon', value: 'Dagger (Finesse) — +5 to hit, 1d4+3' },
+    { label: 'Vitals', value: `143 yrs old · 3'6" · ~48 lbs · Male` },
+  ]}
+  abilities={[
+    { abbr: 'STR', score: 8 },
+    { abbr: 'DEX', score: 16 },
+    { abbr: 'CON', score: 14 },
+    { abbr: 'INT', score: 11 },
+    { abbr: 'WIS', score: 15 },
+    { abbr: 'CHA', score: 10 },
+  ]}
+  proficiencies={[
+    {
+      label: 'Skills',
+      value:
+        'Religion +5 · Insight +5 · Investigation +2 · Persuasion +2 · Perception +3 · Survival +3',
+    },
+    {
+      label: 'Tools',
+      value: "Smith's, Jeweler's, Mason's, Carpenter's, Tinker's Tools (racial)",
+    },
+    { label: 'Languages', value: 'Common, Dwarvish, Gnomish' },
+    {
+      label: 'Divine Order',
+      value: 'Thaumaturge — bonus cantrip, WIS added to Arcana/Religion checks',
+    },
+  ]}
+  spells={[
+    { label: 'Cantrips', value: 'Toll the Dead · Sacred Flame · Guidance · Spare the Dying' },
+    { label: 'Racial Cantrips', value: 'Mending · Prestidigitation (Gnomish Lineage)' },
+    { label: 'Channel Divinity', value: 'Radiance of the Dawn · Warding Flare' },
+    { label: 'Prepared Spells', value: 'Healing Word · Scorching Ray' },
+  ]}
+  personality={[
+    {
+      label: 'Traits',
+      value: [
+        'I still narrate my own actions out loud — but now half of it sounds like prayer.',
+        "I used to think consequences were for other people. I've met the dark now. I take it seriously — even if I still smile through it.",
+      ],
+    },
+    {
+      label: 'Ideal',
+      value: 'Renewal — "Every dawn is a chance to fix what broke — myself included."',
+    },
+    {
+      label: 'Bond',
+      value:
+        'My god pulled me out of the dark once. I owe him — and everyone the dark has already taken — a debt I intend to pay in full.',
+    },
+    {
+      label: 'Flaw',
+      value:
+        "I charge at the dark before I've thought it through — some habits didn't die with me.",
+    },
+  ]}
+  equipment={[
+    'Chain Shirt',
+    'Shield',
+    'Dagger',
+    'Holy Symbol (worked into the sunburst chestplate)',
+    "Smith's / Jeweler's / Mason's / Carpenter's / Tinker's Tools",
+    'Warhammer (kept as a relic — no longer wielded)',
+  ]}
+/>
+
+## Origin — The Ironwhirl Household
+
+Fizzwick grew up the middle child of five, in a loud, warm gnome enclave built into a hillside — the kind of place where every wall shares a room with a cousin. His mother, Pemma Ironwhirl, was a cobbler with a booming laugh and zero patience for self-pity. "A broken thing," she liked to say, elbow-deep in a boot she was rebuilding for the third time, "is just an opportunity wearing a disguise." His father, Bramblewick, was a retired caravan guard turned part-time brewer, permanently, endlessly amused by his middle child's chaos. Fizzwick could set the pantry on fire — he did, once — and Bramblewick's only comment would be some variation of "well, at least it was interesting."
+
+His older sister Tillie runs the family shop now and still bosses him around like he's twelve. His younger brother Podge thinks he's the coolest person alive, which says more about Podge's taste than Fizzwick's judgment.
+
+There's no tragedy here. No dead parents, no burned village. Just a hyperactive, attention-loving kid in a big, chaotic family that loved him and found him exhausting in roughly equal measure — which, in hindsight, was the most stable thing about him.
+
+## Grandpa Thistle
+
+The instability came from Grandpa Thistle.
+
+Thistlewick "Grandpa Thistle" Ironwhirl held court by the hearth most nights, and every story ended the same two ways: treasure, or a joke. Lost vaults nobody had found. Singing swords that judged their wielders. Riches still sitting out there, waiting patiently for the right fool to go looking. Never a cautionary tale. Never a story where the moral was "and that's why you shouldn't." The real tragedy, as far as Grandpa Thistle was concerned, was dying having never gone to look.
+
+Fizzwick believed every word of it, completely and permanently. It's where he picked up the quiet, foundational conviction that consequences happen to other people — the less interesting ones. It's also, though nobody clocked it at the time, where he first saw the rage. Every so often, mid-story, something old and violent would flicker across the old gnome's face — a flash gone as fast as it arrived, catching itself before anyone could ask about it. Fizzwick never asked. Grandpa Thistle never explained. But it went somewhere. It always goes somewhere.
+
+## Three Guilds, Three Failures
+
+{/* TODO: add the "original barbarian concept" reference image here — the chibi/illustrated steampunk gnome with the sledgehammer and the flaming device on his back. Drop the source file in and I'll compress it to public/images/compressed/post14/ and wire up the <img> tag. */}
+
+Cast out of the Tinker's Guild after the "Whirling Hammer Engine" — his words, still, unapologetically — leveled the guild hall. Two more guilds followed, in two more towns, with the same general outcome. Fizzwick doesn't call these failures. He calls them field data.
+
+So he took his genius on the road instead of into another workshop, and it turned out the road agreed with him more than any guild ever had. He became a real tomb-diver, a relic-hunter with actual results, eventually a warrior-engineer good enough that people who'd normally never hire a gnome kept hiring this one anyway. Loud, chaotic, occasionally on fire — but good at the job, and the job paid.
+
+## The Curse
+
+He was retained by a benefactor he never fully vetted — that part matters, in hindsight — to extract a single tome from a sealed vault. The vault's guardians warned the party off more than once, in more than one language, with increasing specificity. The party ignored every warning, because the party had a job to finish and Fizzwick had a lifetime of believing warnings were for other people.
+
+They got the book. Fizzwick lingered too long near the arcane machinery sealing the vault behind them — just a few extra seconds, admiring the craftsmanship of a lock he was never going to get to keep — and something inside that Book of the Dead reached out and unmade a piece of him. Not his body. He walked out on his own two legs. It took the charge in him instead — a decade of hard-earned mastery, gone, like a candle someone else had blown out from the inside.
+
+He walked out withered. Weakened. Cursed, in the specific, technical, "a piece of me is genuinely missing now" sense of the word.
+
+## Death and Rebirth — Finding Lathander
+
+_A note before this section: Fizzwick already had a version of this scene written, but I didn't have that text in front of me when I sat down to put this post together — so what follows is my own retelling of the beats as they were described to me, not a copy of the original. If a "real" version of this scene exists elsewhere, treat that one as canon and this as the blog's dramatization of it._
+
+He died afraid of the dark, which had never happened before. Fizzwick Ironwhirl had spent a hundred and forty-some years believing, all the way down, that the bad parts of any story belonged to somebody else. The curse took that belief with everything else it took. In the last few seconds, there was no field data, no "well, at least it was interesting." There was just the dark, closing in from every direction at once, and a gnome who finally understood — too late, the way everyone always says it happens too late — that some things really do come for you specifically.
+
+And then warmth answered it. Not a rescue in the way he would have written it — no dramatic entrance, no voice booming out of the void — just dawn-light, patient and total, arriving the way morning arrives whether or not anyone asked it to. It didn't fight the dark off. It just kept being warm until there was nothing left for the dark to hold onto. Piece by piece, the same way the curse had taken him apart, something put him back together — not quite the same shape as before, but whole, and warm, and unmistakably still him.
+
+He woke on his back with a rising sun branded into his skin, right where the curse had done its worst damage, and understood two things immediately and with total clarity. First: something had actually reached into the dark and pulled him out, on purpose, and he owed that something an honest debt for the first time in his life. Second: whatever the Book of the Dead had done to him, it had almost certainly done to others too — and if Lathander could reach him, then the souls that book had already taken weren't necessarily gone. Just misplaced. He had a new guild to fail his way through, one more time, except this one wasn't going to end with a leveled building. He was going to meet this god properly, and then he was going to go get back what the dark had taken — his own mastery included, but not only his.
+
+{/* TODO: add the "Fizz joining the campaign" reference image here — the close-up portrait with the mismatched eye and the grin, mid-reach toward the camera. Drop the source file in and I'll compress it to public/images/compressed/post14/ and wire up the <img> tag. */}
+
+## Current Status — The Discovery
+
+Here's the part the rest of the party knows and the rest of the world doesn't: the gods aren't dead. That's the story everyone's been told, and everyone's been told it long enough to stop questioning it. They're not dead. They're cut off — restrained, walled away from something that should be theirs by right — and every time Fizzwick casts even the smallest spell, he's not channeling some faint leftover echo of a god who used to matter. He's pulling on the real thing, at real physical cost. He took eight points of damage casting _Guidance_. Guidance. The cantrip. His eyes go gold when it surfaces, an honest-to-gods glow that no amount of goggles hides.
+
+The party has seen it happen enough times that there's no more pretending it's a trick of the torchlight. They know. The wider world still doesn't, and every session that secret sits there is another session it gets heavier — because if Fizzwick is right about what he felt in that moment near the sealed vault, "the gods are dead" isn't a eulogy. It's a lock somebody put on the door on purpose, and now there's a gnome who's died once already walking around with a very specific, very personal interest in finding out who's holding the key.
+
+---
+
+_Old habits die hard, and apparently so does everything else — Fizzwick's just the first thing that came back different. More on the party, the campaign, and whatever's actually keeping the gods out, as it unfolds at the table._

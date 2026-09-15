@@ -4,7 +4,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 // Posts are Markdown pages under src/pages/posts/, not a content collection,
 // so they're gathered with import.meta.glob rather than getCollection().
 export async function GET(context) {
-  const posts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+  const posts = Object.values(import.meta.glob('./posts/*.{md,mdx}', { eager: true }));
 
   const items = posts
     .map((post) => ({

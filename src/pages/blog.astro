@@ -16,7 +16,7 @@ interface MarkdownPost {
 }
 
 const allPosts = Object.values(
-  import.meta.glob<MarkdownPost>('./posts/*.md', { eager: true })
+  import.meta.glob<MarkdownPost>('./posts/*.{md,mdx}', { eager: true })
 ).sort((a, b) => {
   const byDate =
     new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime();

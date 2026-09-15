@@ -8,7 +8,9 @@ interface MarkdownPost {
 }
 
 export async function getStaticPaths() {
-  const allPosts = Object.values(import.meta.glob<MarkdownPost>('../posts/*.md', { eager: true }));
+  const allPosts = Object.values(
+    import.meta.glob<MarkdownPost>('../posts/*.{md,mdx}', { eager: true })
+  );
 
   const uniqueTags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
 

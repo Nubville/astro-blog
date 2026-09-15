@@ -7,7 +7,7 @@ interface MarkdownPost {
 }
 
 const allPosts = Object.values(
-  import.meta.glob<MarkdownPost>('../pages/posts/*.md', { eager: true })
+  import.meta.glob<MarkdownPost>('../pages/posts/*.{md,mdx}', { eager: true })
 );
 const allTags = allPosts.flatMap((post) => post.frontmatter.tags ?? []);
 const tags = [...new Set(allTags)]

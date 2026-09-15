@@ -5,7 +5,9 @@ interface MarkdownPost {
   frontmatter: { tags: string[] };
 }
 
-const allPosts = Object.values(import.meta.glob<MarkdownPost>('../posts/*.md', { eager: true }));
+const allPosts = Object.values(
+  import.meta.glob<MarkdownPost>('../posts/*.{md,mdx}', { eager: true })
+);
 const allTags = allPosts.map((post) => post.frontmatter.tags).flat();
 const tags = [...new Set(allTags)]
   .map((tag) => ({ tag, count: allTags.filter((t) => t === tag).length }))

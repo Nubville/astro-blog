@@ -45,14 +45,14 @@ const interests = [
                  grid track) kicks in. -->
             <source
               type="image/webp"
-              srcset="/images/drew_avatar-300.webp 300w, /images/drew_avatar-600.webp 600w, /images/drew_avatar-900.webp 900w, /images/drew_avatar-1350.webp 1350w"
+              srcset="/images/drew_family-300.webp 300w, /images/drew_family-600.webp 600w, /images/drew_family-900.webp 900w, /images/drew_family-1254.webp 1254w"
               sizes="(max-width: 419px) 200px, (min-width: 992px) 300px, 750px"
             />
             <img
-              src="/images/drew_avatar-fallback.jpg"
-              alt="Andrew Garman — a generated illustration of the author as a css wizard with a mix of coding and dungeon master dice"
+              src="/images/drew_family-fallback.jpg"
+              alt="Andrew Garman with his family — an illustrated portrait of four people standing close together on a sandy beach at sunset: a teenage boy in a red Indiana shirt, Andrew in a ball cap, glasses and a blue t-shirt, a girl in a white top making a peace sign, and a woman in a red dress"
               width="900"
-              height="600"
+              height="675"
               loading="eager"
               fetchpriority="high"
             />
@@ -126,17 +126,7 @@ const interests = [
   .portrait img {
     display: block;
     height: auto;
-    mix-blend-mode: multiply;
     width: 100%;
-  }
-
-  /* multiply only reads correctly against a light backdrop — on a
-     dark surface it crushes this full-color illustration toward
-     black, so it renders unblended there instead. Add new dark
-     themes to this selector list too. */
-  :global([data-theme='lamplight']) .portrait img,
-  :global([data-theme='horde']) .portrait img {
-    mix-blend-mode: normal;
   }
 
   .profile-info {

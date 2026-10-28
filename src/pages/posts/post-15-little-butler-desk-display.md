@@ -38,7 +38,7 @@ My board never showed up. It was clearly alive once I found a cable that powered
 
 I tried a second cable, then a USB splitter, then a reboot. What finally worked was plugging straight into a port on the motherboard. I changed the cable and the port along the way, so I can't tell you for sure how much each mattered, but a splitter in the middle was clearly not helping. After that:
 
-```
+```text
 1-5    1a86:7523  USB-SERIAL CH340 (COM5)
 ```
 
@@ -53,7 +53,7 @@ Back in WSL it showed up as `/dev/ttyUSB0`. My user also had to be in the `dialo
 
 The first real build failed on one line:
 
-```
+```text
 src/main.cpp:31:23: error: no matching function for call to 'XPT2046_Touchscreen::begin(SPIClass&)'
 ```
 

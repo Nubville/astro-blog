@@ -19,6 +19,9 @@ const pages = [
   { name: 'post with a character stat block', path: '/posts/post-14-fizzwick-sparkmender' },
 ];
 
+// Scan a specific post too: POST=/posts/post-15-foo npm run test:a11y
+if (process.env.POST) pages.push({ name: `new post ${process.env.POST}`, path: process.env.POST });
+
 // Keep in sync with THEMES in Header.astro. Scanning every theme, not just
 // whatever's currently the default, is deliberate: a real contrast bug and
 // a real dead-selector bug (Astro's scoped-style compiler silently drops

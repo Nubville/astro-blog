@@ -311,3 +311,142 @@ sketch-card[type='character'] {
   padding-top: 0.75rem;
   text-transform: uppercase;
 }
+
+/* ── Utilities ─────────────────────────────────────── */
+
+.visually-hidden {
+  border: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* ── Image lightbox ────────────────────────────────── */
+
+image-lightbox {
+  container-type: inline-size;
+  display: block;
+}
+
+.lightbox-trigger {
+  background: none;
+  border: 0;
+  border-radius: 2px;
+  cursor: zoom-in;
+  display: block;
+  padding: 0;
+  position: relative;
+  width: 100%;
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-1);
+    outline-offset: 3px;
+  }
+}
+
+/* showModal() makes the page inert, but the wheel can still scroll it.
+   The gutter stops the page shifting when its scrollbar goes away. */
+html:has(.lightbox[open]) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.lightbox {
+  /* Room left for the viewport gap, toolbar and caption around a fitted image. */
+  --lightbox-chrome: 10rem;
+
+  background: var(--paper);
+  border: 1px solid var(--pencil);
+  border-radius: 2px;
+  box-shadow: var(--shadow-cel-lg);
+  color: var(--ink);
+  margin: auto;
+  max-height: calc(100dvh - var(--ag-space-xl));
+  max-width: calc(100dvw - var(--ag-space-xl));
+  padding: 0;
+
+  &::backdrop {
+    background: color-mix(in srgb, var(--paper) 85%, transparent);
+  }
+}
+
+.lightbox-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ag-space-s);
+  padding: var(--ag-space-s);
+}
+
+.lightbox-toolbar {
+  display: flex;
+  gap: var(--ag-space-xs);
+  justify-content: flex-end;
+}
+
+.lightbox-button {
+  background: none;
+  border: 1px solid var(--pencil);
+  border-radius: 2px;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--ag-font-size-s);
+  padding: var(--ag-space-2xs) var(--ag-space-s);
+
+  &:hover {
+    border-color: var(--ink);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-1);
+    outline-offset: 2px;
+  }
+
+  &[aria-pressed='true'] {
+    border-color: var(--ink);
+
+    /* Pressed is shown by a mark, not color alone. The empty alt keeps the
+       mark out of the accessible name; aria-pressed already announces it. */
+    &::before {
+      content: '✓ ' / '';
+    }
+  }
+}
+
+.lightbox-pane {
+  max-height: calc(100dvh - var(--lightbox-chrome));
+  overflow: auto;
+  scrollbar-color: var(--pencil) var(--paper);
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-1);
+    outline-offset: -2px;
+  }
+
+  & img {
+    display: block;
+    height: auto;
+    margin: auto;
+    max-height: calc(100dvh - var(--lightbox-chrome));
+    max-width: 100%;
+    width: auto;
+  }
+}
+
+.lightbox[data-zoomed] .lightbox-pane img {
+  max-height: none;
+  max-width: none;
+}
+
+.lightbox-caption {
+  /* Wraps to the image's width instead of stretching the dialog. */
+  contain: inline-size;
+  font-family: var(--font-annotation);
+  font-size: var(--ag-font-size-s);
+  margin: 0;
+}

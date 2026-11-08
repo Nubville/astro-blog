@@ -42,6 +42,7 @@ const recentPosts = Object.values(postModules)
 
 <script>
   import '../custom-elements/code-copy.js';
+  import '../custom-elements/image-lightbox.js';
 </script>
 {
   /* Note: frontmatter.type is the card category (spellbook/quest/lore), not the
@@ -72,33 +73,35 @@ const recentPosts = Object.values(postModules)
   />
 
   <article class="post-article">
-    <header class="post-header">
-      <p class="post-date">{frontmatter.pubDate.toString().slice(0, 10)}</p>
-      <p class="post-description"><em>{frontmatter.description}</em></p>
-      <p class="post-author">Written by: {frontmatter.author}</p>
-      {
-        frontmatter.image && (
-          <img
-            src={frontmatter.image.url}
-            width={frontmatter.image.width}
-            height={frontmatter.image.height}
-            alt={frontmatter.image.alt}
-          />
-        )
-      }
-      <div class="tags">
+    <image-lightbox>
+      <header class="post-header">
+        <p class="post-date">{frontmatter.pubDate.toString().slice(0, 10)}</p>
+        <p class="post-description"><em>{frontmatter.description}</em></p>
+        <p class="post-author">Written by: {frontmatter.author}</p>
         {
-          frontmatter.tags.map((tag: string) => (
-            <p class="tag">
-              <a href={`/tags/${tag}`}>{tag}</a>
-            </p>
-          ))
+          frontmatter.image && (
+            <img
+              src={frontmatter.image.url}
+              width={frontmatter.image.width}
+              height={frontmatter.image.height}
+              alt={frontmatter.image.alt}
+            />
+          )
         }
+        <div class="tags">
+          {
+            frontmatter.tags.map((tag: string) => (
+              <p class="tag">
+                <a href={`/tags/${tag}`}>{tag}</a>
+              </p>
+            ))
+          }
+        </div>
+      </header>
+      <div class="post-body">
+        <slot />
       </div>
-    </header>
-    <div class="post-body">
-      <slot />
-    </div>
+    </image-lightbox>
   </article>
 </BaseLayout>
 <style>
@@ -198,6 +201,25 @@ const recentPosts = Object.values(postModules)
     max-width: 100%;
     height: auto;
     margin-bottom: var(--ag-space-l);
+  }
+
+  /* The trigger takes over the image's spacing so its focus ring hugs the image. */
+  .post-body :global(.lightbox-trigger) {
+    margin-bottom: var(--ag-space-l);
+  }
+
+  .post-body :global(.lightbox-trigger img) {
+    margin-bottom: 0;
+  }
+
+  .post-header :global(.lightbox-trigger) {
+    margin-bottom: 1rem;
+    max-width: 100%;
+    width: fit-content;
+  }
+
+  .post-header :global(.lightbox-trigger img) {
+    margin-bottom: 0;
   }
 
   .post-body :global(figcaption) {

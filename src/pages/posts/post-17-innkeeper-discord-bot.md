@@ -47,7 +47,14 @@ A token works once, for one tool, with those exact arguments, for ten minutes. T
 
 Tokens live in memory, so restarting the server cancels anything pending. Every applied change gets appended to a log with its before and after. Deleting stays a manual job in Discord.
 
-The Fort's topic channels and house rules were set up with these tools.
+The Fort's topic channels and house rules were set up with these tools, and the rules went up as a post from the bot:
+
+<figure style="max-width: 520px; margin: 0 auto 1.5rem;">
+  <img src="/images/compressed/post17/house-rules.webp" alt="Discord screenshot of an Inn Keeper post titled House Rules of the Fort: 'The Fort is a tavern for friends. A few rules keep the fire warm.' 1. Be kind. Roast like friends, never punch down. No harassment, slurs or hate, including in jokes. 2. You vouch for who you invite. Bring good people! If someone you invite causes trouble, the Guild Council will talk to you both. 3. What happens in a private room stays there. Don't screenshot or share party, campaign or DM channels without asking the people in them. 4. Spoilers in tags. New raid, new set, last session's twist: wrap it in spoiler tags for a day or two. 5. Keep it in the right room. Each table has its channels; #general is for everything else. Not sure where something goes? #general. 6. Keep it PG-13 in shared rooms. Nothing graphic or NSFW outside spaces where everyone agreed to it. 7. Consent goes both ways. Don't record or transcribe voice chat without everyone's OK, and don't pressure anyone into a game, a party or a bot. 8. No spam or selling. Sharing your own projects is welcome; ads and self-promo bots are not. 9. Problems? Tell the Guild Council. DM any of them, or use the anonymous buttons in #start-here. Nobody gets in trouble for asking. The Guild Council has the final say, and we'd always rather talk than kick. Mind the rules, mind the mugs." width="642" height="868" loading="lazy" />
+  <figcaption>The house rules, posted through the same dry run and apply</figcaption>
+</figure>
+
+Rule 7 applies to the bots as much as the people: don't record or transcribe voice chat without everyone's OK, and don't pressure anyone into a game, a party or a bot. The same idea sits behind the feedback buttons below and the opt-in voice notes in [Chronicler's Companion](/posts/post-16-chroniclers-companion/).
 
 ## A bot that can't read the room
 
@@ -63,7 +70,28 @@ That goes further with the feedback buttons on the bot's announcement posts. One
 
 ## Thorin has no tools
 
+<figure style="max-width: 320px; margin: 0 auto 1.5rem;">
+  <img src="/images/compressed/post17/thorin-avatar.webp" alt="Portrait of Thorin, a grinning dwarf with grey hair and a long braided beard bound with gold rings, holding up a wooden tankard in a lantern-lit tavern" width="1024" height="1024" loading="lazy" />
+  <figcaption>Thorin's avatar on the Fort</figcaption>
+</figure>
+
 `/ask` is an AI Q&A open to a few hand-picked people, with a default limit of 20 questions per person per day. It answers as Thorin "Keg-Slinger" Bronzebeard, a dwarven tavern keeper with a static set of notes about the Fort's features. It's a plain text completion and nothing else. Thorin has no tools, can't see messages or members, and is never handed roster data. The usage database stores counts and never the questions or answers.
+
+Here he is on his first day, introducing himself:
+
+<figure>
+  <img src="/images/compressed/post17/thorin-introduction.webp" alt="Discord screenshot. Drew used /ask: 'Can you introduce yourself?' Inn Keeper replies: 'Aye, welcome in! I'm Thorin Keg-Slinger Bronzebeard, the innkeeper of the Fort, part host, part trouble-shooter, and the one who keeps the Discord fires burning. In here, I look after the tables: Tabletop RPGs, Board games, The workshop (3D printing), The raid table (World of Warcraft). Ask away if you want help with rules, scheduling, printing advice, raid strats, or anything else that needs a steady hand and a good mug.'" width="1239" height="346" loading="lazy" />
+  <figcaption>Thorin's introduction, from his first day on the job</figcaption>
+</figure>
+
+Later that afternoon I asked him to pass something along to the guild, and he told me he couldn't:
+
+<figure>
+  <img src="/images/compressed/post17/thorin-can-not-message.webp" alt="Discord screenshot. Drew used /ask: 'Can you tell the guild how to register with the you to help track professions?' Inn Keeper replies: 'Aye lad, Thorin Keg-Slinger Bronzebeard here. I can't message the Guild Council directly, but you can tell 'em this: In #start-here, click World of Warcraft (the Raid Table) to get into the WoW side. Then use the command /wow register to add your character for profession tracking. Tell the Council you want it set up so the roster can show who can craft what. If you want, reply here with what you've got (Normal/PvP/RP mode + faction + class + professions), and I'll format it into a clean /wow register prompt you can paste.'" width="1250" height="329" loading="lazy" />
+  <figcaption>No tools means no messaging anyone, and he knows it</figcaption>
+</figure>
+
+That's the design doing its job: he can only answer, so he says so and tells me what to do instead. It's also a snapshot of how fast things moved. The mode and faction he asks about were gone from the form by the next day.
 
 Keeping it that way is a job for a build step, because "the AI part can't touch the admin part" is the kind of rule that erodes one convenient import at a time. `scripts/check-isolation.mjs` fails `pnpm check` if `src/ask/` imports anything beyond itself, the model SDKs and Node built-ins:
 

@@ -102,8 +102,13 @@ for (const [re, what] of [
   [/\bfunctions\s*:/, 'a `functions:` field'],
   [/\bfunction_call\b/, 'function_call'],
   [/\bmcp_servers\b/, 'mcp_servers'],
-  [/\bprocess\.env\b/, 'process.env (config must be passed in, so the module never sees the Discord token)'],
+  [
+    /\bprocess\.env\b/,
+    'process.env (config must be passed in, so the module never sees the Discord token)',
+  ],
 ])
+  if (re.test(text))
+    errors.push(`${rel}: contains ${what}; /ask must be a plain completion with no tools`);
 ```
 
 It's a pile of regexes, not a sandbox, and someone determined could walk around it. It's there to catch me (or an agent working for me) doing something careless at 11pm, and for that it's enough. Pointing `/ask` at a local model is a config change, which is the direction I'd like to go.

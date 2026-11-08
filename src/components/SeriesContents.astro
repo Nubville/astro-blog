@@ -35,6 +35,11 @@ const { series, part } = Astro.props.postSeries;
     border-radius: 2px;
     container-type: inline-size;
     margin-bottom: var(--ag-space-xl);
+
+    /* A shared post stacks one box per series, so keep them together. */
+    &:has(+ .series-contents) {
+      margin-bottom: var(--ag-space-xs);
+    }
   }
 
   summary {

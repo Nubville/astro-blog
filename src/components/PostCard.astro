@@ -14,7 +14,7 @@ interface Props {
 
 const { type, url, title, description, pubDate, headingLevel = 'h2' } = Astro.props;
 const HeadingTag = headingLevel;
-const postSeries = getPostSeries(url);
+const seriesPlaces = getPostSeries(url);
 
 const BADGE: Record<CardType, string> = {
   quest: '⚔',
@@ -39,12 +39,11 @@ function formatDate(dateStr: string): string {
       <span class="stamp-text">{type}</span>
     </div>
     {
-      postSeries && (
+      seriesPlaces.map(({ series, part }) => (
         <p class="card-series">
-          {postSeries.series.title}, part {postSeries.part.number} of{' '}
-          {postSeries.series.parts.length}
+          {series.title}, part {part.number} of {series.parts.length}
         </p>
-      )
+      ))
     }
     <HeadingTag class="card-post-title">
       <a class="card-title" href={url}>

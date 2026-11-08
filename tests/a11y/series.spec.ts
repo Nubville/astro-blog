@@ -30,8 +30,9 @@ test('the last part has no next link', async ({ page }) => {
 
 test('following next links reads the whole series in order', async ({ page }) => {
   await page.goto(urlOf(parts[0]));
+  const pager = page.getByRole('navigation', { name: pagerLabel });
   for (const slug of parts.slice(1)) {
-    await page.locator('a[rel="next"]').click();
+    await pager.locator('a[rel="next"]').click();
     await expect(page).toHaveURL(new RegExp(`${urlOf(slug)}/?$`));
   }
 });
@@ -48,6 +49,31 @@ test('the contents list opens by keyboard and marks the current part', async ({ 
   const current = contents.locator('[aria-current="page"]');
   await expect(current).toHaveCount(1);
   await expect(current).toHaveAttribute('href', urlOf(parts[2]));
+});
+
+test('a shared post follows each series separately', async ({ page }) => {
+  const shared = 'post-06-discord-bot';
+  const companion = seriesData['chroniclers-companion'].posts;
+  const place = parts.indexOf(shared);
+  await page.goto(urlOf(shared));
+
+  const meridian = page.getByRole('navigation', { name: pagerLabel });
+  await expect(meridian.locator('a[rel="prev"]')).toHaveAttribute('href', urlOf(parts[place - 1]));
+  await expect(meridian.locator('a[rel="next"]')).toHaveAttribute('href', urlOf(parts[place + 1]));
+
+  const chronicler = page.getByRole('navigation', {
+    name: "Previous and next in the Chronicler's Companion series",
+  });
+  await expect(chronicler.locator('a[rel="prev"]')).toHaveCount(0);
+  await expect(chronicler.locator('a[rel="next"]')).toHaveAttribute('href', urlOf(companion[1]));
+
+  await expect(page.locator('.series-contents summary')).toHaveCount(2);
+  await expect(page.locator('.series-contents summary').first()).toContainText(
+    `Part ${place + 1} of ${parts.length}`
+  );
+  await expect(page.locator('.series-contents summary').last()).toContainText(
+    `Part 1 of ${companion.length}`
+  );
 });
 
 test('a post outside any series shows no series navigation', async ({ page }) => {

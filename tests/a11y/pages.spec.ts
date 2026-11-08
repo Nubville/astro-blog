@@ -18,6 +18,7 @@ const pages = [
   // relying on the general pages above to happen to cover it.
   { name: 'post with a character stat block', path: '/posts/post-14-fizzwick-sparkmender' },
   { name: 'post in a series', path: '/posts/post-05-audio-full-system' },
+  { name: 'post shared between series', path: '/posts/post-06-discord-bot' },
   { name: 'series index', path: '/series' },
   { name: 'series', path: '/series/root-meridian' },
 ];

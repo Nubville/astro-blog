@@ -40,7 +40,6 @@ function readSeries(): Series[] {
   // file, so at the top level the bundled build sees every post as undefined.
   const postModules = import.meta.glob<PostModule>('./pages/posts/*.{md,mdx}', { eager: true });
   const posts = new Map(Object.values(postModules).map((post) => [slugOf(post.url), post]));
-  const owners = new Map<string, string>();
 
   return Object.entries(seriesData).map(([slug, { title, description, posts: postSlugs }]) => ({
     slug,
@@ -50,10 +49,9 @@ function readSeries(): Series[] {
       const post = posts.get(postSlug);
       if (!post) throw new Error(`series.json: "${slug}" lists "${postSlug}", which isn't a post.`);
 
-      // One series per post, or "the next part" would have two answers.
-      const owner = owners.get(postSlug);
-      if (owner) throw new Error(`series.json: "${postSlug}" is in both "${owner}" and "${slug}".`);
-      owners.set(postSlug, slug);
+      // A post can be shared between series, but can only hold one place in each.
+      if (postSlugs.indexOf(postSlug) !== index)
+        throw new Error(`series.json: "${slug}" lists "${postSlug}" more than once.`);
 
       return {
         number: index + 1,
@@ -71,13 +69,17 @@ export function getAllSeries(): Series[] {
   return readSeries().filter((series) => series.parts.length > 1);
 }
 
-/** Where a post sits in its series, or undefined if it isn't in one. Takes a URL or pathname. */
-export function getPostSeries(url: string): PostSeries | undefined {
+/**
+ * Where a post sits in every series it belongs to, in series.json order. Empty
+ * if it isn't in one. A shared post has its own part number and neighbours in
+ * each series. Takes a URL or pathname.
+ */
+export function getPostSeries(url: string): PostSeries[] {
   const postSlug = slugOf(url);
 
-  for (const series of getAllSeries()) {
+  return getAllSeries().flatMap((series) => {
     const index = series.parts.findIndex((part) => slugOf(part.url) === postSlug);
-    if (index === -1) continue;
+    if (index === -1) return [];
 
     return {
       series,
@@ -85,7 +87,5 @@ export function getPostSeries(url: string): PostSeries | undefined {
       previous: series.parts[index - 1],
       next: series.parts[index + 1],
     };
-  }
-
-  return undefined;
+  });
 }

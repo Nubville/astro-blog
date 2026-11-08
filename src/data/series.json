@@ -19,5 +19,10 @@
       "post-12-first-open-source-storybook-addon",
       "post-13-storybook-events-inspector-setup"
     ]
+  },
+  "chroniclers-companion": {
+    "title": "Chronicler's Companion",
+    "description": "A campaign memory for tabletop groups, which grew out of the Discord bot built to drive the Root Meridian compass.",
+    "posts": ["post-06-discord-bot", "post-16-chroniclers-companion"]
   }
 }

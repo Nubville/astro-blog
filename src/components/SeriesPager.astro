@@ -9,6 +9,7 @@ const { series, previous, next } = Astro.props.postSeries;
 ---
 
 <nav class="series-pager" aria-label={`Previous and next in the ${series.title} series`}>
+  <p class="pager-series"><a href={`/series/${series.slug}`}>{series.title} series</a></p>
   <div class="pager-links">
     {
       previous && (
@@ -31,7 +32,6 @@ const { series, previous, next } = Astro.props.postSeries;
       )
     }
   </div>
-  <p class="pager-all"><a href={`/series/${series.slug}`}>All parts of {series.title}</a></p>
 </nav>
 
 <style>
@@ -87,9 +87,9 @@ const { series, previous, next } = Astro.props.postSeries;
     text-underline-offset: 3px;
   }
 
-  .pager-all {
+  /* Sits above the links so a shared post's pagers each say which series they follow. */
+  .pager-series {
     font-size: var(--ag-font-size-s);
-    margin: var(--ag-space-m) 0 0;
-    text-align: center;
+    margin: 0 0 var(--ag-space-s);
   }
 </style>

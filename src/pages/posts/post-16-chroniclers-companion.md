@@ -5,10 +5,10 @@ pubDate: 2026-11-08
 description: 'Discord admins can read every private channel, so passing D&D secrets needed a different design. Whispers over bot DMs, voice notes that catch only people who opted in, and a console that never gets data it should not show.'
 author: 'Andrew Garman'
 image:
-  url: '/images/compressed/post6/chroniclers_companion.webp'
-  alt: 'Chronicler bot avatar: a hooded robot reading a tome surrounded by D20s and a map, rendered in dark fantasy style'
-  width: 1254
-  height: 1254
+  url: '/images/compressed/post16/hero.webp'
+  alt: 'A round black circuit board with a Seeed Studio XIAO module, still in its foam-lined box with a bag of pin headers on top, beside a closed 3D-printed round puck in slate blue with a honeycomb speaker grille in an irregular silhouette'
+  width: 1400
+  height: 1050
 tags: ['dnd', 'discord', 'dungeon-master', 'web-components', 'claude', 'nodejs']
 type: spellbook
 ---
@@ -110,18 +110,22 @@ The name has caused real trouble. The compass bot's Discord application is calle
 
 The person won. **The Chronicler** is whoever keeps the book. A trusted player who helps clean up transcripts is **the Scribe**, and the bot's storyteller persona is **the Bard**, for now. The code still says `dm` everywhere, and the table device currently has no name at all.
 
-That device is still only a plan. Discord gives you speaker labels, but an in-person table doesn't. The first version would be a screenless puck, Seeed's reSpeaker XVF3800 with a XIAO ESP32-S3, sitting in the middle of the table. Its mic array can estimate where a voice came from, so "who spoke" can be worked out from seats. I'm deliberately not using voiceprints, because that's biometric data about my friends and the whole project is supposed to hold the campaign, not the people playing it. Seat guesses will be wrong sometimes, and that's what the Scribe's review after the session is for.
+That device has started to exist physically, even without a name. Discord gives you speaker labels, but an in-person table doesn't. The first version is a screenless puck, Seeed's reSpeaker XVF3800 with a XIAO ESP32-S3, sitting in the middle of the table. The board has arrived and I've printed some prototype shells for it.
+
+<img src="/images/compressed/post16/puck-shell-interior.webp" alt="The inside of an open 3D-printed round shell in slate blue, with a circular honeycomb grille in the center of the floor, four small screw holes around it, and notches in the wall, sitting next to the circuit board in its box" width="1400" height="1050" loading="lazy" />
+
+Its mic array can estimate where a voice came from, so "who spoke" can be worked out from seats. I'm deliberately not using voiceprints, because that's biometric data about my friends and the whole project is supposed to hold the campaign, not the people playing it. Seat guesses will be wrong sometimes, and that's what the Scribe's review after the session is for.
 
 ## Where it actually stands
 
-| Piece                         | Status                       |
-| ----------------------------- | ---------------------------- |
-| `/whisper`                    | Working in early tests       |
-| `/session` voice notes        | Works for one speaker so far |
-| Opt-in voice consent          | Written, not yet committed   |
-| Console and connections graph | Sample data only             |
-| Chronicle API                 | Not started                  |
-| Recaps, `/ask`, scheduling    | Planned                      |
-| Table puck                    | Planned                      |
+| Piece                         | Status                        |
+| ----------------------------- | ----------------------------- |
+| `/whisper`                    | Working in early tests        |
+| `/session` voice notes        | Works for one speaker so far  |
+| Opt-in voice consent          | Written, not yet committed    |
+| Console and connections graph | Sample data only              |
+| Chronicle API                 | Not started                   |
+| Recaps, `/ask`, scheduling    | Planned                       |
+| Table puck                    | Board in hand, shells printed |
 
 The next real test is a live voice session with more than one person talking. After that comes the API, and I have to prove that sign-in works with Discord's `identify` scope and no real email before I build on it. If the auth library can't do that, the library goes and the no-email rule stays.

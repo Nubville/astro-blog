@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: 'Innkeeper: Giving Claude the Keys to My Discord Server, With a Dry Run First'
+title: "Innkeeper: Why Didn't I Think of This Sooner?"
 pubDate: 2026-11-08
-description: "A private Discord bot and admin MCP server built in two days: single-use tokens for every change, no delete tools, a dwarven tavern keeper with no tools at all, and a fight with Discord's five-field form limit."
+description: "A private Discord bot and an admin helper built in two days: Claude drafts each server change and waits for my go-ahead, nothing can be deleted, and a dwarven tavern keeper fights Discord's five-field form limit."
 author: 'Andrew Garman'
 image:
   url: '/images/compressed/post17/hero.webp'
@@ -13,9 +13,11 @@ tags: ['discord', 'mcp', 'claude', 'nodejs', 'web-components']
 type: spellbook
 ---
 
-# Innkeeper: Giving Claude the Keys to My Discord Server, With a Dry Run First
+# Innkeeper: Why Didn't I Think of This Sooner?
 
-The admin tools I built for my Discord server can create channels, rewrite permissions and post as the bot. None of them can delete anything. That was in the very first commit, along with a rule that every other change has to be rehearsed before it's allowed to happen.
+Running a Discord server is a long list of small, fiddly clicks: a role here, a channel there, the right permissions on each one. Why didn't I think of getting some help with that sooner?
+
+Claude isn't driving here. It's more like a helper behind the bar. It works out what needs to change and writes up the exact plan, and I'm the one who says go. The project's instructions tell it to show me every plan in plain words, including who gains or loses access, and wait for an explicit "apply". The tools it works with can create channels, change permissions and post as the bot, but none of them can delete anything. That was in the very first commit, along with a rule that every change has to be rehearsed before it's allowed to happen.
 
 Innkeeper looks after the Fort, a private, invite-only server for my friends, with spaces for D&D, World of Warcraft, 3D printing and card games. I built it to learn about Discord bots, AI and home servers, and most of what's here happened over two days, November 6th and 7th. It's completely separate from [Chronicler's Companion](/posts/post-16-chroniclers-companion/), with its own repo, Discord application and token. It comes in two halves:
 
@@ -41,7 +43,7 @@ consume(tool: string, args: unknown, token: string | undefined, fingerprint: str
 }
 ```
 
-A token works once, for one tool, with those exact arguments, for ten minutes. The last check matters most: the plan gets fingerprinted, so if someone changes the server by hand between the preview and the apply, the apply is refused. What you approved is what happens, or nothing happens.
+A token works once, for one tool, with those exact arguments, for ten minutes. The last check matters most: the plan gets fingerprinted, so if someone changes the server by hand between the preview and the apply, the apply is refused. What you approved is what happens, or nothing happens. The token can't prove a person actually read the plan, though. That part is the instruction to wait for me, plus me reading it.
 
 Tokens live in memory, so restarting the server cancels anything pending. Every applied change gets appended to a log with its before and after. Deleting stays a manual job in Discord.
 

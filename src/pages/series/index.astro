@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllSeries } from '../../series';
+
+const allSeries = getAllSeries();
+---
+
+<BaseLayout pageTitle="Series" description="Posts that follow one project from start to finish.">
+  <p>Posts that follow one project from start to finish.</p>
+  <ul class="series-index">
+    {
+      allSeries.map((series) => (
+        <li>
+          <a class="series-title" href={`/series/${series.slug}`}>
+            {series.title}
+          </a>
+          <span class="series-count">{series.parts.length} parts</span>
+          <p class="series-description">{series.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
+
+<style>
+  .series-index {
+    list-style: none;
+    margin: var(--ag-space-l) 0;
+    padding: 0;
+
+    & li {
+      margin-bottom: var(--ag-space-l);
+    }
+  }
+
+  .series-title {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .series-count {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    margin-left: var(--ag-space-xs);
+  }
+
+  .series-description {
+    color: var(--ink-faint);
+    font-size: var(--ag-font-size-s);
+    margin: var(--ag-space-2xs) 0 0;
+  }
+</style>

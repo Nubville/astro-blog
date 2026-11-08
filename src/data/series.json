@@ -1,0 +1,23 @@
+{
+  "root-meridian": {
+    "title": "Root Meridian",
+    "description": "Building a working compass prop for a D&D table with an ESP32, from the first idea to the first CAD model.",
+    "posts": [
+      "post-01-root-meridian-concept",
+      "post-04-the-stepper-motor",
+      "post-05-audio-full-system",
+      "post-06-discord-bot",
+      "post-07-soldering-neopixel",
+      "post-08-measuring-the-stack",
+      "post-09-fusion-360-first-model"
+    ]
+  },
+  "storybook-events-inspector": {
+    "title": "Storybook Events Inspector",
+    "description": "Turning a copy-pasted debug hack into an open source Storybook addon, then putting it to work.",
+    "posts": [
+      "post-12-first-open-source-storybook-addon",
+      "post-13-storybook-events-inspector-setup"
+    ]
+  }
+}

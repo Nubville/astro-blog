@@ -1,0 +1,95 @@
+---
+import type { PostSeries } from '../series';
+
+interface Props {
+  postSeries: PostSeries;
+}
+
+const { series, previous, next } = Astro.props.postSeries;
+---
+
+<nav class="series-pager" aria-label={`Previous and next in the ${series.title} series`}>
+  <div class="pager-links">
+    {
+      previous && (
+        <a class="pager-link" href={previous.url} rel="prev">
+          <span class="pager-label">
+            <span aria-hidden="true">←</span> Previous: Part {previous.number}
+          </span>
+          <span class="pager-title">{previous.title}</span>
+        </a>
+      )
+    }
+    {
+      next && (
+        <a class="pager-link pager-link--next" href={next.url} rel="next">
+          <span class="pager-label">
+            Next: Part {next.number} <span aria-hidden="true">→</span>
+          </span>
+          <span class="pager-title">{next.title}</span>
+        </a>
+      )
+    }
+  </div>
+  <p class="pager-all"><a href={`/series/${series.slug}`}>All parts of {series.title}</a></p>
+</nav>
+
+<style>
+  .series-pager {
+    border-top: 1px solid var(--pencil);
+    container-name: series-pager;
+    container-type: inline-size;
+    margin-top: var(--ag-space-2xl);
+    padding-top: var(--ag-space-l);
+  }
+
+  .pager-links {
+    display: grid;
+    gap: var(--ag-space-s);
+  }
+
+  @container series-pager (min-width: 480px) {
+    .pager-links {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* Stays on the right even when there's no previous part beside it. */
+    .pager-link--next {
+      grid-column: 2;
+      text-align: right;
+    }
+  }
+
+  .pager-link {
+    border: 1px solid var(--pencil);
+    border-radius: 2px;
+    color: var(--ink);
+    display: block;
+    padding: var(--ag-space-s);
+    text-decoration: none;
+
+    &:hover {
+      border-color: var(--ink);
+    }
+  }
+
+  .pager-label {
+    color: var(--ink-faint);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    margin-bottom: var(--ag-space-2xs);
+  }
+
+  .pager-title {
+    display: block;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .pager-all {
+    font-size: var(--ag-font-size-s);
+    margin: var(--ag-space-m) 0 0;
+    text-align: center;
+  }
+</style>

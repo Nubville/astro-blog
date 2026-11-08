@@ -1,4 +1,6 @@
 ---
+import { getPostSeries } from '../series';
+
 type CardType = 'quest' | 'spellbook' | 'lore' | 'character';
 
 interface Props {
@@ -12,6 +14,7 @@ interface Props {
 
 const { type, url, title, description, pubDate, headingLevel = 'h2' } = Astro.props;
 const HeadingTag = headingLevel;
+const postSeries = getPostSeries(url);
 
 const BADGE: Record<CardType, string> = {
   quest: '⚔',
@@ -35,6 +38,14 @@ function formatDate(dateStr: string): string {
       <span class={`stamp stamp--${type}`} aria-hidden="true">{BADGE[type]}</span>
       <span class="stamp-text">{type}</span>
     </div>
+    {
+      postSeries && (
+        <p class="card-series">
+          {postSeries.series.title}, part {postSeries.part.number} of{' '}
+          {postSeries.series.parts.length}
+        </p>
+      )
+    }
     <HeadingTag class="card-post-title">
       <a class="card-title" href={url}>
         {title}
@@ -103,6 +114,13 @@ function formatDate(dateStr: string): string {
     font-size: var(--ag-font-size-xs);
     letter-spacing: 0.1em;
     text-transform: uppercase;
+  }
+
+  .card-series {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+    margin: 0 0 var(--ag-space-2xs);
   }
 
   .card-post-title {

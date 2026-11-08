@@ -53,6 +53,12 @@ chronicle, `lore` = worldbuilding/reflection, `character` = D&D character (post 
 After the frontmatter, repeat the title as a single `# H1`, then `##` sections. Never skip
 heading levels (accessibility is the top priority on this site).
 
+**Series:** if the post continues a project that already has posts, add its filename (no
+extension) to that series' `posts` list in `src/data/series.json`, in reading order. That one
+line is the whole job: part numbers and previous/next links are generated, so never edit the
+other posts. For a new series, add an entry with `title`, `description` and `posts`. It stays
+hidden until it has two posts.
+
 ## 4. Images
 
 Photos/screenshots go in `public/images/compressed/postN/` as WebP, max 1400px wide.

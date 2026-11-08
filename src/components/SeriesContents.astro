@@ -1,0 +1,90 @@
+---
+import type { PostSeries } from '../series';
+
+interface Props {
+  postSeries: PostSeries;
+}
+
+const { series, part } = Astro.props.postSeries;
+---
+
+<nav class="series-contents" aria-label={`${series.title} series`}>
+  <details>
+    <summary>
+      <span class="series-position">Part {part.number} of {series.parts.length}</span>
+      <span class="series-name">{series.title} series</span>
+    </summary>
+    <ol class="series-list">
+      {
+        series.parts.map((item) => (
+          <li>
+            <a href={item.url} aria-current={item.number === part.number ? 'page' : undefined}>
+              {item.title}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="series-about"><a href={`/series/${series.slug}`}>About this series</a></p>
+  </details>
+</nav>
+
+<style>
+  .series-contents {
+    border: 1px solid var(--pencil);
+    border-radius: 2px;
+    container-type: inline-size;
+    margin-bottom: var(--ag-space-xl);
+  }
+
+  summary {
+    align-items: baseline;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ag-space-2xs) var(--ag-space-s);
+    padding: var(--ag-space-s);
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-1);
+      outline-offset: 2px;
+    }
+  }
+
+  .series-position {
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-s);
+  }
+
+  .series-name {
+    color: var(--ink-faint);
+    font-size: var(--ag-font-size-s);
+  }
+
+  .series-list {
+    margin: 0;
+    padding: 0 var(--ag-space-s) 0 var(--ag-space-2xl);
+
+    & li {
+      margin-bottom: var(--ag-space-2xs);
+    }
+  }
+
+  /* The current part is marked by weight and a pointer, never color alone.
+     The empty alt keeps the pointer out of what a screen reader announces;
+     aria-current already says it. */
+  [aria-current='page'] {
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+
+    &::before {
+      content: '▸ ' / '';
+    }
+  }
+
+  .series-about {
+    font-size: var(--ag-font-size-s);
+    margin: var(--ag-space-s) 0 0;
+    padding: 0 var(--ag-space-s) var(--ag-space-s);
+  }
+</style>

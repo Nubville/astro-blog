@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllSeries, type Series } from '../../series';
+
+export function getStaticPaths() {
+  return getAllSeries().map((series) => ({
+    params: { series: series.slug },
+    props: { series },
+  }));
+}
+
+const { series } = Astro.props as { series: Series };
+---
+
+<BaseLayout pageTitle={`${series.title} series`} description={series.description}>
+  <p>{series.description}</p>
+  <ol class="series-parts">
+    {
+      series.parts.map((part) => (
+        <li>
+          <a class="part-title" href={part.url}>
+            {part.title}
+          </a>
+          {part.description && <p class="part-description">{part.description}</p>}
+          <time class="part-date" datetime={part.pubDate}>
+            {part.pubDate}
+          </time>
+        </li>
+      ))
+    }
+  </ol>
+  <p><a href="/series">All series</a></p>
+</BaseLayout>
+
+<style>
+  .series-parts {
+    margin: var(--ag-space-l) 0;
+    padding-left: var(--ag-space-l);
+
+    & li {
+      margin-bottom: var(--ag-space-l);
+    }
+  }
+
+  .part-title {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .part-description {
+    color: var(--ink-faint);
+    font-size: var(--ag-font-size-s);
+    margin: var(--ag-space-2xs) 0;
+  }
+
+  .part-date {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: var(--ag-font-size-xs);
+  }
+</style>

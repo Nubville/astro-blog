@@ -17,6 +17,9 @@ const pages = [
   // that no other post exercises, so it needs its own scan rather than
   // relying on the general pages above to happen to cover it.
   { name: 'post with a character stat block', path: '/posts/post-14-fizzwick-sparkmender' },
+  { name: 'post in a series', path: '/posts/post-05-audio-full-system' },
+  { name: 'series index', path: '/series' },
+  { name: 'series', path: '/series/root-meridian' },
 ];
 
 // Scan a specific post too: POST=/posts/post-15-foo npm run test:a11y

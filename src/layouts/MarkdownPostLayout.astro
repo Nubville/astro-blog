@@ -1,9 +1,13 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import PostSidebar from '../components/PostSidebar.astro';
+import SeriesContents from '../components/SeriesContents.astro';
+import SeriesPager from '../components/SeriesPager.astro';
 import { DEFAULT_SOCIAL_IMAGE, SITE_AUTHOR } from '../consts';
+import { getPostSeries } from '../series';
 
 const { frontmatter } = Astro.props;
+const postSeries = getPostSeries(Astro.url.pathname);
 
 const postImage = frontmatter.image?.url ?? DEFAULT_SOCIAL_IMAGE;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
@@ -98,10 +102,12 @@ const recentPosts = Object.values(postModules)
           }
         </div>
       </header>
+      {postSeries && <SeriesContents postSeries={postSeries} />}
       <div class="post-body">
         <slot />
       </div>
     </image-lightbox>
+    {postSeries && <SeriesPager postSeries={postSeries} />}
   </article>
 </BaseLayout>
 <style>

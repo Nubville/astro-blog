@@ -9,28 +9,26 @@ const { series, previous, next } = Astro.props.postSeries;
 ---
 
 <nav class="series-pager" aria-label={`Previous and next in the ${series.title} series`}>
-  <p class="pager-series"><a href={`/series/${series.slug}`}>{series.title} series</a></p>
+  <p class="pager-series">
+    <a href={`/series/${series.slug}`}>{series.title} series</a>
+  </p>
   <div class="pager-links">
-    {
-      previous && (
-        <a class="pager-link" href={previous.url} rel="prev">
-          <span class="pager-label">
-            <span aria-hidden="true">←</span> Previous: Part {previous.number}
-          </span>
-          <span class="pager-title">{previous.title}</span>
-        </a>
-      )
-    }
-    {
-      next && (
-        <a class="pager-link pager-link--next" href={next.url} rel="next">
-          <span class="pager-label">
-            Next: Part {next.number} <span aria-hidden="true">→</span>
-          </span>
-          <span class="pager-title">{next.title}</span>
-        </a>
-      )
-    }
+    {previous && (
+      <a class="pager-link" href={previous.url} rel="prev">
+        <span class="pager-label">
+          <span aria-hidden="true">←</span> Previous: Part {previous.number}
+        </span>
+        <span class="pager-title">{previous.title}</span>
+      </a>
+    )}
+    {next && (
+      <a class="pager-link pager-link--next" href={next.url} rel="next">
+        <span class="pager-label">
+          Next: Part {next.number} <span aria-hidden="true">→</span>
+        </span>
+        <span class="pager-title">{next.title}</span>
+      </a>
+    )}
   </div>
 </nav>
 

@@ -13,25 +13,21 @@ interface Props {
 const { posts, postsLabel = '// more posts' } = Astro.props;
 ---
 
-{
-  posts.length > 0 && (
-    <nav class="sidebar-posts" aria-label="More posts">
-      <p class="sidebar-posts-label">{postsLabel}</p>
-      <ul role="list" class="sidebar-posts-list">
-        {posts.map((post) => (
-          <li class="sidebar-post-item">
-            <a href={post.url} class="sidebar-post-link">
-              {post.title}
-            </a>
-            <span class="sidebar-post-date">
-              {new Date(post.pubDate).toISOString().slice(0, 10)}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  )
-}
+{posts.length > 0 && (
+  <nav class="sidebar-posts" aria-label="More posts">
+    <p class="sidebar-posts-label">{postsLabel}</p>
+    <ul role="list" class="sidebar-posts-list">
+      {posts.map((post) => (
+        <li class="sidebar-post-item">
+          <a href={post.url} class="sidebar-post-link">
+            {post.title}
+          </a>
+          <span class="sidebar-post-date">{new Date(post.pubDate).toISOString().slice(0, 10)}</span>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
 
 <style>
   /* No outer margin — the Stack that places this owns the space around

@@ -170,16 +170,14 @@ const publishedISO = pubDate ? new Date(pubDate).toISOString() : undefined;
               </div>
             </Stack>
 
-            {
-              showPageTitle ? (
-                <div class="page-content">
-                  <h1 class="page-title">{pageTitle}</h1>
-                  <slot />
-                </div>
-              ) : (
+            {showPageTitle ? (
+              <div class="page-content">
+                <h1 class="page-title">{pageTitle}</h1>
                 <slot />
-              )
-            }
+              </div>
+            ) : (
+              <slot />
+            )}
           </main>
         </div>
         <Footer />

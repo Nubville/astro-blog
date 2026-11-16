@@ -65,19 +65,17 @@ function mod(score: number): string {
   <!-- ── Ability scores ────────────────────────────── -->
   <div class="sheet-section">
     <ul class="abilities" role="list" aria-label="Ability scores">
-      {
-        char.abilities.map((a) => (
-          <li class="ability">
-            <span class="ability-name">{a.abbr}</span>
-            <div class="ability-score" aria-label={`${a.abbr} score`}>
-              {a.score}
-            </div>
-            <div class="ability-mod" aria-label="modifier">
-              {mod(a.score)}
-            </div>
-          </li>
-        ))
-      }
+      {char.abilities.map((a) => (
+        <li class="ability">
+          <span class="ability-name">{a.abbr}</span>
+          <div class="ability-score" aria-label={`${a.abbr} score`}>
+            {a.score}
+          </div>
+          <div class="ability-mod" aria-label="modifier">
+            {mod(a.score)}
+          </div>
+        </li>
+      ))}
     </ul>
     <p class="section-label">Ability Scores</p>
   </div>
@@ -85,16 +83,14 @@ function mod(score: number): string {
   <!-- ── Skills / Proficiencies ────────────────────── -->
   <div class="sheet-section">
     <ul class="skills" role="list" aria-label="Proficiencies">
-      {
-        char.skills.map((s) => (
-          <li class={`skill skill--${s.type}`}>
-            <span class="skill-pip" aria-hidden="true">
-              ◆
-            </span>
-            <span class="skill-name">{s.name}</span>
-          </li>
-        ))
-      }
+      {char.skills.map((s) => (
+        <li class={`skill skill--${s.type}`}>
+          <span class="skill-pip" aria-hidden="true">
+            ◆
+          </span>
+          <span class="skill-name">{s.name}</span>
+        </li>
+      ))}
     </ul>
     <p class="section-label">Proficiencies &amp; Skills</p>
   </div>
@@ -108,7 +104,9 @@ function mod(score: number): string {
   <!-- ── Equipment ─────────────────────────────────── -->
   <div class="sheet-section sheet-section--last">
     <ul class="equipment" role="list">
-      {char.equipment.map((item) => <li class="equipment-item">{item}</li>)}
+      {char.equipment.map((item) => (
+        <li class="equipment-item">{item}</li>
+      ))}
     </ul>
     <p class="section-label">Equipment</p>
   </div>

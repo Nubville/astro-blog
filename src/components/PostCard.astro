@@ -35,16 +35,16 @@ function formatDate(dateStr: string): string {
 <sketch-card type={type}>
   <div class="card-content">
     <div class="card-type-label">
-      <span class={`stamp stamp--${type}`} aria-hidden="true">{BADGE[type]}</span>
+      <span class={`stamp stamp--${type}`} aria-hidden="true">
+        {BADGE[type]}
+      </span>
       <span class="stamp-text">{type}</span>
     </div>
-    {
-      seriesPlaces.map(({ series, part }) => (
-        <p class="card-series">
-          {series.title}, part {part.number} of {series.parts.length}
-        </p>
-      ))
-    }
+    {seriesPlaces.map(({ series, part }) => (
+      <p class="card-series">
+        {series.title}, part {part.number} of {series.parts.length}
+      </p>
+    ))}
     <HeadingTag class="card-post-title">
       <a class="card-title" href={url}>
         {title}

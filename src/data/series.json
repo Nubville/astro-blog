@@ -23,6 +23,10 @@
   "chroniclers-companion": {
     "title": "Chronicler's Companion",
     "description": "A campaign memory for tabletop groups, which grew out of the Discord bot built to drive the Root Meridian compass.",
-    "posts": ["post-06-discord-bot", "post-16-chroniclers-companion"]
+    "posts": [
+      "post-06-discord-bot",
+      "post-16-chroniclers-companion",
+      "post-18-the-puck-hears-a-game-night"
+    ]
   }
 }

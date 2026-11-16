@@ -34,6 +34,15 @@ npm run build
 POST=/posts/post-NN-slug npm run test:a11y
 ```
 
+**Check what owns the port first.** `playwright.config.ts` uses `reuseExistingServer`, so if
+another project's dev server is on 4321 the tests silently run against the wrong site (symptom:
+every test times out on `customElements.get('theme-switcher')`). Verify with
+`readlink /proc/$(ss -ltnp | grep -oP ':4321 .*pid=\K\d+')/cwd` — it must be this repo. Astro 7
+dev/preview servers detach and keep running, so `astro dev status` shows this repo's, and a
+second `npm run dev` here just refuses. If 4321 isn't ours, `npm run build`, start
+`npm run preview -- --port 4399`, run Playwright with a temporary config whose `baseURL` is
+that port (no `webServer` block), delete the config, and `astro preview stop`.
+
 `POST` adds the new post to the axe scan, which runs every theme (paper, lamplight, horde,
 wayfinder). Any violation is a blocker — most often color contrast in a new component or
 code-block theme. Fix it in the post/component; don't weaken the test. If the post uses a

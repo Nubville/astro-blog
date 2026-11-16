@@ -41,61 +41,61 @@ const personSchema = {
 
     <!-- ── Skills ──────────────────────────────────────── -->
     <section class="about-section" aria-labelledby="skills-heading">
-      <h2 id="skills-heading" class="section-heading">Technical Skills</h2>
+      <h2 id="skills-heading" class="section-heading">
+        Technical Skills
+      </h2>
       <dl class="skills-grid">
-        {
-          resume.skillGroups.map((group) => (
-            <div class="skill-group">
-              <dt class="skill-category">{group.category}</dt>
-              <dd class="skill-tags">
-                {group.tags.map((tag) => (
-                  <span class={`skill-tag skill-tag--${group.style}`}>{tag}</span>
-                ))}
-              </dd>
-            </div>
-          ))
-        }
+        {resume.skillGroups.map((group) => (
+          <div class="skill-group">
+            <dt class="skill-category">{group.category}</dt>
+            <dd class="skill-tags">
+              {group.tags.map((tag) => (
+                <span class={`skill-tag skill-tag--${group.style}`}>{tag}</span>
+              ))}
+            </dd>
+          </div>
+        ))}
       </dl>
     </section>
 
     <!-- ── Experience ──────────────────────────────────── -->
     <section class="about-section" aria-labelledby="experience-heading">
-      <h2 id="experience-heading" class="section-heading">Experience</h2>
+      <h2 id="experience-heading" class="section-heading">
+        Experience
+      </h2>
       <ol class="timeline" role="list">
-        {
-          resume.experience.map((job) => (
-            <li class="timeline-item">
-              <div class="timeline-meta">
-                <span class="timeline-dates">{job.dates}</span>
-              </div>
-              <div class="timeline-body">
-                <h3 class="timeline-role">{job.role}</h3>
-                <p class="timeline-company">{job.company}</p>
-                {job.summary && <p class="timeline-summary">{job.summary}</p>}
-                <ul class="timeline-bullets">
-                  {job.bullets.map((bullet) => (
-                    <li>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          ))
-        }
+        {resume.experience.map((job) => (
+          <li class="timeline-item">
+            <div class="timeline-meta">
+              <span class="timeline-dates">{job.dates}</span>
+            </div>
+            <div class="timeline-body">
+              <h3 class="timeline-role">{job.role}</h3>
+              <p class="timeline-company">{job.company}</p>
+              {job.summary && <p class="timeline-summary">{job.summary}</p>}
+              <ul class="timeline-bullets">
+                {job.bullets.map((bullet) => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))}
       </ol>
     </section>
 
     <!-- ── Education ───────────────────────────────────── -->
     <section class="about-section" aria-labelledby="education-heading">
-      <h2 id="education-heading" class="section-heading">Education</h2>
-      {
-        resume.education.map((entry) => (
-          <div class="education-item">
-            <h3 class="education-degree">{entry.degree}</h3>
-            <p class="education-school">{entry.school}</p>
-            <p class="education-dates">{entry.dates}</p>
-          </div>
-        ))
-      }
+      <h2 id="education-heading" class="section-heading">
+        Education
+      </h2>
+      {resume.education.map((entry) => (
+        <div class="education-item">
+          <h3 class="education-degree">{entry.degree}</h3>
+          <p class="education-school">{entry.school}</p>
+          <p class="education-dates">{entry.dates}</p>
+        </div>
+      ))}
     </section>
   </div>
 </BaseLayout>

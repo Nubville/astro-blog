@@ -11,21 +11,23 @@ const { series, part } = Astro.props.postSeries;
 <nav class="series-contents" aria-label={`${series.title} series`}>
   <details>
     <summary>
-      <span class="series-position">Part {part.number} of {series.parts.length}</span>
+      <span class="series-position">
+        Part {part.number} of {series.parts.length}
+      </span>
       <span class="series-name">{series.title} series</span>
     </summary>
     <ol class="series-list">
-      {
-        series.parts.map((item) => (
-          <li>
-            <a href={item.url} aria-current={item.number === part.number ? 'page' : undefined}>
-              {item.title}
-            </a>
-          </li>
-        ))
-      }
+      {series.parts.map((item) => (
+        <li>
+          <a href={item.url} aria-current={item.number === part.number ? 'page' : undefined}>
+            {item.title}
+          </a>
+        </li>
+      ))}
     </ol>
-    <p class="series-about"><a href={`/series/${series.slug}`}>About this series</a></p>
+    <p class="series-about">
+      <a href={`/series/${series.slug}`}>About this series</a>
+    </p>
   </details>
 </nav>
 

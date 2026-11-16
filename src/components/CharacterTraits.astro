@@ -27,25 +27,33 @@ Equal parts coder and maker. Most comfortable when there's solder in one hand an
   <div class="traits-column">
     <div class="trait-box">
       <ul class="trait-list" role="list">
-        {char.personalityTraits.map((t) => <li class="trait-item">{t}</li>)}
+        {char.personalityTraits.map((t) => (
+          <li class="trait-item">{t}</li>
+        ))}
       </ul>
       <p class="section-label">Personality Traits</p>
     </div>
     <div class="trait-box">
       <ul class="trait-list" role="list">
-        {char.ideals.map((t) => <li class="trait-item">{t}</li>)}
+        {char.ideals.map((t) => (
+          <li class="trait-item">{t}</li>
+        ))}
       </ul>
       <p class="section-label">Ideals</p>
     </div>
     <div class="trait-box">
       <ul class="trait-list" role="list">
-        {char.bonds.map((t) => <li class="trait-item">{t}</li>)}
+        {char.bonds.map((t) => (
+          <li class="trait-item">{t}</li>
+        ))}
       </ul>
       <p class="section-label">Bonds</p>
     </div>
     <div class="trait-box trait-box--last-row">
       <ul class="trait-list" role="list">
-        {char.flaws.map((t) => <li class="trait-item">{t}</li>)}
+        {char.flaws.map((t) => (
+          <li class="trait-item">{t}</li>
+        ))}
       </ul>
       <p class="section-label">Flaws</p>
     </div>
@@ -53,7 +61,9 @@ Equal parts coder and maker. Most comfortable when there's solder in one hand an
 
   <!-- ── Features & Traits ──────────────────────────── -->
   <div class="features-box">
-    {char.features.split('\n\n').map((para) => <p class="features-text">{para}</p>)}
+    {char.features.split('\n\n').map((para) => (
+      <p class="features-text">{para}</p>
+    ))}
     <p class="section-label">Features &amp; Traits</p>
   </div>
 </aside>

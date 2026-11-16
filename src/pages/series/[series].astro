@@ -15,21 +15,21 @@ const { series } = Astro.props as { series: Series };
 <BaseLayout pageTitle={`${series.title} series`} description={series.description}>
   <p>{series.description}</p>
   <ol class="series-parts">
-    {
-      series.parts.map((part) => (
-        <li>
-          <a class="part-title" href={part.url}>
-            {part.title}
-          </a>
-          {part.description && <p class="part-description">{part.description}</p>}
-          <time class="part-date" datetime={part.pubDate}>
-            {part.pubDate}
-          </time>
-        </li>
-      ))
-    }
+    {series.parts.map((part) => (
+      <li>
+        <a class="part-title" href={part.url}>
+          {part.title}
+        </a>
+        {part.description && <p class="part-description">{part.description}</p>}
+        <time class="part-date" datetime={part.pubDate}>
+          {part.pubDate}
+        </time>
+      </li>
+    ))}
   </ol>
-  <p><a href="/series">All series</a></p>
+  <p>
+    <a href="/series">All series</a>
+  </p>
 </BaseLayout>
 
 <style>

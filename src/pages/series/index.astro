@@ -8,17 +8,15 @@ const allSeries = getAllSeries();
 <BaseLayout pageTitle="Series" description="Posts that follow one project from start to finish.">
   <p>Posts that follow one project from start to finish.</p>
   <ul class="series-index">
-    {
-      allSeries.map((series) => (
-        <li>
-          <a class="series-title" href={`/series/${series.slug}`}>
-            {series.title}
-          </a>
-          <span class="series-count">{series.parts.length} parts</span>
-          <p class="series-description">{series.description}</p>
-        </li>
-      ))
-    }
+    {allSeries.map((series) => (
+      <li>
+        <a class="series-title" href={`/series/${series.slug}`}>
+          {series.title}
+        </a>
+        <span class="series-count">{series.parts.length} parts</span>
+        <p class="series-description">{series.description}</p>
+      </li>
+    ))}
   </ul>
 </BaseLayout>
 

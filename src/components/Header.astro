@@ -25,37 +25,43 @@ function isActive(href: string) {
 ---
 
 <header>
-  <a href="/" class="brand" aria-label="Andrew Garman — home">Andrew Garman</a>
-  <span class="brand-sub" aria-hidden="true">// dev + design</span>
+  <a href="/" class="brand" aria-label="Andrew Garman — home">
+    Andrew Garman
+  </a>
+  <span class="brand-sub" aria-hidden="true">
+    // dev + design
+  </span>
 
   <nav class="header-nav" aria-label="Main navigation">
     <ul class="nav-list" role="list">
-      {
-        navItems.map(({ href, label, icon }) => (
-          <li class="nav-item">
-            <a
-              href={href}
-              class={`nav-link${isActive(href) ? ' nav-link--active' : ''}`}
-              aria-current={isActive(href) ? 'page' : undefined}
-            >
-              <span class="nav-icon" aria-hidden="true">
-                {icon}
-              </span>
-              <span class="nav-label">{label}</span>
-            </a>
-          </li>
-        ))
-      }
+      {navItems.map(({ href, label, icon }) => (
+        <li class="nav-item">
+          <a
+            href={href}
+            class={`nav-link${isActive(href) ? ' nav-link--active' : ''}`}
+            aria-current={isActive(href) ? 'page' : undefined}
+          >
+            <span class="nav-icon" aria-hidden="true">
+              {icon}
+            </span>
+            <span class="nav-label">{label}</span>
+          </a>
+        </li>
+      ))}
     </ul>
   </nav>
 
   <theme-switcher class="theme-switcher">
     <label for="theme-select" class="theme-switcher-label">
-      <span class="nav-icon" aria-hidden="true">🖌</span>
+      <span class="nav-icon" aria-hidden="true">
+        🖌
+      </span>
       <span class="nav-label">Theme</span>
     </label>
     <select id="theme-select" class="theme-select">
-      {THEMES.map(({ value, label }) => <option value={value}>{label}</option>)}
+      {THEMES.map(({ value, label }) => (
+        <option value={value}>{label}</option>
+      ))}
     </select>
   </theme-switcher>
 
@@ -73,23 +79,23 @@ function isActive(href: string) {
 
 <dialog id="mobile-nav-dialog" aria-label="Navigation menu">
   <div class="dialog-inner">
-    <button class="dialog-close" aria-label="Close navigation menu" autofocus>✕</button>
+    <button class="dialog-close" aria-label="Close navigation menu" autofocus>
+      ✕
+    </button>
     <nav aria-label="Mobile navigation">
       <ul class="dialog-nav-list" role="list">
-        {
-          navItems.map(({ href, label, icon }) => (
-            <li>
-              <a
-                href={href}
-                class={`dialog-nav-link${isActive(href) ? ' dialog-nav-link--active' : ''}`}
-                aria-current={isActive(href) ? 'page' : undefined}
-              >
-                <span aria-hidden="true">{icon}</span>
-                {label}
-              </a>
-            </li>
-          ))
-        }
+        {navItems.map(({ href, label, icon }) => (
+          <li>
+            <a
+              href={href}
+              class={`dialog-nav-link${isActive(href) ? ' dialog-nav-link--active' : ''}`}
+              aria-current={isActive(href) ? 'page' : undefined}
+            >
+              <span aria-hidden="true">{icon}</span>
+              {label}
+            </a>
+          </li>
+        ))}
       </ul>
     </nav>
 
@@ -100,11 +106,15 @@ function isActive(href: string) {
          uniquely-labeled elements at once. -->
     <theme-switcher class="theme-switcher dialog-theme-switcher">
       <label for="theme-select-mobile" class="theme-switcher-label">
-        <span class="nav-icon" aria-hidden="true">🖌</span>
+        <span class="nav-icon" aria-hidden="true">
+          🖌
+        </span>
         <span class="nav-label">Theme</span>
       </label>
       <select id="theme-select-mobile" class="theme-select">
-        {THEMES.map(({ value, label }) => <option value={value}>{label}</option>)}
+        {THEMES.map(({ value, label }) => (
+          <option value={value}>{label}</option>
+        ))}
       </select>
     </theme-switcher>
   </div>

@@ -43,20 +43,20 @@ function deriveType(post: MarkdownPost): CardType {
 
 <BaseLayout pageTitle="Andrew Garman — Dev Blog" showPageTitle={false} heroNameHeading="h1">
   <section class="latest" aria-labelledby="latest-heading">
-    <h2 id="latest-heading" class="section-heading">Latest Posts</h2>
+    <h2 id="latest-heading" class="section-heading">
+      Latest Posts
+    </h2>
     <div class="posts-grid">
-      {
-        allPosts.map((post) => (
-          <PostCard
-            type={deriveType(post)}
-            url={post.url}
-            title={post.frontmatter.title}
-            description={post.frontmatter.description}
-            pubDate={post.frontmatter.pubDate}
-            headingLevel="h3"
-          />
-        ))
-      }
+      {allPosts.map((post) => (
+        <PostCard
+          type={deriveType(post)}
+          url={post.url}
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          pubDate={post.frontmatter.pubDate}
+          headingLevel="h3"
+        />
+      ))}
     </div>
   </section>
 

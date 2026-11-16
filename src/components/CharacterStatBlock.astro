@@ -99,88 +99,80 @@ function lines(value: string | string[]): string[] {
       <span class="field-value">{background}</span>
       <span class="field-label">Background</span>
     </div>
-    {
-      quickFacts && quickFacts.length > 0 && (
-        <div class="field-row field-row--wrap">
-          {quickFacts.map((f) => (
-            <div class="field field--grow">
-              <span class="field-value">{lines(f.value).join(', ')}</span>
-              <span class="field-label">{f.label}</span>
-            </div>
-          ))}
-        </div>
-      )
-    }
+    {quickFacts && quickFacts.length > 0 && (
+      <div class="field-row field-row--wrap">
+        {quickFacts.map((f) => (
+          <div class="field field--grow">
+            <span class="field-value">{lines(f.value).join(', ')}</span>
+            <span class="field-label">{f.label}</span>
+          </div>
+        ))}
+      </div>
+    )}
   </div>
 
   <div class="sheet-section">
     <ul class="abilities" role="list" aria-label="Ability scores">
-      {
-        abilities.map((a) => (
-          <li class="ability">
-            <span class="ability-name">{a.abbr}</span>
-            <div class="ability-score" aria-label={`${a.abbr} score`}>
-              {a.score}
-            </div>
-            <div class="ability-mod" aria-label="modifier">
-              {mod(a.score)}
-            </div>
-          </li>
-        ))
-      }
+      {abilities.map((a) => (
+        <li class="ability">
+          <span class="ability-name">{a.abbr}</span>
+          <div class="ability-score" aria-label={`${a.abbr} score`}>
+            {a.score}
+          </div>
+          <div class="ability-mod" aria-label="modifier">
+            {mod(a.score)}
+          </div>
+        </li>
+      ))}
     </ul>
     <p class="section-label">Ability Scores</p>
   </div>
 
   <div class="sheet-section">
     <dl class="detail-lines">
-      {
-        proficiencies.map((p) => (
-          <div class="detail-line">
-            <dt>{p.label}</dt>
-            <dd>{lines(p.value).join(' · ')}</dd>
-          </div>
-        ))
-      }
+      {proficiencies.map((p) => (
+        <div class="detail-line">
+          <dt>{p.label}</dt>
+          <dd>{lines(p.value).join(' · ')}</dd>
+        </div>
+      ))}
     </dl>
     <p class="section-label">Proficiencies &amp; Skills</p>
   </div>
 
-  {
-    spells && spells.length > 0 && (
-      <div class="sheet-section">
-        <dl class="detail-lines">
-          {spells.map((s) => (
-            <div class="detail-line">
-              <dt>{s.label}</dt>
-              <dd>{lines(s.value).join(' · ')}</dd>
-            </div>
-          ))}
-        </dl>
-        <p class="section-label">Spells &amp; Divine Features</p>
-      </div>
-    )
-  }
+  {spells && spells.length > 0 && (
+    <div class="sheet-section">
+      <dl class="detail-lines">
+        {spells.map((s) => (
+          <div class="detail-line">
+            <dt>{s.label}</dt>
+            <dd>{lines(s.value).join(' · ')}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="section-label">Spells &amp; Divine Features</p>
+    </div>
+  )}
 
   <div class="sheet-section">
     <dl class="detail-lines">
-      {
-        personality.map((p) => (
-          <div class="detail-line">
-            <dt>{p.label}</dt>
-            {lines(p.value).map((line) => (
-              <dd class="trait-text">{line}</dd>
-            ))}
-          </div>
-        ))
-      }
+      {personality.map((p) => (
+        <div class="detail-line">
+          <dt>{p.label}</dt>
+          {lines(p.value).map((line) => (
+            <dd class="trait-text">{line}</dd>
+          ))}
+        </div>
+      ))}
     </dl>
     <p class="section-label">Personality</p>
   </div>
 
   <div class="sheet-section sheet-section--last">
     <ul class="equipment" role="list">
-      {equipment.map((item) => <li class="equipment-item">{item}</li>)}
+      {equipment.map((item) => (
+        <li class="equipment-item">{item}</li>
+      ))}
     </ul>
     <p class="section-label">Equipment</p>
   </div>

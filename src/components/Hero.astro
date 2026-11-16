@@ -64,21 +64,19 @@ const interests = [
           <p class="profile-role">Senior Front-End Developer</p>
 
           <ul class="profile-tags" role="list" aria-label="Interests">
-            {
-              interests.map(({ icon, label, tag, modifier, linked }) => (
-                <li>
-                  {linked ? (
-                    <a class={`tag tag--${modifier}`} href={`/tags/${tag}`}>
-                      <span aria-hidden="true">{icon}</span> {label}
-                    </a>
-                  ) : (
-                    <span class={`tag tag--${modifier}`}>
-                      <span aria-hidden="true">{icon}</span> {label}
-                    </span>
-                  )}
-                </li>
-              ))
-            }
+            {interests.map(({ icon, label, tag, modifier, linked }) => (
+              <li>
+                {linked ? (
+                  <a class={`tag tag--${modifier}`} href={`/tags/${tag}`}>
+                    <span aria-hidden="true">{icon}</span> {label}
+                  </a>
+                ) : (
+                  <span class={`tag tag--${modifier}`}>
+                    <span aria-hidden="true">{icon}</span> {label}
+                  </span>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       </div>

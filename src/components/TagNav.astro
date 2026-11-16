@@ -15,25 +15,23 @@ const tags = [...new Set(allTags)]
   .sort((a, b) => a.tag.localeCompare(b.tag));
 ---
 
-{
-  tags.length > 0 && (
-    <nav class="tag-nav" aria-label="Browse tags">
-      <p class="tag-nav-label">// browse tags</p>
-      <ul role="list" class="tag-nav-list">
-        {tags.map(({ tag, count }) => (
-          <li>
-            <a href={`/tags/${tag}`} class="tag-nav-link">
-              {tag} <span class="tag-nav-count">×{count}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-      <a href="/tags" class="tag-nav-all">
-        View all tags →
-      </a>
-    </nav>
-  )
-}
+{tags.length > 0 && (
+  <nav class="tag-nav" aria-label="Browse tags">
+    <p class="tag-nav-label">// browse tags</p>
+    <ul role="list" class="tag-nav-list">
+      {tags.map(({ tag, count }) => (
+        <li>
+          <a href={`/tags/${tag}`} class="tag-nav-link">
+            {tag} <span class="tag-nav-count">×{count}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a href="/tags" class="tag-nav-all">
+      View all tags →
+    </a>
+  </nav>
+)}
 
 <style>
   /* No outer margin — the Stack that places this owns the space around

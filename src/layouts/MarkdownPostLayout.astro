@@ -245,6 +245,10 @@ const recentPosts = Object.values(postModules)
   .post-body :global(th),
   .post-body :global(td) {
     border: 1px solid var(--pencil);
+    /* Long unbreakable strings (hostnames, paths) would otherwise hold the
+       column open and push the whole page wider than a phone. Wrapping the
+       cells, not scrolling the table, keeps native table semantics. */
+    overflow-wrap: anywhere;
     padding: var(--ag-space-2xs) var(--ag-space-s);
     text-align: left;
   }

@@ -1,8 +1,11 @@
 // Usage: node scripts/check-post.mjs <path/to/post.md|mdx>
-// Static checks for a blog post. Exits 1 if any ERROR is found; WARNs are advisory.
+// Static checks for a blog post. Exits 1 if any ERROR is found; WARNs are advisory
+// and NOTEs are prompts to confirm something is intended.
+import { execFileSync } from 'node:child_process';
 import { access, readdir, readFile } from 'node:fs/promises';
 import { basename, dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const file = resolve(process.argv[2] ?? '');
@@ -14,6 +17,7 @@ if (!process.argv[2]) {
 const problems = [];
 const err = (m) => problems.push(['ERROR', m]);
 const warn = (m) => problems.push(['WARN', m]);
+const note = (m) => problems.push(['NOTE', m]);
 const exists = (p) =>
   access(p).then(
     () => true,
@@ -85,10 +89,21 @@ if (!field(/^ {2}width:\s*(\d+)/m) || !field(/^ {2}height:\s*(\d+)/m))
 
 // --- images ---
 const imgPaths = new Set(heroUrl ? [unquote(heroUrl)] : []);
+// What each <img> claims its size is, to compare against the real file.
+const declared = new Map();
+if (heroUrl) {
+  declared.set(unquote(heroUrl), [
+    Number(field(/^ {2}width:\s*(\d+)/m)),
+    Number(field(/^ {2}height:\s*(\d+)/m)),
+  ]);
+}
 for (const tag of body.matchAll(/<img\b[^>]*>/g)) {
   const t = tag[0];
   const s = t.match(/src=["']([^"']+)["']/)?.[1];
   if (s) imgPaths.add(s);
+  const w = Number(t.match(/\bwidth=["']?(\d+)/)?.[1]);
+  const h = Number(t.match(/\bheight=["']?(\d+)/)?.[1]);
+  if (s && w && h) declared.set(s, [w, h]);
   if (!/\balt=/.test(t)) err(`<img> without alt: ${s}`);
   else if (/\balt=["']\s*["']/.test(t)) warn(`<img> with empty alt (decorative?): ${s}`);
   if (!/\bwidth=/.test(t) || !/\bheight=/.test(t))
@@ -107,7 +122,28 @@ for (const p of imgPaths) {
   else if (postNum && !p.startsWith(`/images/compressed/post${postNum}/`))
     warn(`image not in post${postNum}/ folder: ${p}`);
   if (!p.endsWith('.webp')) warn(`image is not WebP: ${p}`);
-  if (!(await exists(join(root, 'public', p)))) err(`image file missing: public${p}`);
+  if (!(await exists(join(root, 'public', p)))) {
+    err(`image file missing: public${p}`);
+    continue;
+  }
+
+  const meta = await sharp(join(root, 'public', p)).metadata();
+  const isHero = p === unquote(heroUrl);
+  const [dw, dh] = declared.get(p) ?? [];
+  if (dw && dh && Math.abs(dh / dw - meta.height / meta.width) > 0.02)
+    warn(
+      `${p}: declared ${dw}×${dh} doesn't match the file's ${meta.width}×${meta.height} aspect ratio`
+    );
+  if (isHero && meta.height / meta.width > 0.76)
+    warn(
+      `hero ${p} is ${meta.width}×${meta.height}, taller than 4:3. The page caps it, but social ` +
+        `cards crop tall images and the text inside is unreadable at hero size. Prefer landscape`
+    );
+  // The post column is ~735px wide on desktop; a narrower file is stretched and goes soft.
+  if (!isHero && meta.width < 735)
+    warn(
+      `${p} is only ${meta.width}px wide but displays up to 735px: it will look soft. Export at 2x`
+    );
 }
 
 // --- headings (ignore fenced code) ---
@@ -134,6 +170,23 @@ for (const m of prose.matchAll(/\[([^\]]*)\]\(([^)\s]*)\)/g)) {
     warn(`non-descriptive link text "${m[1]}" → ${m[2]}`);
   if (!m[2] || m[2] === '#') err(`empty link target for "${m[1]}"`);
 }
+// A link to a private repo is a 404 for every reader. Needs the gh CLI; skipped without it.
+const repos = new Set(
+  [...prose.matchAll(/https:\/\/github\.com\/([\w.-]+)\/([\w.-]+)/g)].map((m) => `${m[1]}/${m[2]}`)
+);
+for (const repo of repos) {
+  try {
+    const priv = execFileSync('gh', ['api', `repos/${repo}`, '--jq', '.private'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }).trim();
+    if (priv === 'true') err(`links to github.com/${repo}, which is private (404 for readers)`);
+  } catch (e) {
+    const out = `${e.stderr ?? ''}${e.message ?? ''}`;
+    if (/HTTP 404/.test(out)) err(`links to github.com/${repo}, which is private or doesn't exist`);
+    // gh missing or not logged in: can't tell, so say nothing
+  }
+}
 if (/\b(TODO|FIXME|XXX|lorem ipsum)\b/i.test(body)) warn('leftover TODO/FIXME/placeholder text');
 let inFence = false;
 for (const line of body.split('\n')) {
@@ -148,11 +201,27 @@ for (const line of body.split('\n')) {
 // --- stray originals ---
 if (/\.(png|jpe?g|gif|heic)["')]/i.test(body)) warn('body references a non-WebP image extension');
 
+// --- series ---
+const series = JSON.parse(await readFile(join(root, 'src/data/series.json'), 'utf8'));
+const memberOf = Object.entries(series).filter(([, s]) => s.posts.includes(name));
+if (!memberOf.length) {
+  note(
+    `not in any series. If it continues one, add "${name}" to src/data/series.json: ` +
+      Object.entries(series)
+        .map(([slug, s]) => `${slug} ("${s.title}")`)
+        .join(', ')
+  );
+}
+
 report();
 
 function report() {
   for (const [lvl, m] of problems) console.log(`${lvl}: ${m}`);
   const errors = problems.filter(([l]) => l === 'ERROR').length;
-  console.log(`\n${basename(file)}: ${errors} error(s), ${problems.length - errors} warning(s)`);
+  const warnings = problems.filter(([l]) => l === 'WARN').length;
+  const notes = problems.length - errors - warnings;
+  console.log(
+    `\n${basename(file)}: ${errors} error(s), ${warnings} warning(s)${notes ? `, ${notes} note(s)` : ''}`
+  );
   process.exit(errors ? 1 : 0);
 }

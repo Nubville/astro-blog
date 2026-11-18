@@ -58,7 +58,8 @@ extension) to that series' `posts` list in `src/data/series.json`, in reading or
 line is the whole job: part numbers and previous/next links are generated, so never edit the
 other posts. A post that belongs to two stories can be listed in both series. For a new series,
 add an entry with `title`, `description` and `posts`. It stays
-hidden until it has two posts.
+hidden until it has two posts. `scripts/check-post.mjs` prints a NOTE when a post is in no
+series, so confirm that's intended rather than assuming.
 
 ## 4. Images
 
@@ -77,6 +78,17 @@ Reference in the body with:
 <img src="/images/compressed/postN/name.webp" alt="..." width="1400" height="900" loading="lazy" />
 ```
 
+**Hero image (frontmatter `image`):** make it **landscape, 4:3 or wider**, and one that reads
+at about 300px wide, because that's how big it shows on the post. A phone screenshot or a
+text-heavy UI shot makes a poor hero: it's unreadable at that size and social cards crop it.
+Use it inline instead and pick a diagram, photo or crop as the hero. The page caps a tall hero
+at 15rem and the lightbox opens it full size, but that's a safety net, not a design choice.
+
+**Size:** inline images display up to about 735px wide on desktop, so export at least 735px
+wide, ideally 1400px (the helper's default; it never upscales). A smaller file is stretched and
+looks soft. Set `width`/`height` to the real file's pixel size, since a wrong aspect ratio
+causes layout shift.
+
 Every image needs real, descriptive alt text (what's _in_ it, incl. readable text in
 screenshots); decorative images use `alt=""`. The first/hero image goes in frontmatter.
 If the user hasn't supplied images, write the post without them and list "images wanted"
@@ -88,7 +100,9 @@ First person, conversational, concrete — Andrew is a senior front-end dev who 
 D&D, hardware tinkering, and the outdoors. Lead with the interesting problem or surprise,
 not a preamble. Show real code/commands/errors from the work (fenced with a language).
 Include what went wrong and why; don't polish it into a victory lap. Link to repos/tools
-mentioned. Prefer short sections with `##` headings. Keep their facts exact — if the dump
+mentioned, **but never to a private repo**: it's a 404 for every reader. Check with
+`gh api repos/OWNER/REPO --jq .private`; if it's `true`, say the repo is private and leave
+the link out (post 15 does this well). `check-post.mjs` fails on a private link. Prefer short sections with `##` headings. Keep their facts exact — if the dump
 is ambiguous, flag it rather than guessing numbers, versions, or dates.
 
 ## 6. Verify and hand off
@@ -96,6 +110,14 @@ is ambiguous, flag it rather than guessing numbers, versions, or dates.
 ```bash
 cd /home/dgarman/projects/astro-blog
 PATH="/home/dgarman/.nvm/versions/node/v24.14.1/bin:$PATH" npm run build
+```
+
+Then run the static check and fix every ERROR and WARN (it covers frontmatter, tags, images,
+hero shape, image sizes, headings, private-repo links and series):
+
+```bash
+PATH="/home/dgarman/.nvm/versions/node/v24.14.1/bin:$PATH" \
+  node scripts/check-post.mjs src/pages/posts/post-NN-….md
 ```
 
 Fix any build errors. Then **commit on the feature branch and STOP**. Do not push, open a

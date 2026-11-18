@@ -105,5 +105,3 @@ None of that exists. It's a design document and a page on the site that says "pl
 ## Where it is
 
 Everything above is merged and live except the saga, which is a plan. The helper is off unless someone connects a model, and I'll see how it does against a real one at the next session. Next up is more kinds of things to put in a world: shops, factions, creatures, encounters.
-
-If you're curious, [the changelog](https://github.com/Nubville/chroniclers-companion/blob/main/docs/changelog.md) has the wrong turns in more detail.

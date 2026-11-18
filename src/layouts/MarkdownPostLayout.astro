@@ -154,8 +154,13 @@ const recentPosts = Object.values(postModules)
 
   .post-header img {
     display: block;
-    width: 300px;
-    max-width: 100%;
+    /* A tall hero (a phone-shaped screenshot) would otherwise push the title
+       below the fold. With both dimensions auto, the two max values shrink the
+       image together, keeping its aspect ratio; the lightbox still opens the
+       full-size image. 15rem leaves 4:3 and wider at the usual 300px. */
+    width: auto;
+    max-width: min(300px, 100%);
+    max-height: 15rem;
     height: auto;
     margin-bottom: 1rem;
   }
